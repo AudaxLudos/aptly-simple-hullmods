@@ -1,0 +1,15 @@
+{
+    "id": "ash",
+    "name": "Aptly Simple Hullmods",
+    "author": "Audax",
+    "version": {
+        "major": 0,
+        "minor": 0,
+        "patch": 0
+    },
+    "description": "Additional hullmods for starsector",
+    "gameVersion": "0.95a-RC6",
+    "jars": [
+        "jars/Aptly Simple Hullmods.jar"
+    ]
+}
