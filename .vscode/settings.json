@@ -1,0 +1,13 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Starsector\\starsector-core\\starfarer.api.jar"
+    ],
+    "java.configuration.runtimes": [
+        {
+          "name":"JavaSE-1.7",
+          "path":"C:\\Program Files\\Java\\jdk1.7.0_80",
+          "default":true
+        }
+    ]
+}
