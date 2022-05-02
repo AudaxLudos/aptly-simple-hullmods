@@ -10,6 +10,6 @@
     "description": "Additional hullmods for starsector",
     "gameVersion": "0.95a-RC6",
     "jars": [
-        "jars/Aptly Simple Hullmods.jar"
+        "Aptly Simple Hullmods.jar"
     ]
 }

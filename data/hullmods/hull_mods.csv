@@ -1,3 +1,4 @@
 name,id,tier,rarity,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,tech/manufacturer,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite
 Test Hullmod,ASH_TestHullmod,3,,special,Special,15000,true,,,ASH,5,10,15,20,data.hullmods.ASH_TestHullmod,Hullmod for testing purposes. %s/%s/%s/%s,,graphics/hullmods/default.png
 Reactive Shields,ASH_ReactiveShields,3,,defensive,Shields,15000,true,,,ASH,5,10,15,20,data.hullmods.ASH_ReactiveShields,Reduces damage taken by shields as hard flux levels rise up to %s at %s and above hard flux levels. In return the ship's shield arc will also go down as hard flux levels rise down to %s.,,graphics/hullmods/default.png
+Energy Flux Regulators,ASH_EnergyFluxRegulators,3,,offensive,Weapons,15000,true,,,ASH,5,10,15,20,data.hullmods.ASH_EnergyFluxRegulators,"Increases or decreases damage and flux cost of all energy weapons as flux levels rise and fall, up to %s and down to %s.",,graphics/hullmods/default.png
