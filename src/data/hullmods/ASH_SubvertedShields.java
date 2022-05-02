@@ -12,16 +12,19 @@ public class ASH_SubvertedShields extends BaseHullMod {
     public final float SHIELD_PIERCED_MODIFIER = 2f;
     public final float HARD_FLUX_DISSIPATION_MODIFIER = 15f;
 
+    @Override
     public String getUnapplicableReason(ShipAPI ship) {
         if (ship == null || ship.getShield() == null)
             return "Ship has no shields";
         return null;
     }
 
+    @Override
     public boolean isApplicableToShip(ShipAPI ship) {
         return ship != null && ship.getShield() != null;
     }
 
+    @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
             return (int) SHIELD_STRENGTH_MODIFIER + "%";
@@ -34,12 +37,14 @@ public class ASH_SubvertedShields extends BaseHullMod {
         return null;
     }
 
+    @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getShieldDamageTakenMult().modifyPercent(id, SHIELD_STRENGTH_MODIFIER);
         stats.getShieldUpkeepMult().modifyPercent(id, -SHIELD_UPKEEP_MODIFIER);
         stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, SHIELD_PIERCED_MODIFIER);
     }
 
+    @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (!ship.isAlive())
             return;

@@ -37,6 +37,8 @@ public class ASH_ReactiveShields extends BaseHullMod {
             return 80 + "%";
         if (index == 2)
             return (int) MINIMUM_SHIELD_ARC + " degrees";
+        if (index == 3)
+            return 80 + "%";
         return null;
     }
 
