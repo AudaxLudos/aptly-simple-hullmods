@@ -1,0 +1,51 @@
+package data.hullmods;
+
+import com.fs.starfarer.api.combat.BaseHullMod;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.impl.campaign.ids.Stats;
+
+public class ASH_SubvertedShields extends BaseHullMod {
+    public final float SHIELD_STRENGTH_MODIFIER = 50f;
+    public final float SHIELD_UPKEEP_MODIFIER = 50f;
+    public final float SHIELD_PIERCED_MODIFIER = 2f;
+    public final float HARD_FLUX_DISSIPATION_MODIFIER = 15f;
+
+    public String getUnapplicableReason(ShipAPI ship) {
+        if (ship == null || ship.getShield() == null)
+            return "Ship has no shields";
+        return null;
+    }
+
+    public boolean isApplicableToShip(ShipAPI ship) {
+        return ship != null && ship.getShield() != null;
+    }
+
+    public String getDescriptionParam(int index, HullSize hullSize) {
+        if (index == 0)
+            return (int) SHIELD_STRENGTH_MODIFIER + "%";
+        if (index == 1)
+            return (int) SHIELD_PIERCED_MODIFIER + "";
+        if (index == 2)
+            return (int) SHIELD_UPKEEP_MODIFIER + "%";
+        if (index == 3)
+            return (int) HARD_FLUX_DISSIPATION_MODIFIER + "%";
+        return null;
+    }
+
+    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        stats.getShieldDamageTakenMult().modifyPercent(id, SHIELD_STRENGTH_MODIFIER);
+        stats.getShieldUpkeepMult().modifyPercent(id, -SHIELD_UPKEEP_MODIFIER);
+        stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, SHIELD_PIERCED_MODIFIER);
+    }
+
+    public void advanceInCombat(ShipAPI ship, float amount) {
+        if (!ship.isAlive())
+            return;
+
+        MutableShipStatsAPI stats = ship.getMutableStats();
+
+        stats.getHardFluxDissipationFraction().modifyFlat(spec.getId(), HARD_FLUX_DISSIPATION_MODIFIER * 0.01f);
+    }
+}
