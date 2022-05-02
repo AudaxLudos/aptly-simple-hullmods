@@ -12,7 +12,9 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) 0 + "";
+            return (int) 10 + "%";
+        if (index == 1)
+            return (int) 50 + " seconds";
         return null;
     }
 
