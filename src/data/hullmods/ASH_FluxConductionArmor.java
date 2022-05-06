@@ -27,7 +27,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
 
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) (FLUX_CAPACITY_MODIFIER) + "%";
+            return Math.round(FLUX_CAPACITY_MODIFIER) + "%";
         if (index == 1)
             return ((Float) ARMOR_MODIFIER.get(HullSize.FRIGATE)).intValue() + "";
         if (index == 2)
@@ -37,7 +37,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         if (index == 4)
             return ((Float) ARMOR_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue() + "";
         if (index == 5)
-            return (int) (EMP_DMG_MODIFIER) + "%";
+            return Math.round(EMP_DMG_MODIFIER) + "%";
         return null;
     }
 }

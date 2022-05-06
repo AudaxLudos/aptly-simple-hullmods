@@ -27,13 +27,13 @@ public class ASH_SubvertedShields extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) SHIELD_STRENGTH_MODIFIER + "%";
+            return Math.round(SHIELD_STRENGTH_MODIFIER) + "%";
         if (index == 1)
-            return (int) SHIELD_PIERCED_MODIFIER + "";
+            return Math.round(SHIELD_PIERCED_MODIFIER) + "";
         if (index == 2)
-            return (int) SHIELD_UPKEEP_MODIFIER + "%";
+            return Math.round(SHIELD_UPKEEP_MODIFIER) + "%";
         if (index == 3)
-            return (int) HARD_FLUX_DISSIPATION_MODIFIER + "%";
+            return Math.round(HARD_FLUX_DISSIPATION_MODIFIER) + "%";
         return null;
     }
 

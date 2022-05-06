@@ -14,9 +14,9 @@ public class ASH_EnergyFluxRegulators extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return "+" + (int) ENERGY_DMG_MODIFIER + "%";
+            return "+" + Math.round(ENERGY_DMG_MODIFIER) + "%";
         if (index == 1)
-            return "-" + (int) ENERGY_COST_MODIFIER + "%";
+            return "-" + Math.round(ENERGY_COST_MODIFIER) + "%";
         return null;
     }
 

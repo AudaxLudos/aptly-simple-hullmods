@@ -14,11 +14,11 @@ public class ASH_ConductiveRails extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) BALLISTIC_STATS_MODIFIER + "%";
+            return Math.round(BALLISTIC_STATS_MODIFIER) + "%";
         if (index == 1)
-            return (int) BALLISTIC_COST_MODIFIER + "%";
+            return Math.round(BALLISTIC_COST_MODIFIER) + "%";
         if (index == 2)
-            return 20 + "%";
+            return Math.round(20f) + "%";
         return null;
     }
 

@@ -32,13 +32,13 @@ public class ASH_ReactiveShields extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) SHIELD_STRENGTH_MODIFIER + "%";
+            return Math.round(SHIELD_STRENGTH_MODIFIER) + "%";
         if (index == 1)
-            return 80 + "%";
+            return Math.round(80f) + "%";
         if (index == 2)
-            return (int) MINIMUM_SHIELD_ARC + " degrees";
+            return Math.round(MINIMUM_SHIELD_ARC) + " degrees";
         if (index == 3)
-            return 80 + "%";
+            return Math.round(80f) + "%";
         return null;
     }
 

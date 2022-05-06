@@ -28,9 +28,9 @@ public class ASH_GravitonAttunementDrive extends BaseHullMod {
 
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) FLEET_BURN_MODIFIER + "";
+            return Math.round(FLEET_BURN_MODIFIER) + "";
         if (index == 1)
-            return (int) 3 + "";
+            return Math.round(3f) + "";
         return null;
     }
 }

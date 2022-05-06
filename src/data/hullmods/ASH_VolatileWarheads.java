@@ -18,9 +18,9 @@ public class ASH_VolatileWarheads extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) MISSILE_DMG_MODIFIER + "%";
+            return Math.round(MISSILE_DMG_MODIFIER) + "%";
         if (index == 1)
-            return (int) MISSILE_HEALTH_MODIFIER + "%";
+            return Math.round(MISSILE_HEALTH_MODIFIER) + "%";
         return null;
     }
 }
