@@ -8,8 +8,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import data.ASH_Utils;
 
 public class ASH_EnergyFluxRegulators extends BaseHullMod {
-    public final float ENERGY_COST_MODIFIER = 15f;
-    public final float ENERGY_DMG_MODIFIER = 15f;
+    public static final float ENERGY_COST_MODIFIER = 15f;
+    public static final float ENERGY_DMG_MODIFIER = 15f;
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {

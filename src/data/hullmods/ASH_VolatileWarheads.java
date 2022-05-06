@@ -6,8 +6,8 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_VolatileWarheads extends BaseHullMod {
-    public final float MISSILE_DMG_MODIFIER = 25f;
-    public final float MISSILE_HEALTH_MODIFIER = 50f;
+    public static final float MISSILE_DMG_MODIFIER = 25f;
+    public static final float MISSILE_HEALTH_MODIFIER = 50f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {

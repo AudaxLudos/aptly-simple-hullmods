@@ -7,10 +7,10 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class ASH_SubvertedShields extends BaseHullMod {
-    public final float SHIELD_STRENGTH_MODIFIER = 50f;
-    public final float SHIELD_UPKEEP_MODIFIER = 50f;
-    public final float SHIELD_PIERCED_MODIFIER = 2f;
-    public final float HARD_FLUX_DISSIPATION_MODIFIER = 15f;
+    public static final float SHIELD_STRENGTH_MODIFIER = 50f;
+    public static final float SHIELD_UPKEEP_MODIFIER = 50f;
+    public static final float SHIELD_PIERCED_MODIFIER = 2f;
+    public static final float HARD_FLUX_DISSIPATION_MODIFIER = 15f;
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {

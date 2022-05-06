@@ -8,8 +8,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import data.ASH_Utils;
 
 public class ASH_ReactiveShields extends BaseHullMod {
-    public final float SHIELD_STRENGTH_MODIFIER = 15f;
-    public final float MINIMUM_SHIELD_ARC = 30F;
+    public static final float SHIELD_STRENGTH_MODIFIER = 15f;
+    public static final float MINIMUM_SHIELD_ARC = 30F;
     public float shipShieldArc;
 
     @Override

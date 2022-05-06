@@ -8,8 +8,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import data.ASH_Utils;
 
 public class ASH_ConductiveRails extends BaseHullMod {
-    public final float BALLISTIC_STATS_MODIFIER = 20f;
-    public final float BALLISTIC_COST_MODIFIER = 50f;
+    public static final float BALLISTIC_STATS_MODIFIER = 20f;
+    public static final float BALLISTIC_COST_MODIFIER = 50f;
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {

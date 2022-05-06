@@ -6,9 +6,9 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_GravitonAttunementDrive extends BaseHullMod {
-    public final float FLEET_BURN_MODIFIER = 3f;
-    public final float SENSOR_PROFILE_MODIFIER = 3f;
-    public final float SUPPLIES_PER_MONTH_MODIFIER = 3f;
+    public static final float FLEET_BURN_MODIFIER = 3f;
+    public static final float SENSOR_PROFILE_MODIFIER = 3f;
+    public static final float SUPPLIES_PER_MONTH_MODIFIER = 3f;
 
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getDynamic().getMod("fleet_burn_bonus").modifyFlat(id, FLEET_BURN_MODIFIER);

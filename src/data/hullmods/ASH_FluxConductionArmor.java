@@ -9,8 +9,8 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_FluxConductionArmor extends BaseHullMod {
-    public final float FLUX_CAPACITY_MODIFIER = 15f;
-    public final float EMP_DMG_MODIFIER = 30f;
+    public static final float FLUX_CAPACITY_MODIFIER = 15f;
+    public static final float EMP_DMG_MODIFIER = 30f;
     private static Map ARMOR_MODIFIER = new HashMap();
     static {
         ARMOR_MODIFIER.put(HullSize.FRIGATE, 25f);
