@@ -12,35 +12,27 @@ import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import data.ASH_Utils;
 
 public class ASH_TestHullmod extends BaseHullMod {
-    public final float MODIFIER = 15f;
+    public static final float BALLISTIC_FIRE_RATE_MOD = 20f;
+    public static final float BALLISTIC_AMMO_REGEN_MOD = 20f;
+    public static final float BALLISTIC_AMMO_CAPACITY_MOD = 20f;
+    public static final float BALLISTIC_FLUX_COST_MOD = 15f;
+    public static final float BALLISTIC_DAMAGE_MOD = 10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMissileRoFMult().modifyMult(id, MODIFIER);
+        stats.getBallisticRoFMult().modifyPercent(id, BALLISTIC_FIRE_RATE_MOD);
+        stats.getBallisticAmmoRegenMult().modifyPercent(id, BALLISTIC_AMMO_REGEN_MOD);
+        stats.getBallisticAmmoBonus().modifyPercent(id, BALLISTIC_AMMO_CAPACITY_MOD);
+        stats.getBallisticWeaponFluxCostMod().modifyPercent(id, BALLISTIC_FLUX_COST_MOD);
+        stats.getBallisticWeaponDamageMult().modifyPercent(id, -BALLISTIC_DAMAGE_MOD);
     }
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return (int) MODIFIER + "";
+            return (int) BALLISTIC_FIRE_RATE_MOD + "";
+        if (index == 1)
+            return (int) BALLISTIC_FLUX_COST_MOD + "";
         return null;
-    }
-
-    @Override
-    public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
-            return;
-
-        MutableShipStatsAPI stats = ship.getMutableStats();
-
-        List<WeaponAPI> weapons = ship.getAllWeapons();
-        for (WeaponAPI weapon : weapons) {
-            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && weapon.getAmmo() <= 0f && weapon.getAmmoPerSecond() == 0f) {
-                float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() * 0.1f);
-                float ammoPerSecond = 0.01666666666666666666666666666667f * ammoReloadSize;
-                weapon.getAmmoTracker().setReloadSize(ammoReloadSize);
-                weapon.getAmmoTracker().setAmmoPerSecond(ammoPerSecond);
-            }
-        }
     }
 }
