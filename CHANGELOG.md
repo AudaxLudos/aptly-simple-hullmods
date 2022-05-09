@@ -1,4 +1,10 @@
 # CHANGELOG
+###### 0.1.8
+- Added Enhanced Autoloaders Hullmod
+- Added Energized Capacitors Hullmod
+- Added Extended Barrels Hullmod
+- Added Subatomic Accelerator Hullmod
+- Change Base values and Tiers of certain Hullmods
 ###### 0.1.1
 - Added 3 new sprites for hullmods
 - Added Subverted Shields sprite
