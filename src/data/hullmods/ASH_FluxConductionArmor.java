@@ -19,12 +19,14 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         ARMOR_MODIFIER.put(HullSize.CAPITAL_SHIP, 100f);
     }
 
+    @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getArmorBonus().modifyFlat(id, (Float) ARMOR_MODIFIER.get(hullSize));
         stats.getFluxCapacity().modifyPercent(id, FLUX_CAPACITY_MODIFIER);
         stats.getEmpDamageTakenMult().modifyPercent(id, EMP_DMG_MODIFIER);
     }
 
+    @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
             return Math.round(FLUX_CAPACITY_MODIFIER) + "%";

@@ -9,12 +9,15 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 
 public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
+    public static final float MISSILE_AMMO_RELOAD_SIZE_MODIFIER = 10f;
+    public static final float MISSILE_AMMO_PER_SECOND_MODIFIER = 50f;
+
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(10f) + "%";
+            return Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%";
         if (index == 1)
-            return Math.round(50f) + " seconds";
+            return Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds";
         return null;
     }
 
@@ -26,8 +29,8 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
         List<WeaponAPI> weapons = ship.getAllWeapons();
         for (WeaponAPI weapon : weapons) {
             if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && weapon.getAmmo() <= 0f && weapon.getAmmoPerSecond() == 0f) {
-                float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() * 0.1f);
-                float ammoPerSecond = 0.02f * ammoReloadSize;
+                float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MODIFIER);
+                float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MODIFIER;
                 weapon.getAmmoTracker().setReloadSize(ammoReloadSize);
                 weapon.getAmmoTracker().setAmmoPerSecond(ammoPerSecond);
             }
