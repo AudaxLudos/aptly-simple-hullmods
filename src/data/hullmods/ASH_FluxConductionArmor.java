@@ -10,7 +10,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_FluxConductionArmor extends BaseHullMod {
     public static final float FLUX_CAPACITY_MODIFIER = 15f;
-    public static final float EMP_DMG_MODIFIER = 30f;
+    public static final float EMP_DAMAGE_MODIFIER = 30f;
     private static Map ARMOR_MODIFIER = new HashMap();
     static {
         ARMOR_MODIFIER.put(HullSize.FRIGATE, 25f);
@@ -23,7 +23,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getArmorBonus().modifyFlat(id, (Float) ARMOR_MODIFIER.get(hullSize));
         stats.getFluxCapacity().modifyPercent(id, FLUX_CAPACITY_MODIFIER);
-        stats.getEmpDamageTakenMult().modifyPercent(id, EMP_DMG_MODIFIER);
+        stats.getEmpDamageTakenMult().modifyPercent(id, EMP_DAMAGE_MODIFIER);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         if (index == 4)
             return ((Float) ARMOR_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue() + "";
         if (index == 5)
-            return Math.round(EMP_DMG_MODIFIER) + "%";
+            return Math.round(EMP_DAMAGE_MODIFIER) + "%";
         return null;
     }
 }
