@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_VolatileAmmunition extends BaseHullMod {
     public static final float BALLISTIC_DAMAGE_MODIFIER = 25f;
     public static final float BALLISTIC_FLUX_COST_MODIFIER = 1.25f;
     public static final float BALLISTIC_FIRE_RATE_MODIFIER = 0.75f;
@@ -22,9 +22,9 @@ public class ASH_TestHullmod extends BaseHullMod {
         if (index == 0)
             return Math.round(BALLISTIC_DAMAGE_MODIFIER) + "%";
         if (index == 1)
-            return Math.round(BALLISTIC_FLUX_COST_MODIFIER) + "%";
+            return BALLISTIC_FIRE_RATE_MODIFIER + "";
         if (index == 2)
-            return Math.round(BALLISTIC_FIRE_RATE_MODIFIER) + "%";
+            return BALLISTIC_FLUX_COST_MODIFIER + "";
         return null;
     }
 }
