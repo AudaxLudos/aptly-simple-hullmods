@@ -22,9 +22,9 @@ public class ASH_OverloadedCapacitors extends BaseHullMod {
         if (index == 0)
             return Math.round(ENERGY_DAMAGE_MODIFIER) + "%";
         if (index == 1)
-            return ENERGY_FLUX_COST_MODIFIER + "";
-        if (index == 2)
             return ENERGY_FIRE_RATE_MODIFIER + "";
+        if (index == 2)
+            return ENERGY_FLUX_COST_MODIFIER + "";
         return null;
     }
 }
