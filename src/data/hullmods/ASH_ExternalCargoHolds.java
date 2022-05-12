@@ -44,11 +44,11 @@ public class ASH_ExternalCargoHolds extends BaseHullMod {
         if (index == 0)
             return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "";
         if (index == 1)
-            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "";
         if (index == 2)
-            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.CRUISER)).intValue()) + "";
         if (index == 3)
-            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Float) CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) + "";
         if (index == 4)
             return Math.round(SHIP_STATS_MODIFIER) + "%";
         return null;
