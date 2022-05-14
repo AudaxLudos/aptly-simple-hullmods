@@ -52,6 +52,8 @@ public class ASH_ExternalCargoHolds extends BaseHullMod {
             return Math.round(((Float) CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) + "";
         if (index == 4)
             return Math.round(SHIP_STATS_MODIFIER) + "%";
+        if (index == 5)
+            return Math.round(SHIP_STATS_MODIFIER) + "%";
         return null;
     }
 }
