@@ -1,11 +1,23 @@
 # CHANGELOG
-###### 0.2.#
-- Added Volatile Ammunition Hullmod
-- Added Overloaded Capacitors Hullmod
-- Added Reactive Subsystems Hullmod
-- Added External Cargo Holds Hullmod
-- Added Maximized Drive Field Hullmod
+###### 0.4.0
+- Added External Cryo Pods Hullmod
+- Added External Fuel Tanks Hullmod
+- Added Makeshift Missile Autoforge Sprite
+- Added Volatile Ammunition Sprite
+- Added Overloaded Capacitors Sprite
+- Added Energized Capacitors Sprite
+- Added Subatomic Accelerator Sprite
+- Added Extended Barrels Sprite
+- Added Reactive Subsystems Sprite
+- Added External Cargo Holds Sprite
+- Added Overloaded Drive Field Sprite
+- Added Maximized Drive Field Sprite
 - Added Overloaded Drive Field Hullmod
+- Added Maximized Drive Field Hullmod
+- Added External Cargo Holds Hullmod
+- Added Reactive Subsystems Hullmod
+- Added Overloaded Capacitors Hullmod
+- Added Volatile Ammunition Hullmod
 ###### 0.1.8
 - Added Enhanced Autoloaders Hullmod
 - Added Energized Capacitors Hullmod
