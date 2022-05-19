@@ -1,7 +1,9 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "d:\\Starsector\\starsector-core\\starfarer.api.jar"
+        "d:\\Starsector\\starsector-core\\starfarer.api.jar",
+        "d:\\Starsector\\mods\\LazyLib\\jars\\LazyLib.jar",
+        "d:\\Starsector\\starsector-core\\lwjgl_util.jar"
     ],
     "java.configuration.runtimes": [
         {

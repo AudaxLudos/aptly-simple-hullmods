@@ -1,12 +1,18 @@
 package data.hullmods;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+
+import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 
 public class ASH_TestHullmod extends BaseHullMod {
     public static final float MAX_BURN_LEVEL_MODIFIER = 1f;
@@ -21,14 +27,6 @@ public class ASH_TestHullmod extends BaseHullMod {
     }
 
     @Override
-    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getCargoMod().modifyFlat(id, (Float) CARGO_MODIFIER.get(hullSize));
-        stats.getMaxBurnLevel().modifyFlat(id, -MAX_BURN_LEVEL_MODIFIER);
-        stats.getMaxSpeed().modifyPercent(id, -MAX_SPEED_MODIFIER);
-        stats.getMaxTurnRate().modifyPercent(id, -MAX_TURN_RATE_MODIFIER);
-    }
-
-    @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
             return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "%";
@@ -38,12 +36,26 @@ public class ASH_TestHullmod extends BaseHullMod {
             return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "%";
         if (index == 3)
             return Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "%";
-        if (index == 4)
-            return Math.round(MAX_BURN_LEVEL_MODIFIER) + "%";
-        if (index == 5)
-            return Math.round(MAX_SPEED_MODIFIER) + "%";
-        if (index == 6)
-            return Math.round(MAX_TURN_RATE_MODIFIER) + "%";
         return null;
+    }
+
+    @Override
+    public void advanceInCombat(ShipAPI ship, float amount) {
+        if (!ship.isAlive())
+            return;
+
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        float calculatedRangeBonus = 0f;
+
+        for (ShipAPI ally : AIUtils.getNearbyAllies(ship, 2000f)) {
+            if(ally.isFrigate() || ally.isDestroyer() || ally.isDrone() || ally.isFighter())
+                continue;
+
+            if (ally.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE) || ally.getVariant().hasHullMod(HullMods.DEDICATED_TARGETING_CORE))
+                calculatedRangeBonus = 1000f;
+        }
+
+        stats.getEnergyWeaponRangeBonus().modifyPercent(spec.getId(), calculatedRangeBonus);
+        stats.getBallisticWeaponRangeBonus().modifyPercent(spec.getId(), calculatedRangeBonus);
     }
 }
