@@ -19,7 +19,6 @@ public class ASH_FuelRamscoop extends BaseHullMod {
         return null;
     }
 
-
     @Override
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
         long currentDay = Global.getSector().getClock().getTimestamp();
@@ -41,7 +40,7 @@ public class ASH_FuelRamscoop extends BaseHullMod {
                 if (fleetMember == member)
                     continue;
                 if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
-                    fuelGenerated++;
+                    fuelGenerated += FUEL_TO_GENERATE;
             }
 
             member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);

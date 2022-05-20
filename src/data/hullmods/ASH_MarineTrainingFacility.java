@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_MarineTrainingFacility extends BaseHullMod {
     public static final int MARINES_TO_GENERATE = 100;
     public static final int DAYS_TO_GENERATE_MARINES = 30;
     public static final int MAX_MARINES_GENERATED = 1000;
@@ -16,10 +16,11 @@ public class ASH_TestHullmod extends BaseHullMod {
         if (index == 0)
             return Math.round(MARINES_TO_GENERATE) + "";
         if (index == 1)
-            return Math.round(DAYS_TO_GENERATE_MARINES) + "";
+            return Math.round(MARINES_TO_GENERATE) + "";
+        if (index == 2)
+            return "month";
         return null;
     }
-
 
     @Override
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
@@ -40,14 +41,14 @@ public class ASH_TestHullmod extends BaseHullMod {
                 return;
             if (member.getFleetData().getFleet().getCargo().getMarines() >= MAX_MARINES_GENERATED)
                 return;
-            
+
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 minFleetCrew += fleetMember.getMinCrew();
 
                 if (fleetMember == member)
                     continue;
                 if (fleetMember.getVariant().hasHullMod("ASH_TestHullmod"))
-                    marinesGenerated+=MARINES_TO_GENERATE;
+                    marinesGenerated += MARINES_TO_GENERATE;
             }
 
             if (member.getFleetData().getFleet().getCargo().getCrew() <= minFleetCrew)
