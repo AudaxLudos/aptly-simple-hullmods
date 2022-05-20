@@ -5,27 +5,29 @@ import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 
-public class ASH_TestHullmod extends BaseHullMod {
-    public static final int DAYS_PER_FUEL_GENERATED = 1;
-    public static final int FUEL_GENERATED_PER_DAY = 1;
+public class ASH_FuelRamscoop extends BaseHullMod {
+    public static final float FUEL_TO_GENERATE = 1f;
+    public static final float DAYS_TO_GENERATE_FUEL = 2f;
+    private long lastDay = 0;
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(DAYS_PER_FUEL_GENERATED) + "%";
+            return Math.round(FUEL_TO_GENERATE) + "";
+        if (index == 1)
+            return Math.round(DAYS_TO_GENERATE_FUEL) + "";
         return null;
     }
 
-    private long lastDay = 0;
 
     @Override
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
-
         long currentDay = Global.getSector().getClock().getTimestamp();
-        int fuelGenerated = FUEL_GENERATED_PER_DAY;
+        float fuelGenerated = FUEL_TO_GENERATE;
 
-        if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_PER_FUEL_GENERATED) {
+        if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_FUEL) {
             lastDay = currentDay;
+
             if (member.getFleetData() == null)
                 return;
             if (member.getFleetData().getFleet() == null)
@@ -38,7 +40,7 @@ public class ASH_TestHullmod extends BaseHullMod {
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 if (fleetMember == member)
                     continue;
-                if (member.getVariant().hasHullMod("ASH_TestHullmod"))
+                if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
                     fuelGenerated++;
             }
 
