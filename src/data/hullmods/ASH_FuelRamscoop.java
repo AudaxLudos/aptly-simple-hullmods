@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.CargoAPI;
+import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 
 public class ASH_FuelRamscoop extends BaseHullMod {
     public static final float DAYS_TO_GENERATE_FUEL = 3f;
-    
+
     private static Map FUEL_TO_GENERATE = new HashMap();
     static {
         FUEL_TO_GENERATE.put(HullSize.FRIGATE, 1f);
@@ -20,15 +22,14 @@ public class ASH_FuelRamscoop extends BaseHullMod {
     }
     private long lastDay = Global.getSector().getClock().getTimestamp();
 
-
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + " fuel";
+            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "";
         if (index == 1)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + " fuel";
+            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "";
         if (index == 2)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + " fuel";
+            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "";
         if (index == 3)
             return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " fuel";
         if (index == 4)
@@ -44,21 +45,25 @@ public class ASH_FuelRamscoop extends BaseHullMod {
         if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_FUEL) {
             lastDay = currentDay;
 
-            if (member.getFleetData() == null)
-                return;
-            if (member.getFleetData().getFleet() == null)
-                return;
-            if (member.getFleetData().getFleet().getCargo() == null)
-                return;
-            if (member.getFleetData().getFleet().getCargo().getFuel() >= member.getFleetData().getFleet().getCargo().getMaxFuel())
+            FleetDataAPI fleetData = member.getFleetData();
+
+            if (fleetData == null || fleetData.getFleet() == null)
                 return;
 
-            for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
+            CargoAPI fleetCargo = fleetData.getFleet().getCargo();
+
+            if (fleetCargo == null || fleetCargo.getFuel() >= fleetCargo.getMaxFuel())
+                return;
+
+            for (FleetMemberAPI fleetMember : fleetData.getMembersListCopy()) {
                 if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
                     fuelGenerated += (Float) FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
             }
 
-            member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);
+            if (fleetCargo.getFuel() + fuelGenerated >= fleetCargo.getMaxFuel())
+                fuelGenerated = fleetCargo.getMaxFuel() - fleetCargo.getFuel();
+
+            fleetCargo.addFuel(fuelGenerated);
         }
     }
 }

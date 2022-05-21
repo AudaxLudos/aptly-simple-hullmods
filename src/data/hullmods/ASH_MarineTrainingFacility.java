@@ -32,23 +32,23 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "";
         if (index == 1)
-            return Math.round(((Float) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "";
+            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "";
         if (index == 2)
-            return Math.round(((Float) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "";
+            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "";
         if (index == 3)
-            return Math.round(((Float) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " crew to marines";
+            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " crew to marines";
         if (index == 4)
             return "month";
         if (index == 5)
-            return Math.round(((Float) MAX_MARINES_GENERATED.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Integer) MAX_MARINES_GENERATED.get(HullSize.FRIGATE)).intValue()) + "";
         if (index == 6)
-            return Math.round(((Float) MAX_MARINES_GENERATED.get(HullSize.DESTROYER)).intValue()) + "";
+            return Math.round(((Integer) MAX_MARINES_GENERATED.get(HullSize.DESTROYER)).intValue()) + "";
         if (index == 7)
-            return Math.round(((Float) MAX_MARINES_GENERATED.get(HullSize.CRUISER)).intValue()) + "";
+            return Math.round(((Integer) MAX_MARINES_GENERATED.get(HullSize.CRUISER)).intValue()) + "";
         if (index == 8)
-            return Math.round(((Float) MAX_MARINES_GENERATED.get(HullSize.CAPITAL_SHIP)).intValue()) + " marines";
+            return Math.round(((Integer) MAX_MARINES_GENERATED.get(HullSize.CAPITAL_SHIP)).intValue()) + " marines";
         return null;
     }
 
@@ -64,9 +64,7 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
 
             FleetDataAPI fleetData = member.getFleetData();
 
-            if (fleetData == null)
-                return;
-            if (fleetData.getFleet() == null)
+            if (fleetData == null || fleetData.getFleet() == null)
                 return;
 
             CargoAPI fleetCargo = fleetData.getFleet().getCargo();
@@ -83,10 +81,10 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
                 }
             }
 
-            if (fleetCargo.getMarines() >= maxMarines)
+            if (fleetCargo.getMarines() >= maxMarines || fleetCargo.getCrew() <= minFleetCrew)
                 return;
-            if (fleetCargo.getCrew() <= minFleetCrew)
-                return;
+            if (fleetCargo.getMarines() + marinesGenerated >= maxMarines)
+                marinesGenerated = maxMarines - (int) fleetCargo.getMarines();
             if (fleetCargo.getCrew() - marinesGenerated <= minFleetCrew)
                 marinesGenerated = fleetCargo.getCrew() - minFleetCrew;
 
