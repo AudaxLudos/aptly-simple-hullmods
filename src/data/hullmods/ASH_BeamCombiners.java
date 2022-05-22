@@ -4,18 +4,16 @@ import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
-public class ASH_TestHullmod extends BaseHullMod {
-    public static final float BEAM_DAMAGE_MODIFIER = 25f;
-    public static final float BEAM_FLUX_COST_MODIFIER = 50f;
-    public static final float BEAM_TURN_RATE_MODIFIER = 25f;
-    public static final float SHIP_TURN_RATE_MODIFIER = 25f;
+public class ASH_BeamCombiners extends BaseHullMod {
+    public static final float BEAM_DAMAGE_MODIFIER = 20f;
+    public static final float BEAM_FLUX_COST_MODIFIER = 40f;
+    public static final float BEAM_TURN_RATE_MODIFIER = 20f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getBeamWeaponDamageMult().modifyPercent(id, BEAM_DAMAGE_MODIFIER);
         stats.getBeamWeaponFluxCostMult().modifyPercent(id, BEAM_FLUX_COST_MODIFIER);
         stats.getBeamWeaponTurnRateBonus().modifyPercent(id, -BEAM_TURN_RATE_MODIFIER);
-        stats.getMaxTurnRate().modifyPercent(id, -SHIP_TURN_RATE_MODIFIER);
     }
 
     @Override
@@ -26,8 +24,6 @@ public class ASH_TestHullmod extends BaseHullMod {
             return Math.round(BEAM_FLUX_COST_MODIFIER) + "";
         if (index == 2)
             return Math.round(BEAM_TURN_RATE_MODIFIER) + "";
-        if (index == 3)
-            return Math.round(SHIP_TURN_RATE_MODIFIER) + "";
         return null;
     }
 }
