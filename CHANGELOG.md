@@ -1,4 +1,10 @@
 # CHANGELOG
+###### 0.4.5
+- Added Hull Conversion Hullmod
+- Added Beam Combiners Hullmod
+- Added Marine Training Facility Hullmod
+- Added Fuel Ramscoop Hullmod
+- Added Targeting Receiver Hullmod
 ###### 0.4.0
 - Added External Cryo Pods Hullmod
 - Added External Fuel Tanks Hullmod
