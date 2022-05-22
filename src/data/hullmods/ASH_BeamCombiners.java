@@ -19,11 +19,11 @@ public class ASH_BeamCombiners extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(BEAM_DAMAGE_MODIFIER) + "";
+            return Math.round(BEAM_DAMAGE_MODIFIER) + "%";
         if (index == 1)
-            return Math.round(BEAM_FLUX_COST_MODIFIER) + "";
+            return Math.round(BEAM_FLUX_COST_MODIFIER) + "%";
         if (index == 2)
-            return Math.round(BEAM_TURN_RATE_MODIFIER) + "";
+            return Math.round(BEAM_TURN_RATE_MODIFIER) + "%";
         return null;
     }
 }
