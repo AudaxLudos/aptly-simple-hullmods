@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_HullConversion extends BaseHullMod {
     public static final float SHIP_ARMOR_MODIFIER = 20f;
-    public static final float SHIP_MIN_ARMOR_MODIFIER = 0.5f;
+    public static final float SHIP_MIN_ARMOR_MODIFIER = 0.05f;
     public static final float SHIP_HULL_MODIFIER = 0.8f;
     public static final float SHIP_BREAK_CHANCE_MODIFIER = 2f;
 
