@@ -9,6 +9,7 @@ import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_FuelRamscoop extends BaseHullMod {
     public static final float DAYS_TO_GENERATE_FUEL = 3f;
@@ -61,8 +62,10 @@ public class ASH_FuelRamscoop extends BaseHullMod {
             }
 
             if (fleetCargo.getFuel() + fuelGenerated >= fleetCargo.getMaxFuel())
-                fuelGenerated = fleetCargo.getMaxFuel() - fleetCargo.getFuel();
-
+                fuelGenerated = fleetCargo.getMaxFuel() - fleetCargo.getFuel(); 
+            if(fuelGenerated <= 0)
+                Global.getSector().getCampaignUI().addMessage("Interstellar matter has been converted into " + Math.round(fuelGenerated) + " units of fuel", Misc.getTextColor());
+                
             fleetCargo.addFuel(fuelGenerated);
         }
     }

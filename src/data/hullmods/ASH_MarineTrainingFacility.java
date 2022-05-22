@@ -9,6 +9,7 @@ import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_MarineTrainingFacility extends BaseHullMod {
     public static final int DAYS_TO_GENERATE_MARINES = 30;
@@ -87,6 +88,8 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
                 marinesGenerated = maxMarines - (int) fleetCargo.getMarines();
             if (fleetCargo.getCrew() - marinesGenerated <= minFleetCrew)
                 marinesGenerated = fleetCargo.getCrew() - minFleetCrew;
+            if(marinesGenerated <= 0)
+                Global.getSector().getCampaignUI().addMessage(marinesGenerated + " crew has been trained into marines.", Misc.getTextColor());
 
             fleetCargo.addMarines(marinesGenerated);
             fleetCargo.removeCrew(marinesGenerated);
