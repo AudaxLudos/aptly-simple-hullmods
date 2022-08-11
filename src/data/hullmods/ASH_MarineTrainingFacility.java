@@ -88,7 +88,7 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
                 marinesGenerated = maxMarines - (int) fleetCargo.getMarines();
             if (fleetCargo.getCrew() - marinesGenerated <= minFleetCrew)
                 marinesGenerated = fleetCargo.getCrew() - minFleetCrew;
-            if(marinesGenerated <= 0)
+            if(marinesGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage(marinesGenerated + " crew has been trained into marines.", Misc.getTextColor());
 
             fleetCargo.addMarines(marinesGenerated);

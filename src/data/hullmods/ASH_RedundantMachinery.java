@@ -8,6 +8,7 @@ public class ASH_RedundantMachinery extends BaseHullMod {
     public static final float OVERLOAD_TIME_MODIFIER = 0.5f;
     public static final float ENGINE_REPAIR_TIME_MODIFIER = 0.5f;
     public static final float WEAPON_REPAIR_TIME_MODIFIER = 0.5f;
+    public static final float CR_LOSS_PER_SECOND_MODIFIER = 50f;
     public static final float SUPPLIES_PER_MONTH_MODIFIER = 50f;
 
     @Override
@@ -15,6 +16,7 @@ public class ASH_RedundantMachinery extends BaseHullMod {
         stats.getOverloadTimeMod().modifyMult(id, OVERLOAD_TIME_MODIFIER);
         stats.getCombatEngineRepairTimeMult().modifyMult(id, ENGINE_REPAIR_TIME_MODIFIER);
         stats.getCombatWeaponRepairTimeMult().modifyMult(id, WEAPON_REPAIR_TIME_MODIFIER);
+        stats.getCRLossPerSecondPercent().modifyPercent(id, CR_LOSS_PER_SECOND_MODIFIER);
         stats.getSuppliesPerMonth().modifyPercent(id, SUPPLIES_PER_MONTH_MODIFIER);
     }
 
@@ -23,6 +25,8 @@ public class ASH_RedundantMachinery extends BaseHullMod {
         if (index == 0)
             return OVERLOAD_TIME_MODIFIER + "";
         if (index == 1)
+            return Math.round(CR_LOSS_PER_SECOND_MODIFIER) + "%";
+        if (index == 2)
             return Math.round(SUPPLIES_PER_MONTH_MODIFIER) + "%";
         return null;
     }

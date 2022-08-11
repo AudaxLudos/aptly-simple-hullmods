@@ -1,7 +1,5 @@
 package data.hullmods;
 
-import java.util.List;
-
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -13,20 +11,12 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
-public class ASH_TestHullmod extends BaseHullMod {
-    public static final float SHIP_ARMOR_MODIFIER = 20f;
-    public static final float SHIP_HULL_MODIFIER = 0.8f;
-    public static final float SHIP_MIN_ARMOR_MODIFIER = 5f;
-    public static final float SHIP_BREAK_CHANCE_MODIFIER = 2f;
-    public static final float OVERLOAD_TIME_MODIFIER = 0.5f;
-
-    @Override
-    public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        // stats.getArmorBonus().modifyPercent(id, 20f);
-        // stats.getMinArmorFraction().modifyPercent(id, 5f);
-        // stats.getHullBonus().modifyMult(id, 0.9f);
-        // stats.getBreakProb().modifyMult(id, 2f);
-    }
+public class ASH_ExcessiveVentingProtocol extends BaseHullMod {
+    public static final float MAX_SPEED_MODIFIER = 2f;
+    public static final float MAX_TURN_RATE_MODIFIER = 2f;
+    public static final float ACCELERATION_MODIFIER = 2f;
+    public static final float TURN_ACCELERATION_MODIFIER = 2f;
+    public static final float VENT_RATE_MODIFIER = 2f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -65,13 +55,9 @@ public class ASH_TestHullmod extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(SHIP_ARMOR_MODIFIER) + "";
-        if (index == 1)
-            return Math.round(SHIP_MIN_ARMOR_MODIFIER) + "";
-        if (index == 2)
-            return Math.round(SHIP_HULL_MODIFIER) + "";
+            return Math.round(MAX_SPEED_MODIFIER) + "";
         if (index == 3)
-            return Math.round(SHIP_BREAK_CHANCE_MODIFIER) + "";
+            return Math.round(VENT_RATE_MODIFIER) + "";
         return null;
     }
 }
