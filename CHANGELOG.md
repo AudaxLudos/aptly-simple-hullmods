@@ -1,4 +1,15 @@
 # CHANGELOG
+###### 0.5.5
+- Added Targeting Transciever Sprite by Vildrian
+- Added Marine Training Facility Sprite by Vildrian
+- Added Hull Conversion Sprite by Vildrian
+- Added Fuel Ramscoop Sprite by Vildrian
+- Added External Fuel Tanks Sprite by Vildrian
+- Added External Cryopods Sprite by Vildrian
+- Added Enhanced Autoloader Sprite by Vildrian
+- Added Beam Combiner Sprite by Vildrian
+- Added Excessive Venting Protocol Hullmod
+- Added Redundant Machinery Hullmod
 ###### 0.4.5
 - Added Hull Conversion Hullmod
 - Added Beam Combiners Hullmod
