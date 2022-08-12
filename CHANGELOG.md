@@ -1,5 +1,5 @@
 # CHANGELOG
-###### 0.5.5
+###### 0.5.6
 - Added Targeting Transciever Sprite by Vildrian
 - Added Marine Training Facility Sprite by Vildrian
 - Added Hull Conversion Sprite by Vildrian

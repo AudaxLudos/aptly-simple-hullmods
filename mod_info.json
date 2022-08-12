@@ -4,8 +4,8 @@
     "author": "Audax",
     "version": {
         "major": 0,
-        "minor": 4,
-        "patch": 5
+        "minor": 5,
+        "patch": 6
     },
     "description": "Additional hullmods for starsector",
     "gameVersion": "0.95a-RC6",
