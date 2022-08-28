@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_AlignedThrustVariants extends BaseHullMod {
     public static final float SHIP_MAX_SPEED_MODIFIER = 1.1f;
     public static final float SHIP_MAX_TURN_RATE_MODIFIER = 50f;
 
@@ -24,7 +24,7 @@ public class ASH_TestHullmod extends BaseHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(SHIP_MAX_SPEED_MODIFIER) + "%";
+            return Math.round(SHIP_MAX_SPEED_MODIFIER * 100 - 100) + "%";
         if (index == 1)
             return Math.round(SHIP_MAX_TURN_RATE_MODIFIER) + "%";
         return null;
