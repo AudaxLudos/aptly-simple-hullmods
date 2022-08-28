@@ -8,7 +8,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 import java.awt.Color;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_TemporalFluxReactor extends BaseHullMod {
     public static final float SHIP_TIME_MODIFIER = 33f;
     public Color jitterColor;
 
