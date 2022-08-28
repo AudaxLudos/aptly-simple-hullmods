@@ -8,8 +8,15 @@
         "patch": 6
     },
     "description": "Additional hullmods for starsector",
-    "gameVersion": "0.95a-RC6",
+    "gameVersion": "0.95.1a-RC6",
     "jars": [
         "Aptly Simple Hullmods.jar"
+    ],
+    "dependencies": [
+        {
+            "id": "lw_lazylib",
+            "name": "LazyLib",
+            "version": "2.7b"
+        }
     ]
 }
