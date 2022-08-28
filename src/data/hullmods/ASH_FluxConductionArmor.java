@@ -11,7 +11,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 public class ASH_FluxConductionArmor extends BaseHullMod {
     public static final float FLUX_CAPACITY_MODIFIER = 15f;
     public static final float EMP_DAMAGE_MODIFIER = 30f;
-    private static Map ARMOR_MODIFIER = new HashMap();
+    private static Map<Object, Float> ARMOR_MODIFIER = new HashMap<Object, Float>();
     static {
         ARMOR_MODIFIER.put(HullSize.FRIGATE, 25f);
         ARMOR_MODIFIER.put(HullSize.DESTROYER, 50f);

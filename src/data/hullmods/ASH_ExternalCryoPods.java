@@ -11,7 +11,7 @@ import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 
 public class ASH_ExternalCryoPods extends BaseHullMod {
     public static final float SHIP_STATS_MODIFIER = 20f;
-    private static Map CREW_MODIFIER = new HashMap();
+    private static Map<Object, Float> CREW_MODIFIER = new HashMap<Object, Float>();
     static {
         CREW_MODIFIER.put(HullSize.FRIGATE, 250f);
         CREW_MODIFIER.put(HullSize.DESTROYER, 500f);

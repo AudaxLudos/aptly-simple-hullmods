@@ -20,8 +20,6 @@ public class ASH_TestHullmod extends BaseHullMod {
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (!ship.isAlive())
             return;
-
-        MutableShipStatsAPI stats = ship.getMutableStats();
     }
 
     @Override

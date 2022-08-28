@@ -14,7 +14,7 @@ import com.fs.starfarer.api.util.Misc;
 public class ASH_FuelRamscoop extends BaseHullMod {
     public static final float DAYS_TO_GENERATE_FUEL = 3f;
 
-    private static Map FUEL_TO_GENERATE = new HashMap();
+    private static Map<Object, Float> FUEL_TO_GENERATE = new HashMap<Object, Float>();
     static {
         FUEL_TO_GENERATE.put(HullSize.FRIGATE, 1f);
         FUEL_TO_GENERATE.put(HullSize.DESTROYER, 1f);

@@ -11,7 +11,7 @@ import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 
 public class ASH_ExternalCargoHolds extends BaseHullMod {
     public static final float SHIP_STATS_MODIFIER = 20f;
-    private static Map CARGO_MODIFIER = new HashMap();
+    private static Map<Object, Float> CARGO_MODIFIER = new HashMap<Object, Float>();
     static {
         CARGO_MODIFIER.put(HullSize.FRIGATE, 250f);
         CARGO_MODIFIER.put(HullSize.DESTROYER, 500f);

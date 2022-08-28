@@ -14,14 +14,14 @@ import com.fs.starfarer.api.util.Misc;
 public class ASH_MarineTrainingFacility extends BaseHullMod {
     public static final int DAYS_TO_GENERATE_MARINES = 30;
 
-    private static Map MARINES_TO_GENERATE = new HashMap();
+    private static Map<Object, Integer> MARINES_TO_GENERATE = new HashMap<Object, Integer>();
     static {
         MARINES_TO_GENERATE.put(HullSize.FRIGATE, 10);
         MARINES_TO_GENERATE.put(HullSize.DESTROYER, 20);
         MARINES_TO_GENERATE.put(HullSize.CRUISER,40);
         MARINES_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50);
     }
-    private static Map MAX_MARINES_GENERATED = new HashMap();
+    private static Map<Object, Integer> MAX_MARINES_GENERATED = new HashMap<Object, Integer>();
     static {
         MAX_MARINES_GENERATED.put(HullSize.FRIGATE, 50);
         MAX_MARINES_GENERATED.put(HullSize.DESTROYER, 100);
