@@ -1,4 +1,10 @@
 # CHANGELOG
+###### 0.6.2
+- Added visual indicator for Reactive Shields
+- Added Aligned Thrust Variants
+- Added Temporal Flux Reactor
+- Updated Excessive Venting Protocol to Venting Overdrive
+- Updated mods with default sprites to available game sprites
 ###### 0.5.6
 - Added Targeting Transciever Sprite by Vildrian
 - Added Marine Training Facility Sprite by Vildrian
