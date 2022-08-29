@@ -63,17 +63,13 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
         if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_MARINES) {
             lastDay = currentDay;
 
-            FleetDataAPI fleetData = member.getFleetData();
-
-            if (fleetData == null || fleetData.getFleet() == null)
+            if (member.getFleetData() == null || member.getFleetData().getFleet() == null)
                 return;
 
-            CargoAPI fleetCargo = fleetData.getFleet().getCargo();
-
-            if (fleetCargo == null)
+            if (member.getFleetData().getFleet().getCargo() == null)
                 return;
 
-            for (FleetMemberAPI fleetMember : fleetData.getMembersListCopy()) {
+            for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 minFleetCrew += fleetMember.getMinCrew();
 
                 if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility")) {
@@ -82,17 +78,17 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
                 }
             }
 
-            if (fleetCargo.getMarines() >= maxMarines || fleetCargo.getCrew() <= minFleetCrew)
+            if (member.getFleetData().getFleet().getCargo().getMarines() >= maxMarines || member.getFleetData().getFleet().getCargo().getCrew() <= minFleetCrew)
                 return;
-            if (fleetCargo.getMarines() + marinesGenerated >= maxMarines)
-                marinesGenerated = maxMarines - (int) fleetCargo.getMarines();
-            if (fleetCargo.getCrew() - marinesGenerated <= minFleetCrew)
-                marinesGenerated = fleetCargo.getCrew() - minFleetCrew;
+            if (member.getFleetData().getFleet().getCargo().getMarines() + marinesGenerated >= maxMarines)
+                marinesGenerated = maxMarines - (int) member.getFleetData().getFleet().getCargo().getMarines();
+            if (member.getFleetData().getFleet().getCargo().getCrew() - marinesGenerated <= minFleetCrew)
+                marinesGenerated = member.getFleetData().getFleet().getCargo().getCrew() - minFleetCrew;
             if(marinesGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage(marinesGenerated + " crew has been trained into marines.", Misc.getTextColor());
 
-            fleetCargo.addMarines(marinesGenerated);
-            fleetCargo.removeCrew(marinesGenerated);
+            member.getFleetData().getFleet().getCargo().addMarines(marinesGenerated);
+            member.getFleetData().getFleet().getCargo().removeCrew(marinesGenerated);
         }
     }
 }
