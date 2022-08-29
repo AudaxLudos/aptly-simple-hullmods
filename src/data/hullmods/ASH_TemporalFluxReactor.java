@@ -10,7 +10,6 @@ import java.awt.Color;
 
 public class ASH_TemporalFluxReactor extends BaseHullMod {
     public static final float SHIP_TIME_MODIFIER = 33f;
-    public static final float PEAK_PERORMANCE_TIME_MODIFIER = 33f;
     public Color jitterColor;
 
     @Override
@@ -19,31 +18,37 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
     }
 
     @Override
-    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getPeakCRDuration().modifyMult(id, 1 - PEAK_PERORMANCE_TIME_MODIFIER * 0.01f);
-    }
-
-    @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (Global.getCombatEngine().isPaused())
             return;
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
+            ship.getMutableStats().getTimeMult().unmodify(ship.getId());
+            Global.getCombatEngine().getTimeMult().unmodify(ship.getId());
             return;
+        }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
+        float timeDeployed = 0f;
+
+        if (Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId()) instanceof Float)
+            timeDeployed = (float) Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId());
 
         ship.setJitterUnder(this, jitterColor, ship.getFluxLevel() * 2, 3, 2, 12);
-        stats.getTimeMult().modifyMult(spec.getId(), 1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f));
+        stats.getTimeMult().modifyMult(ship.getId(), 1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f));
+
+        if (ship.areAnyEnemiesInRange()) {
+            ship.setTimeDeployed(timeDeployed += amount + amount * ship.getFluxLevel());
+        }
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
-            Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(),
+            Global.getCombatEngine().getTimeMult().modifyMult(ship.getId(),
                     1 / (1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f)));
-            Global.getCombatEngine().maintainStatusForPlayerShip(spec.getId(),
-                    "graphics/icons/hullsys/temporal_shell.png", "Time Flow",
+            Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
+                    "graphics/icons/hullsys/temporal_shell.png", "Current Time Flow",
                     Math.round(ship.getFluxLevel() * SHIP_TIME_MODIFIER) + "%", false);
-        } else {
-            Global.getCombatEngine().getTimeMult().unmodify(spec.getId());
         }
+
+        Global.getCombatEngine().getCustomData().put("ASH_TimeDeployed_" + ship.getId(), timeDeployed);
     }
 
     @Override
@@ -51,7 +56,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         if (index == 0)
             return Math.round(SHIP_TIME_MODIFIER) + "%";
         if (index == 1)
-            return Math.round(PEAK_PERORMANCE_TIME_MODIFIER) + "%";
+            return "peak perforamnce time reduction per second is increased as flux levels rise";
         return null;
     }
 }
