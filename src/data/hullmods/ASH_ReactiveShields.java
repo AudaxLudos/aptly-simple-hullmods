@@ -13,15 +13,7 @@ import data.ASH_Utils;
 public class ASH_ReactiveShields extends BaseHullMod {
     public static final float SHIELD_STRENGTH_MODIFIER = 15f;
     public static final float MINIMUM_SHIELD_ARC = 30F;
-    public float shipShieldArc;
-    public Color defaultShieldColor;
-    public Color customShieldColor = new Color(153, 18, 213, 255);
-
-    @Override
-    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        shipShieldArc = ship.getShield().getArc();
-        defaultShieldColor = ship.getShield().getInnerColor();
-    }
+    public static final Color CUSTOM_SHIELD_COLOR = new Color(153, 18, 213, 255);
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
@@ -54,14 +46,16 @@ public class ASH_ReactiveShields extends BaseHullMod {
             return;
 
         MutableShipStatsAPI stats = ship.getMutableStats();
+        float shipShieldArc = ship.getHullSpec().getShieldSpec().getArc();
+        Color defaultShieldColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
         float computedShieldStrength = ASH_Utils.getValueWithinMax(SHIELD_STRENGTH_MODIFIER * (ship.getHardFluxLevel() * 0.30f + ship.getHardFluxLevel()), 0, SHIELD_STRENGTH_MODIFIER);
         float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), MINIMUM_SHIELD_ARC, shipShieldArc);
 
-        int red = (int)Math.abs((ship.getFluxLevel() * customShieldColor.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed()));
-        int green = (int)Math.abs((ship.getFluxLevel() * customShieldColor.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen()));
-        int blue = (int)Math.abs((ship.getFluxLevel() * customShieldColor.getBlue()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getBlue()));
-        int alpha = (int)Math.abs((ship.getFluxLevel() * customShieldColor.getAlpha()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getAlpha()));
+        int red = (int)Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed()));
+        int green = (int)Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen()));
+        int blue = (int)Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getBlue()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getBlue()));
+        int alpha = (int)Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getAlpha()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getAlpha()));
 
         ship.getShield().setInnerColor(new Color(red, green, blue, alpha));
         stats.getShieldAbsorptionMult().modifyPercent(spec.getId(), -computedShieldStrength);
