@@ -10,12 +10,6 @@ import java.awt.Color;
 
 public class ASH_TemporalFluxReactor extends BaseHullMod {
     public static final float SHIP_TIME_MODIFIER = 33f;
-    public Color jitterColor;
-
-    @Override
-    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        jitterColor = ship.getShield().getInnerColor();
-    }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -28,6 +22,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
+        Color jitterColor = ship.getHullSpec().getShieldSpec().getInnerColor();
         float timeDeployed = 0f;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId()) instanceof Float)
