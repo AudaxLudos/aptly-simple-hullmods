@@ -46,27 +46,23 @@ public class ASH_FuelRamscoop extends BaseHullMod {
         if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_FUEL) {
             lastDay = currentDay;
 
-            FleetDataAPI fleetData = member.getFleetData();
-
-            if (fleetData == null || fleetData.getFleet() == null)
+            if (member.getFleetData() == null || member.getFleetData().getFleet() == null)
                 return;
 
-            CargoAPI fleetCargo = fleetData.getFleet().getCargo();
-
-            if (fleetCargo == null || fleetCargo.getFuel() >= fleetCargo.getMaxFuel())
+            if (member.getFleetData().getFleet().getCargo() == null || member.getFleetData().getFleet().getCargo().getFuel() >= member.getFleetData().getFleet().getCargo().getMaxFuel())
                 return;
 
-            for (FleetMemberAPI fleetMember : fleetData.getMembersListCopy()) {
+            for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
                     fuelGenerated += (Float) FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
             }
 
-            if (fleetCargo.getFuel() + fuelGenerated >= fleetCargo.getMaxFuel())
-                fuelGenerated = fleetCargo.getMaxFuel() - fleetCargo.getFuel(); 
+            if (member.getFleetData().getFleet().getCargo().getFuel() + fuelGenerated >= member.getFleetData().getFleet().getCargo().getMaxFuel())
+                fuelGenerated = member.getFleetData().getFleet().getCargo().getMaxFuel() - member.getFleetData().getFleet().getCargo().getFuel(); 
             if(fuelGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage("Interstellar matter has been converted into " + Math.round(fuelGenerated) + " units of fuel", Misc.getTextColor());
                 
-            fleetCargo.addFuel(fuelGenerated);
+                member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);
         }
     }
 }
