@@ -22,7 +22,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
-        Color jitterColor = ship.getHullSpec().getShieldSpec().getInnerColor();
+        Color jitterColor = ship.getShield().getInnerColor();
         float timeDeployed = 0f;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId()) instanceof Float)
