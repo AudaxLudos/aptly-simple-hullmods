@@ -1,4 +1,10 @@
 # CHANGELOG
+###### 0.6.7
+- Updated temporal flux reactor to be color compatible with reactive shields
+- Fixed temporal flux reactor affecting other ships with the hullmod
+- Fixed reactive shields affecting other ships with the hullmod
+- Fixed marine training facility not giving marines every month
+- Fixed fuel ramscoop not giving fuel every 3 days
 ###### 0.6.2
 - Added visual indicator for Reactive Shields
 - Added Aligned Thrust Variants
