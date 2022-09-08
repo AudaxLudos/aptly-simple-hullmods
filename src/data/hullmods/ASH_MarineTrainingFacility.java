@@ -14,10 +14,10 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
 
     private static Map<Object, Integer> MARINES_TO_GENERATE = new HashMap<Object, Integer>();
     static {
-        MARINES_TO_GENERATE.put(HullSize.FRIGATE, 10);
-        MARINES_TO_GENERATE.put(HullSize.DESTROYER, 20);
-        MARINES_TO_GENERATE.put(HullSize.CRUISER,40);
-        MARINES_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50);
+        MARINES_TO_GENERATE.put(HullSize.FRIGATE, 5);
+        MARINES_TO_GENERATE.put(HullSize.DESTROYER, 10);
+        MARINES_TO_GENERATE.put(HullSize.CRUISER,20);
+        MARINES_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 40);
     }
     private static Map<Object, Integer> MAX_MARINES_GENERATED = new HashMap<Object, Integer>();
     static {
