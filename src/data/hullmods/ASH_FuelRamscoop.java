@@ -60,7 +60,7 @@ public class ASH_FuelRamscoop extends BaseHullMod {
             if(fuelGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage("Interstellar matter has been converted into " + Math.round(fuelGenerated) + " units of fuel", Misc.getTextColor());
                 
-                member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);
+            member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);
         }
     }
 }
