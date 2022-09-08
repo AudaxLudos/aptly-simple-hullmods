@@ -10,7 +10,7 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_MarineTrainingFacility extends BaseHullMod {
-    public static final int DAYS_TO_GENERATE_MARINES = 30;
+    public static final int DAYS_TO_GENERATE_MARINES = 7;
 
     private static Map<Object, Integer> MARINES_TO_GENERATE = new HashMap<Object, Integer>();
     static {
