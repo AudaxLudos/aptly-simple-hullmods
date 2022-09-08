@@ -15,9 +15,9 @@ public class ASH_FuelRamscoop extends BaseHullMod {
     private static Map<Object, Float> FUEL_TO_GENERATE = new HashMap<Object, Float>();
     static {
         FUEL_TO_GENERATE.put(HullSize.FRIGATE, 1f);
-        FUEL_TO_GENERATE.put(HullSize.DESTROYER, 1f);
-        FUEL_TO_GENERATE.put(HullSize.CRUISER, 2f);
-        FUEL_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 2f);
+        FUEL_TO_GENERATE.put(HullSize.DESTROYER, 2f);
+        FUEL_TO_GENERATE.put(HullSize.CRUISER, 3f);
+        FUEL_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 4f);
     }
     private long lastDay = Global.getSector().getClock().getTimestamp();
 
