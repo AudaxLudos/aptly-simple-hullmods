@@ -3,13 +3,13 @@ package data.hullmods;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 
-public class ASH_ExternalCryoPods extends BaseHullMod {
+public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
     public static final float SHIP_STATS_MODIFIER = 20f;
     private static Map<Object, Float> CREW_MODIFIER = new HashMap<Object, Float>();
     static {

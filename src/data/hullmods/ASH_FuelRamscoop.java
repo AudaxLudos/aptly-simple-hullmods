@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_FuelRamscoop extends BaseHullMod {
+public class ASH_FuelRamscoop extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_FUEL = 3f;
 
     private static Map<Object, Float> FUEL_TO_GENERATE = new HashMap<Object, Float>();

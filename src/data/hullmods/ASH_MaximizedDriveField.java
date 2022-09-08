@@ -1,11 +1,11 @@
 package data.hullmods;
 
-import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 
-public class ASH_MaximizedDriveField extends BaseHullMod {
+public class ASH_MaximizedDriveField extends BaseLogisticsHullMod {
     public static final float MAX_BURN_LEVEL_MODIFIER = 3f;
     public static final float FUEL_USE_MODIFIER = 2f;
 
