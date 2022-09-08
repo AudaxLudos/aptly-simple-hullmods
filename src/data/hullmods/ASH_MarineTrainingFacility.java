@@ -11,7 +11,6 @@ import com.fs.starfarer.api.util.Misc;
 
 public class ASH_MarineTrainingFacility extends BaseHullMod {
     public static final int DAYS_TO_GENERATE_MARINES = 7;
-
     private static Map<Object, Integer> MARINES_TO_GENERATE = new HashMap<Object, Integer>();
     static {
         MARINES_TO_GENERATE.put(HullSize.FRIGATE, 5);
@@ -41,7 +40,6 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
         long currentDay = Global.getSector().getClock().getTimestamp();
         int marinesGenerated = 0;
-        int maxMarines = 0;
         int minFleetCrew = 0;
 
         if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_MARINES) {
@@ -60,8 +58,7 @@ public class ASH_MarineTrainingFacility extends BaseHullMod {
                     marinesGenerated += (Integer) MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
             }
 
-            if (member.getFleetData().getFleet().getCargo().getMarines() >= maxMarines
-                    || member.getFleetData().getFleet().getCargo().getCrew() <= minFleetCrew)
+            if (member.getFleetData().getFleet().getCargo().getCrew() <= minFleetCrew)
                 return;
             if (member.getFleetData().getFleet().getCargo().getCrew() - marinesGenerated <= minFleetCrew)
                 marinesGenerated = member.getFleetData().getFleet().getCargo().getCrew() - minFleetCrew;
