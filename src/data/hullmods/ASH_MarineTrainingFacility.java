@@ -32,7 +32,7 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
             return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue())
                     + " crew to marines";
         if (index == 4)
-            return "week";
+            return Math.round(DAYS_TO_GENERATE_MARINES) + " days";
         return null;
     }
 

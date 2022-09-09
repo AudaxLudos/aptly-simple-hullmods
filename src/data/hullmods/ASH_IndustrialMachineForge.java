@@ -10,7 +10,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_TestHullmod extends BaseLogisticsHullMod {
+public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
     private static Map<Object, Float> HEAVY_MACHINERY_TO_GENERATE = new HashMap<Object, Float>();
     static {
@@ -30,6 +30,18 @@ public class ASH_TestHullmod extends BaseLogisticsHullMod {
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
+        if (index == 0)
+            return Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
+        if (index == 2)
+            return Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue());
+        if (index == 3)
+            return Math.round(DAYS_TO_GENERATE_HEAVY_MACHINERY) + " days";
         return null;
     }
 
