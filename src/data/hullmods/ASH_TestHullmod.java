@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
-import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_TestHullmod extends BaseLogisticsHullMod {
+public class ASH_TestHullmod extends BaseHullMod {
     public static final float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
     private static Map<Object, Float> HEAVY_MACHINERY_TO_GENERATE = new HashMap<Object, Float>();
     static {

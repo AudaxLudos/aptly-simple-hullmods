@@ -30,9 +30,8 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
-        boolean has = (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()));
         int numLogisticsMods = getNumLogisticsMods(ship);
-        if (has)
+        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
             numLogisticsMods--; 
         if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)))
             return "Cannot be installed on a civilian ship without Militarized Subsystems";
@@ -43,9 +42,8 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
 
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
-        boolean has = (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()));
         int numLogisticsMods = getNumLogisticsMods(ship);
-        if (has)
+        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
             numLogisticsMods--; 
         return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < MAX_MODS;
     }
