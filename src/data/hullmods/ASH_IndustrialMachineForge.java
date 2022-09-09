@@ -35,12 +35,12 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
                     + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
                     + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
                     + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
-        if (index == 2)
+        if (index == 1)
             return Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
                     + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
                     + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
                     + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue());
-        if (index == 3)
+        if (index == 2)
             return Math.round(DAYS_TO_GENERATE_HEAVY_MACHINERY) + " days";
         return null;
     }

@@ -1,14 +1,11 @@
 package data.hullmods;
 
-import org.lwjgl.util.vector.Vector2f;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_FrontLoadedArmor extends BaseHullMod {
     public static final float POSITIVE_ARMOR_VALUE_MODIFIER = 2f;
     public static final float NEGATIVE_ARMOR_VALUE_MODIFIER = 0.5f;
 
@@ -23,8 +20,8 @@ public class ASH_TestHullmod extends BaseHullMod {
         int armorCellY = armorGrid[0].length;
         boolean initArmor = false;
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_TestHullmod_" + ship.getId()) instanceof Boolean)
-            initArmor = (boolean) Global.getCombatEngine().getCustomData().get("ASH_TestHullmod_" + ship.getId());
+        if (Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId()) instanceof Boolean)
+            initArmor = (boolean) Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId());
 
         if (!initArmor) {
             initArmor = true;
@@ -38,13 +35,15 @@ public class ASH_TestHullmod extends BaseHullMod {
             }
         }
 
-        Global.getCombatEngine().getCustomData().put("ASH_TestHullmod_" + ship.getId(), initArmor);
+        Global.getCombatEngine().getCustomData().put("ASH_FrontLoadedArmor_" + ship.getId(), initArmor);
     }
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return POSITIVE_ARMOR_VALUE_MODIFIER + "%";
+            return "Doubles";
+        if (index == 1)
+            return "Halves";
         return null;
     }
 }
