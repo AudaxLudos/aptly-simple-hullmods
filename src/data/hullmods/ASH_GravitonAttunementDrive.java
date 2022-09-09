@@ -44,10 +44,10 @@ public class ASH_GravitonAttunementDrive extends BaseLogisticsHullMod {
                     + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) * 200 + "/"
                     + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) * 200;
         if (index == 2)
-            return Math.round(((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue());
+            return ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.FRIGATE)).floatValue() + "/"
+                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.DESTROYER)).floatValue() + "/"
+                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CRUISER)).floatValue() + "/"
+                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CAPITAL_SHIP)).floatValue();
         return null;
     }
 }
