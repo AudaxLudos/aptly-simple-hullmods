@@ -1,4 +1,15 @@
 # CHANGELOG
+###### 0.7.6
+- Added Front Loaded Armor Hullmod
+- Fixed logistical hullmods not getting properly checked if installable
+- Added Industrial Machine Forge Hullmod
+- Removed Conductive Rails
+- Updated Gravtion Attunement Drive to be less restrictive
+- Updated tags and uiTags for hullmods
+- MarineTF - removed maximum marines trainable
+- MarineTF - decreased number of marines generated to 5/10/20/40 from 10/20/40/50
+- MarineTF - Decreased days needed to generate marines to 7 from 30
+- Increase fuel ramscoop fuel generation to 1/2/3/4 from 1/1/2/2
 ###### 0.6.7
 - Updated temporal flux reactor to be color compatible with reactive shields
 - Fixed temporal flux reactor affecting other ships with the hullmod
