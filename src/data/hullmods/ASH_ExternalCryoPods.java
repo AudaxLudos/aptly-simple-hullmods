@@ -21,7 +21,7 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getFuelMod().modifyFlat(id, (Float) CREW_MODIFIER.get(hullSize));
+        stats.getMaxCrewMod().modifyFlat(id, (Float) CREW_MODIFIER.get(hullSize));
         stats.getMaxSpeed().modifyPercent(id, -SHIP_STATS_MODIFIER);
         stats.getMaxTurnRate().modifyPercent(id, -SHIP_STATS_MODIFIER);
         stats.getFluxDissipation().modifyPercent(id, -SHIP_STATS_MODIFIER);
