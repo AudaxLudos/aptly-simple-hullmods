@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_BeamCombiners extends BaseHullMod {
     public static final float BEAM_DAMAGE_MODIFIER = 20f;
-    public static final float BEAM_FLUX_COST_MODIFIER = 40f;
+    public static final float BEAM_FLUX_COST_MODIFIER = 20f;
     public static final float BEAM_TURN_RATE_MODIFIER = 20f;
 
     @Override
