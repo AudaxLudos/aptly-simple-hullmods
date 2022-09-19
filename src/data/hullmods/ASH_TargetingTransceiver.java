@@ -40,8 +40,8 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
                 continue;
 
             if (ally.getVariant().hasHullMod(HullMods.DEDICATED_TARGETING_CORE) ||
-                    ally.getVariant().hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT) ||
-                    ally.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE)) {
+                ally.getVariant().hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT) ||
+                ally.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE)) {
                 computedRangeBonus = WEAPON_RANGE_MODIFIER;
                 computedAutofireAimAccuracy = AUTOFIRE_AIM_ACCURACY_MODIFIER;
             }

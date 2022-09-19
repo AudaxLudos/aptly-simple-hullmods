@@ -21,7 +21,7 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
         boolean initArmor = false;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId()) instanceof Boolean)
-            initArmor = (boolean) Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId());
+            initArmor = (boolean)Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId());
 
         if (!initArmor) {
             initArmor = true;

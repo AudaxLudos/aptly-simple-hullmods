@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_SubatomicAccelerator extends BaseHullMod {
     public static final float ENERGY_BULLET_SPEED_MODIFIER = 20f;
-    
+
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getEnergyProjectileSpeedMult().modifyPercent(id, ENERGY_BULLET_SPEED_MODIFIER);

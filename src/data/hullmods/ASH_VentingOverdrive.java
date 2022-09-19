@@ -32,12 +32,12 @@ public class ASH_VentingOverdrive extends BaseHullMod {
                 stats.getMaxTurnRate().modifyMult(spec.getId(), MAX_TURN_RATE_MODIFIER);
 
                 Vector2f point = new Vector2f(ship.getLocation());
-                point.x += ship.getCollisionRadius() * ((float) Math.random() * 2.0F - 1.0F);
-                point.y += ship.getCollisionRadius() * ((float) Math.random() * 2.0F - 1.0F);
+                point.x += ship.getCollisionRadius() * ((float)Math.random() * 2.0F - 1.0F);
+                point.y += ship.getCollisionRadius() * ((float)Math.random() * 2.0F - 1.0F);
 
                 if (CollisionUtils.isPointWithinBounds(point, ship))
                     engine.applyDamage(ship, point, amount * ship.getFluxTracker().getCurrFlux(), DamageType.OTHER, 0f,
-                            true, false, null);
+                        true, false, null);
             } else {
                 stats.getMaxSpeed().unmodify();
                 stats.getMaxTurnRate().unmodify();

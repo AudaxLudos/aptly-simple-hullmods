@@ -26,28 +26,28 @@ public class ASH_GravitonAttunementDrive extends BaseLogisticsHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getDynamic().getMod("fleet_burn_bonus").modifyFlat(id, (Float) FLEET_BURN_MODIFIER.get(hullSize));
-        stats.getSensorProfile().modifyFlat(id, (Float) FLEET_BURN_MODIFIER.get(hullSize) * 200f);
-        stats.getSuppliesPerMonth().modifyMult(id, (Float) SUPPLIES_PER_MONTH_MODIFIER.get(hullSize));
+        stats.getDynamic().getMod("fleet_burn_bonus").modifyFlat(id, (Float)FLEET_BURN_MODIFIER.get(hullSize));
+        stats.getSensorProfile().modifyFlat(id, (Float)FLEET_BURN_MODIFIER.get(hullSize) * 200f);
+        stats.getSuppliesPerMonth().modifyMult(id, (Float)SUPPLIES_PER_MONTH_MODIFIER.get(hullSize));
     }
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue());
+            return Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue());
         if (index == 1)
-            return Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) * 200 + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.DESTROYER)).intValue()) * 200 + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) * 200 + "/"
-                    + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) * 200;
+            return Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) * 200 + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.DESTROYER)).intValue()) * 200 + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) * 200 + "/"
+                + Math.round(((Float)FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) * 200;
         if (index == 2)
-            return ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.FRIGATE)).floatValue() + "/"
-                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.DESTROYER)).floatValue() + "/"
-                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CRUISER)).floatValue() + "/"
-                    + ((Float) SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CAPITAL_SHIP)).floatValue();
+            return ((Float)SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.FRIGATE)).floatValue() + "/"
+                + ((Float)SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.DESTROYER)).floatValue() + "/"
+                + ((Float)SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CRUISER)).floatValue() + "/"
+                + ((Float)SUPPLIES_PER_MONTH_MODIFIER.get(HullSize.CAPITAL_SHIP)).floatValue();
         return null;
     }
 }

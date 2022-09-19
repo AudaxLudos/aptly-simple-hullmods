@@ -31,15 +31,15 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
+            return Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
         if (index == 1)
-            return Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue());
+            return Math.round(((Float)METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue());
         if (index == 2)
             return Math.round(DAYS_TO_GENERATE_HEAVY_MACHINERY) + " days";
         return null;
@@ -61,21 +61,23 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
                 return;
 
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
-                if (fleetMember.getVariant().hasHullMod("ASH_TestHullmod")){
-                    heavyMachineryGenerated += (Float) HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    metalsConsumed += (Float) METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+                if (fleetMember.getVariant().hasHullMod("ASH_TestHullmod")) {
+                    heavyMachineryGenerated += (Float)HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    metalsConsumed += (Float)METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
                 }
             }
 
-            if(member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < 5f && member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.HEAVY_MACHINERY) > 0f)
+            if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < 5f
+                && member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.HEAVY_MACHINERY) > 0f)
                 return;
-            if(member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < metalsConsumed) {
-                heavyMachineryGenerated = member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) / 5f; 
+            if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < metalsConsumed) {
+                heavyMachineryGenerated = member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) / 5f;
                 metalsConsumed = heavyMachineryGenerated * 5f;
             }
-            if(heavyMachineryGenerated > 0 && metalsConsumed > 0)
-                Global.getSector().getCampaignUI().addMessage(Math.round(metalsConsumed) + " metals have been constructed into " + Math.round(heavyMachineryGenerated) + " heavy machinery", Misc.getTextColor());
-                
+            if (heavyMachineryGenerated > 0 && metalsConsumed > 0)
+                Global.getSector().getCampaignUI().addMessage(Math.round(metalsConsumed) + " metals have been constructed into " + Math.round(heavyMachineryGenerated) + " heavy machinery",
+                    Misc.getTextColor());
+
             member.getFleetData().getFleet().getCargo().addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
             member.getFleetData().getFleet().getCargo().removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
         }

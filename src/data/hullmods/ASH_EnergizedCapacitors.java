@@ -7,7 +7,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_EnergizedCapacitors extends BaseHullMod {
     public static final float ENERGY_STATS_MODIFIER = 100f;
-    
+
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getEnergyRoFMult().modifyPercent(id, ENERGY_STATS_MODIFIER);

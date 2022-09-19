@@ -7,7 +7,7 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 
 public class ASH_ExtendedBarrels extends BaseHullMod {
     public static final float BALLISTIC_BULLET_SPEED_MODIFIER = 20f;
-    
+
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getBallisticProjectileSpeedMult().modifyPercent(id, BALLISTIC_BULLET_SPEED_MODIFIER);

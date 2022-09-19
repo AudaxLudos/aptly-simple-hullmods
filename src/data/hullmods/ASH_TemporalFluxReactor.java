@@ -26,7 +26,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         float timeDeployed = 0f;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId()) instanceof Float)
-            timeDeployed = (float) Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId());
+            timeDeployed = (float)Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + ship.getId());
 
         ship.setJitterUnder(this, jitterColor, ship.getFluxLevel() * 2, 3, 2, 12);
         stats.getTimeMult().modifyMult(ship.getId(), 1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f));
@@ -37,10 +37,10 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
             Global.getCombatEngine().getTimeMult().modifyMult(ship.getId(),
-                    1 / (1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f)));
+                1 / (1 + ship.getFluxLevel() * (SHIP_TIME_MODIFIER * 0.01f)));
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
-                    "graphics/icons/hullsys/temporal_shell.png", "Current Time Flow",
-                    Math.round(ship.getFluxLevel() * SHIP_TIME_MODIFIER) + "%", false);
+                "graphics/icons/hullsys/temporal_shell.png", "Current Time Flow",
+                Math.round(ship.getFluxLevel() * SHIP_TIME_MODIFIER) + "%", false);
         }
 
         Global.getCombatEngine().getCustomData().put("ASH_TimeDeployed_" + ship.getId(), timeDeployed);
