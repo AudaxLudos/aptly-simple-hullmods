@@ -12,6 +12,7 @@
           "default":true
         }
     ],
+    "java.project.exportJar.targetPath": "ASH.jar",
     "java.format.settings.url": ".vscode/java-formatter.xml",
     "[java]": {
         "editor.detectIndentation": false

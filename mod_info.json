@@ -4,13 +4,13 @@
     "author": "Audax",
     "version": {
         "major": 0,
-        "minor": 7,
-        "patch": 6
+        "minor": 8,
+        "patch": 3
     },
     "description": "Additional hullmods for starsector",
     "gameVersion": "0.95.1a-RC6",
     "jars": [
-        "Aptly Simple Hullmods.jar"
+        "ASH.jar"
     ],
     "dependencies": [
         {
