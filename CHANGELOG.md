@@ -1,4 +1,12 @@
 # CHANGELOG
+###### 0.8.3
+- Updated message from hullmods that generate goods
+- Fixed Industrial Machine Forge not working
+- Updated hullmods descriptions
+- Changed Beam Combiners flux cost modifier to 20% from 40%
+- Updated hullmods tags
+- Fixed Front Loaded Armor tags
+- Fixed External Cryo Pods not affecting max crew value
 ###### 0.7.6
 - Added Front Loaded Armor Hullmod
 - Fixed logistical hullmods not getting properly checked if installable
