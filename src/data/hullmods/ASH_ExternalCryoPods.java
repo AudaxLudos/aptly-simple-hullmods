@@ -21,7 +21,7 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMaxCrewMod().modifyFlat(id, (Float) CREW_MODIFIER.get(hullSize));
+        stats.getMaxCrewMod().modifyFlat(id, (Float)CREW_MODIFIER.get(hullSize));
         stats.getMaxSpeed().modifyPercent(id, -SHIP_STATS_MODIFIER);
         stats.getMaxTurnRate().modifyPercent(id, -SHIP_STATS_MODIFIER);
         stats.getFluxDissipation().modifyPercent(id, -SHIP_STATS_MODIFIER);
@@ -32,7 +32,7 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
     public String getUnapplicableReason(ShipAPI ship) {
         int numLogisticsMods = getNumLogisticsMods(ship);
         if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
-            numLogisticsMods--; 
+            numLogisticsMods--;
         if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)))
             return "Cannot be installed on a civilian ship without Militarized Subsystems";
         if (ship == null || numLogisticsMods >= MAX_MODS)
@@ -44,23 +44,20 @@ public class ASH_ExternalCryoPods extends BaseLogisticsHullMod {
     public boolean isApplicableToShip(ShipAPI ship) {
         int numLogisticsMods = getNumLogisticsMods(ship);
         if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
-            numLogisticsMods--; 
+            numLogisticsMods--;
         return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < MAX_MODS;
     }
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) CREW_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Float)CREW_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float)CREW_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float)CREW_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float)CREW_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue());
         if (index == 1)
-            return Math.round(((Float) CREW_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "";
-        if (index == 2)
-            return Math.round(((Float) CREW_MODIFIER.get(HullSize.CRUISER)).intValue()) + "";
-        if (index == 3)
-            return Math.round(((Float) CREW_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) + "";
-        if (index == 4)
             return Math.round(SHIP_STATS_MODIFIER) + "%";
-        if (index == 5)
+        if (index == 2)
             return Math.round(SHIP_STATS_MODIFIER) + "%";
         return null;
     }

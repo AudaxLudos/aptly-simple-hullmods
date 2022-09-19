@@ -23,15 +23,11 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Integer)MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Integer)MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Integer)MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Integer)MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
         if (index == 1)
-            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "";
-        if (index == 2)
-            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "";
-        if (index == 3)
-            return Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue())
-                    + " crew to marines";
-        if (index == 4)
             return Math.round(DAYS_TO_GENERATE_MARINES) + " days";
         return null;
     }
@@ -55,7 +51,7 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
                 minFleetCrew += fleetMember.getMinCrew();
 
                 if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility"))
-                    marinesGenerated += (Integer) MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    marinesGenerated += (Integer)MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
             }
 
             if (member.getFleetData().getFleet().getCargo().getCrew() <= minFleetCrew)
@@ -64,7 +60,7 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
                 marinesGenerated = member.getFleetData().getFleet().getCargo().getCrew() - minFleetCrew;
             if (marinesGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage(marinesGenerated + " crew has been trained into marines.",
-                        Misc.getTextColor());
+                    Misc.getTextColor());
 
             member.getFleetData().getFleet().getCargo().addMarines(marinesGenerated);
             member.getFleetData().getFleet().getCargo().removeCrew(marinesGenerated);

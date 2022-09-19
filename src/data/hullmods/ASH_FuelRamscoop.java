@@ -24,14 +24,11 @@ public class ASH_FuelRamscoop extends BaseLogisticsHullMod {
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "";
+            return Math.round(((Float)FUEL_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float)FUEL_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float)FUEL_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float)FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " fuel";
         if (index == 1)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "";
-        if (index == 2)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "";
-        if (index == 3)
-            return Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " fuel";
-        if (index == 4)
             return Math.round(DAYS_TO_GENERATE_FUEL) + " days";
         return null;
     }
@@ -52,14 +49,14 @@ public class ASH_FuelRamscoop extends BaseLogisticsHullMod {
 
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
-                    fuelGenerated += (Float) FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    fuelGenerated += (Float)FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
             }
 
             if (member.getFleetData().getFleet().getCargo().getFuel() + fuelGenerated >= member.getFleetData().getFleet().getCargo().getMaxFuel())
-                fuelGenerated = member.getFleetData().getFleet().getCargo().getMaxFuel() - member.getFleetData().getFleet().getCargo().getFuel(); 
-            if(fuelGenerated > 0)
+                fuelGenerated = member.getFleetData().getFleet().getCargo().getMaxFuel() - member.getFleetData().getFleet().getCargo().getFuel();
+            if (fuelGenerated > 0)
                 Global.getSector().getCampaignUI().addMessage("Interstellar matter has been converted into " + Math.round(fuelGenerated) + " units of fuel", Misc.getTextColor());
-                
+
             member.getFleetData().getFleet().getCargo().addFuel(fuelGenerated);
         }
     }
