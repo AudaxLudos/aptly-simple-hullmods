@@ -61,7 +61,7 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
                 return;
 
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
-                if (fleetMember.getVariant().hasHullMod("ASH_TestHullmod")) {
+                if (fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge")) {
                     heavyMachineryGenerated += (Float)HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                     metalsConsumed += (Float)METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
                 }
