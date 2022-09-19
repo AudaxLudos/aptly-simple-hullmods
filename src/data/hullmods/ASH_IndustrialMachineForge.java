@@ -75,7 +75,8 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
                 metalsConsumed = heavyMachineryGenerated * 5f;
             }
             if (heavyMachineryGenerated > 0 && metalsConsumed > 0)
-                Global.getSector().getCampaignUI().addMessage(Math.round(metalsConsumed) + " metals have been constructed into " + Math.round(heavyMachineryGenerated) + " heavy machinery",
+                Global.getSector().getCampaignUI().addMessage(
+                    Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals",
                     Misc.getTextColor());
 
             member.getFleetData().getFleet().getCargo().addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
