@@ -17,18 +17,6 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
     public static final float SPEED_OF_TIME_MULTIPLIER = 0.33f;
 
     @Override
-    public String getUnapplicableReason(ShipAPI ship) {
-        if (ship == null || ship.getHullSpec().getShieldType() == ShieldType.PHASE)
-            return "Incompatible with phase ships";
-        return null;
-    }
-
-    @Override
-    public boolean isApplicableToShip(ShipAPI ship) {
-        return ship != null && ship.getHullSpec().getShieldType() != ShieldType.PHASE;
-    }
-
-    @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (Global.getCombatEngine().isPaused())
             return;
@@ -73,22 +61,27 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         float pad = 3f;
         float opad = 10f;
         Color b = Misc.getHighlightColor();
-        Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
-        LabelAPI label;
+        Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
-        label = tooltip.addPara("As flux levels rise:", opad);
+        tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
-        label = tooltip.addPara("Increases the speed of time by up to %s.",
-                pad, b, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
-        label.setHighlight(Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
-        label.setHighlightColors(good);
-        label = tooltip.addPara("Accelerates the peak performance time reduction by up to %s.",
-                pad, b, "2 seconds");
-        label.setHighlight("2 seconds");
-        label.setHighlightColors(bad);
+        tooltip.addPara("Increases the speed of time by up to %s.", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Accelerates the peak performance time reduction by up to %s.", pad, bad, "2 seconds");
         tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public String getUnapplicableReason(ShipAPI ship) {
+        if (ship == null || ship.getHullSpec().getShieldType() == ShieldType.PHASE)
+            return "Incompatible with phase ships";
+        return null;
+    }
+
+    @Override
+    public boolean isApplicableToShip(ShipAPI ship) {
+        return ship != null && ship.getHullSpec().getShieldType() != ShieldType.PHASE;
     }
 }

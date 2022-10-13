@@ -61,20 +61,13 @@ public class ASH_ReactiveShields extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
-        LabelAPI label;
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
-        label = tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
+        tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
-        label = tooltip.addPara("Reduces the damage taken by shields by up to %s.",
-                pad, b, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
-        label.setHighlight(Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
-        label.setHighlightColors(good);
-        label = tooltip.addPara("Lowers the shield arc by up to %s.",
-                pad, b, "30 degrees");
-        label.setHighlight("30 degrees");
-        label.setHighlightColors(bad);
+        tooltip.addPara("Increases the shield strength by up to %s.", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Lowers the shield arc by up to %s.", pad, bad, "30 degrees");
         tooltip.setBulletedListMode(null);
     }
 
