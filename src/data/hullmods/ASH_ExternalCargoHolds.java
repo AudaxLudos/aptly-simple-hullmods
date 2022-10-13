@@ -41,7 +41,7 @@ public class ASH_ExternalCargoHolds extends BaseLogisticsHullMod {
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases cargo capacity by %s based on hull size", opad, good, Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
+        tooltip.addPara("Increases the cargo capacity by %s based on hull size", opad, good, Math.round(((Float) CARGO_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) CARGO_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) CARGO_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
                 + Math.round(((Float) CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) + " points");
