@@ -1,13 +1,18 @@
 package data.hullmods;
 
+import java.awt.Color;
+
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_FrontLoadedArmor extends BaseHullMod {
-    public static final float POSITIVE_ARMOR_VALUE_MODIFIER = 2f;
-    public static final float NEGATIVE_ARMOR_VALUE_MODIFIER = 0.5f;
+    public static final float POSITIVE_ARMOR_VALUE_MULTIPLIER = 2f;
+    public static final float NEGATIVE_ARMOR_VALUE_MULTIPLIER = 0.5f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -21,16 +26,16 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
         boolean initArmor = false;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId()) instanceof Boolean)
-            initArmor = (boolean)Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId());
+            initArmor = (boolean) Global.getCombatEngine().getCustomData().get("ASH_FrontLoadedArmor_" + ship.getId());
 
         if (!initArmor) {
             initArmor = true;
             for (int x = 0; x < armorCellX; x++) {
                 for (int y = 0; y < armorCellY; y++) {
                     if (y >= armorCellY / 2f)
-                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * POSITIVE_ARMOR_VALUE_MODIFIER);
+                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * POSITIVE_ARMOR_VALUE_MULTIPLIER);
                     else
-                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * NEGATIVE_ARMOR_VALUE_MODIFIER);
+                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * NEGATIVE_ARMOR_VALUE_MULTIPLIER);
                 }
             }
         }
@@ -39,11 +44,16 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
     }
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return "Doubles";
-        if (index == 1)
-            return "Halves";
-        return null;
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("%s the armor values towards the front of the ship", pad, good, "Doubles");
+        tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
+        tooltip.setBulletedListMode(null);
     }
 }
