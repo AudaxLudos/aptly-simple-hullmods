@@ -1,29 +1,44 @@
 package data.hullmods;
 
+import java.awt.Color;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_BeamCombiners extends BaseHullMod {
-    public static final float BEAM_DAMAGE_MODIFIER = 20f;
-    public static final float BEAM_FLUX_COST_MODIFIER = 20f;
-    public static final float BEAM_TURN_RATE_MODIFIER = 20f;
+    public static final float BEAM_STATS_MULTIPLIER = 0.20f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getBeamWeaponDamageMult().modifyPercent(id, BEAM_DAMAGE_MODIFIER);
-        stats.getBeamWeaponFluxCostMult().modifyPercent(id, BEAM_FLUX_COST_MODIFIER);
-        stats.getBeamWeaponTurnRateBonus().modifyPercent(id, -BEAM_TURN_RATE_MODIFIER);
+        stats.getBeamWeaponDamageMult().modifyMult(id, 1f + BEAM_STATS_MULTIPLIER);
+        stats.getBeamWeaponFluxCostMult().modifyMult(id, 1f + BEAM_STATS_MULTIPLIER);
+    }
+
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the damage of beam weapons by %s", opad, good, Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the flux cost of beam weapons by %s", pad, bad, Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.setBulletedListMode(null);
     }
 
     @Override
     public String getDescriptionParam(int index, HullSize hullSize) {
         if (index == 0)
-            return Math.round(BEAM_DAMAGE_MODIFIER) + "%";
+            return Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%";
         if (index == 1)
-            return Math.round(BEAM_FLUX_COST_MODIFIER) + "%";
-        if (index == 2)
-            return Math.round(BEAM_TURN_RATE_MODIFIER) + "%";
+            return Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%";
         return null;
     }
 }
