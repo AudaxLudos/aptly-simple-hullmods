@@ -1,33 +1,42 @@
 package data.hullmods;
 
+import java.awt.Color;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_HullConversion extends BaseHullMod {
-    public static final float SHIP_ARMOR_MODIFIER = 20f;
-    public static final float SHIP_MIN_ARMOR_MODIFIER = 0.05f;
-    public static final float SHIP_HULL_MODIFIER = 0.8f;
-    public static final float SHIP_BREAK_CHANCE_MODIFIER = 2f;
+    public static final float ARMOR_MULTIPLIER = 0.20f;
+    public static final float MIN_ARMOR_MODIFIER = 0.05f;
+    public static final float HULL_MULTIPLIER = 0.20f;
+    public static final float BREAK_CHANCE_MULTIPLIER = 1f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getArmorBonus().modifyPercent(id, SHIP_ARMOR_MODIFIER);
-        stats.getMinArmorFraction().modifyFlat(id, SHIP_MIN_ARMOR_MODIFIER);
-        stats.getHullBonus().modifyMult(id, SHIP_HULL_MODIFIER);
-        stats.getBreakProb().modifyMult(id, SHIP_BREAK_CHANCE_MODIFIER);
+        stats.getArmorBonus().modifyMult(id, 1f + ARMOR_MULTIPLIER);
+        stats.getMinArmorFraction().modifyFlat(id, MIN_ARMOR_MODIFIER);
+        stats.getHullBonus().modifyMult(id, 1f + -HULL_MULTIPLIER);
+        stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULTIPLIER);
     }
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(SHIP_ARMOR_MODIFIER) + "%";
-        if (index == 1)
-            return Math.round(SHIP_MIN_ARMOR_MODIFIER * 100) + "%";
-        if (index == 2)
-            return SHIP_HULL_MODIFIER + "";
-        if (index == 3)
-            return Math.round(SHIP_BREAK_CHANCE_MODIFIER) + "";
-        return null;
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the armor value by %s", opad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MODIFIER * 100f) + "%");
+        tooltip.addPara("Decreases hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
+        tooltip.setBulletedListMode(null);
     }
 }
