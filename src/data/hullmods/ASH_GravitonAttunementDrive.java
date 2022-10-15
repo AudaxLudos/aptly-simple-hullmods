@@ -34,7 +34,7 @@ public class ASH_GravitonAttunementDrive extends BaseLogisticsHullMod {
         float pad = 3f;
         float opad = 10f;
         Color good = Misc.getPositiveHighlightColor();
-        Color bad = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");

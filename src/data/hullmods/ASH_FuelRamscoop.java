@@ -67,7 +67,7 @@ public class ASH_FuelRamscoop extends BaseLogisticsHullMod {
         tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " units of fuel");
+                + Math.round(((Float) FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " fuel");
         tooltip.setBulletedListMode(null);
     }
 }

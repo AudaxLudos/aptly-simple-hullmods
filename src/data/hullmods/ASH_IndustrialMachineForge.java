@@ -1,13 +1,17 @@
 package data.hullmods;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
@@ -29,23 +33,6 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     private long lastDay = Global.getSector().getClock().getTimestamp();
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
-                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
-                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float)HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue());
-        if (index == 1)
-            return Math.round(((Float)METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
-                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
-                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float)METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue());
-        if (index == 2)
-            return Math.round(DAYS_TO_GENERATE_HEAVY_MACHINERY) + " days";
-        return null;
-    }
-
-    @Override
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
         long currentDay = Global.getSector().getClock().getTimestamp();
         float heavyMachineryGenerated = 0;
@@ -54,7 +41,7 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
         if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_HEAVY_MACHINERY) {
             lastDay = currentDay;
 
-            if (member.getFleetData() == null || member.getFleetData().getFleet() == null)
+            if (member.getFleetData() == null || member.getFleetData().getFleet() == null || !member.getFleetData().getFleet().isPlayerFleet())
                 return;
 
             if (member.getFleetData().getFleet().getCargo() == null)
@@ -62,25 +49,49 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
 
             for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
                 if (fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge")) {
-                    heavyMachineryGenerated += (Float)HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    metalsConsumed += (Float)METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+                    heavyMachineryGenerated += (Float) HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    metalsConsumed += (Float) METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
                 }
             }
 
             if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < 5f
-                && member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.HEAVY_MACHINERY) > 0f)
+                    && member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
                 return;
+
             if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < metalsConsumed) {
                 heavyMachineryGenerated = member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) / 5f;
                 metalsConsumed = heavyMachineryGenerated * 5f;
             }
-            if (heavyMachineryGenerated > 0 && metalsConsumed > 0)
-                Global.getSector().getCampaignUI().addMessage(
-                    Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals",
-                    Misc.getTextColor());
 
-            member.getFleetData().getFleet().getCargo().addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
-            member.getFleetData().getFleet().getCargo().removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
+            if (heavyMachineryGenerated > 0 && metalsConsumed > 0) {
+                Global.getSector().getCampaignUI().addMessage(
+                        Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
+                member.getFleetData().getFleet().getCargo().addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
+                member.getFleetData().getFleet().getCargo().removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
+            }
         }
+    }
+
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color b = Misc.getHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("Every %s and have %s", opad, b, "3 days", "1 or more heavy machinery:");
+        tooltip.setBulletedListMode(" ^ ");
+        tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " heavy machinery");
+        tooltip.addPara("Consumes %s based on hull size", pad, bad, Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue()) + " metal");
+        tooltip.setBulletedListMode(null);
     }
 }
