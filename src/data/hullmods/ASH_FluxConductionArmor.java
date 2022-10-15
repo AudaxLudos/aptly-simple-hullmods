@@ -1,40 +1,36 @@
 package data.hullmods;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.Color;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_FluxConductionArmor extends BaseHullMod {
-    public static final float FLUX_CAPACITY_MODIFIER = 15f;
-    public static final float EMP_DAMAGE_MODIFIER = 30f;
-    private static Map<Object, Float> ARMOR_MODIFIER = new HashMap<Object, Float>();
-    static {
-        ARMOR_MODIFIER.put(HullSize.FRIGATE, 25f);
-        ARMOR_MODIFIER.put(HullSize.DESTROYER, 50f);
-        ARMOR_MODIFIER.put(HullSize.CRUISER, 75f);
-        ARMOR_MODIFIER.put(HullSize.CAPITAL_SHIP, 100f);
-    }
+    public static final float FLUX_CAPACITY_MULTIPLIER = 0.15f;
+    public static final float ENERGY_DAMAGE_TAKEN_MULTIPLIER = 0.15f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getArmorBonus().modifyFlat(id, (Float)ARMOR_MODIFIER.get(hullSize));
-        stats.getFluxCapacity().modifyPercent(id, FLUX_CAPACITY_MODIFIER);
-        stats.getEmpDamageTakenMult().modifyPercent(id, EMP_DAMAGE_MODIFIER);
+        stats.getFluxCapacity().modifyPercent(id, 100f * FLUX_CAPACITY_MULTIPLIER);
+        stats.getEnergyDamageTakenMult().modifyMult(id, 1f + ENERGY_DAMAGE_TAKEN_MULTIPLIER);
     }
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(((Float)ARMOR_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
-                + Math.round(((Float)ARMOR_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
-                + Math.round(((Float)ARMOR_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float)ARMOR_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue());
-        if (index == 1)
-            return Math.round(EMP_DAMAGE_MODIFIER) + "%";
-        return null;
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the ship's base flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+        tooltip.setBulletedListMode(null);
     }
 }
