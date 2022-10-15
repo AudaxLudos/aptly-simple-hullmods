@@ -1,26 +1,39 @@
 package data.hullmods;
 
+import java.awt.Color;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
 public class ASH_VolatileWarheads extends BaseHullMod {
-    public static final float MISSILE_DAMAGE_MODIFIER = 25f;
-    public static final float MISSILE_HEALTH_MODIFIER = 50f;
+    public static final float MISSILE_DAMAGE_MULTIPLIER = 0.20f;
+    public static final float MISSILE_SPEED_MULTIPLIER = 0.10f;
+    public static final float MISSILE_HEALTH_MULTIPLIER = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMissileWeaponDamageMult().modifyPercent(id, MISSILE_DAMAGE_MODIFIER);
-        stats.getMissileHealthBonus().modifyPercent(id, -MISSILE_HEALTH_MODIFIER);
+        stats.getMissileWeaponDamageMult().modifyMult(id, 1f + MISSILE_DAMAGE_MULTIPLIER);
+        stats.getMissileMaxSpeedBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
+        stats.getMissileHealthBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
     }
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(MISSILE_DAMAGE_MODIFIER) + "%";
-        if (index == 1)
-            return Math.round(MISSILE_HEALTH_MODIFIER) + "%";
-        return null;
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the damage of missiles by %s", opad, good, Math.round(MISSILE_DAMAGE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULTIPLIER * 100f) + "%");
+        tooltip.setBulletedListMode(null);
     }
 }
