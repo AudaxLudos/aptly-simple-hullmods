@@ -65,8 +65,8 @@ public class ASH_ReactiveShields extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the shield strength by up to %s.", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Lowers the shield arc by up to %s.", pad, bad, "30 degrees");
+        tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Lowers the shield arc by up to %s", pad, bad, "30 degrees");
         tooltip.setBulletedListMode(null);
     }
 

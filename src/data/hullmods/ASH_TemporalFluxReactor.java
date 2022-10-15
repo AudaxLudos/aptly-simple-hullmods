@@ -67,8 +67,8 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the speed of time by up to %s.", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Accelerates the peak performance time reduction by up to %s.", pad, bad, "2 seconds");
+        tooltip.addPara("Increases the speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "2 seconds");
         tooltip.setBulletedListMode(null);
     }
 
