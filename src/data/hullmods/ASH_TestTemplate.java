@@ -10,30 +10,36 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_TestHullmod extends BaseHullMod {
-    public static final float ENERGY_FLUX_MULTIPLIER = 0.50f;
-    public static final float ENERGY_DAMAGE_MULTIPLIER = 0.50f;
-    public static final float ENERGY_FIRE_RATE_MULTIPLIER = 0.25f;
+public class ASH_TestTemplate extends BaseHullMod {
+    public static final float TEST_MODIFIER = 100f;
+
+    @Override
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+    }
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f + -ENERGY_FLUX_MULTIPLIER);
-        stats.getEnergyWeaponDamageMult().modifyMult(id, 1f + -ENERGY_FLUX_MULTIPLIER);
-        // stats.getEnergyRoFMult().modifyMult(id, 1f + -ENERGY_FLUX_MULTIPLIER);
+    }
+
+    @Override
+    public void advanceInCombat(ShipAPI ship, float amount) {
+        if (!ship.isAlive())
+            return;
     }
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
         float opad = 10f;
+        Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the flux generated of energy weapons by %s", opad, good, Math.round(ENERGY_FLUX_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Decreases the damage of energy weapons by %s", pad, bad, Math.round(ENERGY_DAMAGE_MULTIPLIER * 100f) + "%");
-        // tooltip.addPara("Decreases the fire rate of energy weapons by %s", pad, bad, Math.round(ENERGY_FIRE_RATE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", opad, b, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, good, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, bad, Math.round(TEST_MODIFIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
