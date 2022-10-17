@@ -15,12 +15,13 @@ public class ASH_TestStopwatch extends BaseHullMod {
         if (Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId()) instanceof Float)
             stopwatchTime = (float) Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId());
 
-        stopwatchTime += amount;
+        if (ship.areSignificantEnemiesInRange())
+            stopwatchTime += amount;
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TestStopwatch",
-                    "graphics/icons/icon_portal.png", "Stopwatch Time",
-                    stopwatchTime + "%", false);
+                    "graphics/icons/hullsys/high_energy_focus.png", "Stopwatch Time",
+                    stopwatchTime + " seconds", false);
         }
 
         Global.getCombatEngine().getCustomData().put("ASH_StopwatchTime_" + spec.getId(), stopwatchTime);
