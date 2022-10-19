@@ -11,7 +11,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_CircuitBreakers extends BaseHullMod {
-    public static final float OVERLOAD_TIME_MULTIPLIER = 1f;
+    public static final float OVERLOAD_TIME_MULTIPLIER = 0.25f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
