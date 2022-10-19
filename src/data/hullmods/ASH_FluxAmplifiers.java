@@ -10,7 +10,7 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_WeaponAmplifiers extends BaseHullMod {
+public class ASH_FluxAmplifiers extends BaseHullMod {
     public static final float WEAPON_DAMAGE_MULTIPLIER = 0.20f;
     public static final float WEAPON_FLUX_MULTIPLIER = 0.10f;
     public static final float WEAPON_FIRE_RATE_MULTIPLIER = 0.10f;
