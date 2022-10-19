@@ -10,7 +10,7 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
-public class ASH_TestHullmod extends BaseHullMod {
+public class ASH_AdvanceRadarSystems extends BaseHullMod {
     public static final float SIGHT_RADIUS_MULTIPLIER = 0.15f;
 
     @Override
