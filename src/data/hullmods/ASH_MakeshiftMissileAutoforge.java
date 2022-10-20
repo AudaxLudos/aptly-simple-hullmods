@@ -9,7 +9,6 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.ui.Alignment;
-import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -45,9 +44,8 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("When missile weapons %s:", opad, b, "run out of ammo");
         tooltip.setBulletedListMode(" ^ ");
-        LabelAPI label = tooltip.addPara("Start Replenishing %s of ammo every %s", pad, b, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%", Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
-        label.setHighlight(Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%", Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
-        label.setHighlightColors(good, bad);
+        tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
+        tooltip.addPara("Only replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 }

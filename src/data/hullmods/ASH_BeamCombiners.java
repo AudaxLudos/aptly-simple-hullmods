@@ -32,13 +32,4 @@ public class ASH_BeamCombiners extends BaseHullMod {
         tooltip.addPara("Increases the flux cost of beam weapons by %s", pad, bad, Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
-
-    @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%";
-        if (index == 1)
-            return Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%";
-        return null;
-    }
 }
