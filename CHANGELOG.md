@@ -1,4 +1,168 @@
 # CHANGELOG
+###### 1.0.0
+- Update hullmods base value
+    - Update ASH_BeamCombiners base value to 8000 from 10000
+    - Update ASH_CircuitBreakers base value to 3000 from 4000
+    - Update ASH_ExternalCargoHolds base value to 2000 from 4000
+    - Update ASH_ExternalCryoPods base value to 2000 from 4000
+    - Update ASH_ExternalFuelTanks base value to 2000 from 4000
+    - Update ASH_FluxAmplifiers base value to 8000 from 15000
+    - Update ASH_FluxConductionArmor base value to 7000 from 8000
+    - Update ASH_FluxLimiters base value to 8000 from 15000
+    - Update ASH_FrontLoadedArmor base value to 6000 from 10000
+    - Update ASH_FuelRamscoop base value to 4000 from 10000
+    - Update ASH_HullConversion base value to 6000 from 10000
+    - Update ASH_IndustrialMachineForge base value to 4000 from 8000
+    - Update ASH_MakeshiftMissileAutoforge base value to 4000 from 15000
+    - Update ASH_ReactiveSubsystems base value to 12000 from 15000
+    - Update ASH_SubvertedShields base value to 7000 from 10000
+    - Update ASH_VolatileWarheads base value to 8000 from 5000
+- Update hullmods tiers
+    - Update circuit breakers tier to 0 from 1
+    - Update flux amplifiers tier to 2 from 3
+    - Update flux limiters tier to 2 from 3
+    - Update hull conversion tier to 1 from 2
+    - Update industrial machine forge tier to 2 from 1
+    - Update makeshift missile autoforge tier to 2 from 3
+- Add hullmods to factions
+- Update hullmods
+    - Add ASH_AdvanceRadarSystems sprite
+    - Add ASH_CircuitBreakers sprite
+    - Remove ASH_RedundantMachinery
+    - Update ASH_TargetingTransceiver descriptions
+    - Update ASH_TargetingTransceiver OP cost to 3/6/9/15 from 4/6/10/12
+- Update descriptions
+    - Update ASH_AdvanceRadarSystems
+    - Update ASH_BeamCombiners
+    - Update ASH_CircuitBreakers
+    - Update ASH_FluxAmplifiers
+    - Update ASH_FluxConductionArmor
+    - Update ASH_FluxLimiters
+    - Update ASH_FrontLoadedArmor
+    - Update ASH_FuelRamscoop
+    - Update ASH_GravitonAttunementDrive
+    - Update ASH_HullConversion
+    - Update ASH_VentingOverdrive
+- Add hullmod circuit breakers
+- Add hullmod advance radar systems
+- Update hullmods
+    - Rename ASH_WeaponAmplifiers to ASH_FluxAmplifiers
+    - Rename ASH_WeaponLimiters to ASH_FluxLimiters
+    - Add ASH_FluxAmplifiers sprite
+    - Add ASH_FluxLimiters sprite
+- Add version checker
+- Remove hullmods
+    - Remove ASH_EnergizedCapacitors
+    - Remove ASH_EnergyFluxRegulators
+    - Remove ASH_EnhancedAutoloaders
+    - Remove ASH_OverloadedCapacitors
+    - Remove ASH_VolatileAmmunition
+- Add hullmods
+    - Add ASH_WeaponAmplifiers
+    - Add ASH_WeaponLimiters
+- Update ASH_MakeshiftMissileAutoforge
+    - Update description
+    - Update OP cost to 3/6/9/15 from 6/9/12/15
+    - Update sprite
+- Remove hullmods
+    - Remove ASH_ExtendedBarrels
+    - Remove ASH_MaximizedDriveField
+    - Remove ASH_OverloadedDriveField
+    - Remove ASH_SubatomicAccelerator
+- Update ASH_BeamCombiners
+    - Update description
+    - Update OP cost to 4/8/12/20 from 4/8/12/16
+    - Update base value to 10000 from 8000
+    - Update modifiers to multipliers
+- Update ASH_IndustrialMachineForge
+    - Update description
+    - Update OP cost to 3/6/9/15 from 4/8/12/16
+    - Add sprite
+- Update ASH_FuelRamscoop
+    - Update description
+    - Update OP cost to 3/6/9/15 from 2/4/6/8
+    - Update base value to 10000 from 15000
+    - Update tier to 2 from 3
+- Update ASH_FluxConductionArmor
+    - Update description
+    - Update OP cost to 3/6/9/15 from 6/9/12/15
+    - Update base value to 8000 from 7000
+    - Update modifiers to multipliers
+    - Add uitag merc & special
+    - Add tag special
+    - Add energy damage taken modifier to 15% from 0%
+    - Remove uitag defenses
+    - Remove tag defensive
+    - Remove EMP damage taken modifier
+    - Remove armor value modifier
+- Update ASH_VolatileWarheads
+    - Update description
+    - Update OP cost to 4/8/12/20 from 6/12/18/24
+    - Update missile damage increase to 20% from 25%
+    - Update missile health reduction to 10% from 50%
+    - Update modifiers to multipliers
+Add missile speed reduction to 10% from 0%
+- Update ASH_HullConversion
+    - Update description
+    - Update OP cost to 4/8/12/20 from 5/10/15/20
+    - Update base value to 10000 from 9000
+- Update ASH_GravitonAttunementDrive
+    - Update description
+    - Update OP cost to 5/10/15/25 from 10/20/30/40
+    - Update supplies use per month to 200% from 100%/150%/200%/250%
+- Update ASH_VentingOverdrive
+    - Add sprite
+    - Update description
+    - Update OP cost to 5/10/15/25 from 10/16/22/28
+    - Update calculation for damage recieved when venting
+    - Remove offensive tag
+- Update ASH_MarineTrainingFacility
+    - Update description
+    - Update OP cost to 3/6/9/15 from 6/12/18/24
+    - Update marines generated to 10/20/30/50 from 5/10/20/40
+    - Add level up marines to 5/10/15/25 from none
+    - Add max marines generated to 50/100/150/250 from none
+- Update ASH_FrontLoadedArmor
+    - Add sprite
+    - Add merc tag
+    - Update description
+    - Update OP cost to 4/8/12/20 from  6/12/18/24
+    - Update base value to 10000 from 8000
+    - Update tier to 1 from 2
+- Update ASH_ReactiveSubsystems
+    - Add merc tag
+    - Update description
+    - Update OP cost to 4/8/12/20 from 6/8/12/24
+    - Update base value to 15000 from 8000
+    - Update cr loss per second to 25% from 50%
+- Update ASH_ExternalFuelTanks
+    - Update description
+    - Update OP cost to 2/4/6/10 from 6/12/18/24
+    - Update crew capacity increase to 200/400/600/1000 from 250/500/750/1000
+- Update ASH_ExternalCryoPods
+    - Update description
+    - Update modifiers to multipliers
+    - Update OP cost to 2/4/6/10 from 6/12/18/24
+- Update ASH_ExternalCargoHolds
+    - Update description
+    - Update OP cost to 2/4/6/10 from 6/12/18/24
+    - Update cargo capacity increase to 200/400/600/1000 from 250/500/750/1000
+- Update ASH_SubvertedShields
+    - Add visual effects
+    - Add special tag and ui tag
+    - Remove offensive tag
+    - Update description
+    - Update OP cost to 3/6/9/15 from 6/9/12/15
+- Update ASH_ReactiveShields
+    - Update description
+    - Update OP cost to 3/6/9/15 from 4/8/12/16
+- Update ASH_TemporalFluxReactor
+    - Add sprite
+    - Add tag merc
+    - Update description
+    - Update OP cost to 5/10/15/25 from 5/10/15/20
+    - Update compability to incompatible with phase ships from none
+    - Fix crash when ship has no shields
 ###### 0.8.3
 - Updated message from hullmods that generate goods
 - Fixed Industrial Machine Forge not working
