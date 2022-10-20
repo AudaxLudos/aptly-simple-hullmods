@@ -1,0 +1,19 @@
+{
+    "knownHullMods": {
+        "hullMods": [
+            "ASH_AdvanceRadarSystems",
+            "ASH_BeamCombiners",
+            "ASH_CircuitBreakers",
+            "ASH_FluxAmplifiers",
+            "ASH_FluxConductionArmor",
+            "ASH_FluxLimiters",
+            "ASH_FuelRamscoop",
+            "ASH_IndustrialMachineForge",
+            "ASH_MakeshiftMissileAutoforge",
+            "ASH_MarineTrainingFacility",
+            "ASH_ReactiveShields",
+            "ASH_SubvertedShields",
+            "ASH_VolatileWarheads"
+        ]
+    }
+}

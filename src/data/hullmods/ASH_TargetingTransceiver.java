@@ -47,24 +47,10 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
     }
 
     @Override
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        if (index == 0)
-            return Math.round(WEAPON_RANGE_MODIFIER) + "%";
-        if (index == 1)
-            return Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER) + "%";
-        if (index == 2)
-            return Math.round(MAX_RANGE_THRESHOLD + 250f) + "su";
-        if (index == 3)
-            return "Targeting Core / Unit";
-        return null;
-    }
-
-    @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
         float opad = 10f;
         Color b = Misc.getHighlightColor();
-        Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
