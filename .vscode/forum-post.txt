@@ -1,0 +1,157 @@
+[center]
+[size=18pt][color=red]Work In Progress[/color][/size]
+[size=36pt]Aptly Simple Hullmods [color=blue]0.8.3[/color][/size]
+
+[table]
+[tr]
+[td][b]Reactive Shields[/b]
+[img]https://i.imgur.com/j5XvBgW.gif[/img][/td]
+[td][b]Venting Overdrive[/b]
+[img]https://i.imgur.com/8RR7NbS.gif[/img][/td]
+[/tr]
+[tr]
+[td][b]Temporal Flux Reactor[/b]
+[img]https://i.imgur.com/QIhKO5B.gif[/img][/td]
+[td][b]Front Loaded Armor[/b]
+[img]https://i.imgur.com/lmewckM.gif[/img][/td]
+[/tr]
+[/table]
+
+[url=https://github.com/AudaxLudos/aptly-simple-hullmods/releases/download/0.8.3/ASH_0.8.3.zip][img]https://img.shields.io/github/v/release/AudaxLudos/aptly-simple-hullmods?label=download%20latest&style=for-the-badge[/img][/url]
+
+[size=12pt][color=red]Requires:[/color][/size]
+[url=https://fractalsoftworks.com/forum/index.php?topic=5444.0]Lazylib[/url]
+
+[size=12pt][color=red]Notice:[/color][/size]
+0.7.6 and above versions incompatible with older versions
+
+[hr]
+
+[color=blue]Updated the mod from 0.7.6 to 0.8.3 just comment if you have issues or recommendations[/color]
+
+Adds a few hullmods to the game, I have balance the hullmods the best I could based on my experience with vanilla and modded starsector. So the hullmods should blend with vanilla and modded starsector games to a certain degree. If you have any sort of problems, feedback, or suggestions just message me or leave a comment.
+
+[b]Update:[/b] Fixed a few bugs that was found and changed some descriptions and tags of some hullmods
+[/center]
+
+[spoiler=Hullmods]
+[color=green][b]0.7.6 Latest Addition[/b][/color]
+[b]Front Loaded Armor[/b]
+Doubles the armor values towards the front of the ship but Halves the armor values towards the rear in exchange. Great for face to face fights, extremely weak against flanking.
+
+[b]Industrial Machine Forge[/b]
+Manufactures 5/15/30/50 heavy machinery using 30/90/150/300 metals every 3 days.
+
+[color=green][b]0.6.2[/b][/color]
+[b]Aligned Thrust Variants[/b]
+Aligns turn controls to be forward focus, increasing the max speed of the ship by 10%, but decreases the ships maneuverability by 50%.
+
+[b]Temporal Flux Reactor[/b]
+A modified phase tech that exploits the timeflow change within phase-space without going into phase-space. Time flow is increased up to 33% as flux levels rise, but peak perforamnce time reduction per second is increased as flux levels rise.
+
+[b]Venting Overdrive[/b]
+Greatly increases vent rate by a factor of 2, due to the force of venting both speed and maneuverability are increased by a factor of 2. But this stresses the ship when venting, venting hurts the ship and the higher the flux levels the greater the damage received.
+
+[color=green][b]0.5.6[/b][/color]
+[b]Redundant Machinery[/b]
+The duration of overloads and the time required to repair disabled engines and weapons are reduced by a factor of 0.5 while the rate at which combat readiness degrades is reduced by 50%, but increases the supplies used per month by 50%.
+
+[color=green][b]0.4.5[/b][/color]
+[b]Hull Conversion[/b]
+Convert parts of the hull into dedicated armor, this increases the armor by 20% and increases the minimum armor value by 5% but significantly decreases the hull by a factor of 0.8 and increases the chance of the ship breaking by a factor of 2.
+
+[b]Beam Combiners[/b]
+Installs partial reflectors that combine two or more wavelengths of light on all beam weapons. This increases the damage by 20% but increases the flux cost by 40% and decreases its turn rate by 20%.
+
+[b]Marine Training Facility[/b]
+Trains excess crew into marines, this converts 10/20/40/50 crew to marines based on hull size every month. Can train up to a maximum of 50/100/200/250 per ship with this hullmod.
+
+[b]Fuel Ramscoop[/b]
+Installs a ramscoop that gathers interstellar matter then converts it into fuel. This generates 1/1/2/2 units of fuel based on hull size every 3 days.
+
+[b]Targeting Transceiver[/b]
+Increases non-missile weapons range by 10% if installed on frigates or destroyers, or increases weapons autoaim accuracy by 40% if installed on cruisers or capital ships. But effects are only active if a cruiser or capital ship is within 1000su and has a Targeting Core / Unit hullmod installed.
+
+[color=green][b]0.4.0[/b][/color]
+[b]External Cryo Pods[/b]
+Installs cryo pods around the front and sides of the ship, allowing for an increase in crew capacity by 250/500/750/1000 depending on hull size but reduces the flux dissipation, speed, and maneuverability by 20% while increasing crew casualties by 20% when hull damage is taken during combat.
+
+[b]External Fuel Tanks[/b]
+Installs fuel tanks or barrels around the front and sides of the ship, allowing for an increase in fuel capacity by 250/500/750/1000 depending on hull size but reduces the flux dissipation, speed, and maneuverability by 20% while increasing the explosive damage taken by 20%.
+
+[b]Overloaded Drive Field[/b]
+Enhances the ship's drive field but pushes it beyond its capabilities, increasing the max burn level by 4 but increases the fuel used per lightyear by a factor of 2, increases the sensor profile by 100%, and decreases the sensor strength by 50%.
+
+[b]Maximized Drive Field[/b]
+Enhances the ship's drive field to its maximum capabilities, increasing the max burn level by 3 but increases the fuel used per lightyear by a factor of 2.
+
+[b]External Cargo Holds[/b]
+Installs cargo containers or pods around the front and sides of the ship, allowing for an increase in cargo capacity by 250/500/750/1000 depending on hull size but reduces the flux dissipation, speed, and maneuverability by 20% while increasing the armor damage taken by 20%.
+
+[b]Reactive Subsystems[/b]
+Replaces subsystems with reactive machines, a basic type of AI that only reacts to its given scenario but cannot go past it. This increases the max combat readiness by 15% and increases the peak performance time by 60 but in return it increases the rate at which combat readiness degrades by 50%.
+
+[b]Overloaded Capacitors[/b]
+A surge of energy is directed to all energy weapons overcharging them, allowing for an increase in damage by 25% but lowers the fire rate by a factor of 0.75 while increasing the flux cost by a factor of 1.25.
+
+[b]Volatile Ammunition[/b]
+Ammunition used by all ballistic weapons are replaced with radioactive ammunition, allowing for an increase in damage by 25% but lowers the fire rate by a factor of 0.75 while increasing the flux cost by a factor of 1.25.
+
+[color=green][b]0.1.8[/b][/color]
+[b]Enhanced Autoloaders[/b]
+Augments the ammo transfer and accelerates ammo feeding of all ballisitc weapons, allowing for an increase in ammo regeneration, ammo capacity and fire rate by 100%.
+
+[b]Energized Capacitors[/b]
+Streams of energy is continually directed to all capacitors of all energy weapons, allowing for an increase in ammo regeneration, ammo capacity and fire rate by 100%.
+
+[b]Extended Barrels[/b]
+Extends the barrels of all ballistic weapons allowing expanding gas to travel and push the bullet further before leaving the barrel, increasing the projectile speed by 20%. 
+
+[b]Subatomic Accelerator[/b]
+Installs a device that accelerates the particles that makes up an atom, increasing the projectile speed of all energy weapons by 20%. 
+
+[color=green][b]0.1.1[/b][/color]
+[b]Makeshift Missile Autoforge[/b]
+When missile weapons run out of ammo a dedicated autoforge is activated, it restores 10% of ammo every 60 seconds.
+
+[color=green][b]0.0.7[/b][/color]
+[b]Flux Conduction Armor[/b]
+Replaces the ships armor with flux conductive materials allowing accumulated flux to be stored in the armor. Increases the ship's flux capacity by 15% and increases the ship's armor by 25/50/75/100 based on hull size but increases the damage taken by EMP weapons by 25%.
+
+[b]Graviton Attunement Drive[/b]
+Increases the fleet's maximum burn by 3 but increases the sensor profile and supplies used per month by a factor of 3.
+
+[s][b]Conductive Rails[/b]
+Increases the damage, range and projectile speed of all ballistic weapons by 20% but increases the flux cost by 50%. Bonuses and penalties are in full effect below 20% flux levels but beyond that the efficiency of this effects are reduced.[/s]
+
+[b]Subverted Shields[/b]
+Increases the damage taken by shields by 50% and increases the chance of EMP arcing by a factor of 2. In return the shield upkeep is reduced by 50% and the ship can dissipate 15% of hard flux even when shields are active.
+
+[b]Volatile Warheads[/b]
+Increases the damage of missiles by 25% but decreases the health of missiles by 50%.
+
+[b]Energy Flux Regulators[/b]
+Increases or decreases damage and flux cost of all energy weapons as flux levels rise and fall, up to +15% and down to -15%.
+
+[b]Reactive Shields[/b]
+Reduces damage taken by shields as hard flux levels rise up to 15% at 80% and above hard flux levels. In return the ship's shield arc will also go down as hard flux levels rise down to 30 degrees at 80% and above hard flux levels.
+[/spoiler]
+[center]
+[size=18pt][color=teal]Credits[/color][/size]
+[b][url=https://fractalsoftworks.com/forum/index.php?action=profile;u=20141]Vildrian[/url][/b] - Sprites for some of the hullmods
+[b][url=https://discord.com/invite/a8AWVcPCPr]Starsector Discord[/url][/b] - coding and balancing advice
+Alex - The creator of the [url=https://fractalsoftworks.com/]starsector[/url]
+[/center]
+
+[spoiler=Changelog]
+Full changelog can be found [url=https://github.com/AudaxLudos/aptly-simple-hullmods/blob/main/CHANGELOG.md]here[/url]
+[/spoiler]
+
+[b]Plans for the Mod[/b]
+[list]
+[li]more hullmods[/li]
+[li]rebalancing[/li]
+[li]improve, add or change sprites[/li]
+[li]better hullmod descriptions[/li]
+[li]Ship variants that use these hullmods, may or may not make the game harder.[/li]
+[/list]
