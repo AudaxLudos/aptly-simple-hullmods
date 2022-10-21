@@ -1,5 +1,7 @@
 # CHANGELOG
 ###### 1.0.0
+- Update reactive shields & subverted shields visuals
+- Remove unused hullmod sprites
 - Update hullmods base value
     - Update ASH_BeamCombiners base value to 8000 from 10000
     - Update ASH_CircuitBreakers base value to 3000 from 4000

@@ -11,21 +11,35 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_TestHullmod extends BaseHullMod {
-    public static final float OVERLOAD_TIME_MULTIPLIER = 0.25f;
+    public static final float TEST_MODIFIER = 100f;
+
+    @Override
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+    }
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getOverloadTimeMod().modifyMult(id, 1f + -OVERLOAD_TIME_MULTIPLIER);
+    }
+
+    @Override
+    public void advanceInCombat(ShipAPI ship, float amount) {
+        if (!ship.isAlive())
+            return;
     }
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
         float opad = 10f;
+        Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the duration of overloads by %s", opad, good, Math.round(OVERLOAD_TIME_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", opad, b, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, good, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, bad, Math.round(TEST_MODIFIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
