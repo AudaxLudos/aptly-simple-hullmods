@@ -32,29 +32,21 @@ public class ASH_SubvertedShields extends BaseHullMod {
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color shieldInnerColor = ship.getShield().getInnerColor();
-        Color shieldRingColor = ship.getShield().getRingColor();
         float shieldInnerAlpha = 0f;
-        float shieldRingAlpha = 0f;
         float shieldPulse = 0f;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId()) instanceof Float)
             shieldPulse = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId());
 
         shieldPulse += amount / 2f;
-        float pulse = (float) (Math.sin(2f * 3.14f * shieldPulse) * 0.15 + 0.85);
+        float pulse = (float) (Math.sin(2f * 3.14f * shieldPulse) * 0.20f + 0.80f);
         shieldInnerAlpha = pulse * ship.getHullSpec().getShieldSpec().getInnerColor().getAlpha();
-        shieldRingAlpha = pulse * ship.getHullSpec().getShieldSpec().getRingColor().getAlpha();
 
         ship.getShield().setInnerColor(new Color(
                 shieldInnerColor.getRed(),
                 shieldInnerColor.getGreen(),
                 shieldInnerColor.getBlue(),
                 Math.round(shieldInnerAlpha)));
-        ship.getShield().setRingColor(new Color(
-                shieldRingColor.getRed(),
-                shieldRingColor.getGreen(),
-                shieldRingColor.getBlue(),
-                Math.round(shieldRingAlpha)));
         stats.getHardFluxDissipationFraction().modifyFlat(spec.getId(), HARD_FLUX_DISSIPATION_MODIFIER);
 
         Global.getCombatEngine().getCustomData().put("ASH_ShieldPulse_" + ship.getId(), shieldPulse);
