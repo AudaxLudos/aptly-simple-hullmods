@@ -2,6 +2,8 @@ package data.hullmods;
 
 import java.awt.Color;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -20,7 +22,6 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
             return;
 
         float[][] armorGrid = ship.getArmorGrid().getGrid();
-        float maxArmor = ship.getArmorGrid().getMaxArmorInCell();
         int armorCellX = armorGrid.length;
         int armorCellY = armorGrid[0].length;
         boolean initArmor = false;
@@ -32,10 +33,13 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
             initArmor = true;
             for (int x = 0; x < armorCellX; x++) {
                 for (int y = 0; y < armorCellY; y++) {
-                    if (y >= armorCellY / 2f)
-                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * POSITIVE_ARMOR_VALUE_MULTIPLIER);
-                    else
-                        ship.getArmorGrid().setArmorValue(x, y, maxArmor * NEGATIVE_ARMOR_VALUE_MULTIPLIER);
+                    float currentArmorValue = ship.getArmorGrid().getArmorValue(x, y);
+                    if (y >= armorCellY / 2f) {
+                        ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * POSITIVE_ARMOR_VALUE_MULTIPLIER);
+                    } else {
+                        if (!ship.getVariant().getSMods().contains(spec.getId()))
+                            ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * NEGATIVE_ARMOR_VALUE_MULTIPLIER);
+                    }
                 }
             }
         }
@@ -49,11 +53,24 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
         float opad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode(" - ");
+            tooltip.addPara("%s the armor values towards the front of the ship", pad, good, "Doubles");
+            tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
+            tooltip.setBulletedListMode(null);
+
+            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("%s the armor values towards the front of the ship", pad, good, "Doubles");
-        tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
+        tooltip.addPara("%s the armor values towards the front of the ship", opad, good, "Doubles");
         tooltip.setBulletedListMode(null);
     }
 }
