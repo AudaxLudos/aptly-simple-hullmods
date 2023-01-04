@@ -3,7 +3,8 @@
         "lib/**/*.jar",
         "d:\\Starsector\\starsector-core\\starfarer.api.jar",
         "d:\\Starsector\\mods\\LazyLib\\jars\\LazyLib.jar",
-        "d:\\Starsector\\starsector-core\\lwjgl_util.jar"
+        "d:\\Starsector\\starsector-core\\lwjgl_util.jar",
+        "d:\\Starsector\\starsector-core\\lwjgl.jar"
     ],
     "java.configuration.runtimes": [
         {
