@@ -2,6 +2,8 @@ package data.hullmods;
 
 import java.awt.Color;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -19,11 +21,14 @@ public class ASH_FluxLimiters extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f + -WEAPON_FLUX_MULTIPLIER);
         stats.getBallisticWeaponDamageMult().modifyMult(id, 1f + -WEAPON_DAMAGE_MULTIPLIER);
-        stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
 
         stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f + -WEAPON_FLUX_MULTIPLIER);
         stats.getEnergyWeaponDamageMult().modifyMult(id, 1f + -WEAPON_DAMAGE_MULTIPLIER);
-        stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
+
+        if (!stats.getVariant().getSMods().contains(id)) {
+            stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
+            stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
+        }
     }
 
     @Override
@@ -32,12 +37,26 @@ public class ASH_FluxLimiters extends BaseHullMod {
         float opad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode(" - ");
+            tooltip.addPara("Decreases the flux cost of non-missile weapons by %s", opad, good, Math.round(WEAPON_FLUX_MULTIPLIER * 100f) + "%");
+            tooltip.addPara("Decreases the damage of non-missile weapons by %s", pad, bad, Math.round(WEAPON_DAMAGE_MULTIPLIER * 100f) + "%");
+            tooltip.addPara("Decreases the fire rate of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FIRE_RATE_MULTIPLIER * 100f) + "%");
+            tooltip.setBulletedListMode(null);
+
+            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Decreases the flux cost of non-missile weapons by %s", opad, good, Math.round(WEAPON_FLUX_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Decreases the damage of non-missile weapons by %s", pad, bad, Math.round(WEAPON_DAMAGE_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Decreases the fire rate of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FIRE_RATE_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
