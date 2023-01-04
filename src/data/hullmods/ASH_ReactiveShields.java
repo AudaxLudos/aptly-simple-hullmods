@@ -2,6 +2,8 @@ package data.hullmods;
 
 import java.awt.Color;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
@@ -36,8 +38,10 @@ public class ASH_ReactiveShields extends BaseHullMod {
         if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float)
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
 
-        float computedShieldStrength = ASH_Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * ship.getHardFluxLevel(), 0, SHIELD_STRENGTH_MULTIPLIER);
-        float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), MINIMUM_SHIELD_ARC, shipShieldArc);
+        float selectedFluxLevel = !stats.getVariant().getSMods().contains(spec.getId()) ? ship.getHardFluxLevel() : ship.getFluxLevel();
+        float computedShieldStrength = ASH_Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
+        float minShieldArc = (shipShieldArc <= MINIMUM_SHIELD_ARC) ? shipShieldArc : MINIMUM_SHIELD_ARC;
+        float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
 
         if (ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
             defaultShieldColor = ship.getShield().getInnerColor();
@@ -62,13 +66,32 @@ public class ASH_ReactiveShields extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode("");
+            tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
+            tooltip.setBulletedListMode(" ^ ");
+            tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
+            tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
+            tooltip.setBulletedListMode(null);
+
+            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
+        tooltip.setBulletedListMode(" ^ ");
+        tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Lowers the shield arc by up to %s", pad, bad, "30 degrees");
+        tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
         tooltip.setBulletedListMode(null);
     }
 

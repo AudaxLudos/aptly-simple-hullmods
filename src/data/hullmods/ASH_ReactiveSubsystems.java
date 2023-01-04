@@ -50,8 +50,8 @@ public class ASH_ReactiveSubsystems extends BaseHullMod {
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Increases the ship's max combat readiness by %s", opad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's peak performance time by %s", pad, good, Math.round(PEAK_CR_DURATION_MODIFIER) + " seconds");
         tooltip.addPara("Increases the rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's peak performance time by %s", pad, good, Math.round(PEAK_CR_DURATION_MODIFIER) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 }
