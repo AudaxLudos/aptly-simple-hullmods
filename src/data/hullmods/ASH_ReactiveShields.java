@@ -38,7 +38,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
         if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float)
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
 
-        float selectedFluxLevel = !stats.getVariant().getSMods().contains(spec.getId()) ? ship.getHardFluxLevel() : ship.getFluxLevel();
+        float selectedFluxLevel = stats.getVariant().getSMods().contains(spec.getId()) && ASH_Utils.isModEnabled() ? ship.getFluxLevel() : ship.getHardFluxLevel();
         float computedShieldStrength = ASH_Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
         float minShieldArc = (shipShieldArc <= MINIMUM_SHIELD_ARC) ? shipShieldArc : MINIMUM_SHIELD_ARC;
         float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
@@ -68,7 +68,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode("");
             tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
@@ -76,6 +76,9 @@ public class ASH_ReactiveShields extends BaseHullMod {
             tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);

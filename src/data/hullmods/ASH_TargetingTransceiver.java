@@ -10,6 +10,8 @@ import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 import java.awt.Color;
 
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -30,7 +32,7 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         float computedAutofireAimAccuracy = 0f;
         float maxRangeThreshold = MAX_RANGE_THRESHOLD;
 
-        if (ship.getVariant().getSMods().contains(spec.getId()))
+        if (ship.getVariant().getSMods().contains(spec.getId()) && ASH_Utils.isModEnabled())
             maxRangeThreshold *= 2f;
         for (ShipAPI ally : AIUtils.getNearbyAllies(ship, maxRangeThreshold)) {
             if (ally.isFrigate() || ally.isDestroyer() || ally.isDrone() || ally.isFighter())
@@ -60,7 +62,7 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode("");
             tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Cruiser/Capital ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
@@ -68,6 +70,9 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
             tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
             tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);

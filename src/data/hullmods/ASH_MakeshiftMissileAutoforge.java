@@ -14,6 +14,8 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
     public static final float MISSILE_AMMO_RELOAD_SIZE_MODIFIER = 10f;
     public static final float MISSILE_AMMO_PER_SECOND_MODIFIER = 50f;
@@ -25,7 +27,8 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
 
         List<WeaponAPI> weapons = ship.getAllWeapons();
         for (WeaponAPI weapon : weapons) {
-            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && (weapon.getAmmo() <= 0f || ship.getVariant().getSMods().contains(spec.getId())) && weapon.getAmmoPerSecond() == 0f) {
+            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && (weapon.getAmmo() <= 0f || (ship.getVariant().getSMods().contains(spec.getId()) && ASH_Utils.isModEnabled()))
+                    && weapon.getAmmoPerSecond() == 0f) {
                 float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MODIFIER);
                 float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MODIFIER;
                 weapon.getAmmoTracker().setReloadSize(ammoReloadSize);
@@ -43,7 +46,7 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode("");
             tooltip.addPara("When non-reloading missile weapons %s:", opad, b, "run out of ammo");
@@ -51,6 +54,9 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
             tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
             tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);

@@ -12,6 +12,8 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 public class ASH_HullConversion extends BaseHullMod {
     public static final float ARMOR_MULTIPLIER = 0.20f;
     public static final float MIN_ARMOR_MODIFIER = 0.05f;
@@ -26,7 +28,7 @@ public class ASH_HullConversion extends BaseHullMod {
         stats.getHullBonus().modifyMult(id, 1f + -HULL_MULTIPLIER);
         stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled())
             stats.getArmorDamageTakenMult().modifyMult(id, 1f + -ARMOR_DAMAGE_TAKEN_MULTIPLIER);
     }
 
@@ -38,7 +40,7 @@ public class ASH_HullConversion extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the armor value by %s", opad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");
@@ -46,6 +48,9 @@ public class ASH_HullConversion extends BaseHullMod {
             tooltip.addPara("Decreases hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);

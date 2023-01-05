@@ -14,6 +14,8 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 public class ASH_SubvertedShields extends BaseHullMod {
     public static final float HARD_FLUX_DISSIPATION_MODIFIER = 0.15f;
     public static final float SHIELD_UPKEEP_MULTIPLIER = 0.30f;
@@ -25,8 +27,10 @@ public class ASH_SubvertedShields extends BaseHullMod {
         stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_STRENGTH_MULTIPLIER);
         stats.getShieldUpkeepMult().modifyMult(id, 1f + -SHIELD_UPKEEP_MULTIPLIER);
 
-        if (!stats.getVariant().getSMods().contains(id))
-            stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULTIPLIER);
+        stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULTIPLIER);
+
+        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled())
+            stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).unmodifyMult(id);
     }
 
     @Override
@@ -64,7 +68,7 @@ public class ASH_SubvertedShields extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Dissipates hard flux while shields are active by %s", opad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
@@ -72,6 +76,9 @@ public class ASH_SubvertedShields extends BaseHullMod {
             tooltip.addPara("Reduces the shield strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);

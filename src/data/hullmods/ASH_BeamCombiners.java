@@ -12,6 +12,8 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 public class ASH_BeamCombiners extends BaseHullMod {
     public static final float BEAM_STATS_MULTIPLIER = 0.20f;
 
@@ -20,7 +22,7 @@ public class ASH_BeamCombiners extends BaseHullMod {
         stats.getBeamWeaponDamageMult().modifyMult(id, 1f + BEAM_STATS_MULTIPLIER);
 
         float beamFluxCostMult = BEAM_STATS_MULTIPLIER;
-        if (stats.getVariant().getSMods().contains(id))
+        if (stats.getVariant().getSMods().contains(id)  && ASH_Utils.isModEnabled())
             beamFluxCostMult *= 0.5f;
         stats.getBeamWeaponFluxCostMult().modifyMult(id, 1f + beamFluxCostMult);
     }
@@ -33,12 +35,15 @@ public class ASH_BeamCombiners extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the damage of beam weapons by %s", opad, good, Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Increases the flux cost of beam weapons by %s", pad, bad, Math.round(BEAM_STATS_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
