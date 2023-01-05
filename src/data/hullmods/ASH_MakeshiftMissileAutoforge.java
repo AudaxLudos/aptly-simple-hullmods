@@ -3,6 +3,8 @@ package data.hullmods;
 import java.awt.Color;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
@@ -23,7 +25,7 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
 
         List<WeaponAPI> weapons = ship.getAllWeapons();
         for (WeaponAPI weapon : weapons) {
-            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && weapon.getAmmo() <= 0f && weapon.getAmmoPerSecond() == 0f) {
+            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && (weapon.getAmmo() <= 0f || ship.getVariant().getSMods().contains(spec.getId())) && weapon.getAmmoPerSecond() == 0f) {
                 float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MODIFIER);
                 float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MODIFIER;
                 weapon.getAmmoTracker().setReloadSize(ammoReloadSize);
@@ -39,13 +41,29 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode("");
+            tooltip.addPara("When non-reloading missile weapons %s:", opad, b, "run out of ammo");
+            tooltip.setBulletedListMode(" ^ ");
+            tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
+            tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
+            tooltip.setBulletedListMode(null);
+
+            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode("");
-        tooltip.addPara("When missile weapons %s:", opad, b, "run out of ammo");
+        tooltip.addPara("At the %s of combat:", opad, good, "start");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
-        tooltip.addPara("Only replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
+        tooltip.addPara("Start Replenishing %s of ammo for non-reloading missile weapons", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
+        tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 }
