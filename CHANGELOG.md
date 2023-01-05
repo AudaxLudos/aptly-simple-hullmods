@@ -1,5 +1,9 @@
 # CHANGELOG
 ###### 1.2.0
+- Add settings for disabling or enabling mod and compatibility with BDSM
+- Add flux conduction armor s-mod effects
+    - Increase flux capacity to 20% when smodded
+    - Decrease energy damage taken to 10% when smodded
 - Add beam combiners s-mod effects
     - Decrease flux cost usage to 10% when smodded
 - Add hull conversion s-mod effects
@@ -26,6 +30,7 @@
     - Remove fire rate debuff when smodded
 - Add flux limiters s-mod effects
     - Remove fire rate debuff when smodded
+- Add LICENSE.md
 ###### 1.0.0
 - Update reactive shields & subverted shields visuals
 - Remove unused hullmod sprites
