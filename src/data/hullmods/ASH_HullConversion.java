@@ -58,6 +58,6 @@ public class ASH_HullConversion extends BaseHullMod {
         tooltip.addPara("Increases the minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MODIFIER * 100f) + "%");
         tooltip.addPara("Decreases hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Decreases the damage taken of armor by %s", pad, bad, Math.round(ARMOR_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Decreases the damage taken of armor by %s", pad, good, Math.round(ARMOR_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
     }
 }

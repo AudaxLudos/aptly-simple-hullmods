@@ -2,6 +2,8 @@ package data.hullmods;
 
 import java.awt.Color;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -16,8 +18,16 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getFluxCapacity().modifyPercent(id, 100f * FLUX_CAPACITY_MULTIPLIER);
-        stats.getEnergyDamageTakenMult().modifyMult(id, 1f + ENERGY_DAMAGE_TAKEN_MULTIPLIER);
+        float fluxCapacityMult = FLUX_CAPACITY_MULTIPLIER;
+        float energyDamageTakenMult = ENERGY_DAMAGE_TAKEN_MULTIPLIER;
+
+        if (stats.getVariant().getSMods().contains(id)) {
+            fluxCapacityMult += 0.05f;
+            energyDamageTakenMult -= 0.05f;
+        }
+
+        stats.getFluxCapacity().modifyPercent(id, 100f * fluxCapacityMult);
+        stats.getEnergyDamageTakenMult().modifyMult(id, 1f + energyDamageTakenMult);
     }
 
     @Override
@@ -26,11 +36,25 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         float opad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (!ship.getVariant().getSMods().contains(spec.getId())) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode(" - ");
+            tooltip.addPara("Increases the ship's base flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULTIPLIER * 100f) + "%");
+            tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+            tooltip.setBulletedListMode(null);
+
+            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's base flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's base flux capacity by %s", opad, good, Math.round((FLUX_CAPACITY_MULTIPLIER + 0.05f) * 100f) + "%");
+        tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round((ENERGY_DAMAGE_TAKEN_MULTIPLIER - 0.05f) * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
