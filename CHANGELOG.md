@@ -1,4 +1,31 @@
 # CHANGELOG
+###### 1.2.0
+- Add beam combiners s-mod effects
+    - Decrease flux cost usage to 10% when smodded
+- Add hull conversion s-mod effects
+    - Add decrease armor damage taken by 5% when smodded 
+- Add makeshift missile autoforge s-mod effects
+    - Change reload to start of combat when smodded
+- Add subverted shields s-mod effects
+    - Remove shield pierce penalty when smodded
+- Add targeting transceiver s-mod effects
+    - Increase range to 2000 from 1000 when smodded
+- Add reactive shields s-mod effects
+    - Change hard flux usage to soft flux usage for shield sthrength when smodded
+- Add volatile warheads s-mod effects
+    - Remove fire rate debuff when smodded
+- Add reactive subsystems s-mod effects
+    - Add increase peak performance time by 60 seconds when smodded
+- Add front loaded armor s-mod effects
+    - Remove penalty when s-modded
+- Add advance radar systems s-mod effects
+    - Add 20% autofire aim accuracy when smodded
+- Add circuit breakers s-mod effects
+    - Add 25% decrease emp damage taken when smodded
+- Add flux amplifiers s-mod effect
+    - Remove fire rate debuff when smodded
+- Add flux limiters s-mod effects
+    - Remove fire rate debuff when smodded
 ###### 1.0.0
 - Update reactive shields & subverted shields visuals
 - Remove unused hullmod sprites

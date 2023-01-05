@@ -17,7 +17,7 @@ import data.ASH_Utils;
 public class ASH_FluxAmplifiers extends BaseHullMod {
     public static final float WEAPON_DAMAGE_MULTIPLIER = 0.20f;
     public static final float WEAPON_FLUX_MULTIPLIER = 0.10f;
-    public static final float WEAPON_FIRE_RATE_MULTIPLIER = 0.90f;
+    public static final float WEAPON_FIRE_RATE_MULTIPLIER = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -30,7 +30,7 @@ public class ASH_FluxAmplifiers extends BaseHullMod {
         stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
         stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id) || ASH_Utils.isModEnabled()) {
+        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled()) {
             stats.getBallisticRoFMult().unmodifyMult(id);
             stats.getEnergyRoFMult().unmodifyMult(id);
         }
