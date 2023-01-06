@@ -55,7 +55,7 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
             tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

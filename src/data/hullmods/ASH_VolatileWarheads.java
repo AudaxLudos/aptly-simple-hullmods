@@ -45,7 +45,7 @@ public class ASH_VolatileWarheads extends BaseHullMod {
             tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

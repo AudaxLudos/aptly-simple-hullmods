@@ -49,7 +49,7 @@ public class ASH_HullConversion extends BaseHullMod {
             tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

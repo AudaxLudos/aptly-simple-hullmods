@@ -38,7 +38,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
             tooltip.addPara("Reduces the duration of overloads by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

@@ -71,7 +71,7 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
             tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

@@ -77,7 +77,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
             tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

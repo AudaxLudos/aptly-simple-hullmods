@@ -47,7 +47,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
             tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

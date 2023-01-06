@@ -77,7 +77,7 @@ public class ASH_SubvertedShields extends BaseHullMod {
             tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

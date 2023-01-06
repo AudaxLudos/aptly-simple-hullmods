@@ -38,7 +38,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
             tooltip.addPara("Increases the ship's sight radius by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {

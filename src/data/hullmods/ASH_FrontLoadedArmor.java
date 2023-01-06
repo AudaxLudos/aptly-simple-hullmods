@@ -65,7 +65,7 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
             tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
             tooltip.setBulletedListMode(null);
 
-            if (!ASH_Utils.isModEnabled())
+            if (ship == null || !ASH_Utils.isModEnabled())
                 return;
 
             if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
