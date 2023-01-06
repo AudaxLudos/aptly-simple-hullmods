@@ -32,7 +32,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the ship's sight radius by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
@@ -41,7 +41,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
             if (!ASH_Utils.isModEnabled())
                 return;
 
-            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
                 return;
             }

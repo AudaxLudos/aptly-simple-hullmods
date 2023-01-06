@@ -68,7 +68,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode("");
             tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
@@ -80,7 +80,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
             if (!ASH_Utils.isModEnabled())
                 return;
 
-            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
                 return;
             }

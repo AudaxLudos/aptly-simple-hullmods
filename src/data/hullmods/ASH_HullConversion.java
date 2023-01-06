@@ -40,7 +40,7 @@ public class ASH_HullConversion extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the armor value by %s", opad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");

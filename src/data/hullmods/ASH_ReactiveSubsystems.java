@@ -36,7 +36,7 @@ public class ASH_ReactiveSubsystems extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the ship's max combat readiness by %s", opad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
@@ -46,7 +46,7 @@ public class ASH_ReactiveSubsystems extends BaseHullMod {
             if (!ASH_Utils.isModEnabled())
                 return;
 
-            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
                 return;
             }

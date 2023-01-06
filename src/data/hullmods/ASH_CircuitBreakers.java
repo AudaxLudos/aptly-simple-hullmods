@@ -21,7 +21,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getOverloadTimeMod().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id)  && ASH_Utils.isModEnabled())
+        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled())
             stats.getEmpDamageTakenMult().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
     }
 
@@ -32,7 +32,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Reduces the duration of overloads by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
@@ -41,7 +41,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
             if (!ASH_Utils.isModEnabled())
                 return;
 
-            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
                 return;
             }

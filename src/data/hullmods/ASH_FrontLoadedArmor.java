@@ -58,7 +58,7 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color story = Misc.getStoryOptionColor();
 
-        if (!ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("%s the armor values towards the front of the ship", pad, good, "Doubles");
@@ -68,7 +68,7 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
             if (!ASH_Utils.isModEnabled())
                 return;
 
-            if (!Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
+            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
                 tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
                 return;
             }
