@@ -1,4 +1,6 @@
 # CHANGELOG
+###### 1.2.3
+- Fix makeshift missile autoforge crash when viewing as blueprint/modspec
 ###### 1.2.2
 - Fix hullmod ui when hovering in the market
 - Fix crash when hovering modspec in market
