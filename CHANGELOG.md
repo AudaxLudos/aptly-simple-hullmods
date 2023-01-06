@@ -1,4 +1,7 @@
 # CHANGELOG
+###### 1.2.2
+- Fix hullmod ui when hovering in the market
+- Fix crash when hovering modspec in market
 ###### 1.2.0
 - Add settings for disabling or enabling mod and compatibility with BDSM
 - Add flux conduction armor s-mod effects
