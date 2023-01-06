@@ -70,13 +70,13 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
             tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
             tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
-        }
 
-        if (!ASH_Utils.isModEnabled())
-            return;
-        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-            return;
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);

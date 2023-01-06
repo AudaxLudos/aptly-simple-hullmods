@@ -51,13 +51,13 @@ public class ASH_FluxAmplifiers extends BaseHullMod {
             tooltip.addPara("Increases the flux cost of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FLUX_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Decreases the fire rate of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FIRE_RATE_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
-        }
 
-        if (!ASH_Utils.isModEnabled())
-            return;
-        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-            return;
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);

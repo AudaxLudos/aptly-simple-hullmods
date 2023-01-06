@@ -76,13 +76,13 @@ public class ASH_ReactiveShields extends BaseHullMod {
             tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
             tooltip.setBulletedListMode(null);
-        }
 
-        if (!ASH_Utils.isModEnabled())
-            return;
-        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-            return;
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);

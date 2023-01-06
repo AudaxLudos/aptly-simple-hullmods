@@ -48,13 +48,13 @@ public class ASH_HullConversion extends BaseHullMod {
             tooltip.addPara("Decreases hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
-        }
 
-        if (!ASH_Utils.isModEnabled())
-            return;
-        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-            return;
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
