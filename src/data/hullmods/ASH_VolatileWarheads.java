@@ -44,14 +44,13 @@ public class ASH_VolatileWarheads extends BaseHullMod {
             tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULTIPLIER * 100f) + "%");
             tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULTIPLIER * 100f) + "%");
             tooltip.setBulletedListMode(null);
+        }
 
-            if (ship == null || !ASH_Utils.isModEnabled())
-                return;
-
-            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
-                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
-                return;
-            }
+        if (!ASH_Utils.isModEnabled())
+            return;
+        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+            return;
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);

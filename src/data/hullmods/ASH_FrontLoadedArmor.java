@@ -64,14 +64,13 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
             tooltip.addPara("%s the armor values towards the front of the ship", pad, good, "Doubles");
             tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
             tooltip.setBulletedListMode(null);
+        }
 
-            if (ship == null || !ASH_Utils.isModEnabled())
-                return;
-
-            if (ship == null || !Keyboard.isKeyDown(Keyboard.getKeyIndex("F1"))) {
-                tooltip.addPara("Press F1 to show S-mod effects", Misc.getGrayColor(), opad);
-                return;
-            }
+        if (!ASH_Utils.isModEnabled())
+            return;
+        if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+            tooltip.addPara("Press or Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+            return;
         }
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
