@@ -28,9 +28,8 @@ public class ASH_VentingOverdrive extends BaseHullMod {
         CombatEngineAPI engine = Global.getCombatEngine();
 
         if (ship.getHullLevel() >= 0.2f) {
-            stats.getVentRateMult().modifyMult(spec.getId(), 1f + SHIP_STATS_MULTIPLIER);
-
             if (ship.getFluxTracker().isVenting()) {
+                stats.getVentRateMult().modifyMult(spec.getId(), 1f + SHIP_STATS_MULTIPLIER);
                 stats.getMaxSpeed().modifyMult(spec.getId(), 1f + SHIP_STATS_MULTIPLIER);
                 stats.getMaxTurnRate().modifyMult(spec.getId(), 1f + SHIP_STATS_MULTIPLIER);
 
@@ -43,13 +42,13 @@ public class ASH_VentingOverdrive extends BaseHullMod {
 
                 engine.applyDamage(ship, point, amount * (0.20f * ship.getVariant().getHullSpec().getFluxCapacity()), DamageType.OTHER, 0f, true, false, null);
             } else {
-                stats.getMaxSpeed().unmodify();
-                stats.getMaxTurnRate().unmodify();
+                stats.getMaxSpeed().unmodify(spec.getId());
+                stats.getMaxTurnRate().unmodify(spec.getId());
             }
         } else {
-            stats.getVentRateMult().unmodify();
-            stats.getMaxSpeed().unmodify();
-            stats.getMaxTurnRate().unmodify();
+            stats.getVentRateMult().unmodify(spec.getId());
+            stats.getMaxSpeed().unmodify(spec.getId());
+            stats.getMaxTurnRate().unmodify(spec.getId());
         }
     }
 
