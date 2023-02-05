@@ -1,4 +1,6 @@
 # CHANGELOG
+###### 1.2.4
+- Fix venting overdrive unmodifiying all the modifiers from the stats it uses
 ###### 1.2.3
 - Fix makeshift missile autoforge crash when viewing as blueprint/modspec
 ###### 1.2.2
