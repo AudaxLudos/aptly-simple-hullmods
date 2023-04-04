@@ -16,6 +16,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
     public static final int DAYS_TO_GENERATE_MARINES = 7;
+    public static final int MARINES_TO_TRAIN_MULTIPLIER = 20;
     private static Map<Object, Integer> MARINES_TO_GENERATE = new HashMap<Object, Integer>();
     static {
         MARINES_TO_GENERATE.put(HullSize.FRIGATE, 10);
@@ -52,7 +53,7 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
                 if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility")) {
                     addMarines += (Integer) MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                     maxMarines += (Integer) MAX_MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    trainMarines += Math.round((Integer) MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) / 2);
+                    trainMarines += (Integer) MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) * (MARINES_TO_TRAIN_MULTIPLIER / 100f);
                 }
             }
 
@@ -81,7 +82,6 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
                 member.getFleetData().getFleet().getCargo().removeCrew(addMarines);
                 Global.getSector().getCampaignUI().addMessage(addMarines + " crew has been trained into marines.", Misc.getTextColor());
             }
-
         }
     }
 
@@ -96,10 +96,10 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s:", opad, b, "week");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("levels up %s current marines based on hull size", pad, good, Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) / 2 + "/"
-                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) / 2 + "/"
-                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) / 2 + "/"
-                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) / 2);
+        tooltip.addPara("levels up %s current marines based on hull size", pad, good, Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) * (MARINES_TO_TRAIN_MULTIPLIER / 100f) + "/"
+                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) * (MARINES_TO_TRAIN_MULTIPLIER / 100f) + "/"
+                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) * (MARINES_TO_TRAIN_MULTIPLIER / 100f) + "/"
+                + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) * (MARINES_TO_TRAIN_MULTIPLIER / 100f));
         tooltip.addPara("Converts %s crew members into marines based on hull size", pad, good, Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Integer) MARINES_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"

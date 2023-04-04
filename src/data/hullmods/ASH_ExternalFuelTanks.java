@@ -59,7 +59,7 @@ public class ASH_ExternalFuelTanks extends BaseLogisticsHullMod {
             numLogisticsMods--;
         if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)))
             return "Cannot be installed on a civilian ship without Militarized Subsystems";
-        if (ship == null || numLogisticsMods >= MAX_MODS)
+        if (ship == null || numLogisticsMods >= getMax(ship))
             return "Maximum of 2 non-built-in \"Logistics\" hullmods per hull";
         return null;
     }
@@ -69,6 +69,6 @@ public class ASH_ExternalFuelTanks extends BaseLogisticsHullMod {
         int numLogisticsMods = getNumLogisticsMods(ship);
         if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
             numLogisticsMods--;
-        return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < MAX_MODS;
+        return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < getMax(ship);
     }
 }
