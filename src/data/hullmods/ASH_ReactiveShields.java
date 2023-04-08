@@ -46,9 +46,9 @@ public class ASH_ReactiveShields extends BaseHullMod {
         if (ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
             defaultShieldColor = ship.getShield().getInnerColor();
 
-        int red = (int) Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed()));
-        int green = (int) Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen()));
-        int blue = (int) Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getBlue()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getBlue()));
+        int red = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed())), 255);
+        int green = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen())), 255);
+        int blue = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getBlue()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getBlue())), 255);
 
         ship.getShield().setInnerColor(new Color(red, green, blue, ship.getShield().getInnerColor().getAlpha()));
         ship.getShield().setArc(computedShieldArc);
