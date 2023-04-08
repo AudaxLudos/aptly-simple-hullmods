@@ -1,4 +1,10 @@
 # CHANGELOG
+###### 1.2.9
+- Fix Reactive Shields Hullmod crash when shield color changes
+- Fix ASH_ExternalCargoHolds to be installable on ships that support 2 or more logistics hullmod
+- Fix ASH_ExternalCryoPods to be installable on ships that support 2 or more logistics hullmod
+- Fix ASH_ExternalFuelTanks to be installable on ships that support 2 or more logistics hullmod
+- Update ASH_MarineTrainingFacility marines trained to 2/4/6/10 from 5/10/15/25
 ###### 1.2.4
 - Fix venting overdrive unmodifiying all the modifiers from the stats it uses
 ###### 1.2.3
