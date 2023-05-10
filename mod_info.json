@@ -15,8 +15,7 @@
     "dependencies": [
         {
             "id": "lw_lazylib",
-            "name": "LazyLib",
-            "version": "2.7b"
+            "name": "LazyLib"
         }
     ]
 }
