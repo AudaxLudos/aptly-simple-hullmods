@@ -1,4 +1,7 @@
 # CHANGELOG
+###### 1.3.0
+- Update mod_info.json lazylib dependecy to any version
+- Update mod_info.json game version to latest
 ###### 1.2.9
 - Fix Reactive Shields Hullmod crash when shield color changes
 - Fix ASH_ExternalCargoHolds to be installable on ships that support 2 or more logistics hullmod
