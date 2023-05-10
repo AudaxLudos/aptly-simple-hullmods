@@ -8,7 +8,7 @@
         "patch": 9
     },
     "description": "Additional hullmods for starsector",
-    "gameVersion": "0.95.1a-RC6",
+    "gameVersion": "0.96a",
     "jars": [
         "ASH.jar"
     ],
