@@ -44,7 +44,6 @@ public class ASH_MarineTrainingFacilityScript implements EveryFrameScript {
             int addMarines = 0;
             float trainMarines = 0;
 
-            System.out.println(Global.getSector().getClock().getElapsedDaysSince(lastDay));
             if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= ASH_MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
                 for (FleetMemberAPI fleetMember : playerFleetMembers) {
                     if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility")) {
