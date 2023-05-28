@@ -1,4 +1,7 @@
 # CHANGELOG
+###### 1.3.2
+- Fix marin training facility crash when getting accessed outside of combat
+- Fix fuel ramscoop crash when getting accessed outside of combat
 ###### 1.3.0
 - Update mod_info.json lazylib dependecy to any version
 - Update mod_info.json game version to latest
