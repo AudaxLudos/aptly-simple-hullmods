@@ -19,6 +19,8 @@ public class ASH_FuelRamscoopScript implements EveryFrameScript {
     public void advance(float amount) {
         if (Global.getSector().getPlayerFleet() == null)
             return;
+        if (Global.getSector().getPlayerFleet().getCargo() == null)
+            return;
 
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
         List<FleetMemberAPI> playerFleetMembers = playerFleet.getFleetData().getMembersListCopy();
