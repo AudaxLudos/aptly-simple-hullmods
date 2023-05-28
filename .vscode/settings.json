@@ -4,7 +4,8 @@
         "d:\\Starsector\\starsector-core\\starfarer.api.jar",
         "d:\\Starsector\\mods\\LazyLib\\jars\\LazyLib.jar",
         "d:\\Starsector\\starsector-core\\lwjgl_util.jar",
-        "d:\\Starsector\\starsector-core\\lwjgl.jar"
+        "d:\\Starsector\\starsector-core\\lwjgl.jar",
+        "d:\\Starsector\\starsector-core\\xstream-1.4.10.jar"
     ],
     "java.configuration.runtimes": [
         {

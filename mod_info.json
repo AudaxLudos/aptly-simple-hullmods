@@ -17,5 +17,6 @@
             "id": "lw_lazylib",
             "name": "LazyLib"
         }
-    ]
+    ],
+    "modPlugin":"data.scripts.ASH_ModPlugin"
 }
