@@ -4,73 +4,42 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fs.starfarer.api.Global;
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
+
 public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
-    private static Map<Object, Float> HEAVY_MACHINERY_TO_GENERATE = new HashMap<Object, Float>();
+    public static Map<HullSize, Float> HEAVY_MACHINERY_TO_GENERATE = new HashMap<HullSize, Float>();
     static {
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.FRIGATE, 5f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.DESTROYER, 15f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CRUISER, 30f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50f);
     }
-    private static Map<Object, Float> METALS_TO_CONSUME = new HashMap<Object, Float>();
+    public static Map<HullSize, Float> SMOD_HEAVY_MACHINERY_TO_GENERATE = new HashMap<HullSize, Float>();
+    static {
+        SMOD_HEAVY_MACHINERY_TO_GENERATE.put(HullSize.FRIGATE, 15f);
+        SMOD_HEAVY_MACHINERY_TO_GENERATE.put(HullSize.DESTROYER, 30f);
+        SMOD_HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CRUISER, 40f);
+        SMOD_HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 75f);
+    }
+    public static Map<HullSize, Float> METALS_TO_CONSUME = new HashMap<HullSize, Float>();
     static {
         METALS_TO_CONSUME.put(HullSize.FRIGATE, 25f);
         METALS_TO_CONSUME.put(HullSize.DESTROYER, 75f);
         METALS_TO_CONSUME.put(HullSize.CRUISER, 150f);
         METALS_TO_CONSUME.put(HullSize.CAPITAL_SHIP, 250f);
     }
-    private long lastDay = Global.getSector().getClock().getTimestamp();
 
-    @Override
-    public void advanceInCampaign(FleetMemberAPI member, float amount) {
-        long currentDay = Global.getSector().getClock().getTimestamp();
-        float heavyMachineryGenerated = 0;
-        float metalsConsumed = 0;
-
-        if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= DAYS_TO_GENERATE_HEAVY_MACHINERY) {
-            lastDay = currentDay;
-
-            if (member.getFleetData() == null || member.getFleetData().getFleet() == null || !member.getFleetData().getFleet().isPlayerFleet())
-                return;
-
-            if (member.getFleetData().getFleet().getCargo() == null)
-                return;
-
-            for (FleetMemberAPI fleetMember : member.getFleetData().getMembersListCopy()) {
-                if (fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge")) {
-                    heavyMachineryGenerated += (Float) HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    metalsConsumed += (Float) METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
-                }
-            }
-
-            if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < 5f
-                    && member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
-                return;
-
-            if (member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) < metalsConsumed) {
-                heavyMachineryGenerated = member.getFleetData().getFleet().getCargo().getCommodityQuantity(Commodities.METALS) / 5f;
-                metalsConsumed = heavyMachineryGenerated * 5f;
-            }
-
-            if (heavyMachineryGenerated > 0 && metalsConsumed > 0) {
-                Global.getSector().getCampaignUI().addMessage(
-                        Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
-                member.getFleetData().getFleet().getCargo().addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
-                member.getFleetData().getFleet().getCargo().removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
-            }
-        }
-    }
+    // Affects are done in ASH_IndustrialMachineForgeScript.java
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
@@ -79,15 +48,39 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode("");
+            tooltip.addPara("Every %s and have %s", opad, b, "3 days", "1 or more heavy machinery:");
+            tooltip.setBulletedListMode(" ^ ");
+            tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " heavy machinery");
+            tooltip.addPara("Consumes %s based on hull size", pad, bad, Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
+                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue()) + " metal");
+            tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s and have %s", opad, b, "3 days", "1 or more heavy machinery:");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
-                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
-                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " heavy machinery");
+        tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) SMOD_HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float) SMOD_HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float) SMOD_HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float) SMOD_HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " heavy machinery");
         tooltip.addPara("Consumes %s based on hull size", pad, bad, Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
