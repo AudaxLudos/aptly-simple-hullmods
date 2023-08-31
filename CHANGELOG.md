@@ -1,4 +1,18 @@
 # CHANGELOG
+###### 1.3.5
+- Add s-mod effect Industrial Machine Forge
+    - Generates 15/30/40/75 machinery every 3 days when s-modded
+- Add s-mod effect for Marine Training Facility
+    - Levels up 3/6/9/15 marines every week when s-modded
+- Add s-mod for Fuel Ramscoop
+    - Generates 2/3/5/6 fuel every 3 days when s-modded
+- Add s-mod effect for Temporal Flux reactor
+    - Reduces the peak performance time debuff to 1.5 seconds
+- Update ASH_ExternalCargoHolds, ASH_ExternalCryoPods, ASH_ExternalFuelTanks, ASH_ExternalCargoHolds
+    - Lower stat modifiers to 10% from 20%
+    - Remove speed and turn rate ship modifiers
+    - Add increase sensor profile modifier by 10%
+    - Update flat cargo modifiers to 60/120/180/300 from 200/400/600/1000
 ###### 1.3.2
 - Fix marin training facility crash when getting accessed outside of combat
 - Fix fuel ramscoop crash when getting accessed outside of combat
