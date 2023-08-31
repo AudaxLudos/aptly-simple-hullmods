@@ -47,7 +47,6 @@ public class ASH_FuelRamscoopScript implements EveryFrameScript {
                         fuelGenerated += (Float) ASH_FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                     else
                         fuelGenerated += (Float) ASH_FuelRamscoop.FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-
                 }
 
                 if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel())

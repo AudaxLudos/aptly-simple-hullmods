@@ -11,6 +11,7 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.PlayerFleetPersonnelTracker;
 import com.fs.starfarer.api.util.Misc;
 
+import data.ASH_Utils;
 import data.hullmods.ASH_MarineTrainingFacility;
 
 public class ASH_MarineTrainingFacilityScript implements EveryFrameScript {
@@ -46,12 +47,17 @@ public class ASH_MarineTrainingFacilityScript implements EveryFrameScript {
 
             if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= ASH_MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
                 for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                    if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility")) {
-                        addMarines += (Integer) ASH_MarineTrainingFacility.MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                        maxMarines += (Integer) ASH_MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                        trainMarines += (Integer) ASH_MarineTrainingFacility.MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize())
-                                * (ASH_MarineTrainingFacility.MARINES_TO_TRAIN_MULTIPLIER / 100f);
-                    }
+                    if (!fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility"))
+                        continue;
+
+                    addMarines += (Integer) ASH_MarineTrainingFacility.MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    maxMarines += (Integer) ASH_MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+
+                    if (fleetMember.getVariant().getSMods().contains("ASH_MarineTrainingFacility") && ASH_Utils.isModEnabled())
+                        trainMarines += (Integer) ASH_MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(fleetMember.getVariant().getHullSize());
+                    else
+                        trainMarines += (Integer) ASH_MarineTrainingFacility.MARINES_TO_LEVEL.get(fleetMember.getVariant().getHullSize());
+
                 }
 
                 if (PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines() + trainMarines >= playerCargo.getMarines())
