@@ -14,21 +14,20 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_ExternalFuelTanks extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.20f;
+    public static final float SHIP_STATS_MULTIPLIER = 0.10f;
     private static Map<Object, Float> FUEL_MODIFIER = new HashMap<Object, Float>();
     static {
-        FUEL_MODIFIER.put(HullSize.FRIGATE, 200f);
-        FUEL_MODIFIER.put(HullSize.DESTROYER, 400f);
-        FUEL_MODIFIER.put(HullSize.CRUISER, 600f);
-        FUEL_MODIFIER.put(HullSize.CAPITAL_SHIP, 1000f);
+        FUEL_MODIFIER.put(HullSize.FRIGATE, 60f);
+        FUEL_MODIFIER.put(HullSize.DESTROYER, 120f);
+        FUEL_MODIFIER.put(HullSize.CRUISER, 180f);
+        FUEL_MODIFIER.put(HullSize.CAPITAL_SHIP, 300f);
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getFuelMod().modifyFlat(id, (Float) FUEL_MODIFIER.get(hullSize));
-        stats.getMaxSpeed().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
-        stats.getMaxTurnRate().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
         stats.getFluxDissipation().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
         stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
     }
 
@@ -46,8 +45,7 @@ public class ASH_ExternalFuelTanks extends BaseLogisticsHullMod {
                 + Math.round(((Float) FUEL_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
                 + Math.round(((Float) FUEL_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()) + " points");
         tooltip.addPara("Reduces the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the ship's speed by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the ship's maneuverability by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the explosive damage taken by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
