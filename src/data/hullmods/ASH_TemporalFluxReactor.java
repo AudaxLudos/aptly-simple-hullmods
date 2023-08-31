@@ -2,6 +2,8 @@ package data.hullmods;
 
 import java.awt.Color;
 
+import org.lwjgl.input.Keyboard;
+
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
@@ -11,6 +13,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+
+import data.ASH_Utils;
 
 public class ASH_TemporalFluxReactor extends BaseHullMod {
     public static final float SPEED_OF_TIME_MULTIPLIER = 0.33f;
@@ -28,6 +32,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color jitterColor = Color.WHITE;
         float timeDeployed = 0f;
+        float peakTimeReductionMult = stats.getVariant().getSMods().contains(spec.getId()) && ASH_Utils.isModEnabled() ? 0.5f : 1f;
 
         if (ship.getShield() != null)
             jitterColor = ship.getShield().getInnerColor();
@@ -43,7 +48,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         stats.getTimeMult().modifyMult(spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER);
 
         if (ship.areAnyEnemiesInRange())
-            ship.setTimeDeployed(timeDeployed += amount + amount * ship.getFluxLevel());
+            ship.setTimeDeployed(timeDeployed += amount + (amount * ship.getFluxLevel()) * peakTimeReductionMult);
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
             Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER));
@@ -62,13 +67,31 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
+        Color story = Misc.getStoryOptionColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
+            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
+            tooltip.setBulletedListMode("");
+            tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
+            tooltip.setBulletedListMode(" ^ ");
+            tooltip.addPara("Increases the speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
+            tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "2 seconds");
+            tooltip.setBulletedListMode(null);
+
+            if (!ASH_Utils.isModEnabled())
+                return;
+            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
+                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
+                return;
+            }
+        }
+
+        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "2 seconds");
+        tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "1.5 seconds");
         tooltip.setBulletedListMode(null);
     }
 
