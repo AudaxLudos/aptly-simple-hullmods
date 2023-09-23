@@ -16,7 +16,9 @@
             "ASH_ReactiveShields",
             "ASH_SubvertedShields",
             "ASH_VentingOverdrive",
-            "ASH_VolatileWarheads"
+            "ASH_VolatileWarheads",
+            "ASH_MissileBay",
+            "ASH_ReactorBay"
         ]
     }
 }

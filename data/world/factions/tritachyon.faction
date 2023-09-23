@@ -13,7 +13,9 @@
             "ASH_MarineTrainingFacility",
             "ASH_ReactiveShields",
             "ASH_SubvertedShields",
-            "ASH_VolatileWarheads"
+            "ASH_VolatileWarheads",
+            "ASH_MissileBay",
+            "ASH_ReactorBay"
         ]
     }
 }

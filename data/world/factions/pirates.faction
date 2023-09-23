@@ -14,7 +14,9 @@
             "ASH_MakeshiftMissileAutoforge",
             "ASH_MarineTrainingFacility",
             "ASH_VentingOverdrive",
-            "ASH_VolatileWarheads"
+            "ASH_VolatileWarheads",
+            "ASH_MissileBay",
+            "ASH_ReactorBay"
         ]
     }
 }
