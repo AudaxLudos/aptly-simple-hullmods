@@ -50,7 +50,6 @@ public class ASH_MissileBay extends BaseHullMod {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
             tooltip.addPara("Increases the ammo capacity of missile weapons by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-            tooltip.addPara("Increases flux capacity by %s", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
             tooltip.addPara("Removes %s built-in fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
             tooltip.setBulletedListMode(null);
 

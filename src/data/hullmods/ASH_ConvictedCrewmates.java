@@ -166,6 +166,5 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
         tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
-
     }
 }
