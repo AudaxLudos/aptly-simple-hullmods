@@ -49,9 +49,9 @@ public class ASH_MissileBay extends BaseHullMod {
         if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
             tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
             tooltip.setBulletedListMode(" - ");
-            tooltip.addPara("Increases flux dissipation by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+            tooltip.addPara("Increases the ammo capacity of missile weapons by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
             tooltip.addPara("Increases flux capacity by %s", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-            tooltip.addPara("Removes %s fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
+            tooltip.addPara("Removes %s built-in fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
             tooltip.setBulletedListMode(null);
 
             if (!ASH_Utils.isModEnabled())
@@ -64,9 +64,8 @@ public class ASH_MissileBay extends BaseHullMod {
 
         tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases flux dissipation by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases flux capacity by %s", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Removes %s fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
+        tooltip.addPara("Increases the ammo capacity of missile weapons by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Removes %s built-in fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
         tooltip.addPara("Decreases deployment points by %s", pad, good, Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER)).intValue()) + "/"
