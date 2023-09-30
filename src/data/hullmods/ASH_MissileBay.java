@@ -49,15 +49,14 @@ public class ASH_MissileBay extends BaseHullMod {
     }
 
     public boolean isApplicableToShip(ShipAPI ship) {
-        int builtIn = ship.getHullSpec().getBuiltInWings().size();
         int bays = (int) Math.round(ship.getMutableStats().getNumFighterBays().getBaseValue());
-        if (builtIn <= 0 || bays > builtIn)
+        if (bays <= 0f)
             return false;
         return true;
     }
 
     public String getUnapplicableReason(ShipAPI ship) {
-        return "Requires built-in fighter wings only";
+        return "Requires built-in fighter bays";
     }
 
     @Override
