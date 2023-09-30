@@ -14,9 +14,9 @@ import com.fs.starfarer.api.util.Misc;
 
 public class ASH_SubvertedShields extends BaseHullMod {
     public static final float HARD_FLUX_DISSIPATION_MODIFIER = 0.15f;
-    public static final float SHIELD_UPKEEP_MULTIPLIER = 0.30f;
-    public static final float SHIELD_STRENGTH_MULTIPLIER = 0.30f;
-    public static final float SHIELD_PIERCED_MULTIPLIER = 0.50f;
+    public static final float SHIELD_UPKEEP_MULTIPLIER = 0.15f;
+    public static final float SHIELD_STRENGTH_MULTIPLIER = 0.15f;
+    public static final float SHIELD_PIERCED_MULTIPLIER = 0.25f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
