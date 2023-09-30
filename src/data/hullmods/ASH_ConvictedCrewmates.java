@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
@@ -20,8 +19,6 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-
-import data.ASH_Utils;
 
 public class ASH_ConvictedCrewmates extends BaseHullMod {
     public static final float SHIP_PPT_MULT = 0.15f;
@@ -116,7 +113,7 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         stats.getPeakCRDuration().modifyMult(id, 1f - SHIP_PPT_MULT);
         stats.getMaxCombatReadiness().modifyFlat(id, -MAX_CR_MOD, "Convicted Crewmates Hullmod");
 
-        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled())
+        if (stats.getVariant().getSMods().contains(id))
             stats.getMaxCombatReadiness().unmodify(id);
     }
 
@@ -127,33 +124,8 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
-        Color story = Misc.getStoryOptionColor();
 
-        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
-            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
-            tooltip.addPara("When contributing to killing an %s:", opad, b, "enemy");
-            tooltip.setBulletedListMode(" ^ ");
-            tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(((Float) PPT_GAIN.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) PPT_GAIN.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) PPT_GAIN.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) PPT_GAIN.get(HullSize.CAPITAL_SHIP)).intValue()));
-            tooltip.setBulletedListMode(" - ");
-            tooltip.addPara("Frigates gain %s the peak performance time against larger ships", opad, good, FRIGATE_PPT_MULT + " Times");
-            tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
-            tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
-            tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
-            tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
-            tooltip.setBulletedListMode(null);
-
-            if (!ASH_Utils.isModEnabled())
-                return;
-            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-                return;
-            }
-        }
-
-        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.addPara("When contributing to killing an %s:", opad, b, "enemy");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(((Float) PPT_GAIN.get(HullSize.FRIGATE)).intValue()) + "/"
@@ -165,6 +137,22 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
         tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
         tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
+
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float opad = 10f;
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Fully negates the max combat readiness penalty", opad);
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 }

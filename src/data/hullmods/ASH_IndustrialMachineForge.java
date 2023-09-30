@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lwjgl.input.Keyboard;
-
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
@@ -15,8 +13,6 @@ import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-
-import data.ASH_Utils;
 
 public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
@@ -43,7 +39,7 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     }
 
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        if (stats.getVariant().getSMods().contains(id) && ASH_Utils.isModEnabled())
+        if (stats.getVariant().getSMods().contains(id))
             stats.getDynamic().getMod(Stats.getSurveyCostReductionId(Commodities.HEAVY_MACHINERY)).modifyFlat(id, (Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(hullSize));
     }
 
@@ -56,32 +52,8 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
-        Color story = Misc.getStoryOptionColor();
 
-        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
-            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
-            tooltip.setBulletedListMode("");
-            tooltip.addPara("Every %s and have %s", opad, b, "3 days", "1 or more heavy machinery:");
-            tooltip.setBulletedListMode(" ^ ");
-            tooltip.addPara("Generates %s based on hull size", pad, good, Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP)).intValue()) + " heavy machinery");
-            tooltip.addPara("Consumes %s based on hull size", pad, bad, Math.round(((Float) METALS_TO_CONSUME.get(HullSize.FRIGATE)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.DESTROYER)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
-                    + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue()) + " metal");
-            tooltip.setBulletedListMode(null);
-
-            if (!ASH_Utils.isModEnabled())
-                return;
-            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-                return;
-            }
-        }
-
-        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s and have %s", opad, b, "3 days", "1 or more heavy machinery:");
         tooltip.setBulletedListMode(" ^ ");
@@ -94,5 +66,23 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
                 + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CRUISER)).intValue()) + "/"
                 + Math.round(((Float) METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP)).intValue()) + " metal");
         tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float opad = 10.0F;
+        Color good = Misc.getPositiveHighlightColor();
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Decreases the heavy machinery required to perform surveys by %s", opad, good, Math.round(((Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(HullSize.FRIGATE)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(HullSize.DESTROYER)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(HullSize.CRUISER)).intValue()) + "/"
+                + Math.round(((Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(HullSize.CAPITAL_SHIP)).intValue()));
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 }

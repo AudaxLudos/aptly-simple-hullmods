@@ -6,16 +6,12 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.Alignment;
-import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-
-import data.ASH_Utils;
 
 import java.awt.Color;
 
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.lwjgl.input.Keyboard;
 
 public class ASH_TargetingTransceiver extends BaseHullMod {
     public static final float WEAPON_RANGE_MODIFIER = 0.10f;
@@ -32,7 +28,7 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         float computedAutofireAimAccuracy = 0f;
         float maxRangeThreshold = MAX_RANGE_THRESHOLD;
 
-        if (ship.getVariant().getSMods().contains(spec.getId()) && ASH_Utils.isModEnabled())
+        if (ship.getVariant().getSMods().contains(spec.getId()))
             maxRangeThreshold *= 2f;
         for (ShipAPI ally : AIUtils.getNearbyAllies(ship, maxRangeThreshold)) {
             if (ally.isFrigate() || ally.isDestroyer() || ally.isDrone() || ally.isFighter())
@@ -60,32 +56,28 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         float opad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
-        Color story = Misc.getStoryOptionColor();
 
-        if (ship == null || !ship.getVariant().getSMods().contains(spec.getId()) || !ASH_Utils.isModEnabled()) {
-            tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
-            tooltip.setBulletedListMode("");
-            tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Cruiser/Capital ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
-            tooltip.setBulletedListMode(" ^ ");
-            tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
-            tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
-            tooltip.setBulletedListMode(null);
-
-            if (!ASH_Utils.isModEnabled())
-                return;
-            if (!Keyboard.isKeyDown(Keyboard.KEY_F1)) {
-                tooltip.addPara("Hold F1 to show S-mod effects", Misc.getGrayColor(), opad);
-                return;
-            }
-        }
-
-        tooltip.addSectionHeading("S-Mod Effects:", story, Misc.setAlpha(story, 110), Alignment.MID, opad);
+        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
-        LabelAPI label = tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Cruiser/Capital ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD * 2f + 500f) + "su");
-        label.setHighlightColors(b, b, good);
+        tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Cruiser/Capital ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
         tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float opad = 10.0F;
+        Color good = Misc.getPositiveHighlightColor();
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the detection range to %s", opad, good, Math.round((MAX_RANGE_THRESHOLD + 250f) * 2f) + " su");
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 }

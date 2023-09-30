@@ -9,7 +9,6 @@ import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.util.Misc;
 
-import data.ASH_Utils;
 import data.hullmods.ASH_FuelRamscoop;
 
 public class ASH_FuelRamscoopScript implements EveryFrameScript {
@@ -43,7 +42,7 @@ public class ASH_FuelRamscoopScript implements EveryFrameScript {
                     if (!fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
                         continue;
 
-                    if (fleetMember.getVariant().getSMods().contains("ASH_FuelRamscoop") && ASH_Utils.isModEnabled())
+                    if (fleetMember.getVariant().getSMods().contains("ASH_FuelRamscoop"))
                         fuelGenerated += (Float) ASH_FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                     else
                         fuelGenerated += (Float) ASH_FuelRamscoop.FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
