@@ -37,7 +37,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
 
         tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's base flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
@@ -50,7 +50,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's base flux capacity by an additional %s", opad, good, Math.round(5f) + "%");
+        tooltip.addPara("Increases the ship's flux capacity by an additional %s", opad, good, Math.round(5f) + "%");
         tooltip.addPara("Reduces the energy damage taken penalty by %s", pad, bad, Math.round(5f) + "%");
         tooltip.setBulletedListMode(null);
     }
