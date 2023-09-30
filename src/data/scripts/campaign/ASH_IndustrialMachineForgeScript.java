@@ -10,7 +10,6 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.util.Misc;
 
-import data.ASH_Utils;
 import data.hullmods.ASH_IndustrialMachineForge;
 
 public class ASH_IndustrialMachineForgeScript implements EveryFrameScript {
@@ -48,23 +47,19 @@ public class ASH_IndustrialMachineForgeScript implements EveryFrameScript {
                         continue;
 
                     metalsConsumed += (Float) ASH_IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
-
-                    if (fleetMember.getVariant().getSMods().contains("ASH_IndustrialMachineForge") && ASH_Utils.isModEnabled())
-                        heavyMachineryGenerated += (Float) ASH_IndustrialMachineForge.SMOD_HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    else
-                        heavyMachineryGenerated += (Float) ASH_IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    heavyMachineryGenerated += (Float) ASH_IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                 }
 
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) < 5f
                         && playerCargo.getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
                     return;
 
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) < metalsConsumed) {
-                    heavyMachineryGenerated = playerCargo.getCommodityQuantity(Commodities.METALS) / 5f;
+                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 100f) {
+                    heavyMachineryGenerated = playerCargo.getCommodityQuantity(Commodities.METALS) - 100f / 5f;
                     metalsConsumed = heavyMachineryGenerated * 5f;
                 }
 
-                if (heavyMachineryGenerated > 0 && metalsConsumed > 0) {
+                if (heavyMachineryGenerated >= 1 && metalsConsumed >= 5) {
                     Global.getSector().getCampaignUI().addMessage(
                             Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
                     playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
