@@ -28,7 +28,6 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color jitterColor = Color.WHITE;
         float timeDeployed = 0f;
-        float peakTimeReductionMult = stats.getVariant().getSMods().contains(spec.getId()) ? 0.5f : 1f;
 
         if (ship.getShield() != null)
             jitterColor = ship.getShield().getInnerColor();
@@ -44,7 +43,7 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
         stats.getTimeMult().modifyMult(spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER);
 
         if (ship.areAnyEnemiesInRange())
-            ship.setTimeDeployed(timeDeployed += amount + (amount * ship.getFluxLevel()) * peakTimeReductionMult);
+            ship.setTimeDeployed(timeDeployed += amount + (amount * ship.getFluxLevel()));
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
             Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER));
@@ -83,20 +82,5 @@ public class ASH_TemporalFluxReactor extends BaseHullMod {
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
         return ship != null && ship.getHullSpec().getShieldType() != ShieldType.PHASE;
-    }
-
-    @Override
-    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
-        Color bad = Misc.getNegativeHighlightColor();
-
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the acceleration of peak performance time reduction down to %s", opad, bad, "1.5 seconds");
-        tooltip.setBulletedListMode(null);
-    }
-
-    @Override
-    public boolean hasSModEffect() {
-        return true;
     }
 }
