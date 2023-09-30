@@ -62,7 +62,7 @@ public class ASH_FrontLoadedArmor extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10.0F;
+        float opad = 10f;
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Fully negates the armor penalty towards the back of the ship", opad);

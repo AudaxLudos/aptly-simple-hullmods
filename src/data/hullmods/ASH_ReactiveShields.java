@@ -88,7 +88,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10.0F;
+        float opad = 10f;
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("The increase in shield strength scales with soft flux", opad);

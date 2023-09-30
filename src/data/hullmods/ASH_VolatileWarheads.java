@@ -45,7 +45,7 @@ public class ASH_VolatileWarheads extends BaseHullMod {
         float opad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the healh of missiles penalty", opad);
+        tooltip.addPara("Fully negates the healh penalty for missiles", opad);
         tooltip.setBulletedListMode(null);
     }
 
