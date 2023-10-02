@@ -1,4 +1,6 @@
 # CHANGELOG
+###### 1.5.1
+-
 ###### 1.5.0
 - Update circuit breakers now unlocked at the start
 - Add hullmod sprites for new hullmods
