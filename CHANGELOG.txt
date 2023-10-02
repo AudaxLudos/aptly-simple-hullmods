@@ -1,6 +1,12 @@
 # CHANGELOG
-###### 1.5.1
--
+###### 1.5.5
+- Update CHANGELOG from md to txt
+- Update LICENSE from md to txt
+- Remove settings.json
+- Update files that has old version numbers
+- Fix missile bay and reactor bay description
+- Update missile bay missile ammo increase to 25% from 50%
+- Update convicted crewmates ppt gain to 5/10/15/25 from 10/20/30/50
 ###### 1.5.0
 - Update circuit breakers now unlocked at the start
 - Add hullmod sprites for new hullmods
