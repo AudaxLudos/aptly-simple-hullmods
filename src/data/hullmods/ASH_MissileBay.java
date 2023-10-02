@@ -14,7 +14,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_MissileBay extends BaseHullMod {
-    public static final float SHIP_STATS_MULT = 0.50f;
+    public static final float SHIP_STATS_MULT = 0.25f;
     public static final float FIGHTER_BAY_MOD = 1f;
     public static Map<HullSize, Float> DEPLOYMENT_POINTS_MOD = new HashMap<HullSize, Float>();
     static {
@@ -68,7 +68,7 @@ public class ASH_MissileBay extends BaseHullMod {
         tooltip.addPara("Decreases deployment points by %s", opad, good, Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP)).intValue()));
+                + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP)).intValue()) + " base on the ship's hull size");
         tooltip.setBulletedListMode(null);
     }
 

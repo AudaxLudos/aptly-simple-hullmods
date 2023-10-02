@@ -70,7 +70,7 @@ public class ASH_ReactorBay extends BaseHullMod {
         tooltip.addPara("Decreases deployment points by %s", opad, good, Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER)).intValue()) + "/"
-                + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP)).intValue()));
+                + Math.round(((Float) DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP)).intValue()) + " base on the ship's hull size");
         tooltip.setBulletedListMode(null);
     }
 

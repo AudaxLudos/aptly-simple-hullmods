@@ -1,4 +1,18 @@
 # CHANGELOG
+###### 1.5.0
+- Update circuit breakers now unlocked at the start
+- Add hullmod sprites for new hullmods
+- Update subverted shields stats reduced shield up keep and shield strength to 15% and reduced shield pierce chance to 25%
+- Fix flux conduction armor description
+- Remove s-mod effect for temporal flux reactor
+- Fix fighter hullmods install requirements
+- Update hullmod descriptions to match vanilla starsector
+- Change industrial machine forge s-mod effect to decrease heavy machinery survey cost instead of increase heavy machinery production
+- Fix missile bay s-mod description
+- Add convicted crewmates hullmod
+- Add reactor bay and missile bay to vanilla factions
+- Fix missile bay and reactor bay to only work for built-in fighter bays
+- Add hullmods missile bay & reactor bay
 ###### 1.3.5
 - Add s-mod effect Industrial Machine Forge
     - Generates 15/30/40/75 machinery every 3 days when s-modded

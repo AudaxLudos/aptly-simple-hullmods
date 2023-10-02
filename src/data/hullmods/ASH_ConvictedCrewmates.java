@@ -28,10 +28,10 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
     public static final float KILL_TIMER = 30f;
     private static Map<Object, Float> PPT_GAIN = new HashMap<Object, Float>();
     static {
-        PPT_GAIN.put(HullSize.FRIGATE, 10f);
-        PPT_GAIN.put(HullSize.DESTROYER, 20f);
-        PPT_GAIN.put(HullSize.CRUISER, 30f);
-        PPT_GAIN.put(HullSize.CAPITAL_SHIP, 50f);
+        PPT_GAIN.put(HullSize.FRIGATE, 5f);
+        PPT_GAIN.put(HullSize.DESTROYER, 10f);
+        PPT_GAIN.put(HullSize.CRUISER, 15f);
+        PPT_GAIN.put(HullSize.CAPITAL_SHIP, 25f);
     }
 
     public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {
@@ -89,7 +89,7 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
             if (targetShip.isHulk() || targetShip.isFighter())
                 return null;
             if (damagedTargets.containsKey(targetShip.getId())) {
-                damagedTargets.get(targetShip.getId()).timer = 60f;
+                damagedTargets.get(targetShip.getId()).timer = KILL_TIMER;
                 return null;
             }
 
