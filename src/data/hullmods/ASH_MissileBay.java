@@ -29,7 +29,6 @@ public class ASH_MissileBay extends BaseHullMod {
         stats.getNumFighterBays().modifyFlat(id, -FIGHTER_BAY_MOD);
 
         if (stats.getVariant().getSMods().contains(id))
-            if (stats.getFleetMember().getDeploymentPointsCost() > 1f)
                 stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).modifyFlat(id, -(Float) DEPLOYMENT_POINTS_MOD.get(hullSize));
     }
 
