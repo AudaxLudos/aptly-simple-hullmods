@@ -111,9 +111,6 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getPeakCRDuration().modifyMult(id, 1f - SHIP_PPT_MULT);
         stats.getMaxCombatReadiness().modifyFlat(id, -MAX_CR_MOD, "Convicted Crewmates Hullmod");
-
-        if (stats.getVariant().getSMods().contains(id))
-            stats.getMaxCombatReadiness().unmodify(id);
     }
 
     @Override
@@ -137,20 +134,5 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
         tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
-
-    }
-
-    @Override
-    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
-
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the max combat readiness penalty", opad);
-        tooltip.setBulletedListMode(null);
-    }
-
-    @Override
-    public boolean hasSModEffect() {
-        return true;
     }
 }
