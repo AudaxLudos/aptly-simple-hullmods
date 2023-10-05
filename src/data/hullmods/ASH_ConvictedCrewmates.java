@@ -15,7 +15,6 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
@@ -125,7 +124,6 @@ public class ASH_ConvictedCrewmates extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.addPara("When contributing to killing an %s:", opad, b, "enemy");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(((Float) PPT_GAIN.get(HullSize.FRIGATE)).intValue()) + "/"

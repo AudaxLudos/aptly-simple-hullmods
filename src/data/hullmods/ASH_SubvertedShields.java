@@ -8,7 +8,6 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -63,7 +62,6 @@ public class ASH_SubvertedShields extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Dissipates hard flux while shields are active by %s", opad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
         tooltip.addPara("Reduces the shield upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULTIPLIER * 100f) + "%");

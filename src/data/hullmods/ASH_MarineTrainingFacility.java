@@ -7,7 +7,6 @@ import java.util.Map;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -51,7 +50,6 @@ public class ASH_MarineTrainingFacility extends BaseLogisticsHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s:", opad, b, "week");
         tooltip.setBulletedListMode(" ^ ");

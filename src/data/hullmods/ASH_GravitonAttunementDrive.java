@@ -8,7 +8,6 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -36,9 +35,8 @@ public class ASH_GravitonAttunementDrive extends BaseLogisticsHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fleet's maximum burn by %s based on hull size", pad, good, Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
+        tooltip.addPara("Increases the fleet's maximum burn by %s based on hull size", opad, good, Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
                 + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CRUISER)).intValue()) + "/"
                 + Math.round(((Float) FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP)).intValue()));

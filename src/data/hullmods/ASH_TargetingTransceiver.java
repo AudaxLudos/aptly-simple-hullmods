@@ -5,7 +5,6 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -57,7 +56,6 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode("");
         tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Cruiser/Capital ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
         tooltip.setBulletedListMode(" ^ ");

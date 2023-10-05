@@ -9,7 +9,6 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -38,7 +37,6 @@ public class ASH_ExternalFuelTanks extends BaseLogisticsHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addSectionHeading("Effects:", Alignment.MID, opad);
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Increases the fuel capacity by %s based on hull size", opad, good, Math.round(((Float) FUEL_MODIFIER.get(HullSize.FRIGATE)).intValue()) + "/"
                 + Math.round(((Float) FUEL_MODIFIER.get(HullSize.DESTROYER)).intValue()) + "/"
