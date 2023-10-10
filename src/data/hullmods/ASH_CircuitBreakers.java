@@ -10,14 +10,15 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_CircuitBreakers extends BaseHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.25f;
+    public static final float OVERLOAD_TIME_MULT = 0.25f;
+    public static final float EMP_DAMAGE_TAKEN_MULT = 0.25f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getOverloadTimeMod().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+        stats.getOverloadTimeMod().modifyMult(id, 1f + -OVERLOAD_TIME_MULT);
 
         if (stats.getVariant().getSMods().contains(id))
-            stats.getEmpDamageTakenMult().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+            stats.getEmpDamageTakenMult().modifyMult(id, 1f + -EMP_DAMAGE_TAKEN_MULT);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the duration of overloads by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Reduces the duration of overloads by %s", opad, good, Math.round(OVERLOAD_TIME_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -36,7 +37,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the damage taken from emp weapons by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Decreases the damage taken from emp weapons by %s", opad, good, Math.round(EMP_DAMAGE_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

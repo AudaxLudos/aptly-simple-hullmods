@@ -10,14 +10,15 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class ASH_AdvanceRadarSystems extends BaseHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.20f;
+    public static final float SIGHT_RADIUS_MULT = 0.25f;
+    public static final float AUTOAIM_ACCURACY_MULT = 0.50f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getSightRadiusMod().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
+        stats.getSightRadiusMod().modifyMult(id, 1f + SIGHT_RADIUS_MULT);
 
         if (stats.getVariant().getSMods().contains(id))
-            stats.getAutofireAimAccuracy().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
+            stats.getAutofireAimAccuracy().modifyMult(id, 1f + AUTOAIM_ACCURACY_MULT);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's sight radius by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's sight radius by %s", opad, good, Math.round(SIGHT_RADIUS_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -36,7 +37,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's autofire aim accuracy by %s", opad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's autofire aim accuracy by %s", opad, good, Math.round(AUTOAIM_ACCURACY_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
