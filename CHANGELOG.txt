@@ -1,4 +1,7 @@
 # CHANGELOG
+###### 1.5.7
+- Remove s-mod effect for convicted crewmates
+- Fix crash when s-modding reactor bay and missile bay
 ###### 1.5.5
 - Update CHANGELOG from md to txt
 - Update LICENSE from md to txt
