@@ -29,7 +29,7 @@ public class ASH_ReactorBay extends BaseHullMod {
         stats.getFluxCapacity().modifyMult(id, 1f + SHIP_STATS_MULT);
         stats.getNumFighterBays().modifyFlat(id, -FIGHTER_BAY_MOD);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
                 stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).modifyFlat(id, -(Float) DEPLOYMENT_POINTS_MOD.get(hullSize));
     }
 

@@ -35,7 +35,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
         if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float)
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
 
-        float selectedFluxLevel = stats.getVariant().getSMods().contains(spec.getId()) ? ship.getFluxLevel() : ship.getHardFluxLevel();
+        float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
         float computedShieldStrength = ASH_Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
         float minShieldArc = (shipShieldArc <= MINIMUM_SHIELD_ARC) ? shipShieldArc : MINIMUM_SHIELD_ARC;
         float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);

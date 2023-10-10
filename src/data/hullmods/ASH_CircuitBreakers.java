@@ -17,7 +17,7 @@ public class ASH_CircuitBreakers extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getOverloadTimeMod().modifyMult(id, 1f + -OVERLOAD_TIME_MULT);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getEmpDamageTakenMult().modifyMult(id, 1f + -EMP_DAMAGE_TAKEN_MULT);
     }
 

@@ -28,7 +28,7 @@ public class ASH_TargetingTransceiver extends BaseHullMod {
         float computedAutofireAimAccuracy = 0f;
         float maxRangeThreshold = MAX_RANGE_THRESHOLD;
 
-        if (ship.getVariant().getSMods().contains(spec.getId()))
+        if (isSMod(stats))
             maxRangeThreshold *= 2f;
 
         ShipAPI ally = AIUtils.getNearestAlly(ship);

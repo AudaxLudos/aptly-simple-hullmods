@@ -17,7 +17,7 @@ public class ASH_BeamCombiners extends BaseHullMod {
         stats.getBeamWeaponDamageMult().modifyMult(id, 1f + BEAM_STATS_MULTIPLIER);
 
         float beamFluxCostMult = BEAM_STATS_MULTIPLIER;
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             beamFluxCostMult *= 0.5f;
         stats.getBeamWeaponFluxCostMult().modifyMult(id, 1f + beamFluxCostMult);
     }

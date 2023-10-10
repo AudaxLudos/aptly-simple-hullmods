@@ -25,7 +25,7 @@ public class ASH_FluxAmplifiers extends BaseHullMod {
         stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
         stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id)) {
+        if (isSMod(stats)) {
             stats.getBallisticRoFMult().unmodifyMult(id);
             stats.getEnergyRoFMult().unmodifyMult(id);
         }

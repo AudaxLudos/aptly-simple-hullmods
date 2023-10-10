@@ -20,7 +20,7 @@ public class ASH_VolatileWarheads extends BaseHullMod {
         stats.getMissileMaxSpeedBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
         stats.getMissileHealthBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getMissileHealthBonus().unmodifyMult(id);
     }
 

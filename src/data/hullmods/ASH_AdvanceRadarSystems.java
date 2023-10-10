@@ -17,7 +17,7 @@ public class ASH_AdvanceRadarSystems extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getSightRadiusMod().modifyMult(id, 1f + SIGHT_RADIUS_MULT);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getAutofireAimAccuracy().modifyMult(id, 1f + AUTOAIM_ACCURACY_MULT);
     }
 

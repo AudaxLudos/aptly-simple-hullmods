@@ -19,7 +19,7 @@ public class ASH_ReactiveSubsystems extends BaseHullMod {
         stats.getMaxCombatReadiness().modifyFlat(id, MAX_CR_MODIFIER, "Reactive Subsystems Hullmod");
         stats.getCRLossPerSecondPercent().modifyMult(id, 1f + CR_LOSS_PER_SECOND_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(spec.getId()))
+        if (isSMod(stats))
             stats.getPeakCRDuration().modifyFlat(id, PEAK_CR_DURATION_MODIFIER);
     }
 

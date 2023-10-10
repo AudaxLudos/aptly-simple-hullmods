@@ -22,8 +22,13 @@ public class ASH_MakeshiftMissileAutoforge extends BaseHullMod {
 
         List<WeaponAPI> weapons = ship.getAllWeapons();
         for (WeaponAPI weapon : weapons) {
-            if (weapon.getType() == WeaponType.MISSILE && weapon.usesAmmo() && (weapon.getAmmo() <= 0f || (ship.getVariant().getSMods().contains(spec.getId()))
-                    && weapon.getAmmoPerSecond() == 0f)) {
+            if (weapon.getType() != WeaponType.MISSILE)
+                continue;
+            if (!weapon.usesAmmo())
+                continue;
+            if (weapon.getAmmoPerSecond() != 0f)
+                continue;
+            if (weapon.getAmmo() <= 0f || isSMod(ship)) {
                 float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MODIFIER);
                 float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MODIFIER;
                 weapon.getAmmoTracker().setReloadSize(ammoReloadSize);

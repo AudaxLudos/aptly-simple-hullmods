@@ -38,7 +38,7 @@ public class ASH_IndustrialMachineForge extends BaseLogisticsHullMod {
     }
 
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getDynamic().getMod(Stats.getSurveyCostReductionId(Commodities.HEAVY_MACHINERY)).modifyFlat(id, (Float) HEAVY_MACHINERY_SURVEY_COST_MOD.get(hullSize));
     }
 

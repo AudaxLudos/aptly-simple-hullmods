@@ -18,7 +18,7 @@ public class ASH_FluxConductionArmor extends BaseHullMod {
         float fluxCapacityMult = FLUX_CAPACITY_MULTIPLIER;
         float energyDamageTakenMult = ENERGY_DAMAGE_TAKEN_MULTIPLIER;
 
-        if (stats.getVariant().getSMods().contains(id)) {
+        if (isSMod(stats)) {
             fluxCapacityMult += 0.05f;
             energyDamageTakenMult -= 0.05f;
         }

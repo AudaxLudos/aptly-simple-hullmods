@@ -21,10 +21,9 @@ public class ASH_SubvertedShields extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_STRENGTH_MULTIPLIER);
         stats.getShieldUpkeepMult().modifyMult(id, 1f + -SHIELD_UPKEEP_MULTIPLIER);
-
         stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).unmodifyMult(id);
     }
 

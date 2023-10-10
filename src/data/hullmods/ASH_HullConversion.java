@@ -23,7 +23,7 @@ public class ASH_HullConversion extends BaseHullMod {
         stats.getHullBonus().modifyMult(id, 1f + -HULL_MULTIPLIER);
         stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULTIPLIER);
 
-        if (stats.getVariant().getSMods().contains(id))
+        if (isSMod(stats))
             stats.getArmorDamageTakenMult().modifyMult(id, 1f + -ARMOR_DAMAGE_TAKEN_MULTIPLIER);
     }
 
