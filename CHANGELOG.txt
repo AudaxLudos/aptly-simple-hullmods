@@ -1,5 +1,10 @@
 # CHANGELOG
-###### 1.5.7
+###### 1.6.0
+- Update hullmod smod check to use built in vanilla functions
+- Update ASH_AdvanceRadarSystems increase sight radius buff to 25% from 20%
+- Update ASH_AdvanceRadarSystems increase auto aim accuracy buff to 50% from 20%
+- Update ASH_TargetingTransceiver change detection to any friendly ships from capital/cruiser ships only
+- Update ASH_TargetingTransceiver decrease overall OP cost to 2/4/6/10 from 3/6/9/15
 - Remove s-mod effect for convicted crewmates
 - Fix crash when s-modding reactor bay and missile bay
 ###### 1.5.5
