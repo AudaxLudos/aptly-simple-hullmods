@@ -23,8 +23,8 @@ Reactor Bay,ASH_ReactorBay,3,,"offensive, merc",Special,10000,,,,ASH,3,6,9,15,da
 Subverted Shields,ASH_SubvertedShields,2,,"special, shields","Special, Shields",7000,,,,ASH,3,6,9,15,data.hullmods.ASH_SubvertedShields,"Installs an oscillator in the ship's shield emitter, vibrating shield particles, allowing flux to pass through.",,,graphics/hullmods/ASH_SubvertedShields.png
 Targeting Transceiver,ASH_TargetingTransceiver,1,,offensive,Weapons,5000,true,,,ASH,2,4,6,10,data.hullmods.ASH_TargetingTransceiver,"Installs a transceiver that communicates with nearby targeting systems, enhancing the ship's weapons accuracy or range. ",,,graphics/hullmods/ASH_TargetingTransceiver.png
 Temporal Flux Reactor,ASH_TemporalFluxReactor,3,,"special, merc",Special,15000,,,,ASH,5,10,15,25,data.hullmods.ASH_TemporalFluxReactor,A modified phase cloak that exploits the time dilation within phase-space without going into phase-space.,,,graphics/hullmods/ASH_TemporalFluxReactor.png
-Test Hullmod,ASH_TestHullmod,0,,special,Special,0,,true,true,ASH,0,0,0,0,data.hullmods.ASH_TestHullmod,Hullmod for testing purposes.,,,graphics/hullmods/default.png
-Test Stopwatch,ASH_TestStopwatch,0,,special,Special,0,,true,true,ASH,0,0,0,0,data.hullmods.ASH_TestStopwatch,Hullmod for timing purposes.,,,graphics/hullmods/default.png
+Test Hullmod,ASH_TestHullmod,0,,special,Special,0,,true,true,ASH,0,0,0,0,data.hullmods.ASH_TestHullmod,Hullmod for testing purposes.,,,
+Test Stopwatch,ASH_TestStopwatch,0,,special,Special,0,,true,true,ASH,0,0,0,0,data.hullmods.ASH_TestStopwatch,Hullmod for timing purposes.,,,
 Venting Overdrive,ASH_VentingOverdrive,3,,special,Special,15000,,,,ASH,5,10,15,25,data.hullmods.ASH_VentingOverdrive,An outdated venting protocol that overrides the ship's safety procedures when venting.,,,graphics/hullmods/ASH_VentingOverdrive.png
 Volatile Warheads,ASH_VolatileWarheads,2,,"offensive, merc",Weapons,8000,,,,ASH,4,8,12,20,data.hullmods.ASH_VolatileWarheads,Replaces the chemicals within conventional missile warheads with volatile and radioactive chemicals. ,,,graphics/hullmods/ASH_VolatileWarheads.png
 ,,,,,,,,,,,,,,,,,,,
