@@ -40,7 +40,7 @@ public class ASH_ReactiveShields extends BaseHullMod {
         float minShieldArc = (shipShieldArc <= MINIMUM_SHIELD_ARC) ? shipShieldArc : MINIMUM_SHIELD_ARC;
         float computedShieldArc = ASH_Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
 
-        if (ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
+        if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
             defaultShieldColor = ship.getShield().getInnerColor();
 
         int red = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed())), 255);
