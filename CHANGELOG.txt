@@ -1,4 +1,6 @@
 # CHANGELOG
+###### 1.6.1
+- Fix crash when using reactive shields without a system
 ###### 1.6.0
 - Update hullmod smod check to use built in vanilla functions
 - Update ASH_AdvanceRadarSystems increase sight radius buff to 25% from 20%
