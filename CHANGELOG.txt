@@ -1,4 +1,6 @@
 # CHANGELOG
+###### 1.6.2
+- Fix bug periodic sudden consumption and generation of all materials for industrial machine forge
 ###### 1.6.1
 - Fix crash when using reactive shields without a system
 ###### 1.6.0
