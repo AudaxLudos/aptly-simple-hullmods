@@ -55,7 +55,7 @@ public class ASH_IndustrialMachineForgeScript implements EveryFrameScript {
                     return;
 
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 100f) {
-                    heavyMachineryGenerated = playerCargo.getCommodityQuantity(Commodities.METALS) - 100f / 5f;
+                    heavyMachineryGenerated = (playerCargo.getCommodityQuantity(Commodities.METALS) - 100f) / 5f;
                     metalsConsumed = heavyMachineryGenerated * 5f;
                 }
 
