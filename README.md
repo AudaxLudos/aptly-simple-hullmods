@@ -1,5 +1,5 @@
-# SUITABLE STAR SYSTEMS
-A mod for starsector that adds star systems to different constellations near the core worlds, star systems are customised to speed up colony phase or mid-game/end-game.
+# APTLY SIMPLE HULLMODS
+A mod for starsector that adds a collection of hullmods used for ship customization that can be scavenge through out the sector.
 
 ## Credits
 <strong>Vildrian</strong>: for sprites for some of the hullmods.  
