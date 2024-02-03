@@ -1,3 +1,7 @@
+### 1.7.0
+- Update game version to 0.97a
+- Reformat entire code base
+
 ### 1.6.3
 - Fix github action script issue
 
