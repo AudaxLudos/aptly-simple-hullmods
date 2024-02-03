@@ -1,12 +1,12 @@
 {
-    "id": "ash",
+    "id": "aptlysimplehullmods",
     "name": "Aptly Simple Hullmods",
     "author": "Audax",
-    "version": "1.6.3",
+    "version": "1.7.0",
     "description": "Additional hullmods for starsector",
-    "gameVersion": "0.96a",
+    "gameVersion": "0.97a",
     "jars": [
-        "ASH.jar"
+        "AptlySimpleHullmods.jar"
     ],
     "dependencies": [
         {
@@ -14,5 +14,5 @@
             "name": "LazyLib"
         }
     ],
-    "modPlugin":"data.scripts.ASH_ModPlugin"
+    "modPlugin":"aptlysimplehullmods.ModPlugin"
 }

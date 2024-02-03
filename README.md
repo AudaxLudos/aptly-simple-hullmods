@@ -1,7 +1,8 @@
-# Aptly Simple Hullmods
-A mod for starsector that adds a collection of hullmods used for ship customization that can be scavenge through out the sector.
+# SUITABLE STAR SYSTEMS
+A mod for starsector that adds star systems to different constellations near the core worlds, star systems are customised to speed up colony phase or mid-game/end-game.
+
 ## Credits
-[Vildrian](https://fractalsoftworks.com/forum/index.php?action=profile;u=20141) - Sprites for some of the hullmods  
-[PureTilt](https://fractalsoftworks.com/forum/index.php?action=profile;u=12418) - for his implementation of s-mod effects  
-[Starsector Community](https://fractalsoftworks.com/forum/index.php) - Advice on spriting, coding and balancing  
-Alex & Co - The creators of the [game](https://fractalsoftworks.com/)  
+<strong>Vildrian</strong>: for sprites for some of the hullmods
+<strong>Wispborne</strong>: for the starsector intellij mod template and the GitHub action script.
+<strong>Starsector community</strong>: for many resources in regard to modding and spriting.
+<strong>Alex and Co</strong>: for making a great game and community.  

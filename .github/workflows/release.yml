@@ -44,7 +44,7 @@ jobs:
       - name: Publish Release on GitHub
         uses: "ncipollo/release-action@v1.12.0"
         with:
-          name: "Aptly Simple Hullmods ${{ env.VERSION }}"
+          name: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
           body: "View changes here: [CHANGELOG](https://raw.githubusercontent.com/AudaxLudos/aptly-simple-hullmods/main/CHANGELOG.txt)"
           draft: false

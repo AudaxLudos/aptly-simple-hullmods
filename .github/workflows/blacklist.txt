@@ -12,4 +12,3 @@ DO_NOT_USE
 banner.png$
 .iml$
 .md$
-^.vscode/
