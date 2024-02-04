@@ -4,7 +4,6 @@ import aptlysimplehullmods.scripts.campaign.FuelRamscoopScript;
 import aptlysimplehullmods.scripts.campaign.IndustrialMachineForgeScript;
 import aptlysimplehullmods.scripts.campaign.MarineTrainingFacilityScript;
 import com.fs.starfarer.api.BaseModPlugin;
-import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 
 public class ModPlugin extends BaseModPlugin {
