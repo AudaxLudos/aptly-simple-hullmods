@@ -1,3 +1,7 @@
+### 1.7.2
+- Release version 1.7.2
+- Forgot to push updates before releasing 1.7.1
+
 ### 1.7.1
 - Release version 1.7.1
 - Fix version file name typo
