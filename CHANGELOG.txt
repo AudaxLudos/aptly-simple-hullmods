@@ -1,4 +1,9 @@
+### 1.7.1
+- Release version 1.7.1
+- Fix version file name typo
+
 ### 1.7.0
+- Release version 1.7.0
 - Update game version to 0.97a
 - Reformat entire code base
 
