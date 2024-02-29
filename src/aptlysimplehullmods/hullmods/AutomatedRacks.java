@@ -18,6 +18,10 @@ public class AutomatedRacks extends BaseHullMod {
         stats.getMissileRoFMult().modifyMult(id, 1f + MISSILE_FIRE_RATE_MULT);
         stats.getMissileAmmoBonus().modifyMult(id, 1f - MISSILE_AMMO_MULT);
         stats.getMissileMaxTurnRateBonus().modifyMult(id, 1f - MISSILE_TURN_RATE_MULT);
+
+        if (isSMod(stats)) {
+            stats.getMissileMaxTurnRateBonus().unmodifyMult(id);
+        }
     }
 
     @Override
