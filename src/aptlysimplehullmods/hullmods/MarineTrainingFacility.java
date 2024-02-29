@@ -53,35 +53,35 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("Every %s:", opad, b, "week");
+        tooltip.addPara("Every %s:", oPad, b, "week");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("levels up %s current marines based on hull size", pad, good, MARINES_TO_LEVEL.get(HullSize.FRIGATE).intValue() + "/"
-                + MARINES_TO_LEVEL.get(HullSize.DESTROYER).intValue() + "/"
-                + MARINES_TO_LEVEL.get(HullSize.CRUISER).intValue() + "/"
-                + MARINES_TO_LEVEL.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Converts %s crew members into marines based on hull size", pad, good, Math.round(MARINES_TO_GENERATE.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(MARINES_TO_GENERATE.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(MARINES_TO_GENERATE.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue()));
-        tooltip.addPara("Can convert a maximum of %s marines per ship with this hullmod", pad, b, Math.round(MAX_MARINES_TO_GENERATE.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(MAX_MARINES_TO_GENERATE.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(MAX_MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue()));
+        tooltip.addPara("levels up %s current marines based on hull size", pad, good, MARINES_TO_LEVEL.get(HullSize.FRIGATE) + "/"
+                + MARINES_TO_LEVEL.get(HullSize.DESTROYER) + "/"
+                + MARINES_TO_LEVEL.get(HullSize.CRUISER) + "/"
+                + MARINES_TO_LEVEL.get(HullSize.CAPITAL_SHIP));
+        tooltip.addPara("Converts %s crew members into marines based on hull size", pad, good, MARINES_TO_GENERATE.get(HullSize.FRIGATE) + "/"
+                + MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "/"
+                + MARINES_TO_GENERATE.get(HullSize.CRUISER) + "/"
+                + MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP));
+        tooltip.addPara("Can convert a maximum of %s marines per ship with this hullmod", pad, b, MAX_MARINES_TO_GENERATE.get(HullSize.FRIGATE) + "/"
+                + MAX_MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "/"
+                + MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER) + "/"
+                + MAX_MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP));
         tooltip.setBulletedListMode(null);
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the amount of marines to level up by an additional %s based on hull size", opad, b, "1/2/3/5");
+        tooltip.addPara("Increases the amount of marines to level up by an additional %s based on hull size", oPad, b, "1/2/3/5");
         tooltip.setBulletedListMode(null);
     }
 

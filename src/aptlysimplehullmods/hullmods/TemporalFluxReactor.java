@@ -44,7 +44,7 @@ public class TemporalFluxReactor extends BaseHullMod {
         if (ship.areAnyEnemiesInRange())
             ship.setTimeDeployed(timeDeployed += amount + (amount * ship.getFluxLevel()));
 
-        if (ship == Global.getCombatEngine().getPlayerShip()) {
+        if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER * 100f >= 1f) {
             Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER));
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
                     "graphics/icons/hullsys/temporal_shell.png", "Speed of Time Boost",
@@ -57,13 +57,13 @@ public class TemporalFluxReactor extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("As %s flux levels rise:", opad, b, "soft");
+        tooltip.addPara("As %s flux levels rise:", oPad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "2 seconds");

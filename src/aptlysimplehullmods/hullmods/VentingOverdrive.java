@@ -49,13 +49,13 @@ public class VentingOverdrive extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("While %s and hull integrity is above %s:", opad, b, "venting", "20%");
+        tooltip.addPara("While %s and hull integrity is above %s:", oPad, b, "venting", "20%");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the rate of venting by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's speed by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");

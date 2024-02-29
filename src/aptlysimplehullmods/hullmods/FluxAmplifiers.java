@@ -34,12 +34,12 @@ public class FluxAmplifiers extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the damage of non-missile weapons by %s", opad, good, Math.round(WEAPON_DAMAGE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the damage of non-missile weapons by %s", oPad, good, Math.round(WEAPON_DAMAGE_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the flux cost of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FLUX_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Decreases the fire rate of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FIRE_RATE_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
@@ -47,10 +47,10 @@ public class FluxAmplifiers extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the fire rate penalty of non-missile weapons", opad);
+        tooltip.addPara("Fully negates the fire rate penalty of non-missile weapons", oPad);
         tooltip.setBulletedListMode(null);
     }
 

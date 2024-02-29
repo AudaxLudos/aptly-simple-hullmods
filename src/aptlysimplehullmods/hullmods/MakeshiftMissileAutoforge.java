@@ -40,13 +40,13 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("When non-reloading missile weapons %s:", opad, b, "run out of ammo");
+        tooltip.addPara("When non-reloading missile weapons %s:", oPad, b, "run out of ammo");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MODIFIER) + "%");
         tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MODIFIER) + " seconds");
@@ -55,11 +55,11 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Replenish ammo at the %s of combat for non reloading-missile weapons", opad, good, "start");
+        tooltip.addPara("Replenish ammo at the %s of combat for non reloading-missile weapons", oPad, good, "start");
         tooltip.setBulletedListMode(null);
     }
 

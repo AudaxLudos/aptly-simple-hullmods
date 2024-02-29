@@ -57,12 +57,12 @@ public class TargetingTransceiver extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("If a %s has a %s and is within %s:", opad, b, "Friendly ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
+        tooltip.addPara("If a %s has a %s and is within %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
         tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
@@ -71,11 +71,11 @@ public class TargetingTransceiver extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the detection range to %s", opad, good, Math.round((MAX_RANGE_THRESHOLD + 250f) * 2f) + " su");
+        tooltip.addPara("Increases the detection range to %s", oPad, good, Math.round((MAX_RANGE_THRESHOLD + 250f) * 2f) + " su");
         tooltip.setBulletedListMode(null);
     }
 

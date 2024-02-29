@@ -29,13 +29,13 @@ public class TestHullmod extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Test value by %s", opad, b, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", oPad, b, Math.round(TEST_MODIFIER * 100f) + "%");
         tooltip.addPara("Test value by %s", pad, good, Math.round(TEST_MODIFIER * 100f) + "%");
         tooltip.addPara("Test value by %s", pad, bad, Math.round(TEST_MODIFIER * 100f) + "%");
         tooltip.setBulletedListMode(null);

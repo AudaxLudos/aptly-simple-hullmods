@@ -36,7 +36,7 @@ public class ReactiveShields extends BaseHullMod {
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
         float computedShieldStrength = Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
-        float minShieldArc = (shipShieldArc <= MINIMUM_SHIELD_ARC) ? shipShieldArc : MINIMUM_SHIELD_ARC;
+        float minShieldArc = Math.min(shipShieldArc, MINIMUM_SHIELD_ARC);
         float computedShieldArc = Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
 
         if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
@@ -50,21 +50,22 @@ public class ReactiveShields extends BaseHullMod {
         ship.getShield().setArc(computedShieldArc);
         stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 + -computedShieldStrength);
 
-        if (ship == Global.getCombatEngine().getPlayerShip())
+        if (ship == Global.getCombatEngine().getPlayerShip() && computedShieldStrength * 100f >= 1f) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_ReactiveShields", "graphics/icons/hullsys/fortress_shield.png", "Shield Strength Boost",
                     Math.round(computedShieldStrength * 100f) + "%", false);
+        }
     }
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("As %s flux levels rise:", opad, b, "hard");
+        tooltip.addPara("As %s flux levels rise:", oPad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the shield strength by up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Lowers the shield arc down to %s", pad, bad, "30 degrees");
@@ -85,10 +86,10 @@ public class ReactiveShields extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("The increase in shield strength scales with soft flux", opad);
+        tooltip.addPara("The increase in shield strength scales with soft flux", oPad);
         tooltip.setBulletedListMode(null);
     }
 

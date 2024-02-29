@@ -18,7 +18,7 @@ public class TestStopwatch extends BaseHullMod {
         if (ship.areSignificantEnemiesInRange())
             stopwatchTime += amount;
 
-        if (ship == Global.getCombatEngine().getPlayerShip()) {
+        if (ship == Global.getCombatEngine().getPlayerShip() && stopwatchTime >= 1f) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TestStopwatch",
                     "graphics/icons/hullsys/high_energy_focus.png", "Stopwatch Time",
                     stopwatchTime + " seconds", false);

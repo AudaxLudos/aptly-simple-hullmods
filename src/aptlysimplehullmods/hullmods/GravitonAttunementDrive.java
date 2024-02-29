@@ -32,15 +32,15 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fleet's maximum burn by %s based on hull size", opad, good, Math.round(FLEET_BURN_MODIFIER.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(FLEET_BURN_MODIFIER.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(FLEET_BURN_MODIFIER.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue()));
+        tooltip.addPara("Increases the fleet's maximum burn by %s based on hull size", oPad, good, FLEET_BURN_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
+                + FLEET_BURN_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
+                + FLEET_BURN_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
+                + FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.addPara("Increases the sensor profile by %s based on hull size", pad, bad, Math.round(FLEET_BURN_MODIFIER.get(HullSize.FRIGATE).intValue() * 100f) + "/"
                 + Math.round(FLEET_BURN_MODIFIER.get(HullSize.DESTROYER).intValue() * 100f) + "/"
                 + Math.round(FLEET_BURN_MODIFIER.get(HullSize.CRUISER).intValue() * 100f) + "/"

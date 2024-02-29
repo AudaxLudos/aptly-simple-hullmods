@@ -36,12 +36,12 @@ public class MissileBay extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ammo capacity of missile weapons by %s", opad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ammo capacity of missile weapons by %s", oPad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
         tooltip.addPara("Removes %s built-in fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
         tooltip.setBulletedListMode(null);
     }
@@ -57,14 +57,14 @@ public class MissileBay extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases deployment points by %s", opad, good, Math.round(DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue()) + " base on the ship's hull size");
+        tooltip.addPara("Decreases deployment points by %s", oPad, good, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
+                + DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "/"
+                + DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "/"
+                + DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue() + " base on the ship's hull size");
         tooltip.setBulletedListMode(null);
     }
 

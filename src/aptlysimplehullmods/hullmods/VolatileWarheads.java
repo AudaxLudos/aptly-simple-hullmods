@@ -27,12 +27,12 @@ public class VolatileWarheads extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the damage of missiles by %s", opad, good, Math.round(MISSILE_DAMAGE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the damage of missiles by %s", oPad, good, Math.round(MISSILE_DAMAGE_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
@@ -40,10 +40,10 @@ public class VolatileWarheads extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the healh penalty for missiles", opad);
+        tooltip.addPara("Fully negates the healh penalty for missiles", oPad);
         tooltip.setBulletedListMode(null);
     }
 

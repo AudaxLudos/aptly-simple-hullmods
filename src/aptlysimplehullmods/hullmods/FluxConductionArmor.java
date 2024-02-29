@@ -28,12 +28,12 @@ public class FluxConductionArmor extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's flux capacity by %s", opad, good, Math.round(FLUX_CAPACITY_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's flux capacity by %s", oPad, good, Math.round(FLUX_CAPACITY_MULT * 100f) + "%");
         tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("Decreases the armor of the ship by %s", pad, bad, Math.round(ARMOR_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
@@ -41,10 +41,10 @@ public class FluxConductionArmor extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the armor bonus penalty", opad);
+        tooltip.addPara("Fully negates the armor bonus penalty", oPad);
         tooltip.setBulletedListMode(null);
     }
 

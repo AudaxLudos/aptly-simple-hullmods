@@ -57,12 +57,12 @@ public class SubvertedShields extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Dissipates hard flux while shields are active by %s", opad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
+        tooltip.addPara("Dissipates hard flux while shields are active by %s", oPad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
         tooltip.addPara("Reduces the shield upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Reduces the shield strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULTIPLIER * 100f) + "%");
@@ -83,10 +83,10 @@ public class SubvertedShields extends BaseHullMod {
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the emp arcing penalty", opad);
+        tooltip.addPara("Fully negates the emp arcing penalty", oPad);
         tooltip.setBulletedListMode(null);
     }
 

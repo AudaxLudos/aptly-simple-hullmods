@@ -26,23 +26,23 @@ public class ReactiveSubsystems extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's max combat readiness by %s", opad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's max combat readiness by %s", oPad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
         tooltip.addPara("Increases the rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's peak performance time by %s", opad, good, Math.round(PEAK_CR_DURATION_MODIFIER) + " seconds");
+        tooltip.addPara("Increases the ship's peak performance time by %s", oPad, good, Math.round(PEAK_CR_DURATION_MODIFIER) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 

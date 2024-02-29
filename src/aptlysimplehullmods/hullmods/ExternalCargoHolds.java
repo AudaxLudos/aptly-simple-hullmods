@@ -34,15 +34,15 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float pad = 3f;
-        float opad = 10f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the cargo capacity by %s based on hull size", opad, good, Math.round(CARGO_MODIFIER.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(CARGO_MODIFIER.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(CARGO_MODIFIER.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue()) + " points");
+        tooltip.addPara("Increases the cargo capacity by %s based on hull size", oPad, good, CARGO_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
+                + CARGO_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
+                + CARGO_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
+                + CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue() + " points");
         tooltip.addPara("Reduces the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Reduces the ship's armor strength by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
@@ -56,7 +56,7 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
             numLogisticsMods--;
         if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)))
             return "Cannot be installed on a civilian ship without Militarized Subsystems";
-        if (ship == null || numLogisticsMods >= getMax(ship))
+        if (numLogisticsMods >= getMax(ship))
             return "Maximum of 2 non-built-in \"Logistics\" hullmods per hull";
         return null;
     }
