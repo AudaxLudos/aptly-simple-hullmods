@@ -1,6 +1,5 @@
 package aptlysimplehullmods.hullmods;
 
-import aptlysimplehullmods.Utils;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
@@ -35,9 +34,9 @@ public class ReactiveShields extends BaseHullMod {
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
-        float computedShieldStrength = Utils.getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
+        float computedShieldStrength = getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
         float minShieldArc = Math.min(shipShieldArc, MINIMUM_SHIELD_ARC);
-        float computedShieldArc = Utils.getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
+        float computedShieldArc = getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
 
         if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
             defaultShieldColor = ship.getShield().getInnerColor();
@@ -96,5 +95,13 @@ public class ReactiveShields extends BaseHullMod {
     @Override
     public boolean hasSModEffect() {
         return true;
+    }
+
+    public float getValueWithinMax(float value, float min, float max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    public float getValueWithinRange(float percentage, float min, float max) {
+        return percentage * (max - min) + min;
     }
 }
