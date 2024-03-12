@@ -17,8 +17,8 @@ public class VolatileWarheads extends BaseHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getMissileWeaponDamageMult().modifyMult(id, 1f + MISSILE_DAMAGE_MULTIPLIER);
-        stats.getMissileMaxSpeedBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
-        stats.getMissileHealthBonus().modifyMult(id, 1f + -MISSILE_HEALTH_MULTIPLIER);
+        stats.getMissileMaxSpeedBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULTIPLIER);
+        stats.getMissileHealthBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULTIPLIER);
 
         if (isSMod(stats))
             stats.getMissileHealthBonus().unmodifyMult(id);
@@ -43,7 +43,7 @@ public class VolatileWarheads extends BaseHullMod {
         float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the healh penalty for missiles", oPad);
+        tooltip.addPara("Fully negates the health penalty for missiles", oPad);
         tooltip.setBulletedListMode(null);
     }
 
