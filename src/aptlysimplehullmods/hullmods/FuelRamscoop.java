@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class FuelRamscoop extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_FUEL = 3f;
-    public static Map<HullSize, Float> FUEL_TO_GENERATE = new HashMap<HullSize, Float>();
+    public static Map<HullSize, Float> FUEL_TO_GENERATE = new HashMap<>();
 
     static {
         FUEL_TO_GENERATE.put(HullSize.FRIGATE, 1f);
@@ -21,7 +21,7 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
         FUEL_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 4f);
     }
 
-    public static Map<HullSize, Float> SMOD_FUEL_TO_GENERATE = new HashMap<HullSize, Float>();
+    public static Map<HullSize, Float> SMOD_FUEL_TO_GENERATE = new HashMap<>();
 
     static {
         SMOD_FUEL_TO_GENERATE.put(HullSize.FRIGATE, 2f);

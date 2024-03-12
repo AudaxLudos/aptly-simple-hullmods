@@ -20,7 +20,7 @@ public class SubvertedShields extends BaseHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_STRENGTH_MULTIPLIER);
-        stats.getShieldUpkeepMult().modifyMult(id, 1f + -SHIELD_UPKEEP_MULTIPLIER);
+        stats.getShieldUpkeepMult().modifyMult(id, 1f - SHIELD_UPKEEP_MULTIPLIER);
         stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULTIPLIER);
 
         if (isSMod(stats))
@@ -34,7 +34,7 @@ public class SubvertedShields extends BaseHullMod {
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color shieldInnerColor = ship.getShield().getInnerColor();
-        float shieldInnerAlpha = 0f;
+        float shieldInnerAlpha;
         float shieldPulse = 0f;
 
         if (Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId()) instanceof Float)

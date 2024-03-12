@@ -20,11 +20,11 @@ public class HullConversion extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getArmorBonus().modifyMult(id, 1f + ARMOR_MULTIPLIER);
         stats.getMinArmorFraction().modifyFlat(id, MIN_ARMOR_MODIFIER);
-        stats.getHullBonus().modifyMult(id, 1f + -HULL_MULTIPLIER);
+        stats.getHullBonus().modifyMult(id, 1f - HULL_MULTIPLIER);
         stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULTIPLIER);
 
         if (isSMod(stats))
-            stats.getArmorDamageTakenMult().modifyMult(id, 1f + -ARMOR_DAMAGE_TAKEN_MULTIPLIER);
+            stats.getArmorDamageTakenMult().modifyMult(id, 1f - ARMOR_DAMAGE_TAKEN_MULTIPLIER);
     }
 
     @Override

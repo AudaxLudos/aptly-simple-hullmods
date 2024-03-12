@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ExternalCryoPods extends BaseLogisticsHullMod {
     public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<Object, Float> CREW_MODIFIER = new HashMap<Object, Float>();
+    private static final Map<Object, Float> CREW_MODIFIER = new HashMap<>();
 
     static {
         CREW_MODIFIER.put(HullSize.FRIGATE, 60f);
@@ -26,7 +26,7 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getMaxCrewMod().modifyFlat(id, CREW_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
         stats.getCrewLossMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
         stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
     }

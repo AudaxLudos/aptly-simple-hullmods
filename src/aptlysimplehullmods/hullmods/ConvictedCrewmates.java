@@ -120,9 +120,9 @@ public class ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("When contributing to killing an %s:", oPad, b, "enemy");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(PPT_GAIN.get(HullSize.FRIGATE).intValue()) + "/"
-                + Math.round(PPT_GAIN.get(HullSize.DESTROYER).intValue()) + "/"
-                + Math.round(PPT_GAIN.get(HullSize.CRUISER).intValue()) + "/"
-                + Math.round(PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue()));
+                + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
+                + PPT_GAIN.get(HullSize.CRUISER).intValue() + "/"
+                + PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
         tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");

@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class GravitonAttunementDrive extends BaseLogisticsHullMod {
     public static final float SUPPLIES_PER_MONTH_MULTIPLIER = 2f;
-    private static final Map<Object, Float> FLEET_BURN_MODIFIER = new HashMap<Object, Float>();
+    private static final Map<Object, Float> FLEET_BURN_MODIFIER = new HashMap<>();
 
     static {
         FLEET_BURN_MODIFIER.put(HullSize.FRIGATE, 1f);

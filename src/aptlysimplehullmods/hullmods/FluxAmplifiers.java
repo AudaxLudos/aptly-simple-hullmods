@@ -22,8 +22,8 @@ public class FluxAmplifiers extends BaseHullMod {
         stats.getEnergyWeaponDamageMult().modifyMult(id, 1f + WEAPON_DAMAGE_MULTIPLIER);
         stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f + WEAPON_FLUX_MULTIPLIER);
 
-        stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
-        stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
+        stats.getBallisticRoFMult().modifyMult(id, 1f - WEAPON_FIRE_RATE_MULTIPLIER);
+        stats.getEnergyRoFMult().modifyMult(id, 1f - WEAPON_FIRE_RATE_MULTIPLIER);
 
         if (isSMod(stats)) {
             stats.getBallisticRoFMult().unmodifyMult(id);

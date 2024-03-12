@@ -48,7 +48,7 @@ public class ReactiveShields extends BaseHullMod {
 
         ship.getShield().setInnerColor(new Color(red, green, blue, ship.getShield().getInnerColor().getAlpha()));
         ship.getShield().setArc(computedShieldArc);
-        stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 + -computedShieldStrength);
+        stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 - computedShieldStrength);
 
         if (ship == Global.getCombatEngine().getPlayerShip() && computedShieldStrength * 100f >= 1f) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_ReactiveShields", "graphics/icons/hullsys/fortress_shield.png", "Shield Strength Boost",

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ExternalCargoHolds extends BaseLogisticsHullMod {
     public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<HullSize, Float> CARGO_MODIFIER = new HashMap<HullSize, Float>();
+    private static final Map<HullSize, Float> CARGO_MODIFIER = new HashMap<>();
 
     static {
         CARGO_MODIFIER.put(HullSize.FRIGATE, 60f);
@@ -26,7 +26,7 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getCargoMod().modifyFlat(id, CARGO_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
         stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
         stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
     }

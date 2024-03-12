@@ -16,14 +16,14 @@ public class FluxLimiters extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f + -WEAPON_FLUX_MULTIPLIER);
-        stats.getBallisticWeaponDamageMult().modifyMult(id, 1f + -WEAPON_DAMAGE_MULTIPLIER);
+        stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - WEAPON_FLUX_MULTIPLIER);
+        stats.getBallisticWeaponDamageMult().modifyMult(id, 1f - WEAPON_DAMAGE_MULTIPLIER);
 
-        stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f + -WEAPON_FLUX_MULTIPLIER);
-        stats.getEnergyWeaponDamageMult().modifyMult(id, 1f + -WEAPON_DAMAGE_MULTIPLIER);
+        stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f - WEAPON_FLUX_MULTIPLIER);
+        stats.getEnergyWeaponDamageMult().modifyMult(id, 1f - WEAPON_DAMAGE_MULTIPLIER);
 
-        stats.getBallisticRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
-        stats.getEnergyRoFMult().modifyMult(id, 1f + -WEAPON_FIRE_RATE_MULTIPLIER);
+        stats.getBallisticRoFMult().modifyMult(id, 1f - WEAPON_FIRE_RATE_MULTIPLIER);
+        stats.getEnergyRoFMult().modifyMult(id, 1f - WEAPON_FIRE_RATE_MULTIPLIER);
 
         if (isSMod(stats)) {
             stats.getBallisticRoFMult().unmodifyMult(id);

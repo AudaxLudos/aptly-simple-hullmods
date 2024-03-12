@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ExternalFuelTanks extends BaseLogisticsHullMod {
     public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<Object, Float> FUEL_MODIFIER = new HashMap<Object, Float>();
+    private static final Map<Object, Float> FUEL_MODIFIER = new HashMap<>();
 
     static {
         FUEL_MODIFIER.put(HullSize.FRIGATE, 60f);
@@ -26,7 +26,7 @@ public class ExternalFuelTanks extends BaseLogisticsHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getFuelMod().modifyFlat(id, FUEL_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f + -SHIP_STATS_MULTIPLIER);
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
         stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
         stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
     }

@@ -15,10 +15,10 @@ public class CircuitBreakers extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getOverloadTimeMod().modifyMult(id, 1f + -OVERLOAD_TIME_MULT);
+        stats.getOverloadTimeMod().modifyMult(id, 1f - OVERLOAD_TIME_MULT);
 
         if (isSMod(stats))
-            stats.getEmpDamageTakenMult().modifyMult(id, 1f + -EMP_DAMAGE_TAKEN_MULT);
+            stats.getEmpDamageTakenMult().modifyMult(id, 1f - EMP_DAMAGE_TAKEN_MULT);
     }
 
     @Override
