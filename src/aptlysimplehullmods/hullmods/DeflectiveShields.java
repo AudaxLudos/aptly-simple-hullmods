@@ -16,7 +16,11 @@ public class DeflectiveShields extends BaseHullMod {
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getKineticShieldDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
         stats.getEnergyShieldDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
-        stats.getHighExplosiveShieldDamageTakenMult().modifyMult(id, 1f + EXPLOSIVE_DMG_TAKEN_MULT);
+
+        float explosiveDmgTknMult = EXPLOSIVE_DMG_TAKEN_MULT;
+        if (isSMod(stats))
+            explosiveDmgTknMult *= 0.5f;
+        stats.getHighExplosiveShieldDamageTakenMult().modifyMult(id, 1f + explosiveDmgTknMult);
     }
 
     @Override
@@ -31,5 +35,20 @@ public class DeflectiveShields extends BaseHullMod {
         tooltip.addPara("Decreases the energy damage taken of a shield by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("Increases the explosive damage taken of a shield by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float oPad = 10f;
+        Color b = Misc.getHighlightColor();
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Reduces the explosive damage taken penalty of a ship by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 }
