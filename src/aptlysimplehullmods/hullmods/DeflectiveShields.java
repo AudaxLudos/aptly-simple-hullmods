@@ -8,14 +8,14 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
 
-public class ShockAbsorbers extends BaseHullMod {
-    public static final float EXPLOSIVE_DMG_TAKEN_MULT = 0.20f;
+public class DeflectiveShields extends BaseHullMod {
     public static final float KINETIC_DMG_TAKEN_MULT = 0.20f;
+    public static final float EXPLOSIVE_DMG_TAKEN_MULT = 0.20f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f - EXPLOSIVE_DMG_TAKEN_MULT);
-        stats.getKineticDamageTakenMult().modifyMult(id, 1f + KINETIC_DMG_TAKEN_MULT);
+        stats.getKineticShieldDamageTakenMult().modifyMult(id, 1f - KINETIC_DMG_TAKEN_MULT);
+        stats.getHighExplosiveShieldDamageTakenMult().modifyMult(id, 1f + EXPLOSIVE_DMG_TAKEN_MULT);
     }
 
     @Override
@@ -25,8 +25,8 @@ public class ShockAbsorbers extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the explosive damage taken of the ship by %s", oPad, good, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Increases the kinetic damage taken of the ship by %s", oPad, bad, Math.round(KINETIC_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the kinetic damage taken of shields by %s", oPad, bad, Math.round(KINETIC_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Increases the explosive damage taken of shields by %s", oPad, good, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
