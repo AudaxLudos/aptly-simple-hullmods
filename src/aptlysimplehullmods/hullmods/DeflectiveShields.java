@@ -31,9 +31,9 @@ public class DeflectiveShields extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the kinetic damage taken of a shield by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the energy damage taken of a shield by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Increases the explosive damage taken of a shield by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the shield's kinetic damage taken by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the shield's energy damage taken by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Increases the shield's explosive damage taken by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -43,7 +43,7 @@ public class DeflectiveShields extends BaseHullMod {
         Color b = Misc.getHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the explosive damage taken penalty of a ship by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
+        tooltip.addPara("Reduces the shield's explosive damage taken penalty by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
