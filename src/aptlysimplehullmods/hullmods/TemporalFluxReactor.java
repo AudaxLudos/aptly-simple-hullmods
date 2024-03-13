@@ -25,13 +25,11 @@ public class TemporalFluxReactor extends BaseHullMod {
         }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
-        Color jitterColor;
         float timeDeployed = 0f;
+        Color jitterColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
         if (ship.getShield() != null)
             jitterColor = ship.getShield().getInnerColor();
-        else
-            jitterColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
         if (Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + spec.getId()) instanceof Float)
             timeDeployed = (float) Global.getCombatEngine().getCustomData().get("ASH_TimeDeployed_" + spec.getId());

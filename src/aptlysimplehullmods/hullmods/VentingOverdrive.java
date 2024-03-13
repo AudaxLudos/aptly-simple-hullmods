@@ -57,7 +57,7 @@ public class VentingOverdrive extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("While %s and hull integrity is above %s:", oPad, b, "venting", "20%");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the rate of venting by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's rate of venting by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's speed by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's maneuverability by %s", pad, good, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("%s, the higher the flux the longer you take damage", pad, bad, "Damages the ship");
