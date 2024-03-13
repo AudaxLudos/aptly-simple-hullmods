@@ -39,11 +39,11 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the crew capacity by %s based on hull size", oPad, good, CREW_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Increases the ship's crew capacity by %s based on hull size", oPad, good, CREW_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
                 + CREW_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
                 + CREW_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
                 + CREW_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue() + " points");
-        tooltip.addPara("Reduces the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
