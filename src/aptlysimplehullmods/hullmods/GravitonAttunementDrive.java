@@ -41,11 +41,11 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
                 + FLEET_BURN_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
                 + FLEET_BURN_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
                 + FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Increases the sensor profile by %s based on hull size", pad, bad, Math.round(FLEET_BURN_MODIFIER.get(HullSize.FRIGATE).intValue() * 100f) + "/"
+        tooltip.addPara("Increases the ship's sensor profile by %s based on hull size", pad, bad, Math.round(FLEET_BURN_MODIFIER.get(HullSize.FRIGATE).intValue() * 100f) + "/"
                 + Math.round(FLEET_BURN_MODIFIER.get(HullSize.DESTROYER).intValue() * 100f) + "/"
                 + Math.round(FLEET_BURN_MODIFIER.get(HullSize.CRUISER).intValue() * 100f) + "/"
                 + Math.round(FLEET_BURN_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue() * 100f) + " points");
-        tooltip.addPara("Increases supplies used per month by %s", pad, bad, Math.round(SUPPLIES_PER_MONTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's supplies used per month by %s", pad, bad, Math.round(SUPPLIES_PER_MONTH_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }
