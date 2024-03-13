@@ -61,10 +61,10 @@ public class MissileBay extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases deployment points by %s", oPad, good, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Decreases the ship's deployment points by %s based on its hull size", oPad, good, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
                 + DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "/"
                 + DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "/"
-                + DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue() + " base on the ship's hull size");
+                + DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.setBulletedListMode(null);
     }
 
