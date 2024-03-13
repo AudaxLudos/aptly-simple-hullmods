@@ -63,8 +63,8 @@ public class SubvertedShields extends BaseHullMod {
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Dissipates hard flux while shields are active by %s", oPad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
-        tooltip.addPara("Reduces the shield upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the shield strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Reduces the shield's upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Reduces the shield's strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
