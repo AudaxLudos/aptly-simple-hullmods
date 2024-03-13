@@ -42,10 +42,10 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s:", oPad, b, "3 days");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Generates %s based on hull size", pad, good, FUEL_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Generates %s fuel based on hull size", pad, good, FUEL_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "/"
                 + FUEL_TO_GENERATE.get(HullSize.DESTROYER).intValue() + "/"
                 + FUEL_TO_GENERATE.get(HullSize.CRUISER).intValue() + "/"
-                + FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + " fuel");
+                + FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.setBulletedListMode(null);
     }
 
