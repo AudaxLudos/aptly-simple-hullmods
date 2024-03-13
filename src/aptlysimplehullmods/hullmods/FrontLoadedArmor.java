@@ -10,8 +10,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FrontLoadedArmor extends BaseHullMod {
-    public static final float POSITIVE_ARMOR_VALUE_MULTIPLIER = 2f;
-    public static final float NEGATIVE_ARMOR_VALUE_MULTIPLIER = 0.5f;
+    public static final float POSITIVE_ARMOR_VALUE_MULT = 2f;
+    public static final float NEGATIVE_ARMOR_VALUE_MULT = 0.5f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -32,11 +32,11 @@ public class FrontLoadedArmor extends BaseHullMod {
                 for (int y = 0; y < armorCellY; y++) {
                     float currentArmorValue = ship.getArmorGrid().getArmorValue(x, y);
                     if (y >= armorCellY / 2f) {
-                        ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * POSITIVE_ARMOR_VALUE_MULTIPLIER);
+                        ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * POSITIVE_ARMOR_VALUE_MULT);
                     } else {
                         if (isSMod(ship))
                             continue;
-                        ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * NEGATIVE_ARMOR_VALUE_MULTIPLIER);
+                        ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * NEGATIVE_ARMOR_VALUE_MULT);
                     }
                 }
             }

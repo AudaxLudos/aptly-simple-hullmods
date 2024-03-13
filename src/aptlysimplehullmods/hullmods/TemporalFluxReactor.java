@@ -12,7 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class TemporalFluxReactor extends BaseHullMod {
-    public static final float SPEED_OF_TIME_MULTIPLIER = 0.33f;
+    public static final float SPEED_OF_TIME_MULT = 0.33f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -37,16 +37,16 @@ public class TemporalFluxReactor extends BaseHullMod {
         float jitterRangeBonus = ship.getFluxLevel() * 10f;
         float jitterLevel = (float) Math.sqrt(ship.getFluxLevel());
         ship.setJitterUnder(this, jitterColor, jitterLevel, 50, 0f, 7f + jitterRangeBonus);
-        stats.getTimeMult().modifyMult(spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER);
+        stats.getTimeMult().modifyMult(spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT);
 
         if (ship.areAnyEnemiesInRange())
             ship.setTimeDeployed(timeDeployed += amount + (amount * ship.getFluxLevel()));
 
-        if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER * 100f >= 1f) {
-            Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER));
+        if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f >= 1f) {
+            Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT));
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
                     "graphics/icons/hullsys/temporal_shell.png", "Speed of Time Boost",
-                    Math.round(ship.getFluxLevel() * SPEED_OF_TIME_MULTIPLIER * 100f) + "%", false);
+                    Math.round(ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f) + "%", false);
         }
 
         Global.getCombatEngine().getCustomData().put("ASH_TimeDeployed_" + spec.getId(), timeDeployed);
@@ -63,7 +63,7 @@ public class TemporalFluxReactor extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", oPad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the ship's speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULT * 100f) + "%");
         tooltip.addPara("Accelerates the ship's rate of peak performance time reduction by up to %s", pad, bad, "2 seconds");
         tooltip.setBulletedListMode(null);
     }

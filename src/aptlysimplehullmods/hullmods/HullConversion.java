@@ -10,21 +10,21 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class HullConversion extends BaseHullMod {
-    public static final float ARMOR_MULTIPLIER = 0.20f;
-    public static final float MIN_ARMOR_MODIFIER = 0.05f;
-    public static final float ARMOR_DAMAGE_TAKEN_MULTIPLIER = 0.05f;
-    public static final float HULL_MULTIPLIER = 0.20f;
-    public static final float BREAK_CHANCE_MULTIPLIER = 1f;
+    public static final float ARMOR_MULT = 0.20f;
+    public static final float MIN_ARMOR_MOD = 0.05f;
+    public static final float ARMOR_DAMAGE_TAKEN_MULT = 0.05f;
+    public static final float HULL_MULT = 0.20f;
+    public static final float BREAK_CHANCE_MULT = 1f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getArmorBonus().modifyMult(id, 1f + ARMOR_MULTIPLIER);
-        stats.getMinArmorFraction().modifyFlat(id, MIN_ARMOR_MODIFIER);
-        stats.getHullBonus().modifyMult(id, 1f - HULL_MULTIPLIER);
-        stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULTIPLIER);
+        stats.getArmorBonus().modifyMult(id, 1f + ARMOR_MULT);
+        stats.getMinArmorFraction().modifyFlat(id, MIN_ARMOR_MOD);
+        stats.getHullBonus().modifyMult(id, 1f - HULL_MULT);
+        stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULT);
 
         if (isSMod(stats))
-            stats.getArmorDamageTakenMult().modifyMult(id, 1f - ARMOR_DAMAGE_TAKEN_MULTIPLIER);
+            stats.getArmorDamageTakenMult().modifyMult(id, 1f - ARMOR_DAMAGE_TAKEN_MULT);
     }
 
     @Override
@@ -35,10 +35,10 @@ public class HullConversion extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's armor value by %s", oPad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MODIFIER * 100f) + "%");
-        tooltip.addPara("Decreases the ship's hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's of breaking apart by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's armor value by %s", oPad, good, Math.round(ARMOR_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MOD * 100f) + "%");
+        tooltip.addPara("Decreases the ship's hull integrity by %s", pad, bad, Math.round(HULL_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's of breaking apart by %s", pad, bad, Math.round(BREAK_CHANCE_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -48,7 +48,7 @@ public class HullConversion extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the ship's armor damage taken by %s", oPad, good, Math.round(ARMOR_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor damage taken by %s", oPad, good, Math.round(ARMOR_DAMAGE_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -12,16 +12,16 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class SubvertedShields extends BaseHullMod {
-    public static final float HARD_FLUX_DISSIPATION_MODIFIER = 0.15f;
-    public static final float SHIELD_UPKEEP_MULTIPLIER = 0.15f;
-    public static final float SHIELD_STRENGTH_MULTIPLIER = 0.15f;
-    public static final float SHIELD_PIERCED_MULTIPLIER = 0.25f;
+    public static final float HARD_FLUX_DISSIPATION_MOD = 0.15f;
+    public static final float SHIELD_UPKEEP_MULT = 0.15f;
+    public static final float SHIELD_STRENGTH_MULT = 0.15f;
+    public static final float SHIELD_PIERCED_MULT = 0.25f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_STRENGTH_MULTIPLIER);
-        stats.getShieldUpkeepMult().modifyMult(id, 1f - SHIELD_UPKEEP_MULTIPLIER);
-        stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULTIPLIER);
+        stats.getShieldDamageTakenMult().modifyMult(id, 1f + SHIELD_STRENGTH_MULT);
+        stats.getShieldUpkeepMult().modifyMult(id, 1f - SHIELD_UPKEEP_MULT);
+        stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULT);
 
         if (isSMod(stats))
             stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).unmodifyMult(id);
@@ -49,7 +49,7 @@ public class SubvertedShields extends BaseHullMod {
                 shieldInnerColor.getGreen(),
                 shieldInnerColor.getBlue(),
                 Math.round(shieldInnerAlpha)));
-        stats.getHardFluxDissipationFraction().modifyFlat(spec.getId(), HARD_FLUX_DISSIPATION_MODIFIER);
+        stats.getHardFluxDissipationFraction().modifyFlat(spec.getId(), HARD_FLUX_DISSIPATION_MOD);
 
         Global.getCombatEngine().getCustomData().put("ASH_ShieldPulse_" + ship.getId(), shieldPulse);
     }
@@ -62,10 +62,10 @@ public class SubvertedShields extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Dissipates hard flux while shields are active by %s", oPad, good, Math.round(HARD_FLUX_DISSIPATION_MODIFIER * 100f) + "%");
-        tooltip.addPara("Reduces the shield's upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the shield's strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Dissipates hard flux while shields are active by %s", oPad, good, Math.round(HARD_FLUX_DISSIPATION_MOD * 100f) + "%");
+        tooltip.addPara("Reduces the shield's upkeep by %s", pad, good, Math.round(SHIELD_UPKEEP_MULT * 100f) + "%");
+        tooltip.addPara("Reduces the shield's strength by %s", pad, bad, Math.round(SHIELD_STRENGTH_MULT * 100f) + "%");
+        tooltip.addPara("Increases the chance of EMP arcing by %s", pad, bad, Math.round(SHIELD_PIERCED_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -10,17 +10,17 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class ReactiveSubsystems extends BaseHullMod {
-    public static final float MAX_CR_MODIFIER = 0.15f;
-    public static final float CR_LOSS_PER_SECOND_MULTIPLIER = 0.25f;
-    public static final float PEAK_CR_DURATION_MODIFIER = 60f;
+    public static final float MAX_CR_MOD = 0.15f;
+    public static final float CR_LOSS_PER_SECOND_MULT = 0.25f;
+    public static final float PEAK_CR_DURATION_MOD = 60f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMaxCombatReadiness().modifyFlat(id, MAX_CR_MODIFIER, "Reactive Subsystems Hullmod");
-        stats.getCRLossPerSecondPercent().modifyMult(id, 1f + CR_LOSS_PER_SECOND_MULTIPLIER);
+        stats.getMaxCombatReadiness().modifyFlat(id, MAX_CR_MOD, "Reactive Subsystems Hullmod");
+        stats.getCRLossPerSecondPercent().modifyMult(id, 1f + CR_LOSS_PER_SECOND_MULT);
 
         if (isSMod(stats))
-            stats.getPeakCRDuration().modifyFlat(id, PEAK_CR_DURATION_MODIFIER);
+            stats.getPeakCRDuration().modifyFlat(id, PEAK_CR_DURATION_MOD);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class ReactiveSubsystems extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's max combat readiness by %s", oPad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's max combat readiness by %s", oPad, good, Math.round(MAX_CR_MOD * 100f) + "%");
+        tooltip.addPara("Increases the ship's rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -42,7 +42,7 @@ public class ReactiveSubsystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's peak performance time by %s", oPad, good, Math.round(PEAK_CR_DURATION_MODIFIER) + " seconds");
+        tooltip.addPara("Increases the ship's peak performance time by %s", oPad, good, Math.round(PEAK_CR_DURATION_MOD) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 

@@ -10,7 +10,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class TestHullmod extends BaseHullMod {
-    public static final float TEST_MODIFIER = 100f;
+    public static final float TEST_MOD = 100f;
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
@@ -35,9 +35,9 @@ public class TestHullmod extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Test value by %s", oPad, b, Math.round(TEST_MODIFIER * 100f) + "%");
-        tooltip.addPara("Test value by %s", pad, good, Math.round(TEST_MODIFIER * 100f) + "%");
-        tooltip.addPara("Test value by %s", pad, bad, Math.round(TEST_MODIFIER * 100f) + "%");
+        tooltip.addPara("Test value by %s", oPad, b, Math.round(TEST_MOD * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, good, Math.round(TEST_MOD * 100f) + "%");
+        tooltip.addPara("Test value by %s", pad, bad, Math.round(TEST_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 }

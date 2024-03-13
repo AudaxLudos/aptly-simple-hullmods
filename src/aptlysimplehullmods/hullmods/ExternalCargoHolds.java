@@ -13,22 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCargoHolds extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<HullSize, Float> CARGO_MODIFIER = new HashMap<>();
+    public static final float SHIP_STATS_MULT = 0.10f;
+    private static final Map<HullSize, Float> CARGO_MOD = new HashMap<>();
 
     static {
-        CARGO_MODIFIER.put(HullSize.FRIGATE, 60f);
-        CARGO_MODIFIER.put(HullSize.DESTROYER, 120f);
-        CARGO_MODIFIER.put(HullSize.CRUISER, 180f);
-        CARGO_MODIFIER.put(HullSize.CAPITAL_SHIP, 300f);
+        CARGO_MOD.put(HullSize.FRIGATE, 60f);
+        CARGO_MOD.put(HullSize.DESTROYER, 120f);
+        CARGO_MOD.put(HullSize.CRUISER, 180f);
+        CARGO_MOD.put(HullSize.CAPITAL_SHIP, 300f);
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getCargoMod().modifyFlat(id, CARGO_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
-        stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
-        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
+        stats.getCargoMod().modifyFlat(id, CARGO_MOD.get(hullSize));
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
+        stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULT);
+        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's cargo capacity by %s based on hull size", oPad, good, CARGO_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
-                + CARGO_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
-                + CARGO_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
-                + CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Decreases the ship's armor strength by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's cargo capacity by %s based on hull size", oPad, good, CARGO_MOD.get(HullSize.FRIGATE).intValue() + "/"
+                + CARGO_MOD.get(HullSize.DESTROYER).intValue() + "/"
+                + CARGO_MOD.get(HullSize.CRUISER).intValue() + "/"
+                + CARGO_MOD.get(HullSize.CAPITAL_SHIP).intValue());
+        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor strength by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -13,22 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalFuelTanks extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<Object, Float> FUEL_MODIFIER = new HashMap<>();
+    public static final float SHIP_STATS_MULT = 0.10f;
+    private static final Map<Object, Float> FUEL_MOD = new HashMap<>();
 
     static {
-        FUEL_MODIFIER.put(HullSize.FRIGATE, 60f);
-        FUEL_MODIFIER.put(HullSize.DESTROYER, 120f);
-        FUEL_MODIFIER.put(HullSize.CRUISER, 180f);
-        FUEL_MODIFIER.put(HullSize.CAPITAL_SHIP, 300f);
+        FUEL_MOD.put(HullSize.FRIGATE, 60f);
+        FUEL_MOD.put(HullSize.DESTROYER, 120f);
+        FUEL_MOD.put(HullSize.CRUISER, 180f);
+        FUEL_MOD.put(HullSize.CAPITAL_SHIP, 300f);
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getFuelMod().modifyFlat(id, FUEL_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
-        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
-        stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
+        stats.getFuelMod().modifyFlat(id, FUEL_MOD.get(hullSize));
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
+        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
+        stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULT);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class ExternalFuelTanks extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's fuel capacity by %s based on hull size", oPad, good, FUEL_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
-                + FUEL_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
-                + FUEL_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
-                + FUEL_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the explosive damage taken by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's fuel capacity by %s based on hull size", oPad, good, FUEL_MOD.get(HullSize.FRIGATE).intValue() + "/"
+                + FUEL_MOD.get(HullSize.DESTROYER).intValue() + "/"
+                + FUEL_MOD.get(HullSize.CRUISER).intValue() + "/"
+                + FUEL_MOD.get(HullSize.CAPITAL_SHIP).intValue());
+        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the explosive damage taken by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

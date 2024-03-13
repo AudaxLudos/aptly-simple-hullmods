@@ -14,8 +14,8 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class TargetingTransceiver extends BaseHullMod {
-    public static final float WEAPON_RANGE_MODIFIER = 0.1f;
-    public static final float AUTOFIRE_ACCURACY_MODIFIER = 0.40f;
+    public static final float WEAPON_RANGE_MOD = 0.1f;
+    public static final float AUTOFIRE_ACCURACY_MOD = 0.40f;
     public static float MIN_EFFECTIVE_RANGE = 760f;
     public static float MAX_EFFECTIVE_RANGE = 560f;
 
@@ -73,10 +73,10 @@ public class TargetingTransceiver extends BaseHullMod {
             }
 
             if (ship.getHullSize().ordinal() <= 2) {
-                stats.getEnergyWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MODIFIER * data.mag);
-                stats.getBallisticWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MODIFIER * data.mag);
+                stats.getEnergyWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
+                stats.getBallisticWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
             } else {
-                stats.getAutofireAimAccuracy().modifyMult(spec.getId(), 1f + AUTOFIRE_ACCURACY_MODIFIER * data.mag);
+                stats.getAutofireAimAccuracy().modifyMult(spec.getId(), 1f + AUTOFIRE_ACCURACY_MOD * data.mag);
             }
         }
 
@@ -99,8 +99,8 @@ public class TargetingTransceiver extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("If a %s has a %s and is within %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", 1000 + "su");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_ACCURACY_MODIFIER * 100f) + "%");
-        tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
+        tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_ACCURACY_MOD * 100f) + "%");
+        tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

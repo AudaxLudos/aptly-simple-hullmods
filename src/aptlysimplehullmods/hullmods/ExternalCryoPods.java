@@ -13,22 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCryoPods extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULTIPLIER = 0.10f;
-    private static final Map<Object, Float> CREW_MODIFIER = new HashMap<>();
+    public static final float SHIP_STATS_MULT = 0.10f;
+    private static final Map<Object, Float> CREW_MOD = new HashMap<>();
 
     static {
-        CREW_MODIFIER.put(HullSize.FRIGATE, 60f);
-        CREW_MODIFIER.put(HullSize.DESTROYER, 120f);
-        CREW_MODIFIER.put(HullSize.CRUISER, 180f);
-        CREW_MODIFIER.put(HullSize.CAPITAL_SHIP, 300f);
+        CREW_MOD.put(HullSize.FRIGATE, 60f);
+        CREW_MOD.put(HullSize.DESTROYER, 120f);
+        CREW_MOD.put(HullSize.CRUISER, 180f);
+        CREW_MOD.put(HullSize.CAPITAL_SHIP, 300f);
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMaxCrewMod().modifyFlat(id, CREW_MODIFIER.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULTIPLIER);
-        stats.getCrewLossMult().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
-        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULTIPLIER);
+        stats.getMaxCrewMod().modifyFlat(id, CREW_MOD.get(hullSize));
+        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
+        stats.getCrewLossMult().modifyMult(id, 1f + SHIP_STATS_MULT);
+        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's crew capacity by %s based on hull size", oPad, good, CREW_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
-                + CREW_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
-                + CREW_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
-                + CREW_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's crew capacity by %s based on hull size", oPad, good, CREW_MOD.get(HullSize.FRIGATE).intValue() + "/"
+                + CREW_MOD.get(HullSize.DESTROYER).intValue() + "/"
+                + CREW_MOD.get(HullSize.CRUISER).intValue() + "/"
+                + CREW_MOD.get(HullSize.CAPITAL_SHIP).intValue());
+        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -11,7 +11,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class ReactiveShields extends BaseHullMod {
-    public static final float SHIELD_STRENGTH_MULTIPLIER = 0.15f;
+    public static final float SHIELD_STRENGTH_MULT = 0.15f;
     public static final float MINIMUM_SHIELD_ARC = 30F;
     public static final Color CUSTOM_SHIELD_COLOR = new Color(255, 100, 255, 75);
 
@@ -34,7 +34,7 @@ public class ReactiveShields extends BaseHullMod {
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
-        float computedShieldStrength = getValueWithinMax((SHIELD_STRENGTH_MULTIPLIER * 0.30f + SHIELD_STRENGTH_MULTIPLIER) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULTIPLIER);
+        float computedShieldStrength = getValueWithinMax((SHIELD_STRENGTH_MULT * 0.30f + SHIELD_STRENGTH_MULT) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULT);
         float minShieldArc = Math.min(shipShieldArc, MINIMUM_SHIELD_ARC);
         float computedShieldArc = getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
 
@@ -66,7 +66,7 @@ public class ReactiveShields extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", oPad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the shield's strength up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the shield's strength up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULT * 100f) + "%");
         tooltip.addPara("Lowers the shield's arc down to %s", pad, bad, "30 degrees");
         tooltip.setBulletedListMode(null);
     }

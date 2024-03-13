@@ -10,15 +10,15 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class VolatileWarheads extends BaseHullMod {
-    public static final float MISSILE_DAMAGE_MULTIPLIER = 0.20f;
-    public static final float MISSILE_SPEED_MULTIPLIER = 0.10f;
-    public static final float MISSILE_HEALTH_MULTIPLIER = 0.10f;
+    public static final float MISSILE_DAMAGE_MULT = 0.20f;
+    public static final float MISSILE_SPEED_MULT = 0.10f;
+    public static final float MISSILE_HEALTH_MULT = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMissileWeaponDamageMult().modifyMult(id, 1f + MISSILE_DAMAGE_MULTIPLIER);
-        stats.getMissileMaxSpeedBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULTIPLIER);
-        stats.getMissileHealthBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULTIPLIER);
+        stats.getMissileWeaponDamageMult().modifyMult(id, 1f + MISSILE_DAMAGE_MULT);
+        stats.getMissileMaxSpeedBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULT);
+        stats.getMissileHealthBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULT);
 
         if (isSMod(stats))
             stats.getMissileHealthBonus().unmodifyMult(id);
@@ -32,9 +32,9 @@ public class VolatileWarheads extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the damage of missiles by %s", oPad, good, Math.round(MISSILE_DAMAGE_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the damage of missiles by %s", oPad, good, Math.round(MISSILE_DAMAGE_MULT * 100f) + "%");
+        tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULT * 100f) + "%");
+        tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
