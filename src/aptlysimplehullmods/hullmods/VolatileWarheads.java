@@ -43,7 +43,7 @@ public class VolatileWarheads extends BaseHullMod {
         float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the health penalty for missiles", oPad);
+        tooltip.addPara("Fully negates the health penalty of missiles", oPad);
         tooltip.setBulletedListMode(null);
     }
 
