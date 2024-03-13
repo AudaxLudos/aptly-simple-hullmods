@@ -32,7 +32,7 @@ public class ReactiveSubsystems extends BaseHullMod {
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Increases the ship's max combat readiness by %s", oPad, good, Math.round(MAX_CR_MODIFIER * 100f) + "%");
-        tooltip.addPara("Increases the rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's rate at which combat readiness degrades by %s", pad, bad, Math.round(CR_LOSS_PER_SECOND_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
