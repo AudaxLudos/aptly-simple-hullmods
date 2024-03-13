@@ -8,11 +8,5 @@
     "jars": [
         "AptlySimpleHullmods.jar"
     ],
-    "dependencies": [
-        {
-            "id": "lw_lazylib",
-            "name": "LazyLib"
-        }
-    ],
     "modPlugin":"aptlysimplehullmods.ModPlugin"
 }

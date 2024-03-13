@@ -42,7 +42,7 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
         tooltip.addPara("Increases the ship's cargo capacity by %s based on hull size", oPad, good, CARGO_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
                 + CARGO_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
                 + CARGO_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
-                + CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue() + " points");
+                + CARGO_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Decreases the ship's armor strength by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");

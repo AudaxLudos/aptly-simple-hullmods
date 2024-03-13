@@ -13,6 +13,9 @@ import java.util.Map;
 public class MarineTrainingFacility extends BaseLogisticsHullMod {
     public static final int DAYS_TO_GENERATE_MARINES = 7;
     public static Map<HullSize, Integer> MARINES_TO_GENERATE = new HashMap<>();
+    public static Map<HullSize, Integer> MARINES_TO_LEVEL = new HashMap<>();
+    public static Map<HullSize, Integer> SMOD_MARINES_TO_LEVEL = new HashMap<>();
+    public static Map<HullSize, Integer> MAX_MARINES_TO_GENERATE = new HashMap<>();
 
     static {
         MARINES_TO_GENERATE.put(HullSize.FRIGATE, 10);
@@ -21,8 +24,6 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
         MARINES_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50);
     }
 
-    public static Map<HullSize, Integer> MARINES_TO_LEVEL = new HashMap<>();
-
     static {
         MARINES_TO_LEVEL.put(HullSize.FRIGATE, 2);
         MARINES_TO_LEVEL.put(HullSize.DESTROYER, 4);
@@ -30,16 +31,12 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
         MARINES_TO_LEVEL.put(HullSize.CAPITAL_SHIP, 10);
     }
 
-    public static Map<HullSize, Integer> SMOD_MARINES_TO_LEVEL = new HashMap<>();
-
     static {
         SMOD_MARINES_TO_LEVEL.put(HullSize.FRIGATE, 3);
         SMOD_MARINES_TO_LEVEL.put(HullSize.DESTROYER, 6);
         SMOD_MARINES_TO_LEVEL.put(HullSize.CRUISER, 9);
         SMOD_MARINES_TO_LEVEL.put(HullSize.CAPITAL_SHIP, 15);
     }
-
-    public static Map<HullSize, Integer> MAX_MARINES_TO_GENERATE = new HashMap<>();
 
     static {
         MAX_MARINES_TO_GENERATE.put(HullSize.FRIGATE, 50);

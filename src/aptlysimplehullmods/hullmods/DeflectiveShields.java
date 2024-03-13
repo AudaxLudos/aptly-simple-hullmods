@@ -43,7 +43,7 @@ public class DeflectiveShields extends BaseHullMod {
         Color b = Misc.getHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the shield's explosive damage taken penalty by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
+        tooltip.addPara("Decreases the shield's explosive damage taken penalty by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

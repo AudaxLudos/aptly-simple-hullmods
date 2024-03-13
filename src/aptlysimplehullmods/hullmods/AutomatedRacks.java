@@ -32,7 +32,7 @@ public class AutomatedRacks extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the rate of fire of missile weapons by %s", oPad, good, Math.round(MISSILE_FIRE_RATE_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fire rate of missile weapons by %s", oPad, good, Math.round(MISSILE_FIRE_RATE_MULT * 100f) + "%");
         tooltip.addPara("Decreases the max ammo of missile weapons by %s", pad, bad, Math.round(MISSILE_AMMO_MULT * 100f) + "%");
         tooltip.addPara("Decreases the turret turn rate of missile weapons by %s", pad, bad, Math.round(MISSILE_TURN_RATE_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);

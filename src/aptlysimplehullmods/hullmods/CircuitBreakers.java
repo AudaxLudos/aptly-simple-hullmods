@@ -37,7 +37,7 @@ public class CircuitBreakers extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the damage taken from emp weapons by %s", oPad, good, Math.round(EMP_DAMAGE_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's EMP damage taken by %s", oPad, good, Math.round(EMP_DAMAGE_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

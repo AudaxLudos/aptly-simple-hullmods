@@ -1,57 +1,92 @@
 package aptlysimplehullmods.hullmods;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
+import java.util.Iterator;
 
 public class TargetingTransceiver extends BaseHullMod {
-    public static final float WEAPON_RANGE_MODIFIER = 0.10f;
+    public static final float WEAPON_RANGE_MODIFIER = 1f;
     public static final float AUTOFIRE_AIM_ACCURACY_MODIFIER = 0.40f;
-    public static final float MAX_RANGE_THRESHOLD = 750f;
+    public static float MIN_EFFECTIVE_RANGE = 760f;
+    public static float MAX_EFFECTIVE_RANGE = 560f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
-            return;
+        if (!ship.isAlive()) return;
 
         MutableShipStatsAPI stats = ship.getMutableStats();
-        float computedRangeBonus = 0f;
-        float computedAutofireAimAccuracy = 0f;
-        float maxRangeThreshold = MAX_RANGE_THRESHOLD;
-
-        if (isSMod(stats))
-            maxRangeThreshold *= 2f;
-
-        ShipAPI ally = AIUtils.getNearestAlly(ship);
-
-        if (ally == null)
-            return;
-
-        float distance = MathUtils.getDistance(ship, ally);
-
-        if (distance <= maxRangeThreshold)
-            return;
-
-        if (ally.getVariant().hasHullMod(HullMods.DEDICATED_TARGETING_CORE) ||
-                ally.getVariant().hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT) ||
-                ally.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE)) {
-            computedRangeBonus = WEAPON_RANGE_MODIFIER;
-            computedAutofireAimAccuracy = AUTOFIRE_AIM_ACCURACY_MODIFIER;
+        String key = "targeting_transceiver_" + ship.getId();
+        TargetingTransceiverData data = (TargetingTransceiverData) Global.getCombatEngine().getCustomData().get(key);
+        if (data == null) {
+            data = new TargetingTransceiverData();
+            Global.getCombatEngine().getCustomData().put(key, data);
         }
 
-        if (ship.getHullSize().ordinal() <= 2) {
-            stats.getEnergyWeaponRangeBonus().modifyMult(spec.getId(), 1f + computedRangeBonus);
-            stats.getBallisticWeaponRangeBonus().modifyMult(spec.getId(), 1f + computedRangeBonus);
-        } else
-            stats.getAutofireAimAccuracy().modifyMult(spec.getId(), 1f + computedAutofireAimAccuracy);
+        data.interval.advance(amount);
+        if (data.interval.intervalElapsed() || ship == Global.getCombatEngine().getPlayerShip()) {
+            float minEffectRange = MIN_EFFECTIVE_RANGE;
+            float maxEffectRange = MAX_EFFECTIVE_RANGE;
+            if (isSMod(stats)) {
+                minEffectRange = MIN_EFFECTIVE_RANGE * 2f + 245f;
+                maxEffectRange = MAX_EFFECTIVE_RANGE * 2f + 245f;
+            }
+
+            float checkSize = (minEffectRange + maxEffectRange + ship.getCollisionRadius() + 300f) * 2f;
+            float bestMag = 0f;
+
+            for (Iterator<Object> itr = Global.getCombatEngine().getShipGrid().getCheckIterator(ship.getLocation(), checkSize, checkSize); itr.hasNext(); ) {
+                Object next = itr.next();
+
+                if (!(next instanceof ShipAPI)) continue;
+
+                ShipAPI other = (ShipAPI) next;
+
+                if (ship == other) continue;
+                if (other.getOwner() != ship.getOwner()) continue;
+                if (other.isHulk()) continue;
+                if (!(other.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE) ||
+                        other.getVariant().hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT) ||
+                        other.getVariant().hasHullMod(HullMods.DEDICATED_TARGETING_CORE))) continue;
+
+                float radiusSum = (ship.getShieldRadiusEvenIfNoShield() + other.getShieldRadiusEvenIfNoShield()) * 0.75f;
+                float dist = Misc.getDistance(ship.getShieldCenterEvenIfNoShield(), other.getShieldCenterEvenIfNoShield()) - radiusSum;
+
+                float mag = 0f;
+                if (dist < minEffectRange)
+                    mag = 1f;
+                else if (dist < minEffectRange + maxEffectRange)
+                    mag = 1f - (dist - minEffectRange) / maxEffectRange;
+
+                if (mag > bestMag)
+                    bestMag = mag;
+
+                data.mag = bestMag;
+            }
+
+            if (ship.getHullSize().ordinal() <= 2) {
+                stats.getEnergyWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MODIFIER * data.mag);
+                stats.getBallisticWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MODIFIER * data.mag);
+            } else {
+                stats.getAutofireAimAccuracy().modifyMult(spec.getId(), 1f + AUTOFIRE_AIM_ACCURACY_MODIFIER * data.mag);
+            }
+        }
+
+        if (ship == Global.getCombatEngine().getPlayerShip()) {
+            String icon = Global.getSettings().getSpriteName("ui", "icon_tactical_escort_package");
+            if (data.mag > 0.005f)
+                Global.getCombatEngine().maintainStatusForPlayerShip(key, icon, "Targeting Transceiver", Math.round(data.mag * 100f) + "% telemetry quality", false);
+            else
+                Global.getCombatEngine().maintainStatusForPlayerShip(key, icon, "Targeting Transceiver", "no connection", true);
+        }
     }
 
     @Override
@@ -62,9 +97,9 @@ public class TargetingTransceiver extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("If a %s has a %s and is within %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", Math.round(MAX_RANGE_THRESHOLD + 250f) + "su");
+        tooltip.addPara("If a %s has a %s and is within %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", 1000 + "su");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the ship's autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
+        tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_AIM_ACCURACY_MODIFIER * 100f) + "%");
         tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MODIFIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
@@ -75,12 +110,17 @@ public class TargetingTransceiver extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the detection range to %s", oPad, good, Math.round((MAX_RANGE_THRESHOLD + 250f) * 2f) + " su");
+        tooltip.addPara("Increases the detection range to %s", oPad, good, 2000 + "su");
         tooltip.setBulletedListMode(null);
     }
 
     @Override
     public boolean hasSModEffect() {
         return true;
+    }
+
+    public static class TargetingTransceiverData {
+        IntervalUtil interval = new IntervalUtil(1f, 1f);
+        float mag = 0f;
     }
 }

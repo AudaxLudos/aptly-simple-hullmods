@@ -16,6 +16,8 @@ import java.util.Map;
 public class IndustrialMachineForge extends BaseLogisticsHullMod {
     public static final float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
     public static Map<HullSize, Float> HEAVY_MACHINERY_TO_GENERATE = new HashMap<>();
+    public static Map<HullSize, Float> METALS_TO_CONSUME = new HashMap<>();
+    public static Map<HullSize, Float> HEAVY_MACHINERY_SURVEY_COST_MOD = new HashMap<>();
 
     static {
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.FRIGATE, 5f);
@@ -24,16 +26,12 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50f);
     }
 
-    public static Map<HullSize, Float> METALS_TO_CONSUME = new HashMap<>();
-
     static {
         METALS_TO_CONSUME.put(HullSize.FRIGATE, 25f);
         METALS_TO_CONSUME.put(HullSize.DESTROYER, 75f);
         METALS_TO_CONSUME.put(HullSize.CRUISER, 150f);
         METALS_TO_CONSUME.put(HullSize.CAPITAL_SHIP, 250f);
     }
-
-    public static Map<HullSize, Float> HEAVY_MACHINERY_SURVEY_COST_MOD = new HashMap<>();
 
     static {
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.FRIGATE, 5f);

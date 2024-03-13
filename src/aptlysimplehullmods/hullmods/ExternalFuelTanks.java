@@ -42,7 +42,7 @@ public class ExternalFuelTanks extends BaseLogisticsHullMod {
         tooltip.addPara("Increases the ship's fuel capacity by %s based on hull size", oPad, good, FUEL_MODIFIER.get(HullSize.FRIGATE).intValue() + "/"
                 + FUEL_MODIFIER.get(HullSize.DESTROYER).intValue() + "/"
                 + FUEL_MODIFIER.get(HullSize.CRUISER).intValue() + "/"
-                + FUEL_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue() + " points");
+                + FUEL_MODIFIER.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");
         tooltip.addPara("Increases the explosive damage taken by %s", pad, bad, Math.round(SHIP_STATS_MULTIPLIER * 100f) + "%");

@@ -29,12 +29,41 @@ public class ConvictedCrewmates extends BaseHullMod {
         PPT_GAIN.put(HullSize.CAPITAL_SHIP, 25f);
     }
 
-    public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {
-        public static class TargetData {
-            public ShipAPI target;
-            public float timer = KILL_TIMER;
-        }
+    @Override
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        ship.addListener(new AP_ConvictedCrewmatesScript(ship));
+    }
 
+    @Override
+    public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        stats.getPeakCRDuration().modifyMult(id, 1f - SHIP_PPT_MULT);
+        stats.getMaxCombatReadiness().modifyFlat(id, -MAX_CR_MOD, "Convicted Crewmates Hullmod");
+    }
+
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float oPad = 10f;
+        Color b = Misc.getHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
+
+        tooltip.addPara("When contributing to killing an %s:", oPad, b, "enemy");
+        tooltip.setBulletedListMode(" ^ ");
+        tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(PPT_GAIN.get(HullSize.FRIGATE).intValue()) + "/"
+                + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
+                + PPT_GAIN.get(HullSize.CRUISER).intValue() + "/"
+                + PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue());
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
+        tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
+        tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
+        tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
+        tooltip.setBulletedListMode(null);
+    }
+
+    public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {
         public Map<String, TargetData> damagedTargets = new HashMap<String, TargetData>();
         public ShipAPI ship;
         public IntervalUtil killChecker = new IntervalUtil(1f, 1f);
@@ -96,39 +125,10 @@ public class ConvictedCrewmates extends BaseHullMod {
             return null;
         }
 
-    }
+        public static class TargetData {
+            public ShipAPI target;
+            public float timer = KILL_TIMER;
+        }
 
-    @Override
-    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ship.addListener(new AP_ConvictedCrewmatesScript(ship));
-    }
-
-    @Override
-    public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getPeakCRDuration().modifyMult(id, 1f - SHIP_PPT_MULT);
-        stats.getMaxCombatReadiness().modifyFlat(id, -MAX_CR_MOD, "Convicted Crewmates Hullmod");
-    }
-
-    @Override
-    public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        float pad = 3f;
-        float oPad = 10f;
-        Color b = Misc.getHighlightColor();
-        Color bad = Misc.getNegativeHighlightColor();
-        Color good = Misc.getPositiveHighlightColor();
-
-        tooltip.addPara("When contributing to killing an %s:", oPad, b, "enemy");
-        tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(PPT_GAIN.get(HullSize.FRIGATE).intValue()) + "/"
-                + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
-                + PPT_GAIN.get(HullSize.CRUISER).intValue() + "/"
-                + PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
-        tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
-        tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
-        tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
-        tooltip.setBulletedListMode(null);
     }
 }
