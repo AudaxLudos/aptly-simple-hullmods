@@ -63,7 +63,7 @@ public class FrontLoadedArmor extends BaseHullMod {
         float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the armor penalty towards the back of the ship", oPad);
+        tooltip.addPara("Fully negates the armor values penalty towards the back of the ship", oPad);
         tooltip.setBulletedListMode(null);
     }
 
