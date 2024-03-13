@@ -35,10 +35,10 @@ public class HullConversion extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the armor value by %s", oPad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MODIFIER * 100f) + "%");
-        tooltip.addPara("Decreases hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Increases the chance of the ship breaking by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's armor value by %s", oPad, good, Math.round(ARMOR_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's minimum armor value by %s", pad, good, Math.round(MIN_ARMOR_MODIFIER * 100f) + "%");
+        tooltip.addPara("Decreases the ship's hull integrity by %s", pad, bad, Math.round(HULL_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Increases the ship's of breaking apart by %s", pad, bad, Math.round(BREAK_CHANCE_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -48,7 +48,7 @@ public class HullConversion extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the damage taken of armor by %s", oPad, good, Math.round(ARMOR_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor damage taken by %s", oPad, good, Math.round(ARMOR_DAMAGE_TAKEN_MULTIPLIER * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
