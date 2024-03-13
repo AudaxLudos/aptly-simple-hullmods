@@ -34,8 +34,8 @@ public class FluxConductionArmor extends BaseHullMod {
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Increases the ship's flux capacity by %s", oPad, good, Math.round(FLUX_CAPACITY_MULT * 100f) + "%");
-        tooltip.addPara("Increases the energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the armor of the ship by %s", pad, bad, Math.round(ARMOR_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's energy damage taken by %s", pad, bad, Math.round(ENERGY_DAMAGE_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor value by %s", pad, bad, Math.round(ARMOR_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -44,7 +44,7 @@ public class FluxConductionArmor extends BaseHullMod {
         float oPad = 10f;
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the armor bonus penalty", oPad);
+        tooltip.addPara("Fully negates the ship's armor value penalty", oPad);
         tooltip.setBulletedListMode(null);
     }
 
