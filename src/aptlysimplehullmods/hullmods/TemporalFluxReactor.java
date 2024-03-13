@@ -25,7 +25,7 @@ public class TemporalFluxReactor extends BaseHullMod {
         }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
-        Color jitterColor = Color.WHITE;
+        Color jitterColor;
         float timeDeployed = 0f;
 
         if (ship.getShield() != null)
@@ -65,8 +65,8 @@ public class TemporalFluxReactor extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", oPad, b, "soft");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
-        tooltip.addPara("Accelerates the peak performance time reduction by up to %s", pad, bad, "2 seconds");
+        tooltip.addPara("Increases the ship's speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULTIPLIER * 100f) + "%");
+        tooltip.addPara("Accelerates the ship's rate of peak performance time reduction by up to %s", pad, bad, "2 seconds");
         tooltip.setBulletedListMode(null);
     }
 
