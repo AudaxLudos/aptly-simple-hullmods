@@ -27,7 +27,7 @@ public class CircuitBreakers extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the duration of overloads by %s", oPad, good, Math.round(OVERLOAD_TIME_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the duration of overloads by %s", oPad, good, Math.round(OVERLOAD_TIME_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
