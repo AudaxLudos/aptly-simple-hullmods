@@ -60,14 +60,14 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s and have %s", oPad, b, "3 days", "1 or more heavy machinery:");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Generates %s based on hull size", pad, good, HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Generates %s heavy machinery based on hull size", pad, good, HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "/"
                 + HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER).intValue() + "/"
                 + HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER).intValue() + "/"
-                + HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + " heavy machinery");
-        tooltip.addPara("Consumes %s based on hull size", pad, bad, METALS_TO_CONSUME.get(HullSize.FRIGATE).intValue() + "/"
+                + HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue());
+        tooltip.addPara("Consumes %s metal based on hull size", pad, bad, METALS_TO_CONSUME.get(HullSize.FRIGATE).intValue() + "/"
                 + METALS_TO_CONSUME.get(HullSize.DESTROYER).intValue() + "/"
                 + METALS_TO_CONSUME.get(HullSize.CRUISER).intValue() + "/"
-                + METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP).intValue() + " metal");
+                + METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP).intValue());
         tooltip.setBulletedListMode(null);
     }
 
