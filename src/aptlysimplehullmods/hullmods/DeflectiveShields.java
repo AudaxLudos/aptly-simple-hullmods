@@ -15,7 +15,7 @@ public class DeflectiveShields extends BaseHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getKineticShieldDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
-        stats.getEnergyShieldDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
+        stats.getFragmentationDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
 
         float explosiveDmgTknMult = EXPLOSIVE_DMG_TAKEN_MULT;
         if (isSMod(stats))
@@ -32,7 +32,7 @@ public class DeflectiveShields extends BaseHullMod {
 
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Decreases the shield's kinetic damage taken by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the shield's energy damage taken by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the shield's fragmentation damage taken by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("Increases the shield's explosive damage taken by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }

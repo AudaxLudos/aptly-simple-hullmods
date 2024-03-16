@@ -30,9 +30,9 @@ public class ElasticShields extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the shield's explosive damage taken by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the shield's explosive damage taken by %s", oPad, good, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("Increases the shield's kinetic damage taken by %s", pad, bad, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Increases the shield's energy damage taken by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Increases the shield's energy damage taken by %s", pad, bad, Math.round(DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
