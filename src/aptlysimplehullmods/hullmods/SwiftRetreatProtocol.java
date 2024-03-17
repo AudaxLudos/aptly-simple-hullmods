@@ -1,0 +1,96 @@
+package aptlysimplehullmods.hullmods;
+
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
+import com.fs.starfarer.api.util.Misc;
+
+import java.awt.*;
+
+public class SwiftRetreatProtocol extends BaseHullMod {
+    public static final float FIGHTER_MOVEMENT_MULT = 0.50f;
+    public static final float ENGINE_DMG_TAKEN_MULT = 0.50f;
+
+    @Override
+    public void advanceInCombat(ShipAPI ship, float amount) {
+        if (!ship.isAlive()) return;
+
+        String key = "fast_wing_retreat_protocol_" + ship.getId();
+        FastWingRetreatProtocolData data = (FastWingRetreatProtocolData) Global.getCombatEngine().getCustomData().get(key);
+        if (data == null) {
+            data = new FastWingRetreatProtocolData();
+            Global.getCombatEngine().getCustomData().put(key, data);
+        }
+
+        data.interval.advance(amount);
+        if (data.interval.intervalElapsed() || ship == Global.getCombatEngine().getPlayerShip()) {
+            for (FighterWingAPI wing : ship.getAllWings()) {
+                for (FighterWingAPI.ReturningFighter returningWing : wing.getReturning()) {
+                    MutableShipStatsAPI fighterStats = returningWing.fighter.getMutableStats();
+                    float movementMult = FIGHTER_MOVEMENT_MULT;
+                    if (isSMod(ship))
+                        movementMult *= 2f;
+                    fighterStats.getMaxSpeed().modifyMult(spec.getId(), 1f + movementMult);
+                    fighterStats.getMaxTurnRate().modifyMult(spec.getId(), 1f + movementMult);
+                    fighterStats.getAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getTurnAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getDeceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getEngineDamageTakenMult().modifyMult(spec.getId(), 1f + ENGINE_DMG_TAKEN_MULT);
+                    if (returningWing.fighter.getShield() != null)
+                        returningWing.fighter.getShield().toggleOff();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float oPad = 10f;
+        Color b = Misc.getHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("When a fighter wing is %s:", oPad, b, "retreating/rearming");
+        tooltip.setBulletedListMode(" ^ ");
+        tooltip.addPara("Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's engine damage taken by %s", pad, bad, Math.round(ENGINE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("If the fighter has shields, %s shields", pad, bad, "turns off");
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float oPad = 10f;
+        float pad = 3f;
+        Color b = Misc.getHighlightColor();
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Increases the fighter's top speed by an additional %s", oPad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's maneuverability by an additional %s", pad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
+    }
+
+    @Override
+    public String getUnapplicableReason(ShipAPI ship) {
+        return "Ship does not have fighter bays";
+    }
+
+    @Override
+    public boolean isApplicableToShip(ShipAPI ship) {
+        int bays = (int) ship.getMutableStats().getNumFighterBays().getModifiedValue();
+        return bays > 0;
+    }
+
+    public static class FastWingRetreatProtocolData {
+        IntervalUtil interval = new IntervalUtil(1f, 1f);
+    }
+}
