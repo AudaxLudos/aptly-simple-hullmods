@@ -24,16 +24,12 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.DESTROYER, 15f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CRUISER, 30f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50f);
-    }
 
-    static {
         METALS_TO_CONSUME.put(HullSize.FRIGATE, 25f);
         METALS_TO_CONSUME.put(HullSize.DESTROYER, 75f);
         METALS_TO_CONSUME.put(HullSize.CRUISER, 150f);
         METALS_TO_CONSUME.put(HullSize.CAPITAL_SHIP, 250f);
-    }
 
-    static {
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.FRIGATE, 5f);
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.DESTROYER, 10f);
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.CRUISER, 15f);

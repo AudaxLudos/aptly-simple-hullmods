@@ -49,18 +49,16 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                     heavyMachineryGenerated += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                 }
 
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) < 5f
-                        && playerCargo.getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
+                if (playerCargo.getCommodityQuantity(Commodities.METALS) < 5f && playerCargo.getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
                     return;
 
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 100f) {
-                    heavyMachineryGenerated = (playerCargo.getCommodityQuantity(Commodities.METALS) - 100f) / 5f;
+                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 0f) {
+                    heavyMachineryGenerated = playerCargo.getCommodityQuantity(Commodities.METALS) / 5f;
                     metalsConsumed = heavyMachineryGenerated * 5f;
                 }
 
                 if (heavyMachineryGenerated >= 1 && metalsConsumed >= 5) {
-                    Global.getSector().getCampaignUI().addMessage(
-                            Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
+                    Global.getSector().getCampaignUI().addMessage(Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
                     playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
                     playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
                 }
