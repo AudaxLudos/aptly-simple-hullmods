@@ -1,3 +1,34 @@
+### 1.8.0
+- Remove ConvictedCrewmates peak performance time penalty
+- Increase ConvictedCrewmates ordnance points to 5/10/15/20 from 4/8/12/20
+- Increase GravitonAttunementDrive ordnance cost to 6/12/18/30 from 5/10/15/25
+- Update GravitonAttunementDrive sensor profile scaling to a 3x multiplier from 100/200/300/400 flat modifier
+- Decrease FrontLoadedArmor ordnance points to 3/6/9/15 from 4/8/12/20
+- Decrease ReactiveSubsystems ordnance points to 3/6/9/15 from 4/8/12/20
+- Update ReactiveSubsystems deployment points penalty to 1/2/3/5 from 1/2/3/4
+- Remove ReactiveSubsystems cr degradation rate penalty
+- Remove ReactiveSubsystems peak performance smod bonus
+- Add ReactiveSubsystems deployment points penalty of 1/2/3/4
+- Update ReactiveSubsystems descriptions
+- Update CircuitBreakers overload time to 33% from 25%
+- Update CircuitBreakers emp damage taken to 50% from 25%
+- Remove AdvanceRadarSystems autoaim accuracy smod bonus
+- Add AdvanceRadarSystems weapon range bonus smod bonus to 5% from none
+- Hidden shock absorbers hullmod
+- Hidden deflective shields hullmod
+- Hidden elastic shields hullmod
+- Hidden hull conversion hullmod
+- Hidden conduction armor hullmod
+- Add sprites to new hullmods
+- Add swift retreat protocol hullmod
+- Add fighter targeting uplink hullmod
+- Add elastic shields hullmod
+- Update TargetingTransceiver calculations
+- Add deflective shields hullmod
+- Add shock absorbers hullmod
+- Add automated racks hullmod
+- Update master version file link
+
 ### 1.7.2
 - Release version 1.7.2
 - Forgot to push updates before releasing 1.7.1
