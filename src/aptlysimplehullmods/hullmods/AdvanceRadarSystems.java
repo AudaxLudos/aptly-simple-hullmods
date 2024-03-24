@@ -10,7 +10,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class AdvanceRadarSystems extends BaseHullMod {
-    public static final float SIGHT_RADIUS_MULT = 0.50f;
+    public static final float SIGHT_RADIUS_MULT = 0.25f;
     public static final float WEAPON_RANGE_MULT = 0.05f;
 
     @Override
