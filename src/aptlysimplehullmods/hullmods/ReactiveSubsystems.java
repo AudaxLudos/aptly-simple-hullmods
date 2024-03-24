@@ -20,7 +20,7 @@ public class ReactiveSubsystems extends BaseHullMod {
         DEPLOYMENT_POINTS_MOD.put(HullSize.FRIGATE, 1f);
         DEPLOYMENT_POINTS_MOD.put(HullSize.DESTROYER, 2f);
         DEPLOYMENT_POINTS_MOD.put(HullSize.CRUISER, 3f);
-        DEPLOYMENT_POINTS_MOD.put(HullSize.CAPITAL_SHIP, 4f);
+        DEPLOYMENT_POINTS_MOD.put(HullSize.CAPITAL_SHIP, 5f);
     }
 
     @Override
