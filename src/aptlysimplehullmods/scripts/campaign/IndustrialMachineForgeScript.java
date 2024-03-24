@@ -49,7 +49,7 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                     heavyMachineryGenerated += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
                 }
 
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) < 5f && playerCargo.getCommodityQuantity(Commodities.HEAVY_MACHINERY) < 5f)
+                if (!hasConsumableCommodity(playerCargo, Commodities.METALS, 5f))
                     return;
 
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 0f) {
@@ -57,8 +57,14 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                     metalsConsumed = heavyMachineryGenerated * 5f;
                 }
 
-                if (heavyMachineryGenerated >= 1 && metalsConsumed >= 5) {
-                    Global.getSector().getCampaignUI().addMessage(Math.round(heavyMachineryGenerated) + " units of heavy machinery has been constructed using " + Math.round(metalsConsumed) + " units of metals", Misc.getTextColor());
+                if (heavyMachineryGenerated >= 1 && metalsConsumed >= 5 && hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
+                    Global.getSector().getCampaignUI().addMessage(
+                            "%s units of transplutonics has been refined from %s units of rare ore",
+                            Misc.getTextColor(),
+                            Math.round(heavyMachineryGenerated) + "",
+                            Math.round(metalsConsumed) + "",
+                            Misc.getPositiveHighlightColor(),
+                            Misc.getHighlightColor());
                     playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
                     playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
                 }
@@ -66,6 +72,10 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                 isActive = false;
             }
         }
+    }
+
+    public boolean hasConsumableCommodity(CargoAPI cargo, String commodityId, float minAmount) {
+        return cargo.getCommodityQuantity(commodityId) > minAmount;
     }
 
     @Override
