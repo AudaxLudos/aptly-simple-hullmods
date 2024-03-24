@@ -19,7 +19,7 @@ public class ConvictedCrewmates extends BaseHullMod {
     public static final float DESTROYER_PPT_MULT = 1.5f;
     public static final float MAX_CR_MOD = 0.15f;
     public static final float KILL_TIMER = 30f;
-    private static final Map<Object, Float> PPT_GAIN = new HashMap<Object, Float>();
+    private static final Map<Object, Float> PPT_GAIN = new HashMap<>();
 
     static {
         PPT_GAIN.put(HullSize.FRIGATE, 5f);
@@ -48,7 +48,7 @@ public class ConvictedCrewmates extends BaseHullMod {
 
         tooltip.addPara("When contributing to killing an %s:", oPad, b, "enemy");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, Math.round(PPT_GAIN.get(HullSize.FRIGATE).intValue()) + "/"
+        tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, PPT_GAIN.get(HullSize.FRIGATE).intValue() + "/"
                 + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
                 + PPT_GAIN.get(HullSize.CRUISER).intValue() + "/"
                 + PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue());
@@ -61,10 +61,10 @@ public class ConvictedCrewmates extends BaseHullMod {
     }
 
     public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {
-        public Map<String, TargetData> damagedTargets = new HashMap<String, TargetData>();
+        public Map<String, TargetData> damagedTargets = new HashMap<>();
         public ShipAPI ship;
-        public IntervalUtil killChecker = new IntervalUtil(1f, 1f);
-        public float maxPPT = 0f;
+        public IntervalUtil killChecker = new IntervalUtil(0.9f, 1.1f);
+        public float maxPPT;
 
         public AP_ConvictedCrewmatesScript(ShipAPI ship) {
             this.ship = ship;

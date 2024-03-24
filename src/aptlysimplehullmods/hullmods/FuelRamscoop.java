@@ -20,9 +20,7 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
         FUEL_TO_GENERATE.put(HullSize.DESTROYER, 2f);
         FUEL_TO_GENERATE.put(HullSize.CRUISER, 3f);
         FUEL_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 4f);
-    }
-
-    static {
+        
         SMOD_FUEL_TO_GENERATE.put(HullSize.FRIGATE, 2f);
         SMOD_FUEL_TO_GENERATE.put(HullSize.DESTROYER, 3f);
         SMOD_FUEL_TO_GENERATE.put(HullSize.CRUISER, 5f);

@@ -12,8 +12,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class SwiftRetreatProtocol extends BaseHullMod {
-    public static final float FIGHTER_MOVEMENT_MULT = 0.50f;
-    public static final float ENGINE_DMG_TAKEN_MULT = 0.50f;
+    public static final float FIGHTER_MOVEMENT_MULT = 0.25f;
+    public static final float ENGINE_DMG_TAKEN_MULT = 0.25f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -72,8 +72,8 @@ public class SwiftRetreatProtocol extends BaseHullMod {
         Color b = Misc.getHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fighter's top speed by an additional %s", oPad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("Increases the fighter's maneuverability by an additional %s", pad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's top speed buff by an additional %s", oPad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's maneuverability buff by an additional %s", pad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -94,6 +94,6 @@ public class SwiftRetreatProtocol extends BaseHullMod {
     }
 
     public static class FastWingRetreatProtocolData {
-        IntervalUtil interval = new IntervalUtil(1f, 1f);
+        IntervalUtil interval = new IntervalUtil(0.9f, 1.1f);
     }
 }
