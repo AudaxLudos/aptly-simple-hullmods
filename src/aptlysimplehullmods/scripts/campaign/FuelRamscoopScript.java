@@ -52,7 +52,13 @@ public class FuelRamscoopScript implements EveryFrameScript {
 
                 if (fuelGenerated > 0) {
                     playerCargo.addFuel(fuelGenerated);
-                    Global.getSector().getCampaignUI().addMessage(Math.round(fuelGenerated) + " units of fuel has been converted using accumulated interstellar matter", Misc.getTextColor());
+                    Global.getSector().getCampaignUI().addMessage(
+                            "%s units of fuel has been converted using accumulated interstellar matter",
+                            Misc.getTextColor(),
+                            Math.round(fuelGenerated) + "",
+                            null,
+                            Misc.getPositiveHighlightColor(),
+                            null);
                 }
 
                 isActive = false;

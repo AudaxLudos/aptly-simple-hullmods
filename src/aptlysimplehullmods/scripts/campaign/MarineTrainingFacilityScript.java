@@ -65,7 +65,13 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 if (trainMarines > 0 && playerCargo.getMarines() > 0) {
                     PlayerFleetPersonnelTracker.getInstance().getMarineData().addXP(Math.round(trainMarines));
                     PlayerFleetPersonnelTracker.getInstance().update();
-                    Global.getSector().getCampaignUI().addMessage(Math.round(trainMarines) + " existing marines has been trained.", Misc.getTextColor());
+                    Global.getSector().getCampaignUI().addMessage(
+                            "%s existing marines has been trained.",
+                            Misc.getTextColor(),
+                            Math.round(trainMarines) + "",
+                            null,
+                            Misc.getPositiveHighlightColor(),
+                            null);
                 }
 
                 if (playerCargo.getMarines() + addMarines >= maxMarines)
@@ -80,7 +86,13 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 if (addMarines > 0) {
                     playerCargo.addMarines(addMarines);
                     playerCargo.removeCrew(addMarines);
-                    Global.getSector().getCampaignUI().addMessage(addMarines + " crew has been trained into marines.", Misc.getTextColor());
+                    Global.getSector().getCampaignUI().addMessage(
+                            "%s crew has been trained into marines.",
+                            Misc.getTextColor(),
+                            addMarines + "",
+                            null,
+                            Misc.getPositiveHighlightColor(),
+                            null);
                 }
 
                 isActive = false;
