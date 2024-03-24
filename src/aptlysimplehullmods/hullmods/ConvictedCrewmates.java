@@ -46,7 +46,7 @@ public class ConvictedCrewmates extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addPara("When contributing to killing an %s:", oPad, b, "enemy");
+        tooltip.addPara("When contributing to %s an enemy:", oPad, b, "killing");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, PPT_GAIN.get(HullSize.FRIGATE).intValue() + "/"
                 + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
@@ -56,7 +56,7 @@ public class ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
         tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
         tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
-        tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
+        tooltip.addPara("Decreases the ship's max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
