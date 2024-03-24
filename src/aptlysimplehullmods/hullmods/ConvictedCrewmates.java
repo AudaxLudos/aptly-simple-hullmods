@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ConvictedCrewmates extends BaseHullMod {
-    public static final float SHIP_PPT_MULT = 0.15f;
     public static final float FRIGATE_PPT_MULT = 2f;
     public static final float DESTROYER_PPT_MULT = 1.5f;
     public static final float MAX_CR_MOD = 0.15f;
@@ -36,7 +35,6 @@ public class ConvictedCrewmates extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getPeakCRDuration().modifyMult(id, 1f - SHIP_PPT_MULT);
         stats.getMaxCombatReadiness().modifyFlat(id, -MAX_CR_MOD, "Convicted Crewmates Hullmod");
     }
 
@@ -58,7 +56,6 @@ public class ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
         tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
         tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
-        tooltip.addPara("Decreases the peak performance time by %s", pad, bad, Math.round(SHIP_PPT_MULT * 100f) + "%");
         tooltip.addPara("Decreases the max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
