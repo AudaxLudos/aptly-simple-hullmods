@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class GravitonAttunementDrive extends BaseLogisticsHullMod {
     public static final float SUPPLIES_PER_MONTH_MULT = 2f;
+    public static final float SENSOR_PROFILE_MULT = 3f;
     private static final Map<Object, Float> FLEET_BURN_MOD = new HashMap<>();
 
     static {
@@ -25,7 +26,7 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getDynamic().getMod("fleet_burn_bonus").modifyFlat(id, FLEET_BURN_MOD.get(hullSize));
-        stats.getSensorProfile().modifyFlat(id, FLEET_BURN_MOD.get(hullSize) * 100f);
+        stats.getSensorProfile().modifyMult(id, 1f + SENSOR_PROFILE_MULT);
         stats.getSuppliesPerMonth().modifyMult(id, 1f + SUPPLIES_PER_MONTH_MULT);
     }
 
@@ -41,10 +42,7 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
                 + FLEET_BURN_MOD.get(HullSize.DESTROYER).intValue() + "/"
                 + FLEET_BURN_MOD.get(HullSize.CRUISER).intValue() + "/"
                 + FLEET_BURN_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Increases the ship's sensor profile by %s based on hull size", pad, bad, Math.round(FLEET_BURN_MOD.get(HullSize.FRIGATE).intValue() * 100f) + "/"
-                + Math.round(FLEET_BURN_MOD.get(HullSize.DESTROYER).intValue() * 100f) + "/"
-                + Math.round(FLEET_BURN_MOD.get(HullSize.CRUISER).intValue() * 100f) + "/"
-                + Math.round(FLEET_BURN_MOD.get(HullSize.CAPITAL_SHIP).intValue() * 100f) + " points");
+        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SENSOR_PROFILE_MULT * 100f) + "%");
         tooltip.addPara("Increases the ship's supplies used per month by %s", pad, bad, Math.round(SUPPLIES_PER_MONTH_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
