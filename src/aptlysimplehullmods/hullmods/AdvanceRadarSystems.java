@@ -10,15 +10,17 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class AdvanceRadarSystems extends BaseHullMod {
-    public static final float SIGHT_RADIUS_MULT = 0.25f;
-    public static final float AUTOAIM_ACCURACY_MULT = 0.50f;
+    public static final float SIGHT_RADIUS_MULT = 0.50f;
+    public static final float WEAPON_RANGE_MULT = 0.05f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getSightRadiusMod().modifyMult(id, 1f + SIGHT_RADIUS_MULT);
 
-        if (isSMod(stats))
-            stats.getAutofireAimAccuracy().modifyMult(id, 1f + AUTOAIM_ACCURACY_MULT);
+        if (isSMod(stats)) {
+            stats.getEnergyWeaponRangeBonus().modifyMult(id, 1f + WEAPON_RANGE_MULT);
+            stats.getBallisticWeaponRangeBonus().modifyMult(id, 1f + WEAPON_RANGE_MULT);
+        }
     }
 
     @Override
@@ -37,7 +39,7 @@ public class AdvanceRadarSystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's autofire aim accuracy by %s", oPad, good, Math.round(AUTOAIM_ACCURACY_MULT * 100f) + "%");
+        tooltip.addPara("Increases the range of non-missile weapons by %s", oPad, good, Math.round(WEAPON_RANGE_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
