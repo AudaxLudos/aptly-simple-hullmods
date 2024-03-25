@@ -1,4 +1,6 @@
 ### 1.8.5
+- Release 1.8.5
+- Add MineralRefinery sprite
 - Remove IndustrialMachineForge survey cost smod effect
 - Add IndustrialMachineForge smod effect increase heavy machinery production by 25%
 - Update IndustrialMachineForge description
