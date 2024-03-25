@@ -47,58 +47,78 @@ public class MineralRefineryScript implements EveryFrameScript {
                 }
             }
         } else {
-            float metalsGenerated = 0f;
-            float oreConsumed = 0f;
-            float transplutonicsGenerated = 0f;
-            float rareOreConsumed = 0f;
+            float bonusMetals = 0f;
+            float metalsToGenerate = 0f;
+            float oresToConsume = 0f;
+            float bonusRareMetals = 0f;
+            float rareMetalsToGenerate = 0f;
+            float rareOresToConsume = 0f;
 
             if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MineralRefinery.DAYS_TO_GENERATE_ALLOYS) {
                 for (FleetMemberAPI fleetMember : playerFleetMembers) {
                     if (!fleetMember.getVariant().hasHullMod("ASH_MineralRefinery"))
                         continue;
+                    if (fleetMember.isMothballed())
+                        continue;
 
-                    metalsGenerated += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    oreConsumed += MineralRefinery.MINERALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+                    metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    oresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
 
-                    transplutonicsGenerated += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    rareOreConsumed += MineralRefinery.MINERALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+                    rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    rareOresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+
+                    if (fleetMember.getVariant().getSMods().contains("ASH_MineralRefinery")) {
+                        metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) * 0.25f;
+                        bonusMetals += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) * 0.25f;
+
+                        rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) * 0.25f;
+                        bonusRareMetals += MineralRefinery.ALLOYS_TO_GENERATE.get(fleetMember.getVariant().getHullSize()) * 0.25f;
+                    }
                 }
 
-                if (!hasConsumableCommodity(pCargo, Commodities.ORE, 5f) && !hasConsumableCommodity(pCargo, Commodities.RARE_ORE, 5f))
+                if (!hasConsumableCommodity(pCargo, Commodities.ORE, 5f) && !hasConsumableCommodity(pCargo, Commodities.RARE_ORE, 5f)) {
+                    isActive = false;
                     return;
-
-                if (pCargo.getCommodityQuantity(Commodities.ORE) - oreConsumed < 0f) {
-                    metalsGenerated = pCargo.getCommodityQuantity(Commodities.ORE) / 5f;
-                    oreConsumed = metalsGenerated * 5f;
                 }
 
-                if (pCargo.getCommodityQuantity(Commodities.RARE_ORE) - rareOreConsumed < 0f) {
-                    transplutonicsGenerated = pCargo.getCommodityQuantity(Commodities.RARE_ORE) / 5f;
-                    rareOreConsumed = transplutonicsGenerated * 5f;
+                if (pCargo.getCommodityQuantity(Commodities.ORE) - oresToConsume < -0.0001f) {
+                    metalsToGenerate = pCargo.getCommodityQuantity(Commodities.ORE) / 5f;
+                    oresToConsume = metalsToGenerate * 5f;
+                    if (bonusMetals > 0) {
+                        metalsToGenerate *= 1.25f;
+                    }
                 }
 
-                if (metalsGenerated >= 1 && oreConsumed >= 5 && hasConsumableCommodity(pCargo, Commodities.ORE, 5f)) {
+                if (pCargo.getCommodityQuantity(Commodities.RARE_ORE) - rareOresToConsume < -0.0001f) {
+                    rareMetalsToGenerate = pCargo.getCommodityQuantity(Commodities.RARE_ORE) / 5f;
+                    rareOresToConsume = rareMetalsToGenerate * 5f;
+                    if (bonusRareMetals > 0) {
+                        rareMetalsToGenerate *= 1.25f;
+                    }
+                }
+
+                if (metalsToGenerate >= 1 && oresToConsume >= 5 && hasConsumableCommodity(pCargo, Commodities.ORE, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
                             "%s units of metals has been refined from %s units of ore",
                             Misc.getTextColor(),
-                            Math.round(metalsGenerated) + "",
-                            Math.round(oreConsumed) + "",
+                            Math.round(metalsToGenerate) + "",
+                            Math.round(oresToConsume) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getNegativeHighlightColor());
-                    pCargo.addCommodity(Commodities.METALS, Math.round(metalsGenerated));
-                    pCargo.removeCommodity(Commodities.ORE, Math.round(oreConsumed));
+                    pCargo.addCommodity(Commodities.METALS, Math.round(metalsToGenerate));
+                    pCargo.removeCommodity(Commodities.ORE, Math.round(oresToConsume));
                 }
 
-                if (transplutonicsGenerated >= 1 && rareOreConsumed >= 5 && hasConsumableCommodity(pCargo, Commodities.RARE_ORE, 5f)) {
+                if (rareMetalsToGenerate >= 1 && rareOresToConsume >= 5 && hasConsumableCommodity(pCargo, Commodities.RARE_ORE, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
                             "%s units of transplutonics has been refined from %s units of rare ore",
                             Misc.getTextColor(),
-                            Math.round(transplutonicsGenerated) + "",
-                            Math.round(rareOreConsumed) + "",
+                            Math.round(rareMetalsToGenerate) + "",
+                            Math.round(rareOresToConsume) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getHighlightColor());
-                    pCargo.addCommodity(Commodities.RARE_METALS, Math.round(transplutonicsGenerated));
-                    pCargo.removeCommodity(Commodities.RARE_ORE, Math.round(rareOreConsumed));
+                    pCargo.addCommodity(Commodities.RARE_METALS, Math.round(rareMetalsToGenerate));
+                    pCargo.removeCommodity(Commodities.RARE_ORE, Math.round(rareOresToConsume));
                 }
 
                 isActive = false;
