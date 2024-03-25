@@ -39,11 +39,11 @@ public class MineralRefinery extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("Every %s and have %s", oPad, b, "3 days", "1 or more heavy machinery:");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Generates %s metals/transplutonics based on hull size", pad, good, ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Generates %s Metals / Transplutonics based on hull size", pad, good, ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.FRIGATE).intValue() + "/"
                 + ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.DESTROYER).intValue() + "/"
                 + ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CRUISER).intValue() + "/"
                 + ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Consumes %s ore/rare ore based on hull size", pad, bad, MINERALS_TO_CONSUME.get(ShipAPI.HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Consumes %s Ore / Rare Ore based on hull size", pad, bad, MINERALS_TO_CONSUME.get(ShipAPI.HullSize.FRIGATE).intValue() + "/"
                 + MINERALS_TO_CONSUME.get(ShipAPI.HullSize.DESTROYER).intValue() + "/"
                 + MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CRUISER).intValue() + "/"
                 + MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CAPITAL_SHIP).intValue());
