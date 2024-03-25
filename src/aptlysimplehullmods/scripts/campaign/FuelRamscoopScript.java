@@ -15,6 +15,16 @@ public class FuelRamscoopScript implements EveryFrameScript {
     public Long lastDay;
 
     @Override
+    public boolean isDone() {
+        return false;
+    }
+
+    @Override
+    public boolean runWhilePaused() {
+        return false;
+    }
+
+    @Override
     public void advance(float amount) {
         if (Global.getSector().getPlayerFleet() == null)
             return;
@@ -65,15 +75,4 @@ public class FuelRamscoopScript implements EveryFrameScript {
             }
         }
     }
-
-    @Override
-    public boolean isDone() {
-        return false;
-    }
-
-    @Override
-    public boolean runWhilePaused() {
-        return false;
-    }
-
 }

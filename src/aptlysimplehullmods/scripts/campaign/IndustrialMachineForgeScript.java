@@ -16,6 +16,16 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
     public Long lastDay;
 
     @Override
+    public boolean isDone() {
+        return false;
+    }
+
+    @Override
+    public boolean runWhilePaused() {
+        return false;
+    }
+
+    @Override
     public void advance(float amount) {
         if (Global.getSector().getPlayerFleet() == null)
             return;
@@ -37,36 +47,47 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                 }
             }
         } else {
-            float heavyMachineryGenerated = 0;
-            float metalsConsumed = 0;
+            float bonusHeavyMachinery = 0f;
+            float heavyMachineryToGenerate = 0f;
+            float metalsToConsume = 0f;
 
             if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
                 for (FleetMemberAPI fleetMember : playerFleetMembers) {
                     if (!fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge"))
                         continue;
+                    if (fleetMember.isMothballed())
+                        continue;
 
-                    metalsConsumed += IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
-                    heavyMachineryGenerated += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
+                    metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
+
+                    if (fleetMember.getVariant().getSMods().contains("ASH_IndustrialMachineForge"))
+                        bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize()) * 0.25f;
                 }
 
-                if (!hasConsumableCommodity(playerCargo, Commodities.METALS, 5f))
+                if (!hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
+                    isActive = false;
                     return;
-
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsConsumed < 0f) {
-                    heavyMachineryGenerated = playerCargo.getCommodityQuantity(Commodities.METALS) / 5f;
-                    metalsConsumed = heavyMachineryGenerated * 5f;
                 }
 
-                if (heavyMachineryGenerated >= 1 && metalsConsumed >= 5 && hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
+                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsToConsume < 0f) {
+                    heavyMachineryToGenerate = playerCargo.getCommodityQuantity(Commodities.METALS) / 7f;
+                    metalsToConsume = heavyMachineryToGenerate * 7f;
+                    if (bonusHeavyMachinery > 0) {
+                        heavyMachineryToGenerate *= 1.25f;
+                    }
+                }
+
+                if (heavyMachineryToGenerate >= 1 && metalsToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
-                            "%s units of transplutonics has been refined from %s units of rare ore",
+                            "%s units of Heavy Machinery has been refined from %s units of Metals",
                             Misc.getTextColor(),
-                            Math.round(heavyMachineryGenerated) + "",
-                            Math.round(metalsConsumed) + "",
+                            Math.round(heavyMachineryToGenerate) + "",
+                            Math.round(metalsToConsume) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getHighlightColor());
-                    playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryGenerated));
-                    playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsConsumed));
+                    playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryToGenerate));
+                    playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsToConsume));
                 }
 
                 isActive = false;
@@ -77,15 +98,4 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
     public boolean hasConsumableCommodity(CargoAPI cargo, String commodityId, float minAmount) {
         return cargo.getCommodityQuantity(commodityId) > minAmount;
     }
-
-    @Override
-    public boolean isDone() {
-        return false;
-    }
-
-    @Override
-    public boolean runWhilePaused() {
-        return false;
-    }
-
 }

@@ -46,7 +46,7 @@ public class MineralRefinery extends BaseHullMod {
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.DESTROYER).toString(),
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CRUISER).toString(),
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CAPITAL_SHIP).toString());
-        tooltip.addPara("Consumes %s/%s/%s/%s Ore / Rare Ore based on hull size", pad, bad,
+        tooltip.addPara("Consumes %s/%s/%s/%s Ores / Rare Ores based on hull size", pad, bad,
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.FRIGATE).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.DESTROYER).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CRUISER).toString(),
