@@ -1,3 +1,16 @@
+### 1.8.5
+- Remove IndustrialMachineForge survey cost smod effect
+- Add IndustrialMachineForge smod effect increase heavy machinery production by 25%
+- Update IndustrialMachineForge description
+- Update script plugins code structure
+- Remove MineralRefinery heavy machinery requirement
+- Remove IndustrialMachineForge heavy machinery requirement
+- Decrease SwiftRetreatProtocol ordnance points to 3/6/9/15 from 4/8/12/20
+- Decrease SwiftRetreatProtocol speed and manuverabilty buffs to 25% from 50%
+- Decrease SwiftRetreatProtocol engine damage taken penalty to 25% from 50%
+- Update SwiftRetreatProtocol description
+- Add mineral refinery hullmod
+
 ### 1.8.0
 - Remove ConvictedCrewmates peak performance time penalty
 - Increase ConvictedCrewmates ordnance points to 5/10/15/20 from 4/8/12/20
