@@ -25,10 +25,10 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CRUISER, 30f);
         HEAVY_MACHINERY_TO_GENERATE.put(HullSize.CAPITAL_SHIP, 50f);
 
-        METALS_TO_CONSUME.put(HullSize.FRIGATE, 25f);
-        METALS_TO_CONSUME.put(HullSize.DESTROYER, 75f);
-        METALS_TO_CONSUME.put(HullSize.CRUISER, 150f);
-        METALS_TO_CONSUME.put(HullSize.CAPITAL_SHIP, 250f);
+        METALS_TO_CONSUME.put(HullSize.FRIGATE, 35f);
+        METALS_TO_CONSUME.put(HullSize.DESTROYER, 105f);
+        METALS_TO_CONSUME.put(HullSize.CRUISER, 210f);
+        METALS_TO_CONSUME.put(HullSize.CAPITAL_SHIP, 350f);
 
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.FRIGATE, 5f);
         HEAVY_MACHINERY_SURVEY_COST_MOD.put(HullSize.DESTROYER, 10f);
@@ -52,7 +52,7 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode("");
-        tooltip.addPara("Every %s and have %s", oPad, b, "3 days", "1 or more heavy machinery:");
+        tooltip.addPara("Every %s", oPad, b, "3 days");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Generates %s heavy machinery based on hull size", pad, good, HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "/"
                 + HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER).intValue() + "/"
