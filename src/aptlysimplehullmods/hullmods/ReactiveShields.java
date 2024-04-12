@@ -73,7 +73,7 @@ public class ReactiveShields extends BaseHullMod {
         tooltip.addPara("As %s flux levels rise:", oPad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
         tooltip.addPara("Increases the ship's shield strength up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the ship's shield arc up to %s", pad, bad, Math.round(SHIELD_ARC_MOD) + " degrees");
+        tooltip.addPara("Decreases the ship's shield arc by up to %s", pad, bad, Math.round(SHIELD_ARC_MOD) + " degrees");
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("The ship's shield arc can never go below %s", oPad, b, Math.round(SHIELD_ARC_MOD * 0.5f) + " degrees");
         tooltip.setBulletedListMode(null);
