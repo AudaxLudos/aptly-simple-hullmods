@@ -3,6 +3,7 @@ package aptlysimplehullmods.hullmods;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShieldAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
@@ -12,7 +13,7 @@ import java.awt.*;
 
 public class ReactiveShields extends BaseHullMod {
     public static final float SHIELD_STRENGTH_MULT = 0.15f;
-    public static final float MINIMUM_SHIELD_ARC = 30F;
+    public static final float SHIELD_ARC_MOD = 60f;
     public static final Color CUSTOM_SHIELD_COLOR = new Color(255, 100, 255, 75);
 
     @Override
@@ -25,6 +26,8 @@ public class ReactiveShields extends BaseHullMod {
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (!ship.isAlive())
             return;
+        if (ship.getShield() == null)
+            return;
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         float shipShieldArc = ship.getHullSpec().getShieldSpec().getArc();
@@ -35,8 +38,7 @@ public class ReactiveShields extends BaseHullMod {
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
         float computedShieldStrength = getValueWithinMax((SHIELD_STRENGTH_MULT * 0.30f + SHIELD_STRENGTH_MULT) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULT);
-        float minShieldArc = Math.min(shipShieldArc, MINIMUM_SHIELD_ARC);
-        float computedShieldArc = getValueWithinRange(1 - ship.getHardFluxLevel(), minShieldArc, shipShieldArc);
+        float computedShieldArc = getValueWithinRange(ship.getHardFluxLevel(), 0, SHIELD_ARC_MOD);
 
         if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
             defaultShieldColor = ship.getShield().getInnerColor();
@@ -45,8 +47,12 @@ public class ReactiveShields extends BaseHullMod {
         int green = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen())), 255);
         int blue = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getBlue()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getBlue())), 255);
 
-        ship.getShield().setInnerColor(new Color(red, green, blue, ship.getShield().getInnerColor().getAlpha()));
-        ship.getShield().setArc(computedShieldArc);
+        ShieldAPI shield = ship.getShield();
+        shield.setInnerColor(new Color(red, green, blue, ship.getShield().getInnerColor().getAlpha()));
+        if (shield.getArc() > 30)
+            shield.setArc(shipShieldArc - computedShieldArc);
+        else
+            shield.setArc(30);
         stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 - computedShieldStrength);
 
         if (ship == Global.getCombatEngine().getPlayerShip() && computedShieldStrength * 100f >= 1f) {
@@ -66,8 +72,10 @@ public class ReactiveShields extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("As %s flux levels rise:", oPad, b, "hard");
         tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the shield's strength up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULT * 100f) + "%");
-        tooltip.addPara("Lowers the shield's arc down to %s", pad, bad, "30 degrees");
+        tooltip.addPara("Increases the ship's shield strength up to %s", pad, good, Math.round(SHIELD_STRENGTH_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's shield arc up to %s", pad, bad, Math.round(SHIELD_ARC_MOD) + " degrees");
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("The ship's shield arc can never go below %s", oPad, b, Math.round(SHIELD_ARC_MOD * 0.5f) + " degrees");
         tooltip.setBulletedListMode(null);
     }
 
