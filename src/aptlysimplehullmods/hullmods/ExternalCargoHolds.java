@@ -25,10 +25,12 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getCargoMod().modifyFlat(id, CARGO_MOD.get(hullSize));
-        stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
-        stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULT);
-        stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
+        stats.getCargoMod().modifyFlat(id, CARGO_MOD.get(hullSize) + (isSMod(stats) ? CARGO_MOD.get(hullSize) : 0));
+        if (!isSMod(stats)) {
+            stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
+            stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULT);
+            stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
+        }
     }
 
     @Override
@@ -67,5 +69,21 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
         if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
             numLogisticsMods--;
         return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < getMax(ship);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float pad = 3f;
+        float oPad = 10f;
+
+        tooltip.setBulletedListMode(" - ");
+        tooltip.addPara("Doubles the ship's cargo capacity bonus", oPad);
+        tooltip.addPara("Fully negates all penalties", pad);
+        tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 }
