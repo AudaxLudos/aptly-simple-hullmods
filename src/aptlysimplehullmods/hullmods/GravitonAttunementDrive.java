@@ -3,6 +3,7 @@ package aptlysimplehullmods.hullmods;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -25,7 +26,7 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getDynamic().getMod("fleet_burn_bonus").modifyFlat(id, FLEET_BURN_MOD.get(hullSize));
+        stats.getDynamic().getMod(Stats.FLEET_BURN_BONUS).modifyFlat(id, FLEET_BURN_MOD.get(hullSize));
         stats.getSensorProfile().modifyMult(id, 1f + SENSOR_PROFILE_MULT);
         stats.getSuppliesPerMonth().modifyMult(id, 1f + SUPPLIES_PER_MONTH_MULT);
     }
