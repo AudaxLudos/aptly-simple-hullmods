@@ -1,4 +1,4 @@
-package aptlysimplehullmods.hullmods;
+package aptlysimplehullmods.hullmods.disabled;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
