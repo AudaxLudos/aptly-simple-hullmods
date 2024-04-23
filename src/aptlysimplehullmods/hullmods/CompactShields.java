@@ -8,7 +8,7 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
 
-public class CondensedShields extends BaseHullMod {
+public class CompactShields extends BaseHullMod {
     public static final float SHIELD_DMG_TAKEN_MULT = 0.10f;
     public static final float SHIELD_ARC_MOD = 40f;
 
@@ -21,7 +21,7 @@ public class CondensedShields extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float oPad = 10f;
-        float pad = 5f;
+        float pad = 3f;
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
