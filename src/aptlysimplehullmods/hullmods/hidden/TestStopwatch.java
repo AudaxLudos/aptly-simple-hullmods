@@ -1,4 +1,4 @@
-package aptlysimplehullmods.hullmods.disabled;
+package aptlysimplehullmods.hullmods.hidden;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;

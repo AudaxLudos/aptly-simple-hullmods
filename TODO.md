@@ -1,9 +1,12 @@
 ### TODO:
-- [ ] Change temporal flux reactor
-  - [ ] Increase ordnance points to 30 from 25
-  - [ ] Remove peak performance penalty
-- [ ] Add optic shield
-  - [ ] Remove scaling stats effect
-  - [ ] Add shield strength buff of 15%
-  - [ ] Add flat shield arc penalty of 60 degrees
+- [x] Change temporal flux reactor
+  - [x] Increase ordnance points to 6/12/18/30 from 5/10/15/25
+  - [x] Remove peak performance penalty
+- [ ] Remove reactive shield
+- [ ] Add condensed shield
+  - [ ] Add shield strength buff of 10%
+  - [ ] Add flat shield arc penalty of 40 degrees
 - [ ] Remove subverted shields
+- [ ] Add Channeled Vents
+  - [ ] Add scaling effect based on the ship's shield arc that increases the hard flux dissipation when shields are active by up to 20%
+    - If the ship's shield arc is 180 gain a 10% hard flux dissipation when shields are active

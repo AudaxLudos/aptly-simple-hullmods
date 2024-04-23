@@ -1,4 +1,4 @@
-package aptlysimplehullmods.hullmods.disabled;
+package aptlysimplehullmods.hullmods.hidden;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
@@ -8,19 +8,19 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
 
-public class DeflectiveShields extends BaseHullMod {
+public class ShockAbsorbers extends BaseHullMod {
     public static final float DMG_TAKEN_MULT = 0.10f;
-    public static final float EXPLOSIVE_DMG_TAKEN_MULT = 0.20f;
+    public static final float KINETIC_DMG_TAKEN_MULT = 0.20f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getKineticShieldDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
+        stats.getHighExplosiveDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
         stats.getFragmentationDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
 
-        float explosiveDmgTknMult = EXPLOSIVE_DMG_TAKEN_MULT;
+        float kineticDmgTknMult = KINETIC_DMG_TAKEN_MULT;
         if (isSMod(stats))
-            explosiveDmgTknMult *= 0.5f;
-        stats.getHighExplosiveShieldDamageTakenMult().modifyMult(id, 1f + explosiveDmgTknMult);
+            kineticDmgTknMult *= 0.5f;
+        stats.getKineticDamageTakenMult().modifyMult(id, 1f + kineticDmgTknMult);
     }
 
     @Override
@@ -31,9 +31,9 @@ public class DeflectiveShields extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the shield's kinetic damage taken by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the shield's fragmentation damage taken by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("Increases the shield's explosive damage taken by %s", pad, bad, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's explosive damage taken by %s", oPad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's fragmentation damage taken by %s", pad, good, Math.round(DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's kinetic damage taken by %s", pad, bad, Math.round(KINETIC_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -43,7 +43,7 @@ public class DeflectiveShields extends BaseHullMod {
         Color b = Misc.getHighlightColor();
 
         tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the shield's explosive damage taken penalty by %s", oPad, b, Math.round(EXPLOSIVE_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
+        tooltip.addPara("Decreases the ship's kinetic damage taken penalty by %s", oPad, b, Math.round(KINETIC_DMG_TAKEN_MULT * 100f * 0.5f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
