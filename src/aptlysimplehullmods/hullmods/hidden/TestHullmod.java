@@ -22,8 +22,6 @@ public class TestHullmod extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive()) {
-        }
     }
 
     @Override
