@@ -25,7 +25,9 @@ public class CompactShields extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
+        tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Increases the ship's shield strength by %s", oPad, good, Math.round(SHIELD_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("Decreases the ship's shield arc by %s", pad, bad, Math.round(SHIELD_ARC_MOD) + " degrees");
+        tooltip.setBulletedListMode(null);
     }
 }
