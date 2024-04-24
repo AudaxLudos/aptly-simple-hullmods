@@ -31,20 +31,17 @@ public class AutomatedRacks extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fire rate of missile weapons by %s", oPad, good, Math.round(MISSILE_FIRE_RATE_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the max ammo of missile weapons by %s", pad, bad, Math.round(MISSILE_AMMO_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the turret turn rate of missile weapons by %s", pad, bad, Math.round(MISSILE_TURN_RATE_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the fire rate of missile weapons by %s.", oPad, good, Math.round(MISSILE_FIRE_RATE_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the max ammo of missile weapons by %s.", pad, bad, Math.round(MISSILE_AMMO_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the turret turn rate of missile weapons by %s.", pad, bad, Math.round(MISSILE_TURN_RATE_MULT * 100f) + "%");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the turret turn rate penalty for missile weapons", oPad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Fully %s the turret turn rate penalty for missile weapons.", oPad, good, "negates");
     }
 
     @Override

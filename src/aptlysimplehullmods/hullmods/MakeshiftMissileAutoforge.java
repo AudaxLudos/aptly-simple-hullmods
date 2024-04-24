@@ -45,11 +45,11 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode("");
         tooltip.addPara("When non-reloading missile weapons %s:", oPad, b, "run out of ammo");
-        tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Start Replenishing %s of ammo", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MOD) + "%");
-        tooltip.addPara("Replenish ammo every %s", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MOD) + " seconds");
+        tooltip.setBulletWidth(20f);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("^ Start Replenishing %s of ammo.", pad, good, Math.round(MISSILE_AMMO_RELOAD_SIZE_MOD) + "%");
+        tooltip.addPara("^ Replenish ammo every %s.", pad, bad, Math.round(MISSILE_AMMO_PER_SECOND_MOD) + " seconds");
         tooltip.setBulletedListMode(null);
     }
 
@@ -58,9 +58,7 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Replenish ammo at the %s of combat for non reloading-missile weapons", oPad, good, "start");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Replenish ammo at the %s of combat for non reloading-missile weapons.", oPad, good, "start");
     }
 
     @Override

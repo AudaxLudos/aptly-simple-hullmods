@@ -26,9 +26,7 @@ public class CircuitBreakers extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the duration of overloads by %s", oPad, good, Math.round(OVERLOAD_TIME_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Decreases the duration of overloads by %s.", oPad, good, Math.round(OVERLOAD_TIME_MULT * 100f) + "%");
     }
 
     @Override
@@ -36,9 +34,7 @@ public class CircuitBreakers extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the ship's EMP damage taken by %s", oPad, good, Math.round(EMP_DAMAGE_TAKEN_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Decreases the ship's EMP damage taken by %s.", oPad, good, Math.round(EMP_DAMAGE_TAKEN_MULT * 100f) + "%");
     }
 
     @Override

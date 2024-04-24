@@ -41,11 +41,9 @@ public class ReactorBay extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's flux dissipation by %s", oPad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's flux capacity by %s", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Removes %s built-in fighter bay", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the ship's flux dissipation by %s.", oPad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's flux capacity by %s.", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Removes %s built-in fighter bay.", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
     }
 
     public boolean isApplicableToShip(ShipAPI ship) {
@@ -62,12 +60,10 @@ public class ReactorBay extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the ship's deployment points by %s base on the ship's hull size", oPad, good, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
+        tooltip.addPara("Decreases the ship's deployment points by %s base on the ship's hull size.", oPad, good, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
                 + DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "/"
                 + DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "/"
                 + DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.setBulletedListMode(null);
     }
 
     @Override

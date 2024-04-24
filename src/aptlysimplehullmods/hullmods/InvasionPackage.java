@@ -32,18 +32,18 @@ public class InvasionPackage extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("- Increases the effectiveness of ground operations by %s", oPad, good, Math.round(PLANETARY_OPERATIONS_MULT * 100f) + "%");
-        tooltip.addPara("- Reduces casualties during ground operations by %s", pad, good, Math.round(PLANETARY_OPERATION_CASUALTIES_MULT * 100f) + "%");
+        tooltip.addPara("Increases the effectiveness of ground operations by %s.", oPad, good, Math.round(PLANETARY_OPERATIONS_MULT * 100f) + "%");
+        tooltip.addPara("Reduces casualties during ground operations by %s.", pad, good, Math.round(PLANETARY_OPERATION_CASUALTIES_MULT * 100f) + "%");
         tooltip.setBulletWidth(20f);
         tooltip.setBulletedListMode("");
-        tooltip.addPara("^ This stat has %s", pad, b, "diminishing returns");
-        tooltip.addPara("^ The Total bonus is %s", pad, good, Math.round(getComputedStatMultiplier(0) * 100f) + "%");
+        tooltip.addPara("^ This stat has %s.", pad, b, "diminishing returns");
+        tooltip.addPara("^ The Total bonus is %s.", pad, good, Math.round(getComputedStatMultiplier(0) * 100f) + "%");
         if (!ship.getVariant().hasHullMod(spec.getId()))
-            tooltip.addPara("^ Adding this ship increases it to %s", pad, good, Math.round(getComputedStatMultiplier(1) * 100f) + "%");
+            tooltip.addPara("^ Adding this to the ship increases it to %s.", pad, good, Math.round(getComputedStatMultiplier(1) * 100f) + "%");
         else
-            tooltip.addPara("^ Removing this ship decreases it to %s", pad, bad, Math.round(getComputedStatMultiplier(-1) * 100f) + "%");
+            tooltip.addPara("^ Removing this to the ship decreases it to %s.", pad, bad, Math.round(getComputedStatMultiplier(-1) * 100f) + "%");
         tooltip.setBulletedListMode(null);
-        tooltip.addPara("- Decreases the ship's cargo capacity by %s", pad, bad, Math.round(CARGO_CAPACITY_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's cargo capacity by %s.", pad, bad, Math.round(CARGO_CAPACITY_MULT * 100f) + "%");
     }
 
     public float getComputedStatMultiplier(int offset) {

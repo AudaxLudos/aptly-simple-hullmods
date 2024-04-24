@@ -31,20 +31,17 @@ public class VolatileWarheads extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the damage of missiles by %s", oPad, good, Math.round(MISSILE_DAMAGE_MULT * 100f) + "%");
-        tooltip.addPara("Reduces the max speed of missiles by %s", pad, bad, Math.round(MISSILE_SPEED_MULT * 100f) + "%");
-        tooltip.addPara("Reduces the health of missiles by %s", pad, bad, Math.round(MISSILE_HEALTH_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the damage of missiles by %s.", oPad, good, Math.round(MISSILE_DAMAGE_MULT * 100f) + "%");
+        tooltip.addPara("Reduces the max speed of missiles by %s.", pad, bad, Math.round(MISSILE_SPEED_MULT * 100f) + "%");
+        tooltip.addPara("Reduces the health of missiles by %s.", pad, bad, Math.round(MISSILE_HEALTH_MULT * 100f) + "%");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the health penalty of missiles", oPad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Fully %s the health penalty of missiles.", oPad, good, "negates");
     }
 
     @Override

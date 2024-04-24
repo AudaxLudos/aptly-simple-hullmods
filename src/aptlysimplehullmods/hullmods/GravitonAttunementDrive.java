@@ -38,13 +38,12 @@ public class GravitonAttunementDrive extends BaseLogisticsHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fleet's maximum burn by %s based on hull size", oPad, good, FLEET_BURN_MOD.get(HullSize.FRIGATE).intValue() + "/"
-                + FLEET_BURN_MOD.get(HullSize.DESTROYER).intValue() + "/"
-                + FLEET_BURN_MOD.get(HullSize.CRUISER).intValue() + "/"
-                + FLEET_BURN_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SENSOR_PROFILE_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's supplies used per month by %s", pad, bad, Math.round(SUPPLIES_PER_MONTH_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the fleet's maximum burn by %s/%s/%s/%s based on hull size.", oPad, good,
+                FLEET_BURN_MOD.get(HullSize.FRIGATE).intValue() + "",
+                FLEET_BURN_MOD.get(HullSize.DESTROYER).intValue() + "",
+                FLEET_BURN_MOD.get(HullSize.CRUISER).intValue() + "",
+                FLEET_BURN_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
+        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SENSOR_PROFILE_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's supplies used per month by %s.", pad, bad, Math.round(SUPPLIES_PER_MONTH_MULT * 100f) + "%");
     }
 }

@@ -117,10 +117,10 @@ public class FighterTargetingUplink extends BaseHullMod {
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode("");
         tooltip.addPara("If a %s has a %s and is within %s OR the %s has a %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", 1000 + "su", "ship", "Targeting Core/Unit");
-        tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the damage of all fighters by %s", pad, good, Math.round(DAMAGE_MULT * 100f) + "%");
+        tooltip.setBulletWidth(20f);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("^ Increases the damage of all fighters by %s", pad, good, Math.round(DAMAGE_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 
@@ -129,9 +129,7 @@ public class FighterTargetingUplink extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the detection range to %s", oPad, good, 2000 + "su");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the detection range to %s.", oPad, good, 2000 + "su");
     }
 
     @Override

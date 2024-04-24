@@ -40,15 +40,14 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's cargo capacity by %s based on hull size", oPad, good, CARGO_MOD.get(HullSize.FRIGATE).intValue() + "/"
-                + CARGO_MOD.get(HullSize.DESTROYER).intValue() + "/"
-                + CARGO_MOD.get(HullSize.CRUISER).intValue() + "/"
-                + CARGO_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the ship's armor strength by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the ship's cargo capacity by %s/%s/%s/%s based on hull size.", oPad, good,
+                CARGO_MOD.get(HullSize.FRIGATE).intValue() + "",
+                CARGO_MOD.get(HullSize.DESTROYER).intValue() + "",
+                CARGO_MOD.get(HullSize.CRUISER).intValue() + "",
+                CARGO_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
+        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor strength by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
     }
 
     @Override
@@ -75,11 +74,10 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float pad = 3f;
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Doubles the ship's cargo capacity bonus", oPad);
-        tooltip.addPara("Fully negates all penalties", pad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("%s the ship's cargo capacity bonus.", oPad, good, "Doubles");
+        tooltip.addPara("Fully %s all penalties.", pad, good, "negates");
     }
 
     @Override

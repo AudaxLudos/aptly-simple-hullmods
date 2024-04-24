@@ -28,9 +28,7 @@ public class AdvanceRadarSystems extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's sight radius by %s", oPad, good, Math.round(SIGHT_RADIUS_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the ship's sight radius by %s.", oPad, good, Math.round(SIGHT_RADIUS_MULT * 100f) + "%");
     }
 
     @Override
@@ -38,9 +36,7 @@ public class AdvanceRadarSystems extends BaseHullMod {
         float oPad = 10;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the range of non-missile weapons by %s", oPad, good, Math.round(WEAPON_RANGE_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the range of non-missile weapons by %s.", oPad, good, Math.round(WEAPON_RANGE_MULT * 100f) + "%");
     }
 
     @Override

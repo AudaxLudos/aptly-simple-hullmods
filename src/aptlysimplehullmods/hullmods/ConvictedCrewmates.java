@@ -47,17 +47,18 @@ public class ConvictedCrewmates extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.addPara("When contributing to %s an enemy:", oPad, b, "killing");
-        tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Gain %s seconds of peak performance time based on the targets hull size", pad, good, PPT_GAIN.get(HullSize.FRIGATE).intValue() + "/"
-                + PPT_GAIN.get(HullSize.DESTROYER).intValue() + "/"
-                + PPT_GAIN.get(HullSize.CRUISER).intValue() + "/"
-                + PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Frigates gain %s the peak performance time against larger ships", oPad, good, FRIGATE_PPT_MULT + " Times");
-        tooltip.addPara("Destroyers gain %s the peak performance time against larger ships", pad, good, DESTROYER_PPT_MULT + " Times");
-        tooltip.addPara("Targets must die within %s to gain PPT bonuses", pad, good, Math.round(KILL_TIMER) + " seconds");
-        tooltip.addPara("Decreases the ship's max combat readiness by %s", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
+        tooltip.setBulletWidth(20f);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("^ Gain %s/%s/%s/%s seconds of peak performance time\n   based on the targets hull size.", pad, good,
+                PPT_GAIN.get(HullSize.FRIGATE).intValue() + "",
+                PPT_GAIN.get(HullSize.DESTROYER).intValue() + "",
+                PPT_GAIN.get(HullSize.CRUISER).intValue() + "",
+                PPT_GAIN.get(HullSize.CAPITAL_SHIP).intValue() + "");
+        tooltip.addPara("^ Frigates gain %s the peak performance time\n   against larger ships.", pad, good, FRIGATE_PPT_MULT + " Times");
+        tooltip.addPara("^ Destroyers gain %s the peak performance time\n   against larger ships.", pad, good, DESTROYER_PPT_MULT + " Times");
+        tooltip.addPara("^ Targets must die within %s to gain\n   peak performance time bonuses.", pad, good, Math.round(KILL_TIMER) + " seconds");
         tooltip.setBulletedListMode(null);
+        tooltip.addPara("Decreases the ship's max combat readiness by %s.", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
     }
 
     public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {

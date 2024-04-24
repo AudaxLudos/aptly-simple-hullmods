@@ -38,20 +38,17 @@ public class FluxLimiters extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Decreases the flux cost of non-missile weapons by %s", oPad, good, Math.round(WEAPON_FLUX_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the damage of non-missile weapons by %s", pad, bad, Math.round(WEAPON_DAMAGE_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the fire rate of non-missile weapons by %s", pad, bad, Math.round(WEAPON_FIRE_RATE_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Decreases the flux cost of non-missile weapons by %s.", oPad, good, Math.round(WEAPON_FLUX_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the damage of non-missile weapons by %s.", pad, bad, Math.round(WEAPON_DAMAGE_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the fire rate of non-missile weapons by %s.", pad, bad, Math.round(WEAPON_FIRE_RATE_MULT * 100f) + "%");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the fire rate penalty of non-missile weapons", oPad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Fully %s the fire rate penalty of non-missile weapons.", oPad, good, "negates");
     }
 
     @Override

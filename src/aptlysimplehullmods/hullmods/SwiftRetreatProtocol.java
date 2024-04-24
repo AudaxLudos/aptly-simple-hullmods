@@ -55,26 +55,22 @@ public class SwiftRetreatProtocol extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode("");
         tooltip.addPara("When a fighter wing is %s:", oPad, b, "retreating/rearming");
-        tooltip.setBulletedListMode(" ^ ");
-        tooltip.addPara("Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("Increases the fighter's engine damage taken by %s", pad, bad, Math.round(ENGINE_DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("If the fighter has shields, %s shields", pad, bad, "turns off");
+        tooltip.setBulletWidth(20f);
+        tooltip.setBulletedListMode("");
+        tooltip.addPara("^ Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("^ Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("^ Increases the fighter's engine damage taken by %s", pad, bad, Math.round(ENGINE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("^ If the fighter has shields, %s shields", pad, bad, "turns off");
         tooltip.setBulletedListMode(null);
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
-        float pad = 3f;
-        Color b = Misc.getHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the fighter's top speed buff by an additional %s", oPad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("Increases the fighter's maneuverability buff by an additional %s", pad, b, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the buffs to fighter's by an additional %s.", oPad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
     }
 
     @Override

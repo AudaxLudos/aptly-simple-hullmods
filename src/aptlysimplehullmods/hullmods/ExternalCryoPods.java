@@ -40,15 +40,14 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's crew capacity by %s based on hull size", oPad, good, CREW_MOD.get(HullSize.FRIGATE).intValue() + "/"
-                + CREW_MOD.get(HullSize.DESTROYER).intValue() + "/"
-                + CREW_MOD.get(HullSize.CRUISER).intValue() + "/"
-                + CREW_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.addPara("Decreases the ship's flux dissipation by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the ship's crew capacity by %s/%s/%s/%s based on hull size.", oPad, good,
+                CREW_MOD.get(HullSize.FRIGATE).intValue() + "",
+                CREW_MOD.get(HullSize.DESTROYER).intValue() + "",
+                CREW_MOD.get(HullSize.CRUISER).intValue() + "",
+                CREW_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
+        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
     }
 
     @Override
@@ -75,11 +74,10 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float pad = 3f;
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Doubles the ship's crew capacity bonus", oPad);
-        tooltip.addPara("Fully negates all penalties", pad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("%s the ship's crew capacity bonus.", oPad, good, "Doubles");
+        tooltip.addPara("Fully %s all penalties.", pad, good, "negates");
     }
 
     @Override

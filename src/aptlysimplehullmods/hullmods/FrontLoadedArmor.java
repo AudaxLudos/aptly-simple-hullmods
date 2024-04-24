@@ -41,19 +41,16 @@ public class FrontLoadedArmor extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("%s the armor values towards the front of the ship", oPad, good, "Doubles");
-        tooltip.addPara("%s the armor values towards the back of the ship", pad, bad, "Halves");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("%s the armor values towards the front of the ship.", oPad, good, "Doubles");
+        tooltip.addPara("%s the armor values towards the back of the ship.", pad, bad, "Halves");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the armor values penalty towards the back of the ship", oPad);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Fully %s the armor values penalty towards the back of the ship.", oPad, good, "negates");
     }
 
     @Override

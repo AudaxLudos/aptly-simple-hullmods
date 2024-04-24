@@ -39,23 +39,20 @@ public class ReactiveSubsystems extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the ship's max combat readiness by %s", oPad, good, Math.round(MAX_CR_MOD * 100f) + "%");
-        tooltip.addPara("Increases the ship's deployment points by %s based on its hull size", pad, bad, DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "/"
-                + DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "/"
-                + DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "/"
-                + DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue());
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the ship's max combat readiness by %s.", oPad, good, Math.round(MAX_CR_MOD * 100f) + "%");
+        tooltip.addPara("Increases the ship's deployment points by %s/%s/%s/%s based on its hull size.", pad, bad,
+                DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "",
+                DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "",
+                DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "",
+                DEPLOYMENT_POINTS_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
-        Color b = Misc.getHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Fully negates the ship's deployment points penalty", oPad, b);
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Fully %s the ship's deployment points penalty.", oPad, good, "negates");
     }
 
     @Override

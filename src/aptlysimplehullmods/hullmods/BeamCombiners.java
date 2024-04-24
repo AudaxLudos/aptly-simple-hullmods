@@ -29,20 +29,16 @@ public class BeamCombiners extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Increases the damage of beam weapons by %s", oPad, good, Math.round(BEAM_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the flux cost of beam weapons by %s", pad, bad, Math.round(BEAM_STATS_MULT * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the damage of beam weapons by %s.", oPad, good, Math.round(BEAM_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the flux cost of beam weapons by %s.", pad, bad, Math.round(BEAM_STATS_MULT * 100f) + "%");
     }
 
     @Override
     public void addSModEffectSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
         float oPad = 10f;
-        Color b = Misc.getHighlightColor();
+        Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.setBulletedListMode(" - ");
-        tooltip.addPara("Reduces the flux cost penalty of beam weapons by %s", oPad, b, Math.round(BEAM_STATS_MULT * 100f * 0.5f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Reduces the flux cost penalty of beam weapons by %s.", oPad, good, Math.round(BEAM_STATS_MULT * 100f * 0.5f) + "%");
     }
 
     @Override
