@@ -10,3 +10,8 @@
 - [ ] Add Channeled Vents
   - [ ] Add scaling effect based on the ship's shield arc that increases the hard flux dissipation when shields are active by up to 20%
     - If the ship's shield arc is 180 gain a 10% hard flux dissipation when shields are active
+- [ ] Next game update
+  - [ ] Remove/disable all hidden hullmods
+  - [ ] Change all hullmod ids to lower case
+  - [ ] Change all hullmod image names to lower case
+  - [ ] Update faction known hullmods
