@@ -69,8 +69,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 }
 
                 if (PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines() + trainMarines >= playerCargo.getMarines())
-                    trainMarines = playerCargo.getMarines() - PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() *
-                            playerCargo.getMarines();
+                    trainMarines = playerCargo.getMarines() - PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines();
 
                 if (trainMarines > 0 && playerCargo.getMarines() > 0) {
                     PlayerFleetPersonnelTracker.getInstance().getMarineData().addXP(Math.round(trainMarines));

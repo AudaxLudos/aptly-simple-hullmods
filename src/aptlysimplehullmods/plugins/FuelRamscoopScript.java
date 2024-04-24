@@ -3,16 +3,17 @@ package aptlysimplehullmods.plugins;
 import aptlysimplehullmods.hullmods.FuelRamscoop;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
-import java.util.List;
-
 public class FuelRamscoopScript implements EveryFrameScript {
+    public static final String FUEL_RAMSCOOP_ID = "ASH_FuelRamscoop";
     public boolean isActive = false;
+    public int shipsWithHullmod = 0;
     public Long lastDay;
+    public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
     public boolean isDone() {
@@ -28,35 +29,33 @@ public class FuelRamscoopScript implements EveryFrameScript {
     public void advance(float amount) {
         if (Global.getSector().getPlayerFleet() == null)
             return;
+        if (Global.getSector().getPlayerFleet().getFleetData() == null)
+            return;
         if (Global.getSector().getPlayerFleet().getCargo() == null)
             return;
 
-        CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        List<FleetMemberAPI> playerFleetMembers = playerFleet.getFleetData().getMembersListCopy();
-        CargoAPI playerCargo = playerFleet.getCargo();
-
-        if (!isActive) {
-            for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                if (fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop")) {
-                    isActive = true;
-                    lastDay = Global.getSector().getClock().getTimestamp();
-                    break;
+        timer.advance(amount);
+        if (timer.intervalElapsed()) {
+            CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
+            int shipsWithFuelRamscoop = 0;
+            float fuelGenerated = 0;
+            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+                if (!member.getVariant().hasHullMod(FUEL_RAMSCOOP_ID)) continue;
+                ++shipsWithFuelRamscoop;
+                if (!member.getVariant().getSMods().contains(FUEL_RAMSCOOP_ID)) {
+                    fuelGenerated += FuelRamscoop.FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
+                } else {
+                    fuelGenerated += FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
                 }
             }
-        } else {
-            float fuelGenerated = 0;
 
-            if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
-                for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                    if (!fleetMember.getVariant().hasHullMod("ASH_FuelRamscoop"))
-                        continue;
+            if (!isActive || shipsWithHullmod != shipsWithFuelRamscoop) {
+                isActive = true;
+                shipsWithHullmod = shipsWithFuelRamscoop;
+                lastDay = Global.getSector().getClock().getTimestamp();
+            }
 
-                    if (fleetMember.getVariant().getSMods().contains("ASH_FuelRamscoop"))
-                        fuelGenerated += FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    else
-                        fuelGenerated += FuelRamscoop.FUEL_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                }
-
+            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
                 if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel())
                     fuelGenerated = playerCargo.getMaxFuel() - playerCargo.getFuel();
 

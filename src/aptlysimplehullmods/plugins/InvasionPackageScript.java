@@ -8,7 +8,7 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class InvasionPackageScript implements EveryFrameScript {
-    public static final String InvasionPackageId = "ash_invasion_package";
+    public static final String INVASION_PACKAGE_ID = "ash_invasion_package";
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
 
@@ -34,13 +34,16 @@ public class InvasionPackageScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) return;
+        if (Global.getSector().getPlayerFleet() == null)
+            return;
+        if (Global.getSector().getPlayerFleet().getFleetData() == null)
+            return;
 
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
 
         int shipsWithInvasionPackage = 0;
         for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
-            if (member.getVariant().hasHullMod(InvasionPackageId)) {
+            if (member.getVariant().hasHullMod(INVASION_PACKAGE_ID)) {
                 ++shipsWithInvasionPackage;
             }
         }
@@ -49,17 +52,17 @@ public class InvasionPackageScript implements EveryFrameScript {
             // un-modify fleet stats here
             isActive = false;
             shipsWithHullmod = shipsWithInvasionPackage;
-            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).unmodify(InvasionPackageId);
-            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(InvasionPackageId);
+            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).unmodify(INVASION_PACKAGE_ID);
+            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(INVASION_PACKAGE_ID);
         }
 
         if (!isActive) {
             // modify fleet stats here
             isActive = true;
-            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(InvasionPackageId,
+            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(INVASION_PACKAGE_ID,
                     1f + shipsWithHullmod * InvasionPackage.PLANETARY_OPERATIONS_MULT,
                     shipsWithHullmod + " ships with Invasion Package");
-            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(InvasionPackageId,
+            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(INVASION_PACKAGE_ID,
                     1f - computeStatMultiplier(shipsWithHullmod, InvasionPackage.PLANETARY_OPERATIONS_MULT),
                     shipsWithHullmod + " ships with Invasion Package");
         }
