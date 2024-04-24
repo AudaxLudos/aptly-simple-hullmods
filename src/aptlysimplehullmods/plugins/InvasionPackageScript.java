@@ -46,8 +46,15 @@ public class InvasionPackageScript implements EveryFrameScript {
         if (!data.isActive) {
             data.isActive = true;
             // modify fleet stats here
-            Global.getSector().getPlayerFleet().getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(key, 1f + data.shipsWithInvasionPackage * InvasionPackage.PLANETARY_OPERATIONS_MULT);
-            Global.getSector().getPlayerFleet().getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(key, 1f + data.shipsWithInvasionPackage * InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT);
+            Global.getSector().getPlayerFleet().getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD)
+                    .modifyMult(
+                            key,
+                            1f + data.shipsWithInvasionPackage * InvasionPackage.PLANETARY_OPERATIONS_MULT,
+                            data.shipsWithInvasionPackage + " ships with Invasion Package");
+            Global.getSector().getPlayerFleet().getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(
+                            key,
+                            1f + data.shipsWithInvasionPackage * InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT,
+                            data.shipsWithInvasionPackage + " ships with Invasion Package");
         }
     }
 
