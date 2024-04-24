@@ -1,5 +1,6 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.hullmods.FuelRamscoop;
 import aptlysimplehullmods.hullmods.IndustrialMachineForge;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -7,13 +8,17 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 import java.util.List;
 
 public class IndustrialMachineForgeScript implements EveryFrameScript {
+    public static final String INDUSTRIAL_MACHINE_FORGE_ID = "ASH_IndustrialMachineForge";
     public boolean isActive = false;
+    public int shipsWithHullmod = 0;
     public Long lastDay;
+    public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
     public boolean isDone() {
@@ -34,37 +39,29 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null)
             return;
 
-        CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        CargoAPI playerCargo = playerFleet.getCargo();
-        List<FleetMemberAPI> playerFleetMembers = playerFleet.getFleetData().getMembersListCopy();
-
-        if (!isActive) {
-            for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                if (fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge")) {
-                    isActive = true;
-                    lastDay = Global.getSector().getClock().getTimestamp();
-                    break;
-                }
-            }
-        } else {
+        timer.advance(amount);
+        if (timer.intervalElapsed()) {
+            CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
+            int shipsWithIndustrialMachineForge = 0;
             float bonusHeavyMachinery = 0f;
             float heavyMachineryToGenerate = 0f;
             float metalsToConsume = 0f;
+            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+                if (!member.getVariant().hasHullMod(INDUSTRIAL_MACHINE_FORGE_ID)) continue;
+                ++shipsWithIndustrialMachineForge;
+                heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
+                metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                if (member.getVariant().getSMods().contains(INDUSTRIAL_MACHINE_FORGE_ID))
+                    bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize()) * 0.25f;
+            }
 
-            if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
-                for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                    if (!fleetMember.getVariant().hasHullMod("ASH_IndustrialMachineForge"))
-                        continue;
-                    if (fleetMember.isMothballed())
-                        continue;
+            if (!isActive || shipsWithHullmod != shipsWithIndustrialMachineForge) {
+                isActive = true;
+                shipsWithHullmod = shipsWithIndustrialMachineForge;
+                lastDay = Global.getSector().getClock().getTimestamp();
+            }
 
-                    heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize());
-
-                    if (fleetMember.getVariant().getSMods().contains("ASH_IndustrialMachineForge"))
-                        bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(fleetMember.getVariant().getHullSize()) * 0.25f;
-                }
-
+            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
                 if (!hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
                     isActive = false;
                     return;
