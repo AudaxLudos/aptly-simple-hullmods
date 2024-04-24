@@ -1,4 +1,4 @@
-package aptlysimplehullmods.scripts.campaign;
+package aptlysimplehullmods.plugins;
 
 import aptlysimplehullmods.hullmods.MarineTrainingFacility;
 import com.fs.starfarer.api.EveryFrameScript;
