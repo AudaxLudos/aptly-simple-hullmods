@@ -46,9 +46,11 @@ public class FuelRamscoopScript implements EveryFrameScript {
             }
 
             if (!isActive || shipsWithHullmod != shipsWithFuelRamscoop) {
-                isActive = true;
-                shipsWithHullmod = shipsWithFuelRamscoop;
-                lastDay = Global.getSector().getClock().getTimestamp();
+                if (playerCargo.getFuel() < playerCargo.getMaxFuel()) {
+                    isActive = true;
+                    shipsWithHullmod = shipsWithFuelRamscoop;
+                    lastDay = Global.getSector().getClock().getTimestamp();
+                }
             }
 
             if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
