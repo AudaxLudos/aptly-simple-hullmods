@@ -28,12 +28,9 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null)
-            return;
-        if (Global.getSector().getPlayerFleet().getFleetData() == null)
-            return;
-        if (Global.getSector().getPlayerFleet().getCargo() == null)
-            return;
+        if (Global.getSector().getPlayerFleet() == null) return;
+        if (Global.getSector().getPlayerFleet().getFleetData() == null) return;
+        if (Global.getSector().getPlayerFleet().getCargo() == null) return;
 
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
         FleetDataAPI playerFleetData = playerFleet.getFleetData();
