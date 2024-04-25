@@ -1,17 +1,13 @@
 package aptlysimplehullmods.plugins;
 
-import aptlysimplehullmods.hullmods.FuelRamscoop;
 import aptlysimplehullmods.hullmods.IndustrialMachineForge;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-
-import java.util.List;
 
 public class IndustrialMachineForgeScript implements EveryFrameScript {
     public static final String INDUSTRIAL_MACHINE_FORGE_ID = "ASH_IndustrialMachineForge";
@@ -53,17 +49,14 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             }
 
             if (!isActive || shipsWithHullmod != shipsWithIndustrialMachineForge) {
-                isActive = true;
-                shipsWithHullmod = shipsWithIndustrialMachineForge;
-                lastDay = Global.getSector().getClock().getTimestamp();
+                if (hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
+                    isActive = true;
+                    shipsWithHullmod = shipsWithIndustrialMachineForge;
+                    lastDay = Global.getSector().getClock().getTimestamp();
+                }
             }
 
             if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
-                if (!hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
-                    isActive = false;
-                    return;
-                }
-
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsToConsume < 0f) {
                     heavyMachineryToGenerate = playerCargo.getCommodityQuantity(Commodities.METALS) / 7f;
                     metalsToConsume = heavyMachineryToGenerate * 7f;

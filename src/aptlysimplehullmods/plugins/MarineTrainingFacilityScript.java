@@ -3,18 +3,19 @@ package aptlysimplehullmods.plugins;
 import aptlysimplehullmods.hullmods.MarineTrainingFacility;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.PlayerFleetPersonnelTracker;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
-import java.util.List;
-
 public class MarineTrainingFacilityScript implements EveryFrameScript {
+    public static final String MARINE_TRAINING_FACILITY_ID = "ASH_MarineTrainingFacility";
     public boolean isActive = false;
+    public int shipsWithHullmod = 0;
     public Long lastDay;
+    public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
     public boolean isDone() {
@@ -32,39 +33,32 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getFleetData() == null) return;
         if (Global.getSector().getPlayerFleet().getCargo() == null) return;
 
-        CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        FleetDataAPI playerFleetData = playerFleet.getFleetData();
-        CargoAPI playerCargo = playerFleet.getCargo();
-        List<FleetMemberAPI> playerFleetMembers = playerFleet.getFleetData().getMembersListCopy();
-
-        if (!isActive) {
-            for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                if (fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility")) {
-                    isActive = true;
-                    lastDay = Global.getSector().getClock().getTimestamp();
-                    break;
-                }
-            }
-        } else {
+        timer.advance(amount);
+        if (timer.intervalElapsed()) {
+            FleetDataAPI playerFleetData = Global.getSector().getPlayerFleet().getFleetData();
+            CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
+            int shipsWithMarineTrainingFacility = 0;
             int maxMarines = 0;
             int addMarines = 0;
             float trainMarines = 0;
+            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+                if (!member.getVariant().hasHullMod(MARINE_TRAINING_FACILITY_ID)) continue;
+                ++shipsWithMarineTrainingFacility;
+                addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
+                maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
+                if (!member.getVariant().getSMods().contains(MARINE_TRAINING_FACILITY_ID))
+                    trainMarines += MarineTrainingFacility.MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
+                else
+                    trainMarines += MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
+            }
 
-            if (Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
-                for (FleetMemberAPI fleetMember : playerFleetMembers) {
-                    if (!fleetMember.getVariant().hasHullMod("ASH_MarineTrainingFacility"))
-                        continue;
+            if (!isActive || shipsWithHullmod != shipsWithMarineTrainingFacility) {
+                isActive = true;
+                shipsWithHullmod = shipsWithMarineTrainingFacility;
+                lastDay = Global.getSector().getClock().getTimestamp();
+            }
 
-                    addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-                    maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(fleetMember.getVariant().getHullSize());
-
-                    if (fleetMember.getVariant().getSMods().contains("ASH_MarineTrainingFacility"))
-                        trainMarines += MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(fleetMember.getVariant().getHullSize());
-                    else
-                        trainMarines += MarineTrainingFacility.MARINES_TO_LEVEL.get(fleetMember.getVariant().getHullSize());
-
-                }
-
+            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
                 if (PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines() + trainMarines >= playerCargo.getMarines())
                     trainMarines = playerCargo.getMarines() - PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines();
 
