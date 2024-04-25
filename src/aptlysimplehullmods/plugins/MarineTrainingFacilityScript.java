@@ -53,9 +53,12 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
             }
 
             if (!isActive || shipsWithHullmod != shipsWithMarineTrainingFacility) {
-                isActive = true;
-                shipsWithHullmod = shipsWithMarineTrainingFacility;
-                lastDay = Global.getSector().getClock().getTimestamp();
+                PlayerFleetPersonnelTracker.getInstance().update();
+                if ((playerCargo.getCrew() > playerFleetData.getMinCrew() && playerCargo.getMarines() < maxMarines) || (playerCargo.getMarines() > 0 && PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() < 1f)) {
+                    isActive = true;
+                    shipsWithHullmod = shipsWithMarineTrainingFacility;
+                    lastDay = Global.getSector().getClock().getTimestamp();
+                }
             }
 
             if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
