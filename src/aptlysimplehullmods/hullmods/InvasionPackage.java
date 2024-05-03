@@ -10,11 +10,25 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InvasionPackage extends BaseHullMod {
-    public static float PLANETARY_OPERATIONS_MULT = 0.10f;
-    public static float PLANETARY_OPERATION_CASUALTIES_MULT = 0.10f;
+    public static final Map<Object, Float> PLANETARY_OPERATION_CASUALTIES_MULT = new HashMap<>();
+    public static final Map<Object, Float> PLANETARY_OPERATIONS_MULT = new HashMap<>();
     public static float CARGO_CAPACITY_MULT = 0.40f;
+
+    static {
+        PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.FRIGATE, 0.02f);
+        PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.DESTROYER, 0.04f);
+        PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CRUISER, 0.06f);
+        PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.10f);
+
+        PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.FRIGATE, 0.02f);
+        PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.DESTROYER, 0.04f);
+        PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CRUISER, 0.06f);
+        PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.10f);
+    }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -31,27 +45,36 @@ public class InvasionPackage extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the effectiveness of ground operations by %s.", oPad, good, Math.round(PLANETARY_OPERATIONS_MULT * 100f) + "%");
-        tooltip.addPara("Reduces casualties during ground operations by %s.", pad, good, Math.round(PLANETARY_OPERATION_CASUALTIES_MULT * 100f) + "%");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ This stat has %s.", pad, b, "diminishing returns");
-        tooltip.addPara("^ The Total bonus is %s.", pad, good, Math.round(getComputedStatMultiplier(0) * 100f) + "%");
-        if (!ship.getVariant().hasHullMod(spec.getId()))
-            tooltip.addPara("^ Adding this to the ship increases it to %s.", pad, good, Math.round(getComputedStatMultiplier(1) * 100f) + "%");
-        else
-            tooltip.addPara("^ Removing this to the ship decreases it to %s.", pad, bad, Math.round(getComputedStatMultiplier(-1) * 100f) + "%");
-        tooltip.setBulletedListMode(null);
+        tooltip.addPara("Increases the effectiveness of ground operations by %s/%s/%s/%s.", oPad, good,
+                Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
+                Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
+                Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",
+                Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.CAPITAL_SHIP) * 100f) + "%");
+        tooltip.addPara("Reduces casualties during ground operations by %s/%s/%s/%s.", pad, good,
+                Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
+                Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
+                Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",
+                Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.CAPITAL_SHIP) * 100f) + "%");
         tooltip.addPara("Decreases the ship's cargo capacity by %s.", pad, bad, Math.round(CARGO_CAPACITY_MULT * 100f) + "%");
+
+        tooltip.addPara("Both buffs has %s.", oPad, b, "diminishing returns");
+        if (!isForModSpec) {
+            tooltip.addPara("The Total bonus for both buffs is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
+            if (!ship.getVariant().hasHullMod(spec.getId()))
+                tooltip.addPara("Adding this hullmod increases both buffs to %s.", pad, good, Math.round(getStatMultiplier(PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
+            else
+                tooltip.addPara("Removing this hullmod decreases both buffs to %s.", pad, bad, Math.round(getStatMultiplier(-PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
+        }
     }
 
-    public float getComputedStatMultiplier(int offset) {
-        int shipsWithInvasionPackage = 0;
+    public float getStatMultiplier(float statOffset) {
+        float totalStat = 0;
         for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.getVariant().hasHullMod("ash_invasion_package")) {
-                ++shipsWithInvasionPackage;
-            }
+            if (member.isMothballed()) continue;
+            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID))
+                totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
         }
-        return InvasionPackageScript.computeStatMultiplier(shipsWithInvasionPackage + offset, PLANETARY_OPERATION_CASUALTIES_MULT);
+
+        return InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
     }
 }
