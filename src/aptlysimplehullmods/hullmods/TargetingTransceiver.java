@@ -6,6 +6,7 @@ import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -53,9 +54,7 @@ public class TargetingTransceiver extends BaseHullMod {
                 if (ship == other) continue;
                 if (other.getOwner() != ship.getOwner()) continue;
                 if (other.isHulk()) continue;
-                if (!(other.getVariant().hasHullMod(HullMods.ADVANCED_TARGETING_CORE) ||
-                        other.getVariant().hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT) ||
-                        other.getVariant().hasHullMod(HullMods.DEDICATED_TARGETING_CORE))) continue;
+                if (!hasTargetingCore(other.getVariant())) continue;
 
                 float radiusSum = (ship.getShieldRadiusEvenIfNoShield() + other.getShieldRadiusEvenIfNoShield()) * 0.75f;
                 float dist = Misc.getDistance(ship.getShieldCenterEvenIfNoShield(), other.getShieldCenterEvenIfNoShield()) - radiusSum;
@@ -117,5 +116,11 @@ public class TargetingTransceiver extends BaseHullMod {
     @Override
     public boolean hasSModEffect() {
         return true;
+    }
+
+    public boolean hasTargetingCore(ShipVariantAPI variant) {
+        return variant.hasHullMod(HullMods.DEDICATED_TARGETING_CORE)
+                || variant.hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT)
+                || variant.hasHullMod(HullMods.ADVANCED_TARGETING_CORE);
     }
 }

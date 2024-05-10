@@ -70,6 +70,7 @@ public class FighterTargetingUplink extends BaseHullMod {
                 ShipAPI other = (ShipAPI) next;
 
                 if (ship == other) continue;
+                if (other.getOwner() != ship.getOwner()) continue;
                 if (other.isHulk()) continue;
                 if (!hasTargetingCore(other.getVariant())) continue;
 
