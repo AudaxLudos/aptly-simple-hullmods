@@ -1,3 +1,28 @@
+### 1.9.0
+- Update invasion package added to factions known hullmods
+- Update re-enabled targeting transceiver
+- Fix issue where fighter targeting uplink also links with enemies
+- Fix bug where fighter targeting uplink and targeting transceiver buff ui not appearing properly
+- Fix crash when using fighter targeting uplink and targeting transceiver on a ship
+- Update invasion package hullmod implementation
+- Fix bug where fuel ramscoop is active when it should not
+- Fix bug where marine training facility script is active when it should not be
+- Update optimized marine training facility script for campaign
+- Update optimized mineral refinery script for campaign
+- Update optimized fuel ramscoop for campaign
+- Update optimized industrial machine forge script in campaign
+- Update optimized fuel ramscoop script for campaign
+- Update invasion package script structure and code
+- Update all non-hidden hullmod descriptions
+- Add invasion package hullmod
+- Update flux limiters to be always unlocked
+- Hidden subverted shields
+- Hidden compact shields hullmod
+- Add condensed shields hullmod
+- Update temporal flux reactor remove peak performance time penalty
+- Update temporal flux reactor op cost to 6/12/18/30 from 5/10/15/25
+- Update package structure
+
 ### 1.8.6
 - Release 1.8.6
 - Update directDownloadURL link in version file
