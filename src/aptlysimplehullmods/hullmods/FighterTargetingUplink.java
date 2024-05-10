@@ -1,10 +1,10 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Utils;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
@@ -44,9 +44,9 @@ public class FighterTargetingUplink extends BaseHullMod {
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         String key = "targeting_transceiver_" + ship.getId();
-        TargetingTransceiverData data = (TargetingTransceiverData) Global.getCombatEngine().getCustomData().get(key);
+        Utils.TargetingTransceiverData data = (Utils.TargetingTransceiverData) Global.getCombatEngine().getCustomData().get(key);
         if (data == null) {
-            data = new TargetingTransceiverData();
+            data = new Utils.TargetingTransceiverData();
             Global.getCombatEngine().getCustomData().put(key, data);
         }
 
@@ -152,10 +152,5 @@ public class FighterTargetingUplink extends BaseHullMod {
         return variant.hasHullMod(HullMods.DEDICATED_TARGETING_CORE)
                 || variant.hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT)
                 || variant.hasHullMod(HullMods.ADVANCED_TARGETING_CORE);
-    }
-
-    public static class TargetingTransceiverData {
-        IntervalUtil interval = new IntervalUtil(1f, 1f);
-        float mag = 0f;
     }
 }
