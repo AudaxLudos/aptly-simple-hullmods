@@ -43,7 +43,7 @@ public class FighterTargetingUplink extends BaseHullMod {
         }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
-        String key = "targeting_transceiver_" + ship.getId();
+        String key = "targeting_uplink_" + ship.getId();
         Utils.TargetingTransceiverData data = (Utils.TargetingTransceiverData) Global.getCombatEngine().getCustomData().get(key);
         if (data == null) {
             data = new Utils.TargetingTransceiverData();

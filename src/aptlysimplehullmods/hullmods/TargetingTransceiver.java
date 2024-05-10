@@ -1,4 +1,4 @@
-package aptlysimplehullmods.hullmods.hidden;
+package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Utils;
 import com.fs.starfarer.api.Global;
