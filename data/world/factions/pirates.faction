@@ -17,7 +17,8 @@
             "ASH_VolatileWarheads",
             "ASH_MissileBay",
             "ASH_ReactorBay",
-            "ASH_ConvictedCrewmates"
+            "ASH_ConvictedCrewmates",
+            "ash_invasion_package"
         ]
     }
 }

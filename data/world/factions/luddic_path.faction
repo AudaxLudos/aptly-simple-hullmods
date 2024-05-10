@@ -16,7 +16,8 @@
             "ASH_VentingOverdrive",
             "ASH_VolatileWarheads",
             "ASH_MissileBay",
-            "ASH_ReactorBay"
+            "ASH_ReactorBay",
+            "ash_invasion_package"
         ]
     }
 }
