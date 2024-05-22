@@ -18,30 +18,35 @@ public class ReactiveShields extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (!(Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + id) instanceof Float))
+        if (!(Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + id) instanceof Float)) {
             Global.getCombatEngine().getCustomData().put("ASH_ShieldArc_" + id, ship.getShield().getArc());
+        }
     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
             return;
-        if (ship.getShield() == null)
+        }
+        if (ship.getShield() == null) {
             return;
+        }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         float shipShieldArc = ship.getHullSpec().getShieldSpec().getArc();
         Color defaultShieldColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float)
+        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float) {
             shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
+        }
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
         float computedShieldStrength = getValueWithinMax((SHIELD_STRENGTH_MULT * 0.30f + SHIELD_STRENGTH_MULT) * selectedFluxLevel, 0, SHIELD_STRENGTH_MULT);
         float computedShieldArc = getValueWithinRange(ship.getHardFluxLevel(), 0, SHIELD_ARC_MOD);
 
-        if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive())
+        if (ship.getSystem() != null && ship.getSystem().getId().equals("fortressshield") && ship.getSystem().isActive()) {
             defaultShieldColor = ship.getShield().getInnerColor();
+        }
 
         int red = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getRed()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getRed())), 255);
         int green = (int) Math.min(Math.abs((ship.getFluxLevel() * CUSTOM_SHIELD_COLOR.getGreen()) + ((1 - ship.getFluxLevel()) * defaultShieldColor.getGreen())), 255);
@@ -49,10 +54,11 @@ public class ReactiveShields extends BaseHullMod {
 
         ShieldAPI shield = ship.getShield();
         shield.setInnerColor(new Color(red, green, blue, ship.getShield().getInnerColor().getAlpha()));
-        if (shield.getArc() > 30)
+        if (shield.getArc() > 30) {
             shield.setArc(shipShieldArc - computedShieldArc);
-        else
+        } else {
             shield.setArc(30);
+        }
         stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 - computedShieldStrength);
 
         if (ship == Global.getCombatEngine().getPlayerShip() && computedShieldStrength * 100f >= 1f) {
@@ -81,8 +87,9 @@ public class ReactiveShields extends BaseHullMod {
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
-        if (ship == null || ship.getShield() == null)
+        if (ship == null || ship.getShield() == null) {
             return "Ship has no shields";
+        }
         return null;
     }
 

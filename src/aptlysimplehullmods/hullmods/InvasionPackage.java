@@ -60,19 +60,23 @@ public class InvasionPackage extends BaseHullMod {
         tooltip.addPara("Both buffs has %s.", oPad, b, "diminishing returns");
         if (!isForModSpec) {
             tooltip.addPara("The Total bonus for both buffs is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
-            if (!ship.getVariant().hasHullMod(spec.getId()))
+            if (!ship.getVariant().hasHullMod(spec.getId())) {
                 tooltip.addPara("Adding this hullmod increases both buffs to %s.", pad, good, Math.round(getStatMultiplier(PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
-            else
+            } else {
                 tooltip.addPara("Removing this hullmod decreases both buffs to %s.", pad, bad, Math.round(getStatMultiplier(-PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
+            }
         }
     }
 
     public float getStatMultiplier(float statOffset) {
         float totalStat = 0;
         for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.isMothballed()) continue;
-            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID))
+            if (member.isMothballed()) {
+                continue;
+            }
+            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
                 totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
+            }
         }
 
         return InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);

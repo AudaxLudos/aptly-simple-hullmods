@@ -29,8 +29,9 @@ public class MissileBay extends BaseHullMod {
         stats.getMissileAmmoBonus().modifyPercent(id, SHIP_STATS_MULT * 100f);
         stats.getNumFighterBays().modifyFlat(id, -FIGHTER_BAY_MOD);
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).modifyFlat(id, -(Float) DEPLOYMENT_POINTS_MOD.get(hullSize));
+        }
     }
 
     @Override

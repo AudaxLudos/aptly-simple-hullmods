@@ -14,8 +14,9 @@ public class InvasionPackageScript implements EveryFrameScript {
 
     public static float computeStatMultiplier(float totalStat) {
         float computedStat = 0f;
-        if (totalStat > 0f)
+        if (totalStat > 0f) {
             computedStat = (0.01f * (totalStat / 0.01f)) / (0.01f * (totalStat / 0.01f) + 1);
+        }
         return computedStat;
     }
 
@@ -31,17 +32,21 @@ public class InvasionPackageScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null)
+        if (Global.getSector().getPlayerFleet() == null) {
             return;
-        if (Global.getSector().getPlayerFleet().getFleetData() == null)
+        }
+        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
             return;
+        }
 
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
 
         int shipsWithInvasionPackage = 0;
         float totalStat = 0;
         for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
-            if (member.isMothballed()) continue;
+            if (member.isMothballed()) {
+                continue;
+            }
             if (member.getVariant().hasHullMod(INVASION_PACKAGE_ID)) {
                 ++shipsWithInvasionPackage;
                 totalStat += InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());

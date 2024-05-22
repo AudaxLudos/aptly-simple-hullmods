@@ -18,8 +18,9 @@ public class ShockAbsorbers extends BaseHullMod {
         stats.getFragmentationDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
 
         float kineticDmgTknMult = KINETIC_DMG_TAKEN_MULT;
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             kineticDmgTknMult *= 0.5f;
+        }
         stats.getKineticDamageTakenMult().modifyMult(id, 1f + kineticDmgTknMult);
     }
 

@@ -7,16 +7,19 @@ import com.fs.starfarer.api.combat.ShipAPI;
 public class TestStopwatch extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
             return;
+        }
 
         float stopwatchTime = 0f;
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId()) instanceof Float)
+        if (Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId()) instanceof Float) {
             stopwatchTime = (float) Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId());
+        }
 
-        if (ship.areSignificantEnemiesInRange())
+        if (ship.areSignificantEnemiesInRange()) {
             stopwatchTime += amount;
+        }
 
         if (ship == Global.getCombatEngine().getPlayerShip() && stopwatchTime >= 1f) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TestStopwatch",

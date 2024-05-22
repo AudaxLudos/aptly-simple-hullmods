@@ -14,7 +14,9 @@ public class FrontLoadedArmor extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship == null) return;
+        if (ship == null) {
+            return;
+        }
 
         float[][] armorGrid = ship.getArmorGrid().getGrid();
         int armorCellX = armorGrid.length;
@@ -26,8 +28,9 @@ public class FrontLoadedArmor extends BaseHullMod {
                 if (y >= armorCellY / 2f) {
                     ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * POSITIVE_ARMOR_VALUE_MULT);
                 } else {
-                    if (isSMod(ship))
+                    if (isSMod(ship)) {
                         continue;
+                    }
                     ship.getArmorGrid().setArmorValue(x, y, currentArmorValue * NEGATIVE_ARMOR_VALUE_MULT);
                 }
             }

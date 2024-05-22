@@ -18,8 +18,9 @@ public class DeflectiveShields extends BaseHullMod {
         stats.getFragmentationDamageTakenMult().modifyMult(id, 1f - DMG_TAKEN_MULT);
 
         float explosiveDmgTknMult = EXPLOSIVE_DMG_TAKEN_MULT;
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             explosiveDmgTknMult *= 0.5f;
+        }
         stats.getHighExplosiveShieldDamageTakenMult().modifyMult(id, 1f + explosiveDmgTknMult);
     }
 

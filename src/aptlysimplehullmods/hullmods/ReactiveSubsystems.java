@@ -28,8 +28,9 @@ public class ReactiveSubsystems extends BaseHullMod {
         stats.getMaxCombatReadiness().modifyFlat(id, MAX_CR_MOD, "Reactive Subsystems Hullmod");
         stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).modifyFlat(id, DEPLOYMENT_POINTS_MOD.get(hullSize));
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).unmodify(id);
+        }
     }
 
     @Override

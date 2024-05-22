@@ -20,8 +20,9 @@ public class VolatileWarheads extends BaseHullMod {
         stats.getMissileMaxSpeedBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULT);
         stats.getMissileHealthBonus().modifyMult(id, 1f - MISSILE_HEALTH_MULT);
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getMissileHealthBonus().unmodifyMult(id);
+        }
     }
 
     @Override

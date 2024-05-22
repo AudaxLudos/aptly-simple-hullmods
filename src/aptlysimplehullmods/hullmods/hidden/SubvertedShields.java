@@ -23,22 +23,25 @@ public class SubvertedShields extends BaseHullMod {
         stats.getShieldUpkeepMult().modifyMult(id, 1f - SHIELD_UPKEEP_MULT);
         stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).modifyMult(id, 1f + SHIELD_PIERCED_MULT);
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getDynamic().getStat(Stats.SHIELD_PIERCED_MULT).unmodifyMult(id);
+        }
     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
             return;
+        }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color shieldInnerColor = ship.getShield().getInnerColor();
         float shieldInnerAlpha;
         float shieldPulse = 0f;
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId()) instanceof Float)
+        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId()) instanceof Float) {
             shieldPulse = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldPulse_" + ship.getId());
+        }
 
         shieldPulse += amount / 2f;
         float pulse = (float) (Math.sin(2f * 3.14f * shieldPulse) * 0.20f + 0.80f);
@@ -71,8 +74,9 @@ public class SubvertedShields extends BaseHullMod {
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
-        if (ship == null || ship.getShield() == null)
+        if (ship == null || ship.getShield() == null) {
             return "Ship has no shields";
+        }
         return null;
     }
 

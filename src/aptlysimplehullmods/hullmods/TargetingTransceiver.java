@@ -22,7 +22,9 @@ public class TargetingTransceiver extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive()) return;
+        if (!ship.isAlive()) {
+            return;
+        }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         String key = "targeting_transceiver_" + ship.getId();
@@ -47,26 +49,38 @@ public class TargetingTransceiver extends BaseHullMod {
             for (Iterator<Object> itr = Global.getCombatEngine().getShipGrid().getCheckIterator(ship.getLocation(), checkSize, checkSize); itr.hasNext(); ) {
                 Object next = itr.next();
 
-                if (!(next instanceof ShipAPI)) continue;
+                if (!(next instanceof ShipAPI)) {
+                    continue;
+                }
 
                 ShipAPI other = (ShipAPI) next;
 
-                if (ship == other) continue;
-                if (other.getOwner() != ship.getOwner()) continue;
-                if (other.isHulk()) continue;
-                if (!hasTargetingCore(other.getVariant())) continue;
+                if (ship == other) {
+                    continue;
+                }
+                if (other.getOwner() != ship.getOwner()) {
+                    continue;
+                }
+                if (other.isHulk()) {
+                    continue;
+                }
+                if (!hasTargetingCore(other.getVariant())) {
+                    continue;
+                }
 
                 float radiusSum = (ship.getShieldRadiusEvenIfNoShield() + other.getShieldRadiusEvenIfNoShield()) * 0.75f;
                 float dist = Misc.getDistance(ship.getShieldCenterEvenIfNoShield(), other.getShieldCenterEvenIfNoShield()) - radiusSum;
 
                 float mag = 0f;
-                if (dist < minEffectRange)
+                if (dist < minEffectRange) {
                     mag = 1f;
-                else if (dist < minEffectRange + maxEffectRange)
+                } else if (dist < minEffectRange + maxEffectRange) {
                     mag = 1f - (dist - minEffectRange) / maxEffectRange;
+                }
 
-                if (mag > bestMag)
+                if (mag > bestMag) {
                     bestMag = mag;
+                }
 
                 data.mag = bestMag;
             }
@@ -81,10 +95,11 @@ public class TargetingTransceiver extends BaseHullMod {
 
         if (ship == Global.getCombatEngine().getPlayerShip()) {
             String icon = Global.getSettings().getSpriteName("ui", "icon_tactical_escort_package");
-            if (data.mag > 0.005f)
+            if (data.mag > 0.005f) {
                 Global.getCombatEngine().maintainStatusForPlayerShip(key, icon, "Targeting Transceiver", Math.round(data.mag * 100f) + "% telemetry quality", false);
-            else
+            } else {
                 Global.getCombatEngine().maintainStatusForPlayerShip(key, icon, "Targeting Transceiver", "no connection", true);
+            }
         }
     }
 

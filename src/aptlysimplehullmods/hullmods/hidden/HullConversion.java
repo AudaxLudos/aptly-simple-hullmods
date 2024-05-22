@@ -23,8 +23,9 @@ public class HullConversion extends BaseHullMod {
         stats.getHullBonus().modifyMult(id, 1f - HULL_MULT);
         stats.getBreakProb().modifyMult(id, 1f + BREAK_CHANCE_MULT);
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getArmorDamageTakenMult().modifyMult(id, 1f - ARMOR_DAMAGE_TAKEN_MULT);
+        }
     }
 
     @Override

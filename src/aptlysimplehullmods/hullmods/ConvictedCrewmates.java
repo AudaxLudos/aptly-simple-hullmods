@@ -82,15 +82,17 @@ public class ConvictedCrewmates extends BaseHullMod {
                     ShipAPI target = entry.getValue().target;
                     if (target.isHulk()) {
                         float pptHullSizeMult = 1f;
-                        if (ship.isFrigate() && target.getHullSize().ordinal() >= 3)
+                        if (ship.isFrigate() && target.getHullSize().ordinal() >= 3) {
                             pptHullSizeMult = FRIGATE_PPT_MULT;
-                        else if (ship.isDestroyer() && target.getHullSize().ordinal() >= 4)
+                        } else if (ship.isDestroyer() && target.getHullSize().ordinal() >= 4) {
                             pptHullSizeMult = DESTROYER_PPT_MULT;
+                        }
 
                         // Guarantee to get peak performance time on kill
                         float currentPPT = ship.getTimeDeployedForCRReduction();
-                        if (ship.getTimeDeployedForCRReduction() > maxPPT)
+                        if (ship.getTimeDeployedForCRReduction() > maxPPT) {
                             currentPPT = ship.getTimeDeployedForCRReduction() - maxPPT;
+                        }
 
                         ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSpec().getHullSize()) * pptHullSizeMult);
                         itr.remove();
@@ -103,13 +105,15 @@ public class ConvictedCrewmates extends BaseHullMod {
 
         @Override
         public String modifyDamageDealt(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
-            if (!(target instanceof ShipAPI))
+            if (!(target instanceof ShipAPI)) {
                 return null;
+            }
 
             ShipAPI targetShip = (ShipAPI) target;
 
-            if (targetShip.isHulk() || targetShip.isFighter())
+            if (targetShip.isHulk() || targetShip.isFighter()) {
                 return null;
+            }
             if (damagedTargets.containsKey(targetShip.getId())) {
                 damagedTargets.get(targetShip.getId()).timer = KILL_TIMER;
                 return null;

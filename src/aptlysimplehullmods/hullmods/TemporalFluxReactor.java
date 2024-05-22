@@ -16,8 +16,9 @@ public class TemporalFluxReactor extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (Global.getCombatEngine().isPaused())
+        if (Global.getCombatEngine().isPaused()) {
             return;
+        }
         if (!ship.isAlive()) {
             ship.getMutableStats().getTimeMult().unmodify(spec.getId());
             Global.getCombatEngine().getTimeMult().unmodify(spec.getId());
@@ -27,8 +28,9 @@ public class TemporalFluxReactor extends BaseHullMod {
         MutableShipStatsAPI stats = ship.getMutableStats();
         Color jitterColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
-        if (ship.getShield() != null)
+        if (ship.getShield() != null) {
             jitterColor = ship.getShield().getInnerColor();
+        }
 
         float jitterRangeBonus = ship.getFluxLevel() * 10f;
         float jitterLevel = (float) Math.sqrt(ship.getFluxLevel());
@@ -59,8 +61,9 @@ public class TemporalFluxReactor extends BaseHullMod {
 
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
-        if (ship == null || ship.getHullSpec().getShieldType() == ShieldType.PHASE)
+        if (ship == null || ship.getHullSpec().getShieldType() == ShieldType.PHASE) {
             return "Incompatible with phase ships";
+        }
         return null;
     }
 

@@ -15,8 +15,9 @@ public class VentingOverdrive extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
             return;
+        }
 
         MutableShipStatsAPI stats = ship.getMutableStats();
         CombatEngineAPI engine = Global.getCombatEngine();
@@ -31,8 +32,9 @@ public class VentingOverdrive extends BaseHullMod {
                 point.x += ship.getCollisionRadius() * ((float) Math.random() * 2f - 1f);
                 point.y += ship.getCollisionRadius() * ((float) Math.random() * 2f - 1f);
 
-                if (!CollisionUtils.isPointWithinBounds(point, ship))
+                if (!CollisionUtils.isPointWithinBounds(point, ship)) {
                     point = CollisionUtils.getNearestPointOnBounds(point, ship);
+                }
 
                 engine.applyDamage(ship, point, amount * (0.20f * ship.getVariant().getHullSpec().getFluxCapacity()), DamageType.OTHER, 0f, true, false, null);
             } else {

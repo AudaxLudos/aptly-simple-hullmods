@@ -17,17 +17,21 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive())
+        if (!ship.isAlive()) {
             return;
+        }
 
         List<WeaponAPI> weapons = ship.getAllWeapons();
         for (WeaponAPI weapon : weapons) {
-            if (weapon.getType() != WeaponType.MISSILE)
+            if (weapon.getType() != WeaponType.MISSILE) {
                 continue;
-            if (!weapon.usesAmmo())
+            }
+            if (!weapon.usesAmmo()) {
                 continue;
-            if (weapon.getAmmoPerSecond() != 0f)
+            }
+            if (weapon.getAmmoPerSecond() != 0f) {
                 continue;
+            }
             if (weapon.getAmmo() <= 0f || isSMod(ship)) {
                 float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MOD);
                 float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MOD;

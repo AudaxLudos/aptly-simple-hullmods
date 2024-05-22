@@ -1,5 +1,5 @@
 # APTLY SIMPLE HULLMODS
-A mod for starsector that adds a collection of hullmods used for ship customization that can be scavenge through out the sector.
+A mod for starsector that adds a collection of hullmods used for ship customization that can be scavenged throughout the sector.
 
 ## Credits
 <strong>Vildrian</strong>: for sprites for some of the hullmods.  

@@ -53,20 +53,24 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
     @Override
     public String getUnapplicableReason(ShipAPI ship) {
         int numLogisticsMods = getNumLogisticsMods(ship);
-        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
+        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             numLogisticsMods--;
-        if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)))
+        }
+        if (ship == null || (ship.getVariant().hasHullMod(HullMods.CIVGRADE) && !ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS))) {
             return "Cannot be installed on a civilian ship without Militarized Subsystems";
-        if (numLogisticsMods >= getMax(ship))
+        }
+        if (numLogisticsMods >= getMax(ship)) {
             return "Maximum of 2 non-built-in \"Logistics\" hullmods per hull";
+        }
         return null;
     }
 
     @Override
     public boolean isApplicableToShip(ShipAPI ship) {
         int numLogisticsMods = getNumLogisticsMods(ship);
-        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId()))
+        if (this.spec != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             numLogisticsMods--;
+        }
         return ship != null && (!ship.getVariant().hasHullMod(HullMods.CIVGRADE) || ship.getVariant().hasHullMod(HullMods.MILITARIZED_SUBSYSTEMS)) && numLogisticsMods < getMax(ship);
     }
 

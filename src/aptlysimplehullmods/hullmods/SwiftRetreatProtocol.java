@@ -17,7 +17,9 @@ public class SwiftRetreatProtocol extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if (!ship.isAlive()) return;
+        if (!ship.isAlive()) {
+            return;
+        }
 
         String key = "fast_wing_retreat_protocol_" + ship.getId();
         FastWingRetreatProtocolData data = (FastWingRetreatProtocolData) Global.getCombatEngine().getCustomData().get(key);
@@ -32,16 +34,18 @@ public class SwiftRetreatProtocol extends BaseHullMod {
                 for (FighterWingAPI.ReturningFighter returningWing : wing.getReturning()) {
                     MutableShipStatsAPI fighterStats = returningWing.fighter.getMutableStats();
                     float movementMult = FIGHTER_MOVEMENT_MULT;
-                    if (isSMod(ship))
+                    if (isSMod(ship)) {
                         movementMult *= 2f;
+                    }
                     fighterStats.getMaxSpeed().modifyMult(spec.getId(), 1f + movementMult);
                     fighterStats.getMaxTurnRate().modifyMult(spec.getId(), 1f + movementMult);
                     fighterStats.getAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
                     fighterStats.getTurnAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
                     fighterStats.getDeceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
                     fighterStats.getEngineDamageTakenMult().modifyMult(spec.getId(), 1f + ENGINE_DMG_TAKEN_MULT);
-                    if (returningWing.fighter.getShield() != null)
+                    if (returningWing.fighter.getShield() != null) {
                         returningWing.fighter.getShield().toggleOff();
+                    }
                 }
             }
         }

@@ -18,8 +18,9 @@ public class ElasticShields extends BaseHullMod {
         stats.getKineticDamageTakenMult().modifyMult(id, 1f + DMG_TAKEN_MULT);
         stats.getEnergyShieldDamageTakenMult().modifyMult(id, 1f + DMG_TAKEN_MULT);
 
-        if (isSMod(stats))
+        if (isSMod(stats)) {
             stats.getEnergyShieldDamageTakenMult().unmodify(id);
+        }
     }
 
     @Override

@@ -27,9 +27,15 @@ public class FuelRamscoopScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) return;
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) return;
-        if (Global.getSector().getPlayerFleet().getCargo() == null) return;
+        if (Global.getSector().getPlayerFleet() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getCargo() == null) {
+            return;
+        }
 
         timer.advance(amount);
         if (timer.intervalElapsed()) {
@@ -37,12 +43,15 @@ public class FuelRamscoopScript implements EveryFrameScript {
             int shipsWithFuelRamscoop = 0;
             float fuelGenerated = 0;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(FUEL_RAMSCOOP_ID)) continue;
+                if (!member.getVariant().hasHullMod(FUEL_RAMSCOOP_ID)) {
+                    continue;
+                }
                 ++shipsWithFuelRamscoop;
-                if (!member.getVariant().getSMods().contains(FUEL_RAMSCOOP_ID))
+                if (!member.getVariant().getSMods().contains(FUEL_RAMSCOOP_ID)) {
                     fuelGenerated += FuelRamscoop.FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
-                else
+                } else {
                     fuelGenerated += FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
+                }
             }
 
             if (!isActive || shipsWithHullmod != shipsWithFuelRamscoop) {
@@ -54,8 +63,9 @@ public class FuelRamscoopScript implements EveryFrameScript {
             }
 
             if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
-                if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel())
+                if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel()) {
                     fuelGenerated = playerCargo.getMaxFuel() - playerCargo.getFuel();
+                }
 
                 if (fuelGenerated > 0) {
                     playerCargo.addFuel(fuelGenerated);

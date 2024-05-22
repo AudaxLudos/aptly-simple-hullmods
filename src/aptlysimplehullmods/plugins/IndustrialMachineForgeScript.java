@@ -28,9 +28,15 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) return;
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) return;
-        if (Global.getSector().getPlayerFleet().getCargo() == null) return;
+        if (Global.getSector().getPlayerFleet() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getCargo() == null) {
+            return;
+        }
 
         timer.advance(amount);
         if (timer.intervalElapsed()) {
@@ -40,12 +46,15 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             float metalsToConsume = 0f;
             float bonusHeavyMachinery = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(INDUSTRIAL_MACHINE_FORGE_ID)) continue;
+                if (!member.getVariant().hasHullMod(INDUSTRIAL_MACHINE_FORGE_ID)) {
+                    continue;
+                }
                 ++shipsWithIndustrialMachineForge;
                 heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
                 metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
-                if (member.getVariant().getSMods().contains(INDUSTRIAL_MACHINE_FORGE_ID))
+                if (member.getVariant().getSMods().contains(INDUSTRIAL_MACHINE_FORGE_ID)) {
                     bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize()) * 0.25f;
+                }
             }
 
             if (!isActive || shipsWithHullmod != shipsWithIndustrialMachineForge) {
@@ -60,8 +69,9 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsToConsume < 0f) {
                     heavyMachineryToGenerate = playerCargo.getCommodityQuantity(Commodities.METALS) / 7f;
                     metalsToConsume = heavyMachineryToGenerate * 7f;
-                    if (bonusHeavyMachinery > 0)
+                    if (bonusHeavyMachinery > 0) {
                         heavyMachineryToGenerate *= 1.25f;
+                    }
                 }
 
                 if (heavyMachineryToGenerate >= 1 && metalsToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {

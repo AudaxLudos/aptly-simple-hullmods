@@ -28,9 +28,15 @@ public class MineralRefineryScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) return;
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) return;
-        if (Global.getSector().getPlayerFleet().getCargo() == null) return;
+        if (Global.getSector().getPlayerFleet() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
+            return;
+        }
+        if (Global.getSector().getPlayerFleet().getCargo() == null) {
+            return;
+        }
 
         timer.advance(amount);
         if (timer.intervalElapsed()) {
@@ -43,7 +49,9 @@ public class MineralRefineryScript implements EveryFrameScript {
             float rareMetalsToGenerate = 0f;
             float rareOresToConsume = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(MINERAL_REFINERY_ID)) continue;
+                if (!member.getVariant().hasHullMod(MINERAL_REFINERY_ID)) {
+                    continue;
+                }
                 ++shipsWithMineralRefinery;
                 metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
                 oresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
@@ -69,15 +77,17 @@ public class MineralRefineryScript implements EveryFrameScript {
                 if (playerCargo.getCommodityQuantity(Commodities.ORE) - oresToConsume < -0.0001f) {
                     metalsToGenerate = playerCargo.getCommodityQuantity(Commodities.ORE) / 5f;
                     oresToConsume = metalsToGenerate * 5f;
-                    if (bonusMetals > 0)
+                    if (bonusMetals > 0) {
                         metalsToGenerate *= 1.25f;
+                    }
                 }
 
                 if (playerCargo.getCommodityQuantity(Commodities.RARE_ORE) - rareOresToConsume < -0.0001f) {
                     rareMetalsToGenerate = playerCargo.getCommodityQuantity(Commodities.RARE_ORE) / 5f;
                     rareOresToConsume = rareMetalsToGenerate * 5f;
-                    if (bonusRareMetals > 0)
+                    if (bonusRareMetals > 0) {
                         rareMetalsToGenerate *= 1.25f;
+                    }
                 }
 
                 if (metalsToGenerate >= 1 && oresToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.ORE, 5f)) {
