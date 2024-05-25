@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MissileBay extends BaseHullMod {
-    public static final float SHIP_STATS_MULT = 0.25f;
+    public static final float SHIP_STATS_MULT = 0.60f;
     public static final float FIGHTER_BAY_MOD = 1f;
     public static Map<HullSize, Float> DEPLOYMENT_POINTS_MOD = new HashMap<>();
 
