@@ -1,6 +1,7 @@
 package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.plugins.InvasionPackageScript;
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
@@ -69,16 +70,20 @@ public class InvasionPackage extends BaseHullMod {
     }
 
     public float getStatMultiplier(float statOffset) {
-        float totalStat = 0;
-        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.isMothballed()) {
-                continue;
+        float totalStat = 0f;
+        float calculatedStat = 0f;
+        if (Global.getCurrentState() != GameState.CAMPAIGN) {
+            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+                if (member.isMothballed()) {
+                    continue;
+                }
+                if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
+                    totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
+                }
             }
-            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
-                totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
-            }
-        }
 
-        return InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
+            calculatedStat = InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
+        }
+        return calculatedStat;
     }
 }
