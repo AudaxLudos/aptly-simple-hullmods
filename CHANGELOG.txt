@@ -1,3 +1,9 @@
+### 1.9.3
+- Release 1.9.3
+- Fix crash when viewing invasion package outside of campaign
+- Buff missile bay missile ammo bonus to 60% from 25%
+- Fix issue where marine training facility ui message triggers when training 0 marines
+
 ### 1.9.0
 - Update invasion package added to factions known hullmods
 - Update re-enabled targeting transceiver

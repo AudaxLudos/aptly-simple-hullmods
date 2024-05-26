@@ -5,8 +5,8 @@
     "modVersion": {
         "major": 1,
         "minor": 9,
-        "patch": 0
+        "patch": 3
     },
-    "directDownloadURL": "https://github.com/AudaxLudos/aptly-simple-hullmods/releases/latest/download/AptlySimpleHullmods-1.9.0.zip",
+    "directDownloadURL": "https://github.com/AudaxLudos/aptly-simple-hullmods/releases/latest/download/AptlySimpleHullmods-1.9.3.zip",
     "changelogURL": "https://raw.githubusercontent.com/AudaxLudos/aptly-simple-hullmods/main/CHANGELOG.txt"
 }
