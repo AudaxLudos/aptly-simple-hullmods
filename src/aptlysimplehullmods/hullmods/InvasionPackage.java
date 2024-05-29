@@ -70,20 +70,23 @@ public class InvasionPackage extends BaseHullMod {
     }
 
     public float getStatMultiplier(float statOffset) {
-        float totalStat = 0f;
-        float calculatedStat = 0f;
-        if (Global.getCurrentState() != GameState.CAMPAIGN) {
-            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (member.isMothballed()) {
-                    continue;
-                }
-                if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
-                    totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
-                }
-            }
-
-            calculatedStat = InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
+        if (Global.getCurrentState() != GameState.CAMPAIGN || Global.getSector() == null || Global.getSector().getPlayerFleet() == null) {
+            return 0f;
         }
+
+        float calculatedStat = 0f;
+        float totalStat = 0f;
+
+        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+            if (member.isMothballed()) {
+                continue;
+            }
+            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
+                totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
+            }
+        }
+
+        calculatedStat = InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
         return calculatedStat;
     }
 }
