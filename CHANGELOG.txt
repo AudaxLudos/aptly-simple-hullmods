@@ -1,3 +1,8 @@
+### 1.9.3a
+- Release 1.9.3a
+- Update GitHub action script
+- Fix crash when hovering over invasion package part 2
+
 ### 1.9.3
 - Release 1.9.3
 - Fix crash when viewing invasion package outside of campaign
