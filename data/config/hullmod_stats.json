@@ -1,7 +1,7 @@
 {
   "ash_advance_radar_systems": {
     "sight_radius_mult": 0.25,
-    "weapon_range_mult": 0.05
+    "weapon_range_mult": 1
   },
   "ash_automated_racks": {
     "missile_fire_rate_mult": 0.20,
@@ -25,19 +25,19 @@
   },
   "ash_external_cargo_holds": {
     "flux_dissipation_mult": 0.10,
-    "armor_damage_taken_mult": 0.10,
     "sensor_profile_mult": 0.10,
+    "armor_damage_taken_mult": 0.10,
     "cargo_mod": [60,120,180,300]
   },
   "ash_external_cryo_pods": {
     "flux_dissipation_mult": 0.10,
-    "armor_damage_taken_mult": 0.10,
+    "sensor_profile_mult": 0.10,
     "crew_lost_mult": 0.10,
     "crew_mod": [60,120,180,300]
   },
   "ash_external_fuel_tanks": {
     "flux_dissipation_mult": 0.10,
-    "armor_damage_taken_mult": 0.10,
+    "sensor_profile_mult": 0.10,
     "high_explosive_damage_taken_mult": 0.10,
     "fuel_mod": [60,120,180,300]
   },

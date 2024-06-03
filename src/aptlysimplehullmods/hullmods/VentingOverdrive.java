@@ -11,7 +11,7 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 
 public class VentingOverdrive extends BaseHullMod {
-    public static final float SHIP_MOVEMENT_MULT = 1f;
+    public static float SHIP_MOVEMENT_MULT = 1f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
