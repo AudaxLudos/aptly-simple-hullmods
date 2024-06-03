@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class ModPlugin extends BaseModPlugin {
-    public static final String HULLMOD_SETTINGS_FILE = "data/config/hullmod_stats.json";
+    public static final String HULLMOD_SETTINGS_FILE = "data/config/hullmod_stats.ini";
 
     @Override
     public void onGameLoad(boolean newGame) {
@@ -129,14 +129,14 @@ public class ModPlugin extends BaseModPlugin {
             IndustrialMachineForge.METALS_TO_CONSUME.put(ShipAPI.HullSize.CAPITAL_SHIP, getInt(statsData, "metals_to_consume", 3));
 
             statsData = hullmodData.getJSONObject("ash_invasion_package");
-            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.FRIGATE, getFloat(statsData, "planetary_operations_casualties_mult" , 0));
-            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.DESTROYER, getFloat(statsData, "planetary_operations_casualties_mult", 1));
-            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "planetary_operations_casualties_mult", 2));
-            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "planetary_operations_casualties_mult", 3));
-            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.FRIGATE, getFloat(statsData, "planetary_operations_mult" , 0));
-            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.DESTROYER, getFloat(statsData, "planetary_operations_mult", 1));
-            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "planetary_operations_mult", 2));
-            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "planetary_operations_mult", 3));
+            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.FRIGATE, getFloat(statsData, "casualties_mult" , 0));
+            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.DESTROYER, getFloat(statsData, "casualties_mult", 1));
+            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "casualties_mult", 2));
+            InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "casualties_mult", 3));
+            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.FRIGATE, getFloat(statsData, "operations_mult" , 0));
+            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.DESTROYER, getFloat(statsData, "operations_mult", 1));
+            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "operations_mult", 2));
+            InvasionPackage.PLANETARY_OPERATIONS_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "operations_mult", 3));
             InvasionPackage.CARGO_CAPACITY_MULT = getFloat(statsData, "cargo_capacity_mult");
 
             statsData = hullmodData.getJSONObject("ash_makeshift_missile_autoforge");
