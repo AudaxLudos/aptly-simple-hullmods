@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReactiveSubsystems extends BaseHullMod {
-    public static final float MAX_CR_MOD = 0.15f;
+    public static float MAX_CR_MOD = 0.15f;
     public static Map<HullSize, Float> DEPLOYMENT_POINTS_MOD = new HashMap<>();
 
     static {

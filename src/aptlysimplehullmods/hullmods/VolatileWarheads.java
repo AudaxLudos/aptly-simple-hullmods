@@ -10,9 +10,9 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class VolatileWarheads extends BaseHullMod {
-    public static final float MISSILE_DAMAGE_MULT = 0.20f;
-    public static final float MISSILE_SPEED_MULT = 0.10f;
-    public static final float MISSILE_HEALTH_MULT = 0.10f;
+    public static float MISSILE_DAMAGE_MULT = 0.20f;
+    public static float MISSILE_SPEED_MULT = 0.10f;
+    public static float MISSILE_HEALTH_MULT = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {

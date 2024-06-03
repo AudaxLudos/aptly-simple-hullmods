@@ -10,8 +10,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class CircuitBreakers extends BaseHullMod {
-    public static final float OVERLOAD_TIME_MULT = 0.33f;
-    public static final float EMP_DAMAGE_TAKEN_MULT = 0.50f;
+    public static float OVERLOAD_TIME_MULT = 0.33f;
+    public static float EMP_DAMAGE_TAKEN_MULT = 0.50f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {

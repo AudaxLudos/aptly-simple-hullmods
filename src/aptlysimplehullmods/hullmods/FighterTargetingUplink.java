@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class FighterTargetingUplink extends BaseHullMod {
-    public static final float DAMAGE_MULT = 0.20f;
+    public static float FIGHTER_DAMAGE_MULT = 0.20f;
     public static float MIN_EFFECTIVE_RANGE = 760f;
     public static float MAX_EFFECTIVE_RANGE = 560f;
 
@@ -19,12 +19,12 @@ public class FighterTargetingUplink extends BaseHullMod {
     public void applyEffectsToFighterSpawnedByShip(ShipAPI fighter, ShipAPI ship, String id) {
         MutableShipStatsAPI wingStats = fighter.getMutableStats();
         if (hasTargetingCore(ship.getVariant())) {
-            wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
+            wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
+            wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
+            wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
+            wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
+            wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
         }
     }
 
@@ -107,12 +107,12 @@ public class FighterTargetingUplink extends BaseHullMod {
             for (FighterWingAPI wing : ship.getAllWings()) {
                 for (ShipAPI wingShip : wing.getWingMembers()) {
                     MutableShipStatsAPI wingStats = wingShip.getMutableStats();
-                    wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT * bestMag);
                 }
             }
         }
@@ -137,7 +137,7 @@ public class FighterTargetingUplink extends BaseHullMod {
         tooltip.addPara("If a %s has a %s and is within %s OR the %s has a %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", 1000 + "su", "ship", "Targeting Core/Unit");
         tooltip.setBulletWidth(20f);
         tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Increases the damage of all fighters by %s", pad, good, Math.round(DAMAGE_MULT * 100f) + "%");
+        tooltip.addPara("^ Increases the damage of all fighters by %s", pad, good, Math.round(FIGHTER_DAMAGE_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -10,13 +10,14 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class BeamCombiners extends BaseHullMod {
-    public static final float BEAM_STATS_MULT = 0.20f;
+    public static float BEAM_DAMAGE_MULT = 0.20f;
+    public static float BEAM_FLUX_COST_MULT = 0.20f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getBeamWeaponDamageMult().modifyMult(id, 1f + BEAM_STATS_MULT);
+        stats.getBeamWeaponDamageMult().modifyMult(id, 1f + BEAM_DAMAGE_MULT);
 
-        float beamFluxCostMult = BEAM_STATS_MULT;
+        float beamFluxCostMult = BEAM_FLUX_COST_MULT;
         if (isSMod(stats)) {
             beamFluxCostMult *= 0.5f;
         }
@@ -30,8 +31,8 @@ public class BeamCombiners extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the damage of beam weapons by %s.", oPad, good, Math.round(BEAM_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the flux cost of beam weapons by %s.", pad, bad, Math.round(BEAM_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the damage of beam weapons by %s.", oPad, good, Math.round(BEAM_DAMAGE_MULT * 100f) + "%");
+        tooltip.addPara("Increases the flux cost of beam weapons by %s.", pad, bad, Math.round(BEAM_FLUX_COST_MULT * 100f) + "%");
     }
 
     @Override
@@ -39,7 +40,7 @@ public class BeamCombiners extends BaseHullMod {
         float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addPara("Reduces the flux cost penalty of beam weapons by %s.", oPad, good, Math.round(BEAM_STATS_MULT * 100f * 0.5f) + "%");
+        tooltip.addPara("Reduces the flux cost penalty of beam weapons by %s.", oPad, good, Math.round(BEAM_FLUX_COST_MULT * 100f * 0.5f) + "%");
     }
 
     @Override

@@ -12,7 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class TemporalFluxReactor extends BaseHullMod {
-    public static final float SPEED_OF_TIME_MULT = 0.33f;
+    public static float TIME_FLOW_MULT = 0.33f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -35,13 +35,13 @@ public class TemporalFluxReactor extends BaseHullMod {
         float jitterRangeBonus = ship.getFluxLevel() * 10f;
         float jitterLevel = (float) Math.sqrt(ship.getFluxLevel());
         ship.setJitterUnder(this, jitterColor, jitterLevel, 50, 0f, 7f + jitterRangeBonus);
-        stats.getTimeMult().modifyMult(this.spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT);
+        stats.getTimeMult().modifyMult(this.spec.getId(), 1f + ship.getFluxLevel() * TIME_FLOW_MULT);
 
-        if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f >= 1f) {
-            Global.getCombatEngine().getTimeMult().modifyMult(this.spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT));
+        if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * TIME_FLOW_MULT * 100f >= 1f) {
+            Global.getCombatEngine().getTimeMult().modifyMult(this.spec.getId(), 1f / (1f + ship.getFluxLevel() * TIME_FLOW_MULT));
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
-                    "graphics/icons/hullsys/temporal_shell.png", "Speed of Time Boost",
-                    Math.round(ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f) + "%", false);
+                    "graphics/icons/hullsys/temporal_shell.png", "Time flow Boost",
+                    Math.round(ship.getFluxLevel() * TIME_FLOW_MULT * 100f) + "%", false);
         }
     }
 
@@ -55,7 +55,7 @@ public class TemporalFluxReactor extends BaseHullMod {
         tooltip.addPara("As %s flux levels rise:", oPad, b, "soft");
         tooltip.setBulletWidth(20f);
         tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Increases the ship's speed of time by up to %s", pad, good, Math.round(SPEED_OF_TIME_MULT * 100f) + "%");
+        tooltip.addPara("^ Increases the ship's speed of time by up to %s", pad, good, Math.round(TIME_FLOW_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

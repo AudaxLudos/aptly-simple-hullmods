@@ -10,9 +10,9 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FluxAmplifiers extends BaseHullMod {
-    public static final float WEAPON_DAMAGE_MULT = 0.20f;
-    public static final float WEAPON_FLUX_MULT = 0.10f;
-    public static final float WEAPON_FIRE_RATE_MULT = 0.10f;
+    public static float WEAPON_DAMAGE_MULT = 0.20f;
+    public static float WEAPON_FLUX_MULT = 0.10f;
+    public static float WEAPON_FIRE_RATE_MULT = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {

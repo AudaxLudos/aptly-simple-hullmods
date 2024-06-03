@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MineralRefinery extends BaseHullMod {
-    public static final float DAYS_TO_GENERATE_ALLOYS = 3f;
+    public static float DAYS_TO_GENERATE_ALLOYS = 3f;
     public static Map<ShipAPI.HullSize, Integer> ALLOYS_TO_GENERATE = new HashMap<>();
     public static Map<ShipAPI.HullSize, Integer> MINERALS_TO_CONSUME = new HashMap<>();
 

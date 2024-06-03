@@ -15,8 +15,8 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class TargetingTransceiver extends BaseHullMod {
-    public static final float WEAPON_RANGE_MOD = 0.1f;
-    public static final float AUTOFIRE_ACCURACY_MOD = 0.40f;
+    public static float WEAPON_RANGE_MOD = 0.1f;
+    public static float AUTOFIRE_ACCURACY_MOD = 0.40f;
     public static float MIN_EFFECTIVE_RANGE = 760f;
     public static float MAX_EFFECTIVE_RANGE = 560f;
 

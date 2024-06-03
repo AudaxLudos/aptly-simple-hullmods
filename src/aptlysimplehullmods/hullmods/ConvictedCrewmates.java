@@ -15,11 +15,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ConvictedCrewmates extends BaseHullMod {
-    public static final float FRIGATE_PPT_MULT = 2f;
-    public static final float DESTROYER_PPT_MULT = 1.5f;
-    public static final float MAX_CR_MOD = 0.15f;
-    public static final float KILL_TIMER = 30f;
-    private static final Map<Object, Float> PPT_GAIN = new HashMap<>();
+    public static float FRIGATE_PPT_MULT = 2f;
+    public static float DESTROYER_PPT_MULT = 1.5f;
+    public static float MAX_CR_MOD = 0.15f;
+    public static float KILL_TIMER = 30f;
+    public static Map<Object, Float> PPT_GAIN = new HashMap<>();
 
     static {
         PPT_GAIN.put(HullSize.FRIGATE, 5f);

@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GravitonAttunementDrive extends BaseLogisticsHullMod {
-    public static final float SUPPLIES_PER_MONTH_MULT = 2f;
-    public static final float SENSOR_PROFILE_MULT = 3f;
-    private static final Map<Object, Float> FLEET_BURN_MOD = new HashMap<>();
+    public static float SUPPLIES_PER_MONTH_MULT = 2f;
+    public static float SENSOR_PROFILE_MULT = 3f;
+    public static Map<Object, Float> FLEET_BURN_MOD = new HashMap<>();
 
     static {
         FLEET_BURN_MOD.put(HullSize.FRIGATE, 1f);

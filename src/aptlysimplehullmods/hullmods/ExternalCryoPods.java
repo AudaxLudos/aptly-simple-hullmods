@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCryoPods extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULT = 0.10f;
-    private static final Map<Object, Float> CREW_MOD = new HashMap<>();
+    public static float FLUX_DISSIPATION_MULT = 0.10f;
+    public static float SENSOR_PROFILE_MULT = 0.10f;
+    public static float CREW_LOST_MULT = 0.10f;
+    public static Map<Object, Float> CREW_MOD = new HashMap<>();
 
     static {
         CREW_MOD.put(HullSize.FRIGATE, 60f);
@@ -27,9 +29,9 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getMaxCrewMod().modifyFlat(id, CREW_MOD.get(hullSize) + (isSMod(stats) ? CREW_MOD.get(hullSize) : 0));
         if (!isSMod(stats)) {
-            stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
-            stats.getCrewLossMult().modifyMult(id, 1f + SHIP_STATS_MULT);
-            stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
+            stats.getFluxDissipation().modifyMult(id, 1f - FLUX_DISSIPATION_MULT);
+            stats.getCrewLossMult().modifyMult(id, 1f + SENSOR_PROFILE_MULT);
+            stats.getSensorProfile().modifyMult(id, 1f + CREW_LOST_MULT);
         }
     }
 
@@ -45,9 +47,9 @@ public class ExternalCryoPods extends BaseLogisticsHullMod {
                 CREW_MOD.get(HullSize.DESTROYER).intValue() + "",
                 CREW_MOD.get(HullSize.CRUISER).intValue() + "",
                 CREW_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
-        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(FLUX_DISSIPATION_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SENSOR_PROFILE_MULT * 100f) + "%");
+        tooltip.addPara("Increases crew casualties by %s when hull damage is taken during combat.", pad, bad, Math.round(CREW_LOST_MULT * 100f) + "%");
     }
 
     @Override

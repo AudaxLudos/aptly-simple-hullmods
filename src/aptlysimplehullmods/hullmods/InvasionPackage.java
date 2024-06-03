@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InvasionPackage extends BaseHullMod {
-    public static final Map<Object, Float> PLANETARY_OPERATION_CASUALTIES_MULT = new HashMap<>();
-    public static final Map<Object, Float> PLANETARY_OPERATIONS_MULT = new HashMap<>();
+    public static Map<Object, Float> PLANETARY_OPERATION_CASUALTIES_MULT = new HashMap<>();
+    public static Map<Object, Float> PLANETARY_OPERATIONS_MULT = new HashMap<>();
     public static float CARGO_CAPACITY_MULT = 0.40f;
 
     static {

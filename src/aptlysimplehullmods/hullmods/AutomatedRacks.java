@@ -9,9 +9,9 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class AutomatedRacks extends BaseHullMod {
-    public static final float MISSILE_FIRE_RATE_MULT = 0.20f;
-    public static final float MISSILE_AMMO_MULT = 0.10f;
-    public static final float MISSILE_TURN_RATE_MULT = 0.10f;
+    public static float MISSILE_FIRE_RATE_MULT = 0.20f;
+    public static float MISSILE_AMMO_MULT = 0.10f;
+    public static float MISSILE_TURN_RATE_MULT = 0.10f;
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {

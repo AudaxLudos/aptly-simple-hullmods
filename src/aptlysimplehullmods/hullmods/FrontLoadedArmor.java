@@ -9,8 +9,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FrontLoadedArmor extends BaseHullMod {
-    public static final float POSITIVE_ARMOR_VALUE_MULT = 2f;
-    public static final float NEGATIVE_ARMOR_VALUE_MULT = 0.5f;
+    public static float POSITIVE_ARMOR_VALUE_MULT = 2f;
+    public static float NEGATIVE_ARMOR_VALUE_MULT = 0.5f;
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {

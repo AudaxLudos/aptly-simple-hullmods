@@ -12,8 +12,8 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class SwiftRetreatProtocol extends BaseHullMod {
-    public static final float FIGHTER_MOVEMENT_MULT = 0.25f;
-    public static final float ENGINE_DMG_TAKEN_MULT = 0.25f;
+    public static float FIGHTER_MOVEMENT_MULT = 0.25f;
+    public static float FIGHTER_ENGINE_DMG_TAKEN_MULT = 0.25f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -42,7 +42,7 @@ public class SwiftRetreatProtocol extends BaseHullMod {
                     fighterStats.getAcceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
                     fighterStats.getTurnAcceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
                     fighterStats.getDeceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
-                    fighterStats.getEngineDamageTakenMult().modifyMult(this.spec.getId(), 1f + ENGINE_DMG_TAKEN_MULT);
+                    fighterStats.getEngineDamageTakenMult().modifyMult(this.spec.getId(), 1f + FIGHTER_ENGINE_DMG_TAKEN_MULT);
                     if (returningWing.fighter.getShield() != null) {
                         returningWing.fighter.getShield().toggleOff();
                     }
@@ -64,7 +64,7 @@ public class SwiftRetreatProtocol extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("^ Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
         tooltip.addPara("^ Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("^ Increases the fighter's engine damage taken by %s", pad, bad, Math.round(ENGINE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("^ Increases the fighter's engine damage taken by %s", pad, bad, Math.round(FIGHTER_ENGINE_DMG_TAKEN_MULT * 100f) + "%");
         tooltip.addPara("^ If the fighter has shields, %s shields", pad, bad, "turns off");
         tooltip.setBulletedListMode(null);
     }

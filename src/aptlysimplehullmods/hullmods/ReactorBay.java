@@ -13,8 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReactorBay extends BaseHullMod {
-    public static final float SHIP_STATS_MULT = 0.1f;
-    public static final float FIGHTER_BAY_MOD = 1f;
+    public static float FLUX_DISSIPATION_MULT = 0.1f;
+    public static float FLUX_CAPACITY_MULT = 0.1f;
+    public static float FIGHTER_BAY_MOD = 1f;
     public static Map<HullSize, Float> DEPLOYMENT_POINTS_MOD = new HashMap<>();
 
     static {
@@ -26,8 +27,8 @@ public class ReactorBay extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getFluxDissipation().modifyMult(id, 1f + SHIP_STATS_MULT);
-        stats.getFluxCapacity().modifyMult(id, 1f + SHIP_STATS_MULT);
+        stats.getFluxDissipation().modifyMult(id, 1f + FLUX_DISSIPATION_MULT);
+        stats.getFluxCapacity().modifyMult(id, 1f + FLUX_CAPACITY_MULT);
         stats.getNumFighterBays().modifyFlat(id, -FIGHTER_BAY_MOD);
 
         if (isSMod(stats)) {
@@ -42,8 +43,8 @@ public class ReactorBay extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the ship's flux dissipation by %s.", oPad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's flux capacity by %s.", pad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's flux dissipation by %s.", oPad, good, Math.round(FLUX_DISSIPATION_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's flux capacity by %s.", pad, good, Math.round(FLUX_CAPACITY_MULT * 100f) + "%");
         tooltip.addPara("Removes %s built-in fighter bay.", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
     }
 

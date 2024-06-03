@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCargoHolds extends BaseLogisticsHullMod {
-    public static final float SHIP_STATS_MULT = 0.10f;
-    private static final Map<HullSize, Float> CARGO_MOD = new HashMap<>();
+    public static float FLUX_DISSIPATION_MULT = 0.10f;
+    public static float SENSOR_PROFILE_MULT = 0.10f;
+    public static float ARMOR_DAMAGE_TAKEN_MULT = 0.10f;
+    public static Map<HullSize, Float> CARGO_MOD = new HashMap<>();
 
     static {
         CARGO_MOD.put(HullSize.FRIGATE, 60f);
@@ -27,9 +29,9 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getCargoMod().modifyFlat(id, CARGO_MOD.get(hullSize) + (isSMod(stats) ? CARGO_MOD.get(hullSize) : 0));
         if (!isSMod(stats)) {
-            stats.getFluxDissipation().modifyMult(id, 1f - SHIP_STATS_MULT);
-            stats.getArmorDamageTakenMult().modifyMult(id, 1f + SHIP_STATS_MULT);
-            stats.getSensorProfile().modifyMult(id, 1f + SHIP_STATS_MULT);
+            stats.getFluxDissipation().modifyMult(id, 1f - FLUX_DISSIPATION_MULT);
+            stats.getArmorDamageTakenMult().modifyMult(id, 1f + ARMOR_DAMAGE_TAKEN_MULT);
+            stats.getSensorProfile().modifyMult(id, 1f + SENSOR_PROFILE_MULT);
         }
     }
 
@@ -45,9 +47,9 @@ public class ExternalCargoHolds extends BaseLogisticsHullMod {
                 CARGO_MOD.get(HullSize.DESTROYER).intValue() + "",
                 CARGO_MOD.get(HullSize.CRUISER).intValue() + "",
                 CARGO_MOD.get(HullSize.CAPITAL_SHIP).intValue() + "");
-        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
-        tooltip.addPara("Decreases the ship's armor strength by %s.", pad, bad, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's flux dissipation by %s.", pad, bad, Math.round(FLUX_DISSIPATION_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ship's sensor profile by %s.", pad, bad, Math.round(SENSOR_PROFILE_MULT * 100f) + "%");
+        tooltip.addPara("Decreases the ship's armor strength by %s.", pad, bad, Math.round(ARMOR_DAMAGE_TAKEN_MULT * 100f) + "%");
     }
 
     @Override

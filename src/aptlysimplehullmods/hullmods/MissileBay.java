@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MissileBay extends BaseHullMod {
-    public static final float SHIP_STATS_MULT = 0.60f;
-    public static final float FIGHTER_BAY_MOD = 1f;
+    public static float MISSILE_AMMO_MULT = 0.60f;
+    public static float FIGHTER_BAY_MOD = 1f;
     public static Map<HullSize, Float> DEPLOYMENT_POINTS_MOD = new HashMap<>();
 
     static {
@@ -26,7 +26,7 @@ public class MissileBay extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getMissileAmmoBonus().modifyPercent(id, SHIP_STATS_MULT * 100f);
+        stats.getMissileAmmoBonus().modifyPercent(id, MISSILE_AMMO_MULT * 100f);
         stats.getNumFighterBays().modifyFlat(id, -FIGHTER_BAY_MOD);
 
         if (isSMod(stats)) {
@@ -41,7 +41,7 @@ public class MissileBay extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the ammo capacity of missile weapons by %s.", oPad, good, Math.round(SHIP_STATS_MULT * 100f) + "%");
+        tooltip.addPara("Increases the ammo capacity of missile weapons by %s.", oPad, good, Math.round(MISSILE_AMMO_MULT * 100f) + "%");
         tooltip.addPara("Removes %s built-in fighter bay.", pad, bad, Math.round(FIGHTER_BAY_MOD) + "");
     }
 

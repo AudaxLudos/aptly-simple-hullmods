@@ -12,8 +12,8 @@ import java.awt.*;
 import java.util.List;
 
 public class MakeshiftMissileAutoforge extends BaseHullMod {
-    public static final float MISSILE_AMMO_RELOAD_SIZE_MOD = 10f;
-    public static final float MISSILE_AMMO_PER_SECOND_MOD = 50f;
+    public static float MISSILE_AMMO_RELOAD_SIZE_MOD = 10f;
+    public static float MISSILE_AMMO_PER_SECOND_MOD = 50f;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
