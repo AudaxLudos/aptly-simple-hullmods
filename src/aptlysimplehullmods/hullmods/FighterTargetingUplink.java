@@ -19,12 +19,12 @@ public class FighterTargetingUplink extends BaseHullMod {
     public void applyEffectsToFighterSpawnedByShip(ShipAPI fighter, ShipAPI ship, String id) {
         MutableShipStatsAPI wingStats = fighter.getMutableStats();
         if (hasTargetingCore(ship.getVariant())) {
-            wingStats.getDamageToCapital().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToCruisers().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToDestroyers().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToFrigates().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToFighters().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
-            wingStats.getDamageToMissiles().modifyMult(spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
+            wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT);
         }
     }
 
@@ -107,12 +107,12 @@ public class FighterTargetingUplink extends BaseHullMod {
             for (FighterWingAPI wing : ship.getAllWings()) {
                 for (ShipAPI wingShip : wing.getWingMembers()) {
                     MutableShipStatsAPI wingStats = wingShip.getMutableStats();
-                    wingStats.getDamageToCapital().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToCruisers().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToDestroyers().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToFrigates().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToFighters().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
-                    wingStats.getDamageToMissiles().modifyMult(spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToFrigates().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToFighters().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
+                    wingStats.getDamageToMissiles().modifyMult(this.spec.getId(), 1f + DAMAGE_MULT * bestMag);
                 }
             }
         }

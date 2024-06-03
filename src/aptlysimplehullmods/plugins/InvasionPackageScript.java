@@ -53,23 +53,23 @@ public class InvasionPackageScript implements EveryFrameScript {
             }
         }
 
-        if (shipsWithHullmod != shipsWithInvasionPackage) {
+        if (this.shipsWithHullmod != shipsWithInvasionPackage) {
             // un-modify fleet stats here
-            isActive = false;
-            shipsWithHullmod = shipsWithInvasionPackage;
+            this.isActive = false;
+            this.shipsWithHullmod = shipsWithInvasionPackage;
             playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).unmodify(INVASION_PACKAGE_ID);
             playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(INVASION_PACKAGE_ID);
         }
 
-        if (!isActive) {
+        if (!this.isActive) {
             // modify fleet stats here
-            isActive = true;
+            this.isActive = true;
             playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(INVASION_PACKAGE_ID,
                     1f + computeStatMultiplier(totalStat),
-                    shipsWithHullmod + " ships with Invasion Package");
+                    this.shipsWithHullmod + " ships with Invasion Package");
             playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(INVASION_PACKAGE_ID,
                     1f - computeStatMultiplier(totalStat),
-                    shipsWithHullmod + " ships with Invasion Package");
+                    this.shipsWithHullmod + " ships with Invasion Package");
         }
     }
 }

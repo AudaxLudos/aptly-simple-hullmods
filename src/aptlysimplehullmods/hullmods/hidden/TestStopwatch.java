@@ -13,8 +13,8 @@ public class TestStopwatch extends BaseHullMod {
 
         float stopwatchTime = 0f;
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId()) instanceof Float) {
-            stopwatchTime = (float) Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + spec.getId());
+        if (Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + this.spec.getId()) instanceof Float) {
+            stopwatchTime = (float) Global.getCombatEngine().getCustomData().get("ASH_StopwatchTime_" + this.spec.getId());
         }
 
         if (ship.areSignificantEnemiesInRange()) {
@@ -27,6 +27,6 @@ public class TestStopwatch extends BaseHullMod {
                     stopwatchTime + " seconds", false);
         }
 
-        Global.getCombatEngine().getCustomData().put("ASH_StopwatchTime_" + spec.getId(), stopwatchTime);
+        Global.getCombatEngine().getCustomData().put("ASH_StopwatchTime_" + this.spec.getId(), stopwatchTime);
     }
 }

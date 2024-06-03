@@ -74,27 +74,27 @@ public class ConvictedCrewmates extends BaseHullMod {
 
         @Override
         public void advance(float amount) {
-            killChecker.advance(amount);
-            if (killChecker.intervalElapsed() && !damagedTargets.isEmpty()) {
-                for (Iterator<Map.Entry<String, TargetData>> itr = damagedTargets.entrySet().iterator(); itr.hasNext(); ) {
+            this.killChecker.advance(amount);
+            if (this.killChecker.intervalElapsed() && !this.damagedTargets.isEmpty()) {
+                for (Iterator<Map.Entry<String, TargetData>> itr = this.damagedTargets.entrySet().iterator(); itr.hasNext(); ) {
                     Map.Entry<String, TargetData> entry = itr.next();
                     entry.getValue().timer -= amount;
                     ShipAPI target = entry.getValue().target;
                     if (target.isHulk()) {
                         float pptHullSizeMult = 1f;
-                        if (ship.isFrigate() && target.getHullSize().ordinal() >= 3) {
+                        if (this.ship.isFrigate() && target.getHullSize().ordinal() >= 3) {
                             pptHullSizeMult = FRIGATE_PPT_MULT;
-                        } else if (ship.isDestroyer() && target.getHullSize().ordinal() >= 4) {
+                        } else if (this.ship.isDestroyer() && target.getHullSize().ordinal() >= 4) {
                             pptHullSizeMult = DESTROYER_PPT_MULT;
                         }
 
                         // Guarantee to get peak performance time on kill
-                        float currentPPT = ship.getTimeDeployedForCRReduction();
-                        if (ship.getTimeDeployedForCRReduction() > maxPPT) {
-                            currentPPT = ship.getTimeDeployedForCRReduction() - maxPPT;
+                        float currentPPT = this.ship.getTimeDeployedForCRReduction();
+                        if (this.ship.getTimeDeployedForCRReduction() > this.maxPPT) {
+                            currentPPT = this.ship.getTimeDeployedForCRReduction() - this.maxPPT;
                         }
 
-                        ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSpec().getHullSize()) * pptHullSizeMult);
+                        this.ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSpec().getHullSize()) * pptHullSizeMult);
                         itr.remove();
                     } else if (entry.getValue().timer <= 0) {
                         itr.remove();
@@ -114,15 +114,15 @@ public class ConvictedCrewmates extends BaseHullMod {
             if (targetShip.isHulk() || targetShip.isFighter()) {
                 return null;
             }
-            if (damagedTargets.containsKey(targetShip.getId())) {
-                damagedTargets.get(targetShip.getId()).timer = KILL_TIMER;
+            if (this.damagedTargets.containsKey(targetShip.getId())) {
+                this.damagedTargets.get(targetShip.getId()).timer = KILL_TIMER;
                 return null;
             }
 
             TargetData data = new TargetData();
             data.target = targetShip;
 
-            damagedTargets.put(targetShip.getId(), data);
+            this.damagedTargets.put(targetShip.getId(), data);
 
             return null;
         }

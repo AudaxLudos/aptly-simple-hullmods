@@ -37,8 +37,8 @@ public class FuelRamscoopScript implements EveryFrameScript {
             return;
         }
 
-        timer.advance(amount);
-        if (timer.intervalElapsed()) {
+        this.timer.advance(amount);
+        if (this.timer.intervalElapsed()) {
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
             int shipsWithFuelRamscoop = 0;
             float fuelGenerated = 0;
@@ -54,15 +54,15 @@ public class FuelRamscoopScript implements EveryFrameScript {
                 }
             }
 
-            if (!isActive || shipsWithHullmod != shipsWithFuelRamscoop) {
+            if (!this.isActive || this.shipsWithHullmod != shipsWithFuelRamscoop) {
                 if (playerCargo.getFuel() < playerCargo.getMaxFuel()) {
-                    isActive = true;
-                    shipsWithHullmod = shipsWithFuelRamscoop;
-                    lastDay = Global.getSector().getClock().getTimestamp();
+                    this.isActive = true;
+                    this.shipsWithHullmod = shipsWithFuelRamscoop;
+                    this.lastDay = Global.getSector().getClock().getTimestamp();
                 }
             }
 
-            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
+            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
                 if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel()) {
                     fuelGenerated = playerCargo.getMaxFuel() - playerCargo.getFuel();
                 }
@@ -78,7 +78,7 @@ public class FuelRamscoopScript implements EveryFrameScript {
                             null);
                 }
 
-                isActive = false;
+                this.isActive = false;
             }
         }
     }

@@ -52,7 +52,7 @@ public class SubvertedShields extends BaseHullMod {
                 shieldInnerColor.getGreen(),
                 shieldInnerColor.getBlue(),
                 Math.round(shieldInnerAlpha)));
-        stats.getHardFluxDissipationFraction().modifyFlat(spec.getId(), HARD_FLUX_DISSIPATION_MOD);
+        stats.getHardFluxDissipationFraction().modifyFlat(this.spec.getId(), HARD_FLUX_DISSIPATION_MOD);
 
         Global.getCombatEngine().getCustomData().put("ASH_ShieldPulse_" + ship.getId(), shieldPulse);
     }

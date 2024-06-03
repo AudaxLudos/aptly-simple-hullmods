@@ -20,8 +20,8 @@ public class TemporalFluxReactor extends BaseHullMod {
             return;
         }
         if (!ship.isAlive()) {
-            ship.getMutableStats().getTimeMult().unmodify(spec.getId());
-            Global.getCombatEngine().getTimeMult().unmodify(spec.getId());
+            ship.getMutableStats().getTimeMult().unmodify(this.spec.getId());
+            Global.getCombatEngine().getTimeMult().unmodify(this.spec.getId());
             return;
         }
 
@@ -35,10 +35,10 @@ public class TemporalFluxReactor extends BaseHullMod {
         float jitterRangeBonus = ship.getFluxLevel() * 10f;
         float jitterLevel = (float) Math.sqrt(ship.getFluxLevel());
         ship.setJitterUnder(this, jitterColor, jitterLevel, 50, 0f, 7f + jitterRangeBonus);
-        stats.getTimeMult().modifyMult(spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT);
+        stats.getTimeMult().modifyMult(this.spec.getId(), 1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT);
 
         if (ship == Global.getCombatEngine().getPlayerShip() && ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f >= 1f) {
-            Global.getCombatEngine().getTimeMult().modifyMult(spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT));
+            Global.getCombatEngine().getTimeMult().modifyMult(this.spec.getId(), 1f / (1f + ship.getFluxLevel() * SPEED_OF_TIME_MULT));
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_TemporalFluxReactor",
                     "graphics/icons/hullsys/temporal_shell.png", "Speed of Time Boost",
                     Math.round(ship.getFluxLevel() * SPEED_OF_TIME_MULT * 100f) + "%", false);

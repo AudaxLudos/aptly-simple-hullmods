@@ -86,10 +86,10 @@ public class TargetingTransceiver extends BaseHullMod {
             }
 
             if (ship.getHullSize().ordinal() <= 2) {
-                stats.getEnergyWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
-                stats.getBallisticWeaponRangeBonus().modifyMult(spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
+                stats.getEnergyWeaponRangeBonus().modifyMult(this.spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
+                stats.getBallisticWeaponRangeBonus().modifyMult(this.spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
             } else {
-                stats.getAutofireAimAccuracy().modifyMult(spec.getId(), 1f + AUTOFIRE_ACCURACY_MOD * data.mag);
+                stats.getAutofireAimAccuracy().modifyMult(this.spec.getId(), 1f + AUTOFIRE_ACCURACY_MOD * data.mag);
             }
         }
 

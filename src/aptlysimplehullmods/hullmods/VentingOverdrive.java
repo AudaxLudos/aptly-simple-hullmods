@@ -24,9 +24,9 @@ public class VentingOverdrive extends BaseHullMod {
 
         if (ship.getHullLevel() >= 0.2f) {
             if (ship.getFluxTracker().isVenting()) {
-                stats.getVentRateMult().modifyMult(spec.getId(), 1f + SHIP_STATS_MULT);
-                stats.getMaxSpeed().modifyMult(spec.getId(), 1f + SHIP_STATS_MULT);
-                stats.getMaxTurnRate().modifyMult(spec.getId(), 1f + SHIP_STATS_MULT);
+                stats.getVentRateMult().modifyMult(this.spec.getId(), 1f + SHIP_STATS_MULT);
+                stats.getMaxSpeed().modifyMult(this.spec.getId(), 1f + SHIP_STATS_MULT);
+                stats.getMaxTurnRate().modifyMult(this.spec.getId(), 1f + SHIP_STATS_MULT);
 
                 Vector2f point = new Vector2f(ship.getLocation());
                 point.x += ship.getCollisionRadius() * ((float) Math.random() * 2f - 1f);
@@ -38,13 +38,13 @@ public class VentingOverdrive extends BaseHullMod {
 
                 engine.applyDamage(ship, point, amount * (0.20f * ship.getVariant().getHullSpec().getFluxCapacity()), DamageType.OTHER, 0f, true, false, null);
             } else {
-                stats.getMaxSpeed().unmodify(spec.getId());
-                stats.getMaxTurnRate().unmodify(spec.getId());
+                stats.getMaxSpeed().unmodify(this.spec.getId());
+                stats.getMaxTurnRate().unmodify(this.spec.getId());
             }
         } else {
-            stats.getVentRateMult().unmodify(spec.getId());
-            stats.getMaxSpeed().unmodify(spec.getId());
-            stats.getMaxTurnRate().unmodify(spec.getId());
+            stats.getVentRateMult().unmodify(this.spec.getId());
+            stats.getMaxSpeed().unmodify(this.spec.getId());
+            stats.getMaxTurnRate().unmodify(this.spec.getId());
         }
     }
 

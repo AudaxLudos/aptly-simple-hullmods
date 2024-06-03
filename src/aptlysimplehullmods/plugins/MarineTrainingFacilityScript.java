@@ -39,8 +39,8 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
             return;
         }
 
-        timer.advance(amount);
-        if (timer.intervalElapsed()) {
+        this.timer.advance(amount);
+        if (this.timer.intervalElapsed()) {
             FleetDataAPI playerFleetData = Global.getSector().getPlayerFleet().getFleetData();
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
             int shipsWithMarineTrainingFacility = 0;
@@ -61,16 +61,16 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 }
             }
 
-            if (!isActive || shipsWithHullmod != shipsWithMarineTrainingFacility) {
+            if (!this.isActive || this.shipsWithHullmod != shipsWithMarineTrainingFacility) {
                 PlayerFleetPersonnelTracker.getInstance().update();
                 if ((playerCargo.getCrew() > playerFleetData.getMinCrew() && playerCargo.getMarines() < maxMarines) || (playerCargo.getMarines() > 0 && PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() < 1f)) {
-                    isActive = true;
-                    shipsWithHullmod = shipsWithMarineTrainingFacility;
-                    lastDay = Global.getSector().getClock().getTimestamp();
+                    this.isActive = true;
+                    this.shipsWithHullmod = shipsWithMarineTrainingFacility;
+                    this.lastDay = Global.getSector().getClock().getTimestamp();
                 }
             }
 
-            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
+            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
                 if (PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines() + trainMarines >= playerCargo.getMarines()) {
                     trainMarines = playerCargo.getMarines() - PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines();
                 }
@@ -111,7 +111,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                             null);
                 }
 
-                isActive = false;
+                this.isActive = false;
             }
         }
     }

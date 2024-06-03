@@ -38,8 +38,8 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             return;
         }
 
-        timer.advance(amount);
-        if (timer.intervalElapsed()) {
+        this.timer.advance(amount);
+        if (this.timer.intervalElapsed()) {
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
             int shipsWithIndustrialMachineForge = 0;
             float heavyMachineryToGenerate = 0f;
@@ -57,15 +57,15 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                 }
             }
 
-            if (!isActive || shipsWithHullmod != shipsWithIndustrialMachineForge) {
+            if (!this.isActive || this.shipsWithHullmod != shipsWithIndustrialMachineForge) {
                 if (hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
-                    isActive = true;
-                    shipsWithHullmod = shipsWithIndustrialMachineForge;
-                    lastDay = Global.getSector().getClock().getTimestamp();
+                    this.isActive = true;
+                    this.shipsWithHullmod = shipsWithIndustrialMachineForge;
+                    this.lastDay = Global.getSector().getClock().getTimestamp();
                 }
             }
 
-            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
+            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
                 if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsToConsume < 0f) {
                     heavyMachineryToGenerate = playerCargo.getCommodityQuantity(Commodities.METALS) / 7f;
                     metalsToConsume = heavyMachineryToGenerate * 7f;
@@ -86,7 +86,7 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                     playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsToConsume));
                 }
 
-                isActive = false;
+                this.isActive = false;
             }
         }
     }

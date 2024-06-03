@@ -38,8 +38,8 @@ public class MineralRefineryScript implements EveryFrameScript {
             return;
         }
 
-        timer.advance(amount);
-        if (timer.intervalElapsed()) {
+        this.timer.advance(amount);
+        if (this.timer.intervalElapsed()) {
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
             int shipsWithMineralRefinery = 0;
             float bonusMetals = 0f;
@@ -65,15 +65,15 @@ public class MineralRefineryScript implements EveryFrameScript {
                 }
             }
 
-            if (!isActive || shipsWithHullmod != shipsWithMineralRefinery) {
+            if (!this.isActive || this.shipsWithHullmod != shipsWithMineralRefinery) {
                 if (hasConsumableCommodity(playerCargo, Commodities.ORE, 5f) || hasConsumableCommodity(playerCargo, Commodities.RARE_ORE, 5f)) {
-                    isActive = true;
-                    shipsWithHullmod = shipsWithMineralRefinery;
-                    lastDay = Global.getSector().getClock().getTimestamp();
+                    this.isActive = true;
+                    this.shipsWithHullmod = shipsWithMineralRefinery;
+                    this.lastDay = Global.getSector().getClock().getTimestamp();
                 }
             }
 
-            if (isActive && Global.getSector().getClock().getElapsedDaysSince(lastDay) >= MineralRefinery.DAYS_TO_GENERATE_ALLOYS) {
+            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MineralRefinery.DAYS_TO_GENERATE_ALLOYS) {
                 if (playerCargo.getCommodityQuantity(Commodities.ORE) - oresToConsume < -0.0001f) {
                     metalsToGenerate = playerCargo.getCommodityQuantity(Commodities.ORE) / 5f;
                     oresToConsume = metalsToGenerate * 5f;
@@ -114,7 +114,7 @@ public class MineralRefineryScript implements EveryFrameScript {
                     playerCargo.removeCommodity(Commodities.RARE_ORE, Math.round(rareOresToConsume));
                 }
 
-                isActive = false;
+                this.isActive = false;
             }
         }
     }

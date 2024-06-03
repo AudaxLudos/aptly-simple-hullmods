@@ -36,8 +36,8 @@ public class ReactiveShields extends BaseHullMod {
         float shipShieldArc = ship.getHullSpec().getShieldSpec().getArc();
         Color defaultShieldColor = ship.getHullSpec().getShieldSpec().getInnerColor();
 
-        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId()) instanceof Float) {
-            shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + spec.getId());
+        if (Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + this.spec.getId()) instanceof Float) {
+            shipShieldArc = (float) Global.getCombatEngine().getCustomData().get("ASH_ShieldArc_" + this.spec.getId());
         }
 
         float selectedFluxLevel = isSMod(stats) ? ship.getFluxLevel() : ship.getHardFluxLevel();
@@ -59,7 +59,7 @@ public class ReactiveShields extends BaseHullMod {
         } else {
             shield.setArc(30);
         }
-        stats.getShieldDamageTakenMult().modifyMult(spec.getId(), 1 - computedShieldStrength);
+        stats.getShieldDamageTakenMult().modifyMult(this.spec.getId(), 1 - computedShieldStrength);
 
         if (ship == Global.getCombatEngine().getPlayerShip() && computedShieldStrength * 100f >= 1f) {
             Global.getCombatEngine().maintainStatusForPlayerShip("ASH_ReactiveShields", "graphics/icons/hullsys/fortress_shield.png", "Shield Strength Boost",

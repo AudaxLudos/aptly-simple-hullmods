@@ -37,12 +37,12 @@ public class SwiftRetreatProtocol extends BaseHullMod {
                     if (isSMod(ship)) {
                         movementMult *= 2f;
                     }
-                    fighterStats.getMaxSpeed().modifyMult(spec.getId(), 1f + movementMult);
-                    fighterStats.getMaxTurnRate().modifyMult(spec.getId(), 1f + movementMult);
-                    fighterStats.getAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
-                    fighterStats.getTurnAcceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
-                    fighterStats.getDeceleration().modifyMult(spec.getId(), 1f + movementMult * 2f);
-                    fighterStats.getEngineDamageTakenMult().modifyMult(spec.getId(), 1f + ENGINE_DMG_TAKEN_MULT);
+                    fighterStats.getMaxSpeed().modifyMult(this.spec.getId(), 1f + movementMult);
+                    fighterStats.getMaxTurnRate().modifyMult(this.spec.getId(), 1f + movementMult);
+                    fighterStats.getAcceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getTurnAcceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getDeceleration().modifyMult(this.spec.getId(), 1f + movementMult * 2f);
+                    fighterStats.getEngineDamageTakenMult().modifyMult(this.spec.getId(), 1f + ENGINE_DMG_TAKEN_MULT);
                     if (returningWing.fighter.getShield() != null) {
                         returningWing.fighter.getShield().toggleOff();
                     }
