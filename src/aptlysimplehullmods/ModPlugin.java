@@ -227,7 +227,7 @@ public class ModPlugin extends BaseModPlugin {
     }
 
     public int getInt(JSONObject data, String statId, int index) throws JSONException {
-        return (int) data.getJSONArray(statId).get(index);
+        return data.getJSONArray(statId).getInt(index);
     }
 
     public float getFloat(JSONObject data, String statId) throws JSONException {
@@ -235,11 +235,6 @@ public class ModPlugin extends BaseModPlugin {
     }
 
     public float getFloat(JSONObject data, String statId, int index) throws JSONException {
-        if (data.getJSONArray(statId).get(index) instanceof Integer) {
-            return ((Integer) data.getJSONArray(statId).get(index)).floatValue();
-        } else if (data.getJSONArray(statId).get(index) instanceof Double) {
-            return ((Double) data.getJSONArray(statId).get(index)).floatValue();
-        }
-        return (float) data.getJSONArray(statId).get(index);
+        return (float) data.getJSONArray(statId).getDouble(index);
     }
 }
