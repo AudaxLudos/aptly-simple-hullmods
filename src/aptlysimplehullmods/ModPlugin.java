@@ -241,7 +241,6 @@ public class ModPlugin extends BaseModPlugin {
         if (isModActive(lunaLibId)) {
             Integer result = LunaSettings.getInt(modId, statId + "_" + index);
             if (result == null) {
-                System.out.println("settings not found");
                 return 0;
             }
             return result;
@@ -253,7 +252,6 @@ public class ModPlugin extends BaseModPlugin {
         if (isModActive(lunaLibId)) {
             Float result = LunaSettings.getFloat(modId, statId);
             if (result == null) {
-                System.out.println("settings not found");
                 return 0;
             }
             return result;
@@ -265,7 +263,6 @@ public class ModPlugin extends BaseModPlugin {
         if (isModActive(lunaLibId)) {
             Float result = LunaSettings.getFloat(modId, statId + "_" + index);
             if (result == null) {
-                System.out.println("settings not found");
                 return 0;
             }
             return result;
