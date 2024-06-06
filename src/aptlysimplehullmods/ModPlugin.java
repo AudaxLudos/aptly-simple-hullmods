@@ -237,4 +237,8 @@ public class ModPlugin extends BaseModPlugin {
     public float getFloat(JSONObject data, String statId, int index) throws JSONException {
         return (float) data.getJSONArray(statId).getDouble(index);
     }
+
+    public boolean isModActive(String modName) {
+        return Global.getSettings().getModManager().isModEnabled("lunalib");
+    }
 }
