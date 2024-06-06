@@ -53,7 +53,7 @@
 - Remove MineralRefinery heavy machinery requirement
 - Remove IndustrialMachineForge heavy machinery requirement
 - Decrease SwiftRetreatProtocol ordnance points to 3/6/9/15 from 4/8/12/20
-- Decrease SwiftRetreatProtocol speed and manuverabilty buffs to 25% from 50%
+- Decrease SwiftRetreatProtocol speed and manoeuvrability buffs to 25% from 50%
 - Decrease SwiftRetreatProtocol engine damage taken penalty to 25% from 50%
 - Update SwiftRetreatProtocol description
 - Add mineral refinery hullmod
@@ -164,7 +164,7 @@
 - Fix fuel ramscoop crash when getting accessed outside of combat
 
 ### 1.3.0
-- Update mod_info.json lazylib dependecy to any version
+- Update mod_info.json lazylib dependency to any version
 - Update mod_info.json game version to latest
 
 ### 1.2.9
@@ -175,46 +175,46 @@
 - Update ASH_MarineTrainingFacility marines trained to 2/4/6/10 from 5/10/15/25
 
 ### 1.2.4
-- Fix venting overdrive unmodifiying all the modifiers from the stats it uses
+- Fix venting overdrive unmodified all the modifiers from the stats it uses
 
 ### 1.2.3
-- Fix makeshift missile autoforge crash when viewing as blueprint/modspec
+- Fix makeshift missile autoforge crash when viewing as blueprint/mod spec
 
 ### 1.2.2
 - Fix hullmod ui when hovering in the market
-- Fix crash when hovering modspec in market
+- Fix crash when hovering mod spec in market
 
 ### 1.2.0
 - Add settings for disabling or enabling mod and compatibility with BDSM
 - Add flux conduction armor s-mod effects
-    - Increase flux capacity to 20% when smodded
-    - Decrease energy damage taken to 10% when smodded
+    - Increase flux capacity to 20% when s-modded
+    - Decrease energy damage taken to 10% when s-modded
 - Add beam combiners s-mod effects
-    - Decrease flux cost usage to 10% when smodded
+    - Decrease flux cost usage to 10% when s-modded
 - Add hull conversion s-mod effects
-    - Add decrease armor damage taken by 5% when smodded 
+    - Add decrease armor damage taken by 5% when s-modded
 - Add makeshift missile autoforge s-mod effects
-    - Change reload to start of combat when smodded
+    - Change reload to start of combat when s-modded
 - Add subverted shields s-mod effects
-    - Remove shield pierce penalty when smodded
+    - Remove shield pierce penalty when s-modded
 - Add targeting transceiver s-mod effects
-    - Increase range to 2000 from 1000 when smodded
+    - Increase range to 2000 from 1000 when s-modded
 - Add reactive shields s-mod effects
-    - Change hard flux usage to soft flux usage for shield sthrength when smodded
+    - Change hard flux usage to soft flux usage for shield strength when s-modded
 - Add volatile warheads s-mod effects
-    - Remove fire rate debuff when smodded
+    - Remove fire rate debuff when s-modded
 - Add reactive subsystems s-mod effects
-    - Add increase peak performance time by 60 seconds when smodded
+    - Add increase peak performance time by 60 seconds when s-modded
 - Add front loaded armor s-mod effects
     - Remove penalty when s-modded
 - Add advance radar systems s-mod effects
-    - Add 20% autofire aim accuracy when smodded
+    - Add 20% autofire aim accuracy when s-modded
 - Add circuit breakers s-mod effects
-    - Add 25% decrease emp damage taken when smodded
+    - Add 25% decrease emp damage taken when s-modded
 - Add flux amplifiers s-mod effect
-    - Remove fire rate debuff when smodded
+    - Remove fire rate debuff when s-modded
 - Add flux limiters s-mod effects
-    - Remove fire rate debuff when smodded
+    - Remove fire rate debuff when s-modded
 - Add LICENSE.md
 
 ### 1.0.0
@@ -308,10 +308,10 @@
     - Update OP cost to 3/6/9/15 from 6/9/12/15
     - Update base value to 8000 from 7000
     - Update modifiers to multipliers
-    - Add uitag merc & special
+    - Add ui tag merc & special
     - Add tag special
     - Add energy damage taken modifier to 15% from 0%
-    - Remove uitag defenses
+    - Remove ui tag defenses
     - Remove tag defensive
     - Remove EMP damage taken modifier
     - Remove armor value modifier
@@ -334,7 +334,7 @@ Add missile speed reduction to 10% from 0%
     - Add sprite
     - Update description
     - Update OP cost to 5/10/15/25 from 10/16/22/28
-    - Update calculation for damage recieved when venting
+    - Update calculation for damage received when venting
     - Remove offensive tag
 - Update ASH_MarineTrainingFacility
     - Update description
@@ -381,7 +381,7 @@ Add missile speed reduction to 10% from 0%
     - Add tag merc
     - Update description
     - Update OP cost to 5/10/15/25 from 5/10/15/20
-    - Update compability to incompatible with phase ships from none
+    - Update compatibility to incompatible with phase ships from none
     - Fix crash when ship has no shields
 
 ### 0.8.3
@@ -420,12 +420,12 @@ Add missile speed reduction to 10% from 0%
 - Updated mods with default sprites to available game sprites
 
 ### 0.5.6
-- Added Targeting Transciever Sprite by Vildrian
+- Added Targeting Transceiver Sprite by Vildrian
 - Added Marine Training Facility Sprite by Vildrian
 - Added Hull Conversion Sprite by Vildrian
 - Added Fuel Ramscoop Sprite by Vildrian
 - Added External Fuel Tanks Sprite by Vildrian
-- Added External Cryopods Sprite by Vildrian
+- Added External Cryo pods Sprite by Vildrian
 - Added Enhanced Autoloader Sprite by Vildrian
 - Added Beam Combiner Sprite by Vildrian
 - Added Excessive Venting Protocol Hullmod
@@ -459,7 +459,7 @@ Add missile speed reduction to 10% from 0%
 - Added Volatile Ammunition Hullmod
 
 ### 0.1.8
-- Added Enhanced Autoloaders Hullmod
+- Added Enhanced Autoloader Hullmod
 - Added Energized Capacitors Hullmod
 - Added Extended Barrels Hullmod
 - Added Subatomic Accelerator Hullmod
