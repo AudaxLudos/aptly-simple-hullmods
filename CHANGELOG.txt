@@ -1,6 +1,6 @@
 ### 1.9.5
 - Release 1.9.5
-- Update circuit breakers tags and uitags to defenses
+- Update circuit breakers tags and ui tags to defenses
 - Add lunalib integration
 - Add lunalib settings file
 
