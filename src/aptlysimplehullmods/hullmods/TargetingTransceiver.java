@@ -67,7 +67,7 @@ public class TargetingTransceiver extends BaseHullMod {
                 if (other.isHulk()) {
                     continue;
                 }
-                if (!hasTargetingCore(other.getVariant())) {
+                if (!Utils.hasTargetingCore(other.getVariant())) {
                     continue;
                 }
 
@@ -134,11 +134,5 @@ public class TargetingTransceiver extends BaseHullMod {
     @Override
     public boolean hasSModEffect() {
         return true;
-    }
-
-    public boolean hasTargetingCore(ShipVariantAPI variant) {
-        return variant.hasHullMod(HullMods.DEDICATED_TARGETING_CORE)
-                || variant.hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT)
-                || variant.hasHullMod(HullMods.ADVANCED_TARGETING_CORE);
     }
 }

@@ -18,7 +18,7 @@ public class FighterTargetingUplink extends BaseHullMod {
     @Override
     public void applyEffectsToFighterSpawnedByShip(ShipAPI fighter, ShipAPI ship, String id) {
         MutableShipStatsAPI wingStats = fighter.getMutableStats();
-        if (hasTargetingCore(ship.getVariant())) {
+        if (Utils.hasTargetingCore(ship.getVariant())) {
             wingStats.getDamageToCapital().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
             wingStats.getDamageToCruisers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
             wingStats.getDamageToDestroyers().modifyMult(this.spec.getId(), 1f + FIGHTER_DAMAGE_MULT);
@@ -33,7 +33,7 @@ public class FighterTargetingUplink extends BaseHullMod {
         if (!ship.isAlive()) {
             return;
         }
-        if (hasTargetingCore(ship.getVariant())) {
+        if (Utils.hasTargetingCore(ship.getVariant())) {
             if (ship == Global.getCombatEngine().getPlayerShip()) {
                 Global.getCombatEngine().maintainStatusForPlayerShip(
                         "targeting_transceiver_" + ship.getId(),
@@ -86,7 +86,7 @@ public class FighterTargetingUplink extends BaseHullMod {
                 if (other.isHulk()) {
                     continue;
                 }
-                if (!hasTargetingCore(other.getVariant())) {
+                if (!Utils.hasTargetingCore(other.getVariant())) {
                     continue;
                 }
 
@@ -166,11 +166,5 @@ public class FighterTargetingUplink extends BaseHullMod {
     public boolean isApplicableToShip(ShipAPI ship) {
         int bays = (int) ship.getMutableStats().getNumFighterBays().getModifiedValue();
         return bays > 0;
-    }
-
-    public boolean hasTargetingCore(ShipVariantAPI variant) {
-        return variant.hasHullMod(HullMods.DEDICATED_TARGETING_CORE)
-                || variant.hasHullMod(HullMods.INTEGRATED_TARGETING_UNIT)
-                || variant.hasHullMod(HullMods.ADVANCED_TARGETING_CORE);
     }
 }
