@@ -74,6 +74,9 @@ public class FighterTargetingUplink extends BaseHullMod {
 
                 ShipAPI other = (ShipAPI) next;
 
+                if (ship.isFighter()) {
+                    continue;
+                }
                 if (ship == other) {
                     continue;
                 }
