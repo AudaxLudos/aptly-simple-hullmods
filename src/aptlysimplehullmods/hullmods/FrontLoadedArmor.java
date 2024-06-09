@@ -9,7 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FrontLoadedArmor extends BaseHullMod {
-    public static float POSITIVE_ARMOR_VALUE_MULT = 2f;
+    public static float POSITIVE_ARMOR_VALUE_MULT = 1.5f;
     public static float NEGATIVE_ARMOR_VALUE_MULT = 0.5f;
 
     @Override
@@ -44,8 +44,8 @@ public class FrontLoadedArmor extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("%s the armor values towards the front of the ship.", oPad, good, "Doubles");
-        tooltip.addPara("%s the armor values towards the back of the ship.", pad, bad, "Halves");
+        tooltip.addPara("Increases the armor values towards the front of the ship by a factor of %s.", oPad, good, Math.round(POSITIVE_ARMOR_VALUE_MULT) + "");
+        tooltip.addPara("Decreases the armor values towards the back of the ship by a factor of %s.", pad, bad, Math.round(NEGATIVE_ARMOR_VALUE_MULT) + "");
     }
 
     @Override
