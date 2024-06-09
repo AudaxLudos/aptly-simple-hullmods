@@ -44,8 +44,8 @@ public class FrontLoadedArmor extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the armor values towards the front of the ship by a factor of %s.", oPad, good, Math.round(POSITIVE_ARMOR_VALUE_MULT) + "");
-        tooltip.addPara("Decreases the armor values towards the back of the ship by a factor of %s.", pad, bad, Math.round(NEGATIVE_ARMOR_VALUE_MULT) + "");
+        tooltip.addPara("Increases the armor values towards the front of the ship by a factor of %s.", oPad, good, POSITIVE_ARMOR_VALUE_MULT + "");
+        tooltip.addPara("Decreases the armor values towards the back of the ship by a factor of %s.", pad, bad, NEGATIVE_ARMOR_VALUE_MULT + "");
     }
 
     @Override
