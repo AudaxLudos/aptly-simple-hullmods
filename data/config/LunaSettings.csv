@@ -69,7 +69,7 @@ ash_flux_limiters_stat2,Weapon Damage Multiplier,Double,0.10,,Default value: 0.1
 ash_flux_limiters_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
 ,,,,,,,,
 ash_front_loaded_armor_header,Front Loaded Armor Header,Header,Front Loaded Armor,,,,,Defenses
-ash_front_loaded_armor_stat1,Front Armor Value Multiplier,Double,2,,Default value: 2,0,2147483647,Defenses
+ash_front_loaded_armor_stat1,Front Armor Value Multiplier,Double,1.5,,Default value: 1.5,0,2147483647,Defenses
 ash_front_loaded_armor_stat2,Back Armor Value Multiplier,Double,0.5,,Default value: 0.5,0,2147483647,Defenses
 ,,,,,,,,
 ash_fuel_ramscoop_header,Fuel Ramscoop Header,Header,Fuel Ramscoop,,,,,Logistics
