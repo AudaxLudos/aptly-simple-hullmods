@@ -1,22 +1,25 @@
 {
     "knownHullMods": {
         "hullMods": [
-            "ASH_AdvanceRadarSystems",
-            "ASH_BeamCombiners",
-            "ASH_CircuitBreakers",
-            "ASH_FluxAmplifiers",
-            "ASH_FluxConductionArmor",
-            "ASH_FluxLimiters",
-            "ASH_FuelRamscoop",
-            "ASH_IndustrialMachineForge",
-            "ASH_MakeshiftMissileAutoforge",
-            "ASH_MarineTrainingFacility",
-            "ASH_ReactiveShields",
-            "ASH_SubvertedShields",
-            "ASH_VolatileWarheads",
-            "ASH_MissileBay",
-            "ASH_ReactorBay",
-            "ash_invasion_package"
+            "ash_advance_radar_systems",
+            "ash_automated_racks",
+            "ash_beam_combiners",
+            "ash_circuit_breakers",
+            "ash_fighter_targeting_uplink",
+            "ash_flux_amplifiers",
+            "ash_flux_limiters",
+            "ash_fuel_ramscoop",
+            "ash_industrial_machine_forge",
+            "ash_invasion_package",
+            "ash_makeshift_missile_autoforge",
+            "ash_marine_training_facility",
+            "ash_mineral_refinery",
+            "ash_missile_bay",
+            "ash_reactive_subsystems",
+            "ash_reactor_bay",
+            "ash_swift_retreat_protocol",
+            "ash_targeting_transceiver",
+            "ash_volatile_warheads"
         ]
     }
 }

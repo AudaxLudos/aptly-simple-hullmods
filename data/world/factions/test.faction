@@ -5,9 +5,11 @@
             "ash_automated_racks",
             "ash_beam_combiners",
             "ash_circuit_breakers",
+            "ash_convicted_crewmates",
             "ash_fighter_targeting_uplink",
             "ash_flux_amplifiers",
             "ash_flux_limiters",
+            "ash_front_loaded_armor",
             "ash_fuel_ramscoop",
             "ash_industrial_machine_forge",
             "ash_invasion_package",
@@ -15,9 +17,11 @@
             "ash_marine_training_facility",
             "ash_mineral_refinery",
             "ash_missile_bay",
+            "ash_reactive_subsystems",
             "ash_reactor_bay",
             "ash_swift_retreat_protocol",
             "ash_targeting_transceiver",
+            "ash_venting_overdrive",
             "ash_volatile_warheads"
         ]
     }
