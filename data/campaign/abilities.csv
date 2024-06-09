@@ -1,3 +1,3 @@
 name,id,type,tags,activationDays,activationCooldown,durationDays,deactivationDays,deactivationCooldown,unlockedAtStart,defaultForAIFleet,musicSuppression,uiOn,uiOff,uiLoop,worldOn,worldOff,worldLoop,icon,plugin,ai,desc,sortOrder
-ASH Forging,ash_forging,TOGGLE,,,,,,,TRUE,,,,,,,,,graphics/abilities/ash_forging.png,aptlysimplehullmods.abilities.Forging,,"Disables or enables ASH hullmods that transforms, produces or consumes commodities.",10000
+ASH Forging,ash_forging,TOGGLE,,,,,,,TRUE,,,ui_ash_forging_on,ui_ash_forging_off,,,,,graphics/abilities/ash_forging.png,aptlysimplehullmods.abilities.Forging,,"Disables or enables ASH hullmods that transforms, produces or consumes commodities.",10000
 ,,,,,,,,,,,,,,,,,,,,,,

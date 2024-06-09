@@ -1,0 +1,12 @@
+{
+  "ui_ash_forging_on": {
+    "sounds": [
+      {"file": "sounds/sfx_abilities/ability_scavenge_01.ogg", "pitch": 0.5, "volume": 0.5}
+    ]
+  },
+  "ui_ash_forging_off": {
+    "sounds": [
+      {"file": "sounds/sfx_abilities/ability_scavenge_01.ogg", "pitch": 0.5, "volume": 0.5}
+    ]
+  }
+}
