@@ -212,6 +212,7 @@ public class ModPlugin extends BaseModPlugin {
 
             statsData = hullmodData.getJSONObject("ash_temporal_flux_reactor");
             TemporalFluxReactor.TIME_FLOW_MULT = getFloat(statsData, "ash_temporal_flux_reactor_stat1");
+            TemporalFluxReactor.PEAK_PERFORMANCE_TIME_MULT = getFloat(statsData, "ash_temporal_flux_reactor_stat2");
 
             statsData = hullmodData.getJSONObject("ash_venting_overdrive");
             VentingOverdrive.SHIP_MOVEMENT_MULT = getFloat(statsData, "ash_venting_overdrive_stat1");

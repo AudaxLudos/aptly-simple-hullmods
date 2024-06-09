@@ -183,6 +183,7 @@ ash_targeting_transceiver_stat4,Maximum Effect Range,Double,560,,Default value: 
 ,,,,,,,,
 ash_temporal_flux_reactor_header,Temporal Flux Reactor Header,Header,Temporal Flux Reactor,,,,,Special
 ash_temporal_flux_reactor_stat1,Timeflow Multiplier,Double,0.33,,Default value: 0.33,0,2147483647,Special
+ash_temporal_flux_reactor_stat2,Peak Performance Time Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Special
 ,,,,,,,,
 ash_venting_overdrive_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Special
 ash_venting_overdrive_stat1,Ship Movement Multiplier,Double,1,,Default value: 1,0,2147483647,Special
