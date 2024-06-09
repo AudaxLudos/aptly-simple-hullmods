@@ -55,6 +55,9 @@ public class TargetingTransceiver extends BaseHullMod {
 
                 ShipAPI other = (ShipAPI) next;
 
+                if (other.isFighter()) {
+                    continue;
+                }
                 if (ship == other) {
                     continue;
                 }
