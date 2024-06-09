@@ -13,6 +13,14 @@ import java.awt.*;
 
 public class TemporalFluxReactor extends BaseHullMod {
     public static float TIME_FLOW_MULT = 0.33f;
+    public static float PEAK_PERFORMANCE_TIME_MULT = 0.40f;
+
+    @Override
+    public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        if (isSMod(stats)) {
+            stats.getPeakCRDuration().modifyMult(id, PEAK_PERFORMANCE_TIME_MULT);
+        }
+    }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -57,6 +65,24 @@ public class TemporalFluxReactor extends BaseHullMod {
         tooltip.setBulletedListMode("");
         tooltip.addPara("^ Increases the ship's speed of time by up to %s", pad, good, Math.round(TIME_FLOW_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
+    }
+
+    @Override
+    public void addSModEffectSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec, boolean isForBuildInList) {
+        float oPad = 10f;
+        Color bad = Misc.getNegativeHighlightColor();
+
+        tooltip.addPara("Decreases the ship's peak performance time by %s", oPad, bad, Math.round(PEAK_PERFORMANCE_TIME_MULT * 100f) + "%");
+    }
+
+    @Override
+    public boolean isSModEffectAPenalty() {
+        return true;
+    }
+
+    @Override
+    public boolean hasSModEffect() {
+        return true;
     }
 
     @Override
