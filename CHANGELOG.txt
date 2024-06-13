@@ -1,3 +1,19 @@
+### 2.0.0
+- Release 2.0.0
+- Update sprite names to match hullmod ids
+- Fix crash issue regarding bounty from arma armatura
+- Add toggle ui sounds for forging ability
+- Update forging ability description
+- Add ability to disable or enable hullmods that produce commodities
+- Update .faction files
+- Update hull_mods.csv hullmod ids
+- Update lunaSettings.csv and hullmod_stats.ini
+- Update front loaded armor positive armor buff to 1.5x from 2x
+- Update fighter targeting uplink to not connect with fighters
+- Update targeting transceiver to not connect with fighters
+- Add new settings options for temporal flux reactor
+- Add peak performance time multiplier penalty of 40% to temporal flux reaction when s-modded
+
 ### 1.9.5
 - Release 1.9.5
 - Update circuit breakers tags and ui tags to defenses
