@@ -80,7 +80,7 @@ public class ConvictedCrewmates extends BaseHullMod {
                     Map.Entry<String, TargetData> entry = itr.next();
                     entry.getValue().timer -= amount;
                     ShipAPI target = entry.getValue().target;
-                    if (target.isHulk()) {
+                    if (!target.isAlive() || target.isHulk()) {
                         float pptHullSizeMult = 1f;
                         if (this.ship.isFrigate() && target.getHullSize().ordinal() >= 3) {
                             pptHullSizeMult = FRIGATE_PPT_MULT;
@@ -94,7 +94,9 @@ public class ConvictedCrewmates extends BaseHullMod {
                             currentPPT = this.ship.getTimeDeployedForCRReduction() - this.maxPPT;
                         }
 
-                        this.ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSpec().getHullSize()) * pptHullSizeMult);
+                        if (target.getHullSize() != null) {
+                            this.ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSize()) * pptHullSizeMult);
+                        }
                         itr.remove();
                     } else if (entry.getValue().timer <= 0) {
                         itr.remove();
@@ -111,7 +113,7 @@ public class ConvictedCrewmates extends BaseHullMod {
 
             ShipAPI targetShip = (ShipAPI) target;
 
-            if (targetShip.isHulk() || targetShip.isFighter()) {
+            if (!targetShip.isAlive() || targetShip.isHulk() || targetShip.isFighter()) {
                 return null;
             }
             if (this.damagedTargets.containsKey(targetShip.getId())) {
