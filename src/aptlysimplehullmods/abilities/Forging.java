@@ -9,7 +9,6 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Forging extends BaseToggleAbility {
     @Override
@@ -60,11 +59,6 @@ public class Forging extends BaseToggleAbility {
     @Override
     protected String getActivationText() {
         return "ASH Forging active";
-    }
-
-    @Override
-    protected String getDeactivationText() {
-        return "ASH Forging inactive";
     }
 
     @Override

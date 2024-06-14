@@ -37,7 +37,8 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (!Global.getSector().getPlayerFleet().getAbility("ash_forging").isActive()) {
+        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") != null &&
+                !Global.getSector().getPlayerFleet().getAbility("ash_forging").isActive()) {
             this.isActive = false;
         }
 
