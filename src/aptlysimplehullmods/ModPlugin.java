@@ -27,6 +27,7 @@ public class ModPlugin extends BaseModPlugin {
         Global.getSector().addTransientScript(new IndustrialMachineForgeScript());
         Global.getSector().addTransientScript(new MineralRefineryScript());
         Global.getSector().addTransientScript(new InvasionPackageScript());
+        Global.getSector().addTransientScript(new SuppliesRecyclerScript());
 
         try {
             JSONObject hullmodData = Global.getSettings().loadJSON(HULLMOD_SETTINGS_FILE);
