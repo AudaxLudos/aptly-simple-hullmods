@@ -15,7 +15,6 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
     public static final String SUPPLIES_RECYCLER_ID = "ash_supplies_recycler";
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
-    public List<FleetMemberAPI> currentFleetMembers = new ArrayList<>();
 
     public static float computeStatMultiplier(float totalStat) {
         float computedStat = 0f;
@@ -60,9 +59,8 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
             }
         }
 
-        if (this.shipsWithHullmod != shipsWithSuppliesRecycler || this.currentFleetMembers == null) {
+        if (this.shipsWithHullmod != shipsWithSuppliesRecycler) {
             // un-modify fleet stats here
-            this.currentFleetMembers = playerFleetMembers;
             this.isActive = false;
             this.shipsWithHullmod = shipsWithSuppliesRecycler;
         }
@@ -71,14 +69,14 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
             // modify fleet stats here
             this.isActive = true;
             if (totalStat > 0) {
-                for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
+                for (FleetMemberAPI member : playerFleetMembers) {
                     if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
                         member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
                     }
                     member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID,1f - computeStatMultiplier(totalStat)));
                 }
             } else {
-                for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
+                for (FleetMemberAPI member : playerFleetMembers) {
                     member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
                 }
             }
