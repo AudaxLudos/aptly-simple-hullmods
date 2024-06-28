@@ -171,6 +171,13 @@ ash_reactor_bay_stat4_1,Destroyer Deployment Points Modifier,Double,1,,Default v
 ash_reactor_bay_stat4_2,Cruiser Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ash_reactor_bay_stat4_3,Capital Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ,,,,,,,,
+ash_supplies_recycler_header,Supplies Recycler Header,Header,Supplies Recycler,,,,,Special
+ash_supplies_recycler_stat1_0,Frigate Fleet Supply Use Per Month Multiplier,Double,0.01,,Default value: 0.01,0,2147483647,Special
+ash_supplies_recycler_stat1_1,Destroyer Fleet Supply Use Per Month Multiplier,Double,0.02,,Default value: 0.02,0,2147483647,Special
+ash_supplies_recycler_stat1_2,Cruiser Fleet Supply Use Per Month Multiplier,Double,0.03,,Default value: 0.03,0,2147483647,Special
+ash_supplies_recycler_stat1_3,Capital Fleet Supply Use Per Month Multiplier,Double,0.05,,Default value: 0.05,0,2147483647,Special
+ash_supplies_recycler_stat2,Cargo Capacity Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Special
+,,,,,,,,
 ash_swift_retreat_protocol_header,Swift Retreat Protocol Header,Header,Swift Retreat Protocol,,,,,Fighters
 ash_swift_retreat_protocol_stat1,Fighter Movement Multiplier,Double,0.25,,Default value: 0.25,0,2147483647,Fighters
 ash_swift_retreat_protocol_stat2,Fighter Engine Damage Taken Multiplier,Double,0.25,,Default value: 0.25,0,2147483647,Fighters

@@ -205,6 +205,13 @@ public class ModPlugin extends BaseModPlugin {
             ReactorBay.DEPLOYMENT_POINTS_MOD.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "ash_reactor_bay_stat4", 2));
             ReactorBay.DEPLOYMENT_POINTS_MOD.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "ash_reactor_bay_stat4", 3));
 
+            statsData = hullmodData.getJSONObject("ash_supplies_recycler");
+            SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.put(ShipAPI.HullSize.FRIGATE, getFloat(statsData, "ash_supplies_recycler_stat1", 0));
+            SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.put(ShipAPI.HullSize.DESTROYER, getFloat(statsData, "ash_supplies_recycler_stat1", 1));
+            SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.put(ShipAPI.HullSize.CRUISER, getFloat(statsData, "ash_supplies_recycler_stat1", 2));
+            SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.put(ShipAPI.HullSize.CAPITAL_SHIP, getFloat(statsData, "ash_supplies_recycler_stat1", 3));
+            SuppliesRecycler.CARGO_CAPACITY_MULT = getFloat(statsData, "ash_supplies_recycler_stat2");
+
             statsData = hullmodData.getJSONObject("ash_swift_retreat_protocol");
             SwiftRetreatProtocol.FIGHTER_MOVEMENT_MULT = getFloat(statsData, "ash_swift_retreat_protocol_stat1");
             SwiftRetreatProtocol.FIGHTER_ENGINE_DMG_TAKEN_MULT = getFloat(statsData, "ash_swift_retreat_protocol_stat2");
