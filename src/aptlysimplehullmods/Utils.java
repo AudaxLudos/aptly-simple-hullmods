@@ -11,16 +11,16 @@ public class Utils {
                 || variant.hasHullMod(HullMods.ADVANCED_TARGETING_CORE);
     }
 
-    public static class TargetingTransceiverData {
-        public IntervalUtil interval = new IntervalUtil(1f, 1f);
-        public float mag = 0f;
-    }
-
     public static float computeStatMultiplier(float totalStat) {
         float computedStat = 0f;
         if (totalStat > 0f) {
             computedStat = (0.01f * (totalStat / 0.01f)) / (0.01f * (totalStat / 0.01f) + 1);
         }
         return computedStat;
+    }
+
+    public static class TargetingTransceiverData {
+        public IntervalUtil interval = new IntervalUtil(1f, 1f);
+        public float mag = 0f;
     }
 }

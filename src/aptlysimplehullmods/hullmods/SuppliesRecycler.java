@@ -35,7 +35,7 @@ public class SuppliesRecycler extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-            float pad = 3f;
+        float pad = 3f;
         float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();

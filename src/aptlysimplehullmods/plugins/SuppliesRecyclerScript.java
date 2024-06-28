@@ -9,7 +9,6 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SuppliesRecyclerScript implements EveryFrameScript {
@@ -66,7 +65,7 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
                     if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
                         member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
                     }
-                    member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID,1f - Utils.computeStatMultiplier(totalStat)));
+                    member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID, 1f - Utils.computeStatMultiplier(totalStat)));
                 }
             } else {
                 for (FleetMemberAPI member : playerFleetMembers) {
