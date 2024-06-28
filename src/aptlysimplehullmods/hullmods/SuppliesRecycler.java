@@ -1,5 +1,6 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.plugins.SuppliesRecyclerScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
@@ -75,7 +76,7 @@ public class SuppliesRecycler extends BaseHullMod {
             }
         }
 
-        calculatedStat = SuppliesRecyclerScript.computeStatMultiplier(totalStat + statOffset);
+        calculatedStat = Utils.computeStatMultiplier(totalStat + statOffset);
         return calculatedStat;
     }
 }

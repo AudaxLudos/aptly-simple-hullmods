@@ -1,5 +1,6 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.SuppliesRecycler;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -15,14 +16,6 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
     public static final String SUPPLIES_RECYCLER_ID = "ash_supplies_recycler";
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
-
-    public static float computeStatMultiplier(float totalStat) {
-        float computedStat = 0f;
-        if (totalStat > 0f) {
-            computedStat = (0.01f * (totalStat / 0.01f)) / (0.01f * (totalStat / 0.01f) + 1);
-        }
-        return computedStat;
-    }
 
     @Override
     public boolean isDone() {
@@ -73,7 +66,7 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
                     if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
                         member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
                     }
-                    member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID,1f - computeStatMultiplier(totalStat)));
+                    member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID,1f - Utils.computeStatMultiplier(totalStat)));
                 }
             } else {
                 for (FleetMemberAPI member : playerFleetMembers) {

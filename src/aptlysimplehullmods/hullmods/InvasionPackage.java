@@ -1,5 +1,6 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.plugins.InvasionPackageScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
@@ -86,7 +87,7 @@ public class InvasionPackage extends BaseHullMod {
             }
         }
 
-        calculatedStat = InvasionPackageScript.computeStatMultiplier(totalStat + statOffset);
+        calculatedStat = Utils.computeStatMultiplier(totalStat + statOffset);
         return calculatedStat;
     }
 }
