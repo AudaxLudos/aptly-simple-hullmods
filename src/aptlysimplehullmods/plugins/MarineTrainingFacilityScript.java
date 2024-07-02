@@ -12,6 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class MarineTrainingFacilityScript implements EveryFrameScript {
     public static final String MARINE_TRAINING_FACILITY_ID = "ash_marine_training_facility";
+    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -38,8 +39,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") != null &&
-                !Global.getSector().getPlayerFleet().getAbility("ash_forging").isActive()) {
+        if (!this.isEnabled) {
             this.isActive = false;
         }
 

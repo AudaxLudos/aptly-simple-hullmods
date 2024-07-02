@@ -18,8 +18,8 @@ public class ModPlugin extends BaseModPlugin {
 
     @Override
     public void onGameLoad(boolean newGame) {
-        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") == null) {
-            Global.getSector().getPlayerFleet().addAbility("ash_forging");
+        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") != null) {
+            Global.getSector().getPlayerFleet().removeAbility("ash_forging");
         }
 
         Global.getSector().addTransientScript(new FuelRamscoopScript());

@@ -11,6 +11,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class MineralRefineryScript implements EveryFrameScript {
     public static final String MINERAL_REFINERY_ID = "ash_mineral_refinery";
+    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -37,8 +38,7 @@ public class MineralRefineryScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") != null &&
-                !Global.getSector().getPlayerFleet().getAbility("ash_forging").isActive()) {
+        if (!this.isEnabled) {
             this.isActive = false;
         }
 

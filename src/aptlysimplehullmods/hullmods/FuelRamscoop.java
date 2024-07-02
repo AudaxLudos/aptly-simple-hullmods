@@ -74,8 +74,8 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
             String status = (script != null && !script.isEnabled) ? "Disabled" : "Enabled";
             Color statusColor = (status.equals("Enabled")) ? good : bad;
 
-            tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
             tooltip.addPara("Status: %s", oPad, statusColor, status);
+            tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
     }
 

@@ -1,12 +1,21 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.FuelRamscoopScript;
+import aptlysimplehullmods.plugins.IndustrialMachineForgeScript;
+import com.fs.starfarer.api.GameState;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +60,27 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
                 METALS_TO_CONSUME.get(HullSize.CRUISER).toString(),
                 METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP).toString());
         tooltip.setBulletedListMode(null);
+
+        if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            IndustrialMachineForgeScript script = (IndustrialMachineForgeScript) Utils.getTransientScript(IndustrialMachineForgeScript.class);
+            if (Mouse.getEventButton() == MouseEvent.BUTTON1 && script != null) {
+                script.isEnabled = !script.isEnabled;
+                Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
+                // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
+                Mouse.destroy();
+                try {
+                    Mouse.create();
+                } catch (LWJGLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            String status = (script != null && !script.isEnabled) ? "Disabled" : "Enabled";
+            Color statusColor = (status.equals("Enabled")) ? good : bad;
+
+            tooltip.addPara("Status: %s", oPad, statusColor, status);
+            tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
+        }
     }
 
     @Override
