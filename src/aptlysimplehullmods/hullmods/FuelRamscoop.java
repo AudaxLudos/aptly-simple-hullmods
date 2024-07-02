@@ -1,12 +1,22 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.FuelRamscoopScript;
+import com.fs.starfarer.api.EveryFrameScript;
+import com.fs.starfarer.api.GameState;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.impl.hullmods.BaseLogisticsHullMod;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +45,7 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
         float oPad = 10f;
         Color b = Misc.getHighlightColor();
         Color good = Misc.getPositiveHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Every %s:", oPad, b, "3 days");
         tooltip.setBulletWidth(20f);
@@ -45,6 +56,27 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
                 FUEL_TO_GENERATE.get(HullSize.CRUISER).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + "");
         tooltip.setBulletedListMode(null);
+
+        if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            FuelRamscoopScript script = (FuelRamscoopScript) Utils.getTransientScript(FuelRamscoopScript.class);
+            if (Mouse.getEventButton() == MouseEvent.BUTTON1 && script != null) {
+                script.isEnabled = !script.isEnabled;
+                Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
+                // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
+                Mouse.destroy();
+                try {
+                    Mouse.create();
+                } catch (LWJGLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            String status = (script != null && !script.isEnabled) ? "Disabled" : "Enabled";
+            Color statusColor = (status.equals("Enabled")) ? good : bad;
+
+            tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
+            tooltip.addPara("Status: %s", oPad, statusColor, status);
+        }
     }
 
     @Override

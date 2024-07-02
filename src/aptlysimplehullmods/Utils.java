@@ -1,8 +1,12 @@
 package aptlysimplehullmods;
 
+import com.fs.starfarer.api.EveryFrameScript;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.util.IntervalUtil;
+
+import java.util.List;
 
 public class Utils {
     public static boolean hasTargetingCore(ShipVariantAPI variant) {
@@ -17,6 +21,17 @@ public class Utils {
             computedStat = (0.01f * (totalStat / 0.01f)) / (0.01f * (totalStat / 0.01f) + 1);
         }
         return computedStat;
+    }
+
+    public static EveryFrameScript getTransientScript(Class<?> cls) {
+        if (Global.getSector().hasTransientScript(cls)) {
+            for (EveryFrameScript s : Global.getSector().getTransientScripts()) {
+                if (cls.isInstance(s)){
+                    return s;
+                }
+            }
+        }
+        return null;
     }
 
     public static class TargetingTransceiverData {

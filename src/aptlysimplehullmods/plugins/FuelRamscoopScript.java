@@ -10,6 +10,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class FuelRamscoopScript implements EveryFrameScript {
     public static final String FUEL_RAMSCOOP_ID = "ash_fuel_ramscoop";
+    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -36,8 +37,7 @@ public class FuelRamscoopScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (Global.getSector().getPlayerFleet().getAbility("ash_forging") != null &&
-                !Global.getSector().getPlayerFleet().getAbility("ash_forging").isActive()) {
+        if (!this.isEnabled) {
             this.isActive = false;
         }
 
