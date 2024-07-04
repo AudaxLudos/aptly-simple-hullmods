@@ -1,5 +1,6 @@
 package aptlysimplehullmods.hullmods;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
@@ -80,7 +81,7 @@ public class ConvictedCrewmates extends BaseHullMod {
                     Map.Entry<String, TargetData> entry = itr.next();
                     entry.getValue().timer -= amount;
                     ShipAPI target = entry.getValue().target;
-                    if (!target.isAlive() || target.isHulk()) {
+                    if (!target.isAlive() || target.isHulk() || target.isExpired() || !Global.getCombatEngine().isEntityInPlay(target)) {
                         float pptHullSizeMult = 1f;
                         if (this.ship.isFrigate() && target.getHullSize().ordinal() >= 3) {
                             pptHullSizeMult = FRIGATE_PPT_MULT;
@@ -95,7 +96,7 @@ public class ConvictedCrewmates extends BaseHullMod {
                         }
 
                         if (target.getHullSize() != null) {
-                            this.ship.setTimeDeployed(currentPPT - PPT_GAIN.get(target.getHullSize()) * pptHullSizeMult);
+                            this.ship.setTimeDeployed(currentPPT - entry.getValue().pptGain * pptHullSizeMult);
                         }
                         itr.remove();
                     } else if (entry.getValue().timer <= 0) {
@@ -123,6 +124,7 @@ public class ConvictedCrewmates extends BaseHullMod {
 
             TargetData data = new TargetData();
             data.target = targetShip;
+            data.pptGain = PPT_GAIN.get(targetShip.getHullSize());
 
             this.damagedTargets.put(targetShip.getId(), data);
 
@@ -131,6 +133,7 @@ public class ConvictedCrewmates extends BaseHullMod {
 
         public static class TargetData {
             public ShipAPI target;
+            public float pptGain;
             public float timer = KILL_TIMER;
         }
 
