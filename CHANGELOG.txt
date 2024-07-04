@@ -1,3 +1,12 @@
+### 2.0.2
+- Release 2.0.2
+- Fix crash with convicted crewmates when checking for PPT gain values on target death
+- Hidden forging ability (Replaced with new implementation)
+- Add option to disable/enable production hullmods separately
+- Add supplies recycler sprite
+- Add supplies recycler settings data
+- Add supplies recycler hullmod
+
 ### 2.0.0a
 - Release 2.0.0a
 - Fix crash with forging ability during the tutorial
