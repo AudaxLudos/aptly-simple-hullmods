@@ -2,11 +2,10 @@ package aptlysimplehullmods;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.util.IntervalUtil;
-
-import java.util.List;
 
 public class Utils {
     public static boolean hasTargetingCore(ShipVariantAPI variant) {
@@ -32,6 +31,18 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static boolean getProductionHullmodActivity(String key, boolean invert) {
+        MemoryAPI memory = Global.getSector().getMemoryWithoutUpdate();
+        if (memory.contains(key)) {
+            if (invert) {
+                memory.set(key, !memory.getBoolean(key));
+            }
+        } else {
+            memory.set(key, true);
+        }
+        return memory.getBoolean(key);
     }
 
     public static class TargetingTransceiverData {

@@ -1,8 +1,7 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
-import aptlysimplehullmods.plugins.FuelRamscoopScript;
-import aptlysimplehullmods.plugins.IndustrialMachineForgeScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -62,9 +61,8 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
-            IndustrialMachineForgeScript script = (IndustrialMachineForgeScript) Utils.getTransientScript(IndustrialMachineForgeScript.class);
-            if (Mouse.getEventButton() == MouseEvent.BUTTON1 && script != null) {
-                script.isEnabled = !script.isEnabled;
+            if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
+                Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
                 // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
                 Mouse.destroy();
@@ -75,8 +73,9 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
                 }
             }
 
-            String status = (script != null && !script.isEnabled) ? "Disabled" : "Enabled";
-            Color statusColor = (status.equals("Enabled")) ? good : bad;
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false);
+            String status = isEnabled ? "Enabled" : "Disabled";
+            Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");

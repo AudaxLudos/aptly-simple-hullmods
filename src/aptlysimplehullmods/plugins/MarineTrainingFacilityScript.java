@@ -1,5 +1,7 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.MarineTrainingFacility;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -11,8 +13,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class MarineTrainingFacilityScript implements EveryFrameScript {
-    public static final String MARINE_TRAINING_FACILITY_ID = "ash_marine_training_facility";
-    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -39,8 +39,10 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (!this.isEnabled) {
+        if (!Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false)) {
             this.isActive = false;
+            this.timer.setElapsed(0);
+            return;
         }
 
         this.timer.advance(amount);
@@ -52,13 +54,13 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
             int addMarines = 0;
             float trainMarines = 0;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(MARINE_TRAINING_FACILITY_ID)) {
+                if (!member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
                     continue;
                 }
                 ++shipsWithMarineTrainingFacility;
                 addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
                 maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
-                if (!member.getVariant().getSMods().contains(MARINE_TRAINING_FACILITY_ID)) {
+                if (!member.getVariant().getSMods().contains(Ids.MARINE_TRAINING_FACILITY)) {
                     trainMarines += MarineTrainingFacility.MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
                 } else {
                     trainMarines += MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(member.getVariant().getHullSize());

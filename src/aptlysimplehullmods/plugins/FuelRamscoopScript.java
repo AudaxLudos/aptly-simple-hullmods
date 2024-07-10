@@ -1,5 +1,7 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.FuelRamscoop;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -9,8 +11,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class FuelRamscoopScript implements EveryFrameScript {
-    public static final String FUEL_RAMSCOOP_ID = "ash_fuel_ramscoop";
-    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -37,8 +37,10 @@ public class FuelRamscoopScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (!this.isEnabled) {
+        if (!Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, false)) {
             this.isActive = false;
+            this.timer.setElapsed(0);
+            return;
         }
 
         this.timer.advance(amount);
@@ -47,11 +49,11 @@ public class FuelRamscoopScript implements EveryFrameScript {
             int shipsWithFuelRamscoop = 0;
             float fuelGenerated = 0;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(FUEL_RAMSCOOP_ID)) {
+                if (!member.getVariant().hasHullMod(Ids.FUEL_RAMSCOOP)) {
                     continue;
                 }
                 ++shipsWithFuelRamscoop;
-                if (!member.getVariant().getSMods().contains(FUEL_RAMSCOOP_ID)) {
+                if (!member.getVariant().getSMods().contains(Ids.FUEL_RAMSCOOP)) {
                     fuelGenerated += FuelRamscoop.FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
                 } else {
                     fuelGenerated += FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(member.getVariant().getHullSize());

@@ -1,8 +1,7 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
-import aptlysimplehullmods.plugins.FuelRamscoopScript;
-import aptlysimplehullmods.plugins.MarineTrainingFacilityScript;
 import aptlysimplehullmods.plugins.MineralRefineryScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
@@ -64,6 +63,8 @@ public class MineralRefinery extends BaseHullMod {
         if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
             MineralRefineryScript script = (MineralRefineryScript) Utils.getTransientScript(MineralRefineryScript.class);
             if (Mouse.getEventButton() == MouseEvent.BUTTON1 && script != null) {
+                Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
+                Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
                 // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
                 Mouse.destroy();
                 try {
@@ -71,12 +72,11 @@ public class MineralRefinery extends BaseHullMod {
                 } catch (LWJGLException e) {
                     throw new RuntimeException(e);
                 }
-                script.isEnabled = !script.isEnabled;
-                Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
             }
 
-            String status = (script != null && !script.isEnabled) ? "Disabled" : "Enabled";
-            Color statusColor = (status.equals("Enabled")) ? good : bad;
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
+            String status = isEnabled ? "Enabled" : "Disabled";
+            Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");

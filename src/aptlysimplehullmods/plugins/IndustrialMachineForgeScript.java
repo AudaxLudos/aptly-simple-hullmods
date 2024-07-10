@@ -1,5 +1,7 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.IndustrialMachineForge;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -10,8 +12,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class IndustrialMachineForgeScript implements EveryFrameScript {
-    public static final String INDUSTRIAL_MACHINE_FORGE_ID = "ash_industrial_machine_forge";
-    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -38,8 +38,10 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (!this.isEnabled) {
+        if (!Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false)) {
             this.isActive = false;
+            this.timer.setElapsed(0);
+            return;
         }
 
         this.timer.advance(amount);
@@ -50,13 +52,13 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             float metalsToConsume = 0f;
             float bonusHeavyMachinery = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(INDUSTRIAL_MACHINE_FORGE_ID)) {
+                if (!member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
                     continue;
                 }
                 ++shipsWithIndustrialMachineForge;
                 heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
                 metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
-                if (member.getVariant().getSMods().contains(INDUSTRIAL_MACHINE_FORGE_ID)) {
+                if (member.getVariant().getSMods().contains(Ids.INDUSTRIAL_MACHINE_FORGE)) {
                     bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize()) * 0.25f;
                 }
             }

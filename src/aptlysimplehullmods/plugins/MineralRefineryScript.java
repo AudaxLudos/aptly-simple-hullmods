@@ -1,5 +1,7 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
+import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.MineralRefinery;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -10,8 +12,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class MineralRefineryScript implements EveryFrameScript {
-    public static final String MINERAL_REFINERY_ID = "ash_mineral_refinery";
-    public boolean isEnabled = true;
     public boolean isActive = false;
     public int shipsWithHullmod = 0;
     public Long lastDay;
@@ -38,8 +38,10 @@ public class MineralRefineryScript implements EveryFrameScript {
         if (Global.getSector().getPlayerFleet().getCargo() == null) {
             return;
         }
-        if (!this.isEnabled) {
+        if (!Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false)) {
             this.isActive = false;
+            this.timer.setElapsed(0);
+            return;
         }
 
         this.timer.advance(amount);
@@ -53,7 +55,7 @@ public class MineralRefineryScript implements EveryFrameScript {
             float rareMetalsToGenerate = 0f;
             float rareOresToConsume = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(MINERAL_REFINERY_ID)) {
+                if (!member.getVariant().hasHullMod(Ids.MINERAL_REFINERY)) {
                     continue;
                 }
                 ++shipsWithMineralRefinery;
@@ -61,7 +63,7 @@ public class MineralRefineryScript implements EveryFrameScript {
                 oresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
                 rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
                 rareOresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
-                if (member.getVariant().getSMods().contains(MINERAL_REFINERY_ID)) {
+                if (member.getVariant().getSMods().contains(Ids.MINERAL_REFINERY)) {
                     metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
                     bonusMetals += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
                     rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
