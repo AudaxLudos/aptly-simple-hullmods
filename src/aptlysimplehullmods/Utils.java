@@ -25,7 +25,7 @@ public class Utils {
     public static EveryFrameScript getTransientScript(Class<?> cls) {
         if (Global.getSector().hasTransientScript(cls)) {
             for (EveryFrameScript s : Global.getSector().getTransientScripts()) {
-                if (cls.isInstance(s)){
+                if (cls.isInstance(s)) {
                     return s;
                 }
             }

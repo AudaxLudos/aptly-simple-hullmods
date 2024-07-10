@@ -1,6 +1,5 @@
 package aptlysimplehullmods;
 
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 
 public class Ids {
     public static final String FUEL_RAMSCOOP = "ash_fuel_ramscoop";
