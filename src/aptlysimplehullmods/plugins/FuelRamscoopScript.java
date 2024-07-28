@@ -71,19 +71,29 @@ public class FuelRamscoopScript implements EveryFrameScript {
             if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= FuelRamscoop.DAYS_TO_GENERATE_FUEL) {
                 if (playerCargo.getFuel() + fuelGenerated >= playerCargo.getMaxFuel()) {
                     fuelGenerated = playerCargo.getMaxFuel() - playerCargo.getFuel();
+                    fuelGenerated = Math.round(fuelGenerated);
                 }
-
-                if (fuelGenerated > 0) {
+                if (fuelGenerated >= 1) {
                     playerCargo.addFuel(fuelGenerated);
-                    Global.getSector().getCampaignUI().addMessage(
-                            "%s units of fuel has been converted using accumulated interstellar matter",
+                    if (fuelGenerated > 1) {
+                        Global.getSector().getCampaignUI().addMessage(
+                            "%s units of fuel have been converted using accumulated interstellar matter",
                             Misc.getTextColor(),
-                            Math.round(fuelGenerated) + "",
+                            fuelGenerated + "",
                             null,
                             Misc.getPositiveHighlightColor(),
                             null);
+                    }
+                    else { 
+                        Global.getSector().getCampaignUI().addMessage(
+                            "1 unit of fuel has been converted using accumulated interstellar matter",
+                            Misc.getTextColor(),
+                            1 + "",
+                            null,
+                            Misc.getPositiveHighlightColor(),
+                            null);
+                    }
                 }
-
                 this.isActive = false;
             }
         }
