@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
@@ -60,6 +61,16 @@ public class ConvictedCrewmates extends BaseHullMod {
         tooltip.addPara("^ Targets must die within %s to gain\n   peak performance time bonuses.", pad, good, Math.round(KILL_TIMER) + " seconds");
         tooltip.setBulletedListMode(null);
         tooltip.addPara("Decreases the ship's max combat readiness by %s.", pad, bad, Math.round(MAX_CR_MOD * 100f) + "%");
+    }
+
+    @Override
+    public String getUnapplicableReason(ShipAPI ship) {
+        return "Ship is Automated";
+    }
+
+    @Override
+    public boolean isApplicableToShip(ShipAPI ship) {
+        return !ship.getVariant().hasHullMod(HullMods.AUTOMATED);
     }
 
     public static class AP_ConvictedCrewmatesScript implements AdvanceableListener, DamageDealtModifier {
