@@ -61,9 +61,8 @@ public class TemporalFluxReactor extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
 
         tooltip.addPara("As %s flux levels rise:", oPad, b, "soft");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Increases the ship's speed of time by up to %s", pad, good, Math.round(TIME_FLOW_MULT * 100f) + "%");
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Increases the ship's speed of time by up to %s", pad, good, Math.round(TIME_FLOW_MULT * 100f) + "%");
         tooltip.setBulletedListMode(null);
     }
 

@@ -60,19 +60,18 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Every %s:", oPad, b, "week");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Levels up %s/%s/%s/%s current marines based on hull size.", pad, good,
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Levels up %s/%s/%s/%s current marines based on hull size.", pad, good,
                 MARINES_TO_LEVEL.get(HullSize.FRIGATE) + "",
                 MARINES_TO_LEVEL.get(HullSize.DESTROYER) + "",
                 MARINES_TO_LEVEL.get(HullSize.CRUISER) + "",
                 MARINES_TO_LEVEL.get(HullSize.CAPITAL_SHIP) + "");
-        tooltip.addPara("^ Converts %s/%s/%s/%s crew members into marines\n   based on hull size.", pad, good,
+        tooltip.addPara("Converts %s/%s/%s/%s crew members into marines based on hull size.", pad, good,
                 MARINES_TO_GENERATE.get(HullSize.FRIGATE) + "",
                 MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "",
                 MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",
                 MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP) + "");
-        tooltip.addPara("^ Can convert a maximum of %s/%s/%s/%s marines per\n   ship with this hullmod.", pad, b,
+        tooltip.addPara("Can convert a maximum of %s/%s/%s/%s marines per ship with this hullmod.", pad, b,
                 MAX_MARINES_TO_GENERATE.get(HullSize.FRIGATE) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",

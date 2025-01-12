@@ -46,14 +46,13 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Every %s:", oPad, b, "3 days");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Constructs %s/%s/%s/%s Heavy Machinery\n   based on hull size.", pad, good,
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Constructs %s/%s/%s/%s Heavy Machinery based on hull size.", pad, good,
                 HEAVY_MACHINERY_TO_GENERATE.get(HullSize.FRIGATE).toString(),
                 HEAVY_MACHINERY_TO_GENERATE.get(HullSize.DESTROYER).toString(),
                 HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CRUISER).toString(),
                 HEAVY_MACHINERY_TO_GENERATE.get(HullSize.CAPITAL_SHIP).toString());
-        tooltip.addPara("^ Consumes %s/%s/%s/%s Metals based on hull size.", pad, bad,
+        tooltip.addPara("Consumes %s/%s/%s/%s Metals based on hull size.", pad, bad,
                 METALS_TO_CONSUME.get(HullSize.FRIGATE).toString(),
                 METALS_TO_CONSUME.get(HullSize.DESTROYER).toString(),
                 METALS_TO_CONSUME.get(HullSize.CRUISER).toString(),

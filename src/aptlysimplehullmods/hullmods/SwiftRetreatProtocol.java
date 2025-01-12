@@ -60,12 +60,11 @@ public class SwiftRetreatProtocol extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("When a fighter wing is %s:", oPad, b, "retreating/rearming");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("^ Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
-        tooltip.addPara("^ Increases the fighter's engine damage taken by %s", pad, bad, Math.round(FIGHTER_ENGINE_DMG_TAKEN_MULT * 100f) + "%");
-        tooltip.addPara("^ If the fighter has shields, %s shields", pad, bad, "turns off");
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Increases the fighter's top speed by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's maneuverability by %s", pad, good, Math.round(FIGHTER_MOVEMENT_MULT * 100f) + "%");
+        tooltip.addPara("Increases the fighter's engine damage taken by %s", pad, bad, Math.round(FIGHTER_ENGINE_DMG_TAKEN_MULT * 100f) + "%");
+        tooltip.addPara("If the fighter has shields, %s shields", pad, bad, "turns off");
         tooltip.setBulletedListMode(null);
     }
 

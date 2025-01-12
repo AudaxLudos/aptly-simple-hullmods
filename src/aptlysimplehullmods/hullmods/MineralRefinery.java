@@ -46,14 +46,13 @@ public class MineralRefinery extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Every %s", oPad, b, "3 days");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Generates %s/%s/%s/%s Metals / Transplutonics\n   based on hull size.", pad, good,
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Generates %s/%s/%s/%s Metals / Transplutonics based on hull size.", pad, good,
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.FRIGATE).toString(),
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.DESTROYER).toString(),
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CRUISER).toString(),
                 ALLOYS_TO_GENERATE.get(ShipAPI.HullSize.CAPITAL_SHIP).toString());
-        tooltip.addPara("^ Consumes %s/%s/%s/%s Ores / Rare Ores\n   based on hull size.", pad, bad,
+        tooltip.addPara("Consumes %s/%s/%s/%s Ores / Rare Ores based on hull size.", pad, bad,
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.FRIGATE).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.DESTROYER).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CRUISER).toString(),

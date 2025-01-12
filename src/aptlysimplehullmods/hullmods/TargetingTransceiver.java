@@ -113,7 +113,7 @@ public class TargetingTransceiver extends BaseHullMod {
 
         tooltip.setBulletedListMode("");
         tooltip.addPara("If a %s has a %s and is within %s:", oPad, b, "Friendly ship", "Targeting Core/Unit", 1000 + "su");
-        tooltip.setBulletedListMode(" ^ ");
+        tooltip.setBulletedListMode("  ^ ");
         tooltip.addPara("Increases the autofire aim accuracy by %s if the ship is a Cruiser/Capital ship", pad, good, Math.round(AUTOFIRE_ACCURACY_MOD * 100f) + "%");
         tooltip.addPara("Increases the range of non-missile weapons by %s if the ship is a Frigate/Destroyer", pad, good, Math.round(WEAPON_RANGE_MOD * 100f) + "%");
         tooltip.setBulletedListMode(null);

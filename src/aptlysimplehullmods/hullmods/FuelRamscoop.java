@@ -46,9 +46,8 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Every %s:", oPad, b, "3 days");
-        tooltip.setBulletWidth(20f);
-        tooltip.setBulletedListMode("");
-        tooltip.addPara("^ Generates %s/%s/%s/%s fuel based on hull size.", pad, good,
+        tooltip.setBulletedListMode("  ^ ");
+        tooltip.addPara("Generates %s/%s/%s/%s fuel based on hull size.", pad, good,
                 FUEL_TO_GENERATE.get(HullSize.FRIGATE).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.DESTROYER).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.CRUISER).intValue() + "",
