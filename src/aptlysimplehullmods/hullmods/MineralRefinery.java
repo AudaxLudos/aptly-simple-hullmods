@@ -60,9 +60,8 @@ public class MineralRefinery extends BaseHullMod {
         tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
-            MineralRefineryScript script = (MineralRefineryScript) Utils.getTransientScript(MineralRefineryScript.class);
-            if (Mouse.getEventButton() == MouseEvent.BUTTON1 && script != null) {
-                Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
+            if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
+                Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
                 // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
                 Mouse.destroy();

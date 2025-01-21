@@ -45,6 +45,10 @@ public class Utils {
         return memory.getBoolean(key);
     }
 
+    public static boolean hasConsumableCommodity(String commodityId, float minAmount) {
+        return Global.getSector().getPlayerFleet().getCargo().getCommodityQuantity(commodityId) > minAmount;
+    }
+
     public static class TargetingTransceiverData {
         public IntervalUtil interval = new IntervalUtil(1f, 1f);
         public float mag = 0f;

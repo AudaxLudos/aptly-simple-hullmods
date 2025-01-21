@@ -12,9 +12,8 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class IndustrialMachineForgeScript implements EveryFrameScript {
-    public boolean isActive = false;
-    public int shipsWithHullmod = 0;
-    public Long lastDay;
+    public int shipsWithMod = 0;
+    public Long lastDay = null;
     public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
@@ -39,65 +38,69 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             return;
         }
         if (!Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false)) {
-            this.isActive = false;
-            this.timer.setElapsed(0);
+            this.lastDay = Global.getSector().getClock().getTimestamp();
             return;
         }
 
         this.timer.advance(amount);
         if (this.timer.intervalElapsed()) {
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
-            int shipsWithIndustrialMachineForge = 0;
-            float heavyMachineryToGenerate = 0f;
-            float metalsToConsume = 0f;
-            float bonusHeavyMachinery = 0f;
+            int shipsWithMod = 0;
+            float baseMachineryToMake = 0f;
+            float extraMachineryToMake = 0f;
+            float baseMetalsToUse = 0f;
+            float extraMetalsToUse = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
                 if (!member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
                     continue;
                 }
-                ++shipsWithIndustrialMachineForge;
-                heavyMachineryToGenerate += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
-                metalsToConsume += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                ++shipsWithMod;
                 if (member.getVariant().getSMods().contains(Ids.INDUSTRIAL_MACHINE_FORGE)) {
-                    bonusHeavyMachinery += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize()) * 0.25f;
+                    extraMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.2f;
+                    extraMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                } else {
+                    baseMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
+                    baseMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
                 }
             }
 
-            if (!this.isActive || this.shipsWithHullmod != shipsWithIndustrialMachineForge) {
-                if (hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
-                    this.isActive = true;
-                    this.shipsWithHullmod = shipsWithIndustrialMachineForge;
-                    this.lastDay = Global.getSector().getClock().getTimestamp();
-                }
+            if (this.lastDay == null || this.shipsWithMod != shipsWithMod || this.shipsWithMod <= 0 || !Utils.hasConsumableCommodity(Commodities.METALS, 5f)) {
+                this.shipsWithMod = shipsWithMod;
+                this.lastDay = Global.getSector().getClock().getTimestamp();
+                return;
             }
 
-            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
-                if (playerCargo.getCommodityQuantity(Commodities.METALS) - metalsToConsume < 0f) {
-                    heavyMachineryToGenerate = playerCargo.getCommodityQuantity(Commodities.METALS) / 7f;
-                    metalsToConsume = heavyMachineryToGenerate * 7f;
-                    if (bonusHeavyMachinery > 0) {
-                        heavyMachineryToGenerate *= 1.25f;
+            if (Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= IndustrialMachineForge.DAYS_TO_GENERATE_HEAVY_MACHINERY) {
+                this.lastDay = Global.getSector().getClock().getTimestamp();
+                float currentMetals = playerCargo.getCommodityQuantity(Commodities.METALS);
+                float totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
+                float totalMetalsToUse = baseMetalsToUse + extraMetalsToUse;
+
+                if (currentMetals < totalMetalsToUse) {
+                    if (currentMetals < extraMetalsToUse) {
+                        totalMachineryToMake = currentMetals / 5.8333f;
+                        totalMetalsToUse = totalMachineryToMake * 5.8333f;
+                    } else {
+                        extraMachineryToMake = extraMetalsToUse / 5.8333f;
+                        baseMetalsToUse = currentMetals - extraMetalsToUse;
+                        baseMachineryToMake = baseMetalsToUse / 7f;
+                        totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
+                        totalMetalsToUse = extraMetalsToUse + baseMetalsToUse;
                     }
                 }
 
-                if (heavyMachineryToGenerate >= 1 && metalsToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.METALS, 5f)) {
+                if (totalMachineryToMake >= 1 && totalMetalsToUse >= 5 && Utils.hasConsumableCommodity(Commodities.METALS, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
                             "%s units of Heavy Machinery has been refined from %s units of Metals",
                             Misc.getTextColor(),
-                            Math.round(heavyMachineryToGenerate) + "",
-                            Math.round(metalsToConsume) + "",
+                            Math.round(totalMachineryToMake) + "",
+                            Math.round(totalMetalsToUse) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getHighlightColor());
-                    playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(heavyMachineryToGenerate));
-                    playerCargo.removeCommodity(Commodities.METALS, Math.round(metalsToConsume));
+                    playerCargo.addCommodity(Commodities.HEAVY_MACHINERY, Math.round(totalMachineryToMake));
+                    playerCargo.removeCommodity(Commodities.METALS, Math.round(totalMetalsToUse));
                 }
-
-                this.isActive = false;
             }
         }
-    }
-
-    public boolean hasConsumableCommodity(CargoAPI cargo, String commodityId, float minAmount) {
-        return cargo.getCommodityQuantity(commodityId) > minAmount;
     }
 }

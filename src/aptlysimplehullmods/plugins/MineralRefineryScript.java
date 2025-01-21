@@ -12,9 +12,8 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class MineralRefineryScript implements EveryFrameScript {
-    public boolean isActive = false;
-    public int shipsWithHullmod = 0;
-    public Long lastDay;
+    public int shipsWithMod = 0;
+    public Long lastDay = null;
     public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
@@ -39,93 +38,109 @@ public class MineralRefineryScript implements EveryFrameScript {
             return;
         }
         if (!Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false)) {
-            this.isActive = false;
-            this.timer.setElapsed(0);
+            this.lastDay = Global.getSector().getClock().getTimestamp();
             return;
         }
 
         this.timer.advance(amount);
         if (this.timer.intervalElapsed()) {
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
-            int shipsWithMineralRefinery = 0;
-            float bonusMetals = 0f;
-            float metalsToGenerate = 0f;
-            float oresToConsume = 0f;
-            float bonusRareMetals = 0f;
-            float rareMetalsToGenerate = 0f;
-            float rareOresToConsume = 0f;
+            int shipsWithMod = 0;
+            float baseMetalsToMake = 0f;
+            float extraMetalsToMake = 0f;
+            float baseOreToUse = 0f;
+            float extraOreToUse = 0f;
+
+            float baseRareMetalsToMake = 0f;
+            float extraRareMetalsToMake = 0f;
+            float baseRareOreToUse = 0f;
+            float extraRareOreToUse = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
                 if (!member.getVariant().hasHullMod(Ids.MINERAL_REFINERY)) {
                     continue;
                 }
-                ++shipsWithMineralRefinery;
-                metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
-                oresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
-                rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
-                rareOresToConsume += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                ++shipsWithMod;
                 if (member.getVariant().getSMods().contains(Ids.MINERAL_REFINERY)) {
-                    metalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
-                    bonusMetals += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
-                    rareMetalsToGenerate += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
-                    bonusRareMetals += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 0.25f;
+                    extraMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.25f;
+                    extraOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                    extraRareMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.25f;
+                    extraRareOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                } else {
+                    baseMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
+                    baseOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                    baseRareMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
+                    baseRareOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
                 }
             }
 
-            if (!this.isActive || this.shipsWithHullmod != shipsWithMineralRefinery) {
-                if (hasConsumableCommodity(playerCargo, Commodities.ORE, 5f) || hasConsumableCommodity(playerCargo, Commodities.RARE_ORE, 5f)) {
-                    this.isActive = true;
-                    this.shipsWithHullmod = shipsWithMineralRefinery;
-                    this.lastDay = Global.getSector().getClock().getTimestamp();
-                }
+            if (this.lastDay == null || this.shipsWithMod != shipsWithMod || this.shipsWithMod <= 0 || !(Utils.hasConsumableCommodity(Commodities.ORE, 5f) || Utils.hasConsumableCommodity(Commodities.RARE_ORE, 5f))) {
+                this.shipsWithMod = shipsWithMod;
+                this.lastDay = Global.getSector().getClock().getTimestamp();
+                return;
             }
 
-            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MineralRefinery.DAYS_TO_GENERATE_ALLOYS) {
-                if (playerCargo.getCommodityQuantity(Commodities.ORE) - oresToConsume < -0.0001f) {
-                    metalsToGenerate = playerCargo.getCommodityQuantity(Commodities.ORE) / 5f;
-                    oresToConsume = metalsToGenerate * 5f;
-                    if (bonusMetals > 0) {
-                        metalsToGenerate *= 1.25f;
+            if (Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MineralRefinery.DAYS_TO_GENERATE_ALLOYS) {
+                this.lastDay = Global.getSector().getClock().getTimestamp();
+                float currentOre = playerCargo.getCommodityQuantity(Commodities.ORE);
+                float totalMetalsToMake = baseMetalsToMake + extraMetalsToMake;
+                float totalOreToUse = baseOreToUse + extraOreToUse;
+                if (currentOre < totalOreToUse) {
+                    if (currentOre < extraOreToUse) {
+                        totalMetalsToMake = currentOre / 4f;
+                        totalOreToUse = totalMetalsToMake * 4f;
+                    } else {
+                        System.out.println("this is called");
+                        extraMetalsToMake = extraOreToUse / 4f;
+                        System.out.println(extraOreToUse);
+                        baseOreToUse = currentOre - extraOreToUse;
+                        baseMetalsToMake = baseOreToUse / 5f;
+                        totalMetalsToMake = baseMetalsToMake + extraMetalsToMake;
+                        System.out.println(extraMetalsToMake);
+                        System.out.println(baseMetalsToMake);
+                        totalOreToUse = extraOreToUse + baseOreToUse;
                     }
                 }
 
-                if (playerCargo.getCommodityQuantity(Commodities.RARE_ORE) - rareOresToConsume < -0.0001f) {
-                    rareMetalsToGenerate = playerCargo.getCommodityQuantity(Commodities.RARE_ORE) / 5f;
-                    rareOresToConsume = rareMetalsToGenerate * 5f;
-                    if (bonusRareMetals > 0) {
-                        rareMetalsToGenerate *= 1.25f;
+                float currentRareOre = playerCargo.getCommodityQuantity(Commodities.RARE_ORE);
+                float totalRareMetalsToMake = baseRareMetalsToMake + extraRareMetalsToMake;
+                float totalRareOreToUse = baseRareOreToUse + extraRareOreToUse;
+                if (currentRareOre < totalRareOreToUse) {
+                    if (currentRareOre < extraRareOreToUse) {
+                        totalRareMetalsToMake = currentRareOre / 4f;
+                        totalRareOreToUse = totalRareMetalsToMake * 4f;
+                    } else {
+                        extraRareMetalsToMake = extraRareOreToUse / 4f;
+                        baseRareOreToUse = currentRareOre - extraRareOreToUse;
+                        baseRareMetalsToMake = baseRareOreToUse / 5f;
+                        totalRareMetalsToMake = baseRareMetalsToMake + extraRareMetalsToMake;
+                        totalRareOreToUse = extraRareOreToUse + baseRareOreToUse;
                     }
                 }
 
-                if (metalsToGenerate >= 1 && oresToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.ORE, 5f)) {
+                if (totalMetalsToMake >= 1 && totalOreToUse >= 5 && Utils.hasConsumableCommodity(Commodities.ORE, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
                             "%s units of metals has been refined from %s units of ore",
                             Misc.getTextColor(),
-                            Math.round(metalsToGenerate) + "",
-                            Math.round(oresToConsume) + "",
+                            Math.round(totalMetalsToMake) + "",
+                            Math.round(totalOreToUse) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getNegativeHighlightColor());
-                    playerCargo.addCommodity(Commodities.METALS, Math.round(metalsToGenerate));
-                    playerCargo.removeCommodity(Commodities.ORE, Math.round(oresToConsume));
+                    playerCargo.addCommodity(Commodities.METALS, Math.round(totalMetalsToMake));
+                    playerCargo.removeCommodity(Commodities.ORE, Math.round(totalOreToUse));
                 }
 
-                if (rareMetalsToGenerate >= 1 && rareOresToConsume >= 5 && hasConsumableCommodity(playerCargo, Commodities.RARE_ORE, 5f)) {
+                if (totalRareMetalsToMake >= 1 && totalRareOreToUse >= 5 && Utils.hasConsumableCommodity(Commodities.RARE_ORE, 5f)) {
                     Global.getSector().getCampaignUI().addMessage(
                             "%s units of transplutonics has been refined from %s units of rare ore",
                             Misc.getTextColor(),
-                            Math.round(rareMetalsToGenerate) + "",
-                            Math.round(rareOresToConsume) + "",
+                            Math.round(totalRareMetalsToMake) + "",
+                            Math.round(totalRareOreToUse) + "",
                             Misc.getPositiveHighlightColor(),
                             Misc.getHighlightColor());
-                    playerCargo.addCommodity(Commodities.RARE_METALS, Math.round(rareMetalsToGenerate));
-                    playerCargo.removeCommodity(Commodities.RARE_ORE, Math.round(rareOresToConsume));
+                    playerCargo.addCommodity(Commodities.RARE_METALS, Math.round(totalRareMetalsToMake));
+                    playerCargo.removeCommodity(Commodities.RARE_ORE, Math.round(totalRareOreToUse));
                 }
-
-                this.isActive = false;
             }
         }
-    }
-
-    public boolean hasConsumableCommodity(CargoAPI cargo, String commodityId, float minAmount) {
-        return cargo.getCommodityQuantity(commodityId) > minAmount;
     }
 }
