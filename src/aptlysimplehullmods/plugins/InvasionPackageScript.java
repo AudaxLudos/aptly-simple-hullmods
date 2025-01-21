@@ -33,6 +33,10 @@ public class InvasionPackageScript implements EveryFrameScript {
         }
 
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
+        Float bonus = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(INVASION_PACKAGE_ID);
+        if (bonus != null) {
+            return;
+        }
 
         int shipsWithInvasionPackage = 0;
         float totalStat = 0;
@@ -67,5 +71,6 @@ public class InvasionPackageScript implements EveryFrameScript {
                 playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(INVASION_PACKAGE_ID);
             }
         }
+        playerFleet.getFleetData().getCacheClearedOnSync().put(INVASION_PACKAGE_ID, totalStat);
     }
 }

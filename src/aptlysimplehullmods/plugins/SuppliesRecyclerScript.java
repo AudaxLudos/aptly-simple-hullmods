@@ -38,6 +38,10 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
         FleetDataAPI playerFleetData = playerFleet.getFleetData();
         List<FleetMemberAPI> playerFleetMembers = playerFleetData.getMembersListCopy();
+        Float bonus = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(SUPPLIES_RECYCLER_ID);
+        if (bonus != null) {
+            return;
+        }
 
         int shipsWithSuppliesRecycler = 0;
         float totalStat = 0;
@@ -73,6 +77,7 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
                 }
             }
         }
+        playerFleet.getFleetData().getCacheClearedOnSync().put(SUPPLIES_RECYCLER_ID, totalStat);
     }
 
     public static class SuppliesRecyclerBuff implements BuffManagerAPI.Buff {
