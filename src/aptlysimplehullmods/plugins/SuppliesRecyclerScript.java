@@ -13,8 +13,6 @@ import java.util.List;
 
 public class SuppliesRecyclerScript implements EveryFrameScript {
     public static final String SUPPLIES_RECYCLER_ID = "ash_supplies_recycler";
-    public boolean isActive = false;
-    public int shipsWithHullmod = 0;
 
     @Override
     public boolean isDone() {
@@ -38,46 +36,35 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
         FleetDataAPI playerFleetData = playerFleet.getFleetData();
         List<FleetMemberAPI> playerFleetMembers = playerFleetData.getMembersListCopy();
-        Float bonus = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(SUPPLIES_RECYCLER_ID);
-        if (bonus != null) {
+        Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(SUPPLIES_RECYCLER_ID);
+        if (bonusStat != null) {
             return;
         }
 
-        int shipsWithSuppliesRecycler = 0;
-        float totalStat = 0;
+        bonusStat = 0f;
         for (FleetMemberAPI member : playerFleetMembers) {
             if (member.isMothballed()) {
                 continue;
             }
             if (member.getVariant().hasHullMod(SUPPLIES_RECYCLER_ID)) {
-                ++shipsWithSuppliesRecycler;
-                totalStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
+                bonusStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
             }
         }
 
-        if (this.shipsWithHullmod != shipsWithSuppliesRecycler) {
-            // un-modify fleet stats here
-            this.isActive = false;
-            this.shipsWithHullmod = shipsWithSuppliesRecycler;
-        }
-
-        if (!this.isActive) {
-            // modify fleet stats here
-            this.isActive = true;
-            if (totalStat > 0) {
-                for (FleetMemberAPI member : playerFleetMembers) {
-                    if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
-                        member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
-                    }
-                    member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID, 1f - Utils.computeStatMultiplier(totalStat)));
-                }
-            } else {
-                for (FleetMemberAPI member : playerFleetMembers) {
+        if (bonusStat > 0) {
+            for (FleetMemberAPI member : playerFleetMembers) {
+                if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
                     member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
                 }
+                member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID, 1f - Utils.computeStatMultiplier(bonusStat)));
+            }
+        } else {
+            for (FleetMemberAPI member : playerFleetMembers) {
+                member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
             }
         }
-        playerFleet.getFleetData().getCacheClearedOnSync().put(SUPPLIES_RECYCLER_ID, totalStat);
+
+        playerFleet.getFleetData().getCacheClearedOnSync().put(SUPPLIES_RECYCLER_ID, bonusStat);
     }
 
     public static class SuppliesRecyclerBuff implements BuffManagerAPI.Buff {
