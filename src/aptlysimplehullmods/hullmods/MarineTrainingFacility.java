@@ -80,7 +80,7 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
 
         if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
-                Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false);
+                Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
                 // Fix bug where pressing special keyboard keys (space, alt, etc.) would trigger mouse events
                 Mouse.destroy();
