@@ -1,3 +1,15 @@
+### 2.1.0a
+- Release 2.1.0a
+- Fix marine training facility enable and disable function not working
+- Update optimized marine training facility script
+- Update optimized logistic hullmods scripts
+- Fix logistic hullmods commodity generation not calculating smod bonuses properly
+- Fix mineral refinery not getting disabled or enabled functionality
+- Update optimized supplies recycler and invasion package scripts
+- Update adjust hullmod description bullet points spacing
+- Update convicted crewmates to be incompatible with automated ships
+- Update production hullmod to save its status when reloading/restarting/reopening the game
+
 ### 2.0.2
 - Release 2.0.2
 - Fix crash with convicted crewmates when checking for PPT gain values on target death
