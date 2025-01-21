@@ -13,9 +13,8 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class MarineTrainingFacilityScript implements EveryFrameScript {
-    public boolean isActive = false;
-    public int shipsWithHullmod = 0;
-    public Long lastDay;
+    public int shipsWithMod = 0;
+    public Long lastDay = null;
     public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
     @Override
@@ -40,8 +39,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
             return;
         }
         if (!Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false)) {
-            this.isActive = false;
-            this.timer.setElapsed(0);
+            this.lastDay = Global.getSector().getClock().getTimestamp();
             return;
         }
 
@@ -49,7 +47,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
         if (this.timer.intervalElapsed()) {
             FleetDataAPI playerFleetData = Global.getSector().getPlayerFleet().getFleetData();
             CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
-            int shipsWithMarineTrainingFacility = 0;
+            int shipsWithMod = 0;
             int maxMarines = 0;
             int addMarines = 0;
             float trainMarines = 0;
@@ -57,7 +55,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 if (!member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
                     continue;
                 }
-                ++shipsWithMarineTrainingFacility;
+                ++shipsWithMod;
                 addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
                 maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
                 if (!member.getVariant().getSMods().contains(Ids.MARINE_TRAINING_FACILITY)) {
@@ -67,16 +65,14 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 }
             }
 
-            if (!this.isActive || this.shipsWithHullmod != shipsWithMarineTrainingFacility) {
-                PlayerFleetPersonnelTracker.getInstance().update();
-                if ((playerCargo.getCrew() > playerFleetData.getMinCrew() && playerCargo.getMarines() < maxMarines) || (playerCargo.getMarines() > 0 && PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() < 1f)) {
-                    this.isActive = true;
-                    this.shipsWithHullmod = shipsWithMarineTrainingFacility;
-                    this.lastDay = Global.getSector().getClock().getTimestamp();
-                }
+            if (this.lastDay == null || this.shipsWithMod != shipsWithMod || this.shipsWithMod <= 0 || !((playerCargo.getCrew() > playerFleetData.getMinCrew() && playerCargo.getMarines() < maxMarines) || (playerCargo.getMarines() > 0 && PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() < 1f))) {
+                this.shipsWithMod = shipsWithMod;
+                this.lastDay = Global.getSector().getClock().getTimestamp();
+                return;
             }
 
-            if (this.isActive && Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
+            if (Global.getSector().getClock().getElapsedDaysSince(this.lastDay) >= MarineTrainingFacility.DAYS_TO_GENERATE_MARINES) {
+                this.lastDay = Global.getSector().getClock().getTimestamp();
                 if (PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines() + trainMarines >= playerCargo.getMarines()) {
                     trainMarines = playerCargo.getMarines() - PlayerFleetPersonnelTracker.getInstance().getMarineData().getXPLevel() * playerCargo.getMarines();
                 }
@@ -116,8 +112,6 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                             Misc.getPositiveHighlightColor(),
                             null);
                 }
-
-                this.isActive = false;
             }
         }
     }

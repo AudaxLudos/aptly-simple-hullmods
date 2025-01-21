@@ -89,14 +89,10 @@ public class MineralRefineryScript implements EveryFrameScript {
                         totalMetalsToMake = currentOre / 4f;
                         totalOreToUse = totalMetalsToMake * 4f;
                     } else {
-                        System.out.println("this is called");
                         extraMetalsToMake = extraOreToUse / 4f;
-                        System.out.println(extraOreToUse);
                         baseOreToUse = currentOre - extraOreToUse;
                         baseMetalsToMake = baseOreToUse / 5f;
                         totalMetalsToMake = baseMetalsToMake + extraMetalsToMake;
-                        System.out.println(extraMetalsToMake);
-                        System.out.println(baseMetalsToMake);
                         totalOreToUse = extraOreToUse + baseOreToUse;
                     }
                 }
@@ -124,7 +120,7 @@ public class MineralRefineryScript implements EveryFrameScript {
                             Math.round(totalMetalsToMake) + "",
                             Math.round(totalOreToUse) + "",
                             Misc.getPositiveHighlightColor(),
-                            Misc.getNegativeHighlightColor());
+                            Misc.getHighlightColor());
                     playerCargo.addCommodity(Commodities.METALS, Math.round(totalMetalsToMake));
                     playerCargo.removeCommodity(Commodities.ORE, Math.round(totalOreToUse));
                 }
