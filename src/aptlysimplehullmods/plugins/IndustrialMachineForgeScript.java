@@ -28,15 +28,6 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) {
-            return;
-        }
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
-            return;
-        }
-        if (Global.getSector().getPlayerFleet().getCargo() == null) {
-            return;
-        }
         if (!Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false)) {
             this.lastDay = Global.getSector().getClock().getTimestamp();
             return;

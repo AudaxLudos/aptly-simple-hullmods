@@ -1,5 +1,6 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.InvasionPackage;
 import com.fs.starfarer.api.EveryFrameScript;
@@ -9,8 +10,6 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class InvasionPackageScript implements EveryFrameScript {
-    public static final String INVASION_PACKAGE_ID = "ash_invasion_package";
-
     @Override
     public boolean isDone() {
         return false;
@@ -23,15 +22,8 @@ public class InvasionPackageScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) {
-            return;
-        }
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
-            return;
-        }
-
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(INVASION_PACKAGE_ID);
+        Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(Ids.INVASION_PACKAGE);
         if (bonusStat != null) {
             return;
         }
@@ -42,24 +34,24 @@ public class InvasionPackageScript implements EveryFrameScript {
             if (member.isMothballed()) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(INVASION_PACKAGE_ID)) {
+            if (member.getVariant().hasHullMod(Ids.INVASION_PACKAGE)) {
                 ++shipsWithMod;
                 bonusStat += InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
             }
         }
 
         if (bonusStat > 0f) {
-            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(INVASION_PACKAGE_ID,
+            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).modifyMult(Ids.INVASION_PACKAGE,
                     1f + Utils.computeStatMultiplier(bonusStat),
                     shipsWithMod + " ships with Invasion Package");
-            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(INVASION_PACKAGE_ID,
+            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).modifyMult(Ids.INVASION_PACKAGE,
                     1f - Utils.computeStatMultiplier(bonusStat),
                     shipsWithMod + " ships with Invasion Package");
         } else {
-            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).unmodify(INVASION_PACKAGE_ID);
-            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(INVASION_PACKAGE_ID);
+            playerFleet.getStats().getDynamic().getMod(Stats.PLANETARY_OPERATIONS_MOD).unmodify(Ids.INVASION_PACKAGE);
+            playerFleet.getStats().getDynamic().getStat(Stats.PLANETARY_OPERATIONS_CASUALTIES_MULT).unmodify(Ids.INVASION_PACKAGE);
         }
 
-        playerFleet.getFleetData().getCacheClearedOnSync().put(INVASION_PACKAGE_ID, bonusStat);
+        playerFleet.getFleetData().getCacheClearedOnSync().put(Ids.INVASION_PACKAGE, bonusStat);
     }
 }

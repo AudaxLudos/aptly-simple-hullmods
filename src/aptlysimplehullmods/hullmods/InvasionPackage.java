@@ -1,5 +1,6 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.plugins.InvasionPackageScript;
 import com.fs.starfarer.api.GameState;
@@ -61,7 +62,7 @@ public class InvasionPackage extends BaseHullMod {
 
         tooltip.addPara("Both buffs has %s.", oPad, b, "diminishing returns");
         if (!isForModSpec) {
-            tooltip.addPara("The Total bonus for both buffs is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
+            tooltip.addPara("The current bonus for both buffs is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
             if (!ship.getVariant().hasHullMod(this.spec.getId())) {
                 tooltip.addPara("Adding this hullmod increases both buffs to %s.", pad, good, Math.round(getStatMultiplier(PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
             } else {
@@ -82,7 +83,7 @@ public class InvasionPackage extends BaseHullMod {
             if (member.isMothballed()) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(InvasionPackageScript.INVASION_PACKAGE_ID)) {
+            if (member.getVariant().hasHullMod(Ids.INVASION_PACKAGE)) {
                 totalStat += PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
             }
         }

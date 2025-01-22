@@ -1,5 +1,6 @@
 package aptlysimplehullmods.plugins;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.SuppliesRecycler;
 import com.fs.starfarer.api.EveryFrameScript;
@@ -12,8 +13,6 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import java.util.List;
 
 public class SuppliesRecyclerScript implements EveryFrameScript {
-    public static final String SUPPLIES_RECYCLER_ID = "ash_supplies_recycler";
-
     @Override
     public boolean isDone() {
         return false;
@@ -26,17 +25,10 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
 
     @Override
     public void advance(float amount) {
-        if (Global.getSector().getPlayerFleet() == null) {
-            return;
-        }
-        if (Global.getSector().getPlayerFleet().getFleetData() == null) {
-            return;
-        }
-
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
         FleetDataAPI playerFleetData = playerFleet.getFleetData();
         List<FleetMemberAPI> playerFleetMembers = playerFleetData.getMembersListCopy();
-        Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(SUPPLIES_RECYCLER_ID);
+        Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(Ids.SUPPLIES_RECYCLER);
         if (bonusStat != null) {
             return;
         }
@@ -46,25 +38,25 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
             if (member.isMothballed()) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(SUPPLIES_RECYCLER_ID)) {
+            if (member.getVariant().hasHullMod(Ids.SUPPLIES_RECYCLER)) {
                 bonusStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
             }
         }
 
         if (bonusStat > 0) {
             for (FleetMemberAPI member : playerFleetMembers) {
-                if (member.getBuffManager().getBuff(SUPPLIES_RECYCLER_ID) != null) {
-                    member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
+                if (member.getBuffManager().getBuff(Ids.SUPPLIES_RECYCLER) != null) {
+                    member.getBuffManager().removeBuff(Ids.SUPPLIES_RECYCLER);
                 }
-                member.getBuffManager().addBuff(new SuppliesRecyclerBuff(SUPPLIES_RECYCLER_ID, 1f - Utils.computeStatMultiplier(bonusStat)));
+                member.getBuffManager().addBuff(new SuppliesRecyclerBuff(Ids.SUPPLIES_RECYCLER, 1f - Utils.computeStatMultiplier(bonusStat)));
             }
         } else {
             for (FleetMemberAPI member : playerFleetMembers) {
-                member.getBuffManager().removeBuff(SUPPLIES_RECYCLER_ID);
+                member.getBuffManager().removeBuff(Ids.SUPPLIES_RECYCLER);
             }
         }
 
-        playerFleet.getFleetData().getCacheClearedOnSync().put(SUPPLIES_RECYCLER_ID, bonusStat);
+        playerFleet.getFleetData().getCacheClearedOnSync().put(Ids.SUPPLIES_RECYCLER, bonusStat);
     }
 
     public static class SuppliesRecyclerBuff implements BuffManagerAPI.Buff {
@@ -78,7 +70,7 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
 
         @Override
         public void apply(FleetMemberAPI member) {
-            member.getStats().getSuppliesPerMonth().modifyMult(SUPPLIES_RECYCLER_ID, this.statValue);
+            member.getStats().getSuppliesPerMonth().modifyMult(Ids.SUPPLIES_RECYCLER, this.statValue);
         }
 
         @Override
@@ -93,7 +85,6 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
 
         @Override
         public void advance(float days) {
-
         }
     }
 }
