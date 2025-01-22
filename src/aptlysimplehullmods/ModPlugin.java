@@ -243,7 +243,6 @@ public class ModPlugin extends BaseModPlugin {
         if (isModActive("lunalib")) {
             Integer result = LunaSettings.getInt(modId, statId);
             if (result == null) {
-                System.out.println("settings not found");
                 return 0;
             }
             return result;
