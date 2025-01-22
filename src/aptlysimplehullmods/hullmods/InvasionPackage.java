@@ -48,12 +48,12 @@ public class InvasionPackage extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Increases the effectiveness of ground operations by %s/%s/%s/%s.", oPad, good,
+        tooltip.addPara("Increases the effectiveness of ground operations by %s/%s/%s/%s based on hull size.", oPad, good,
                 Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
                 Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
                 Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",
                 Math.round(PLANETARY_OPERATIONS_MULT.get(ShipAPI.HullSize.CAPITAL_SHIP) * 100f) + "%");
-        tooltip.addPara("Reduces casualties during ground operations by %s/%s/%s/%s.", pad, good,
+        tooltip.addPara("Reduces casualties during ground operations by %s/%s/%s/%s based on hull size.", pad, good,
                 Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
                 Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
                 Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",

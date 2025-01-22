@@ -41,7 +41,7 @@ public class ReactiveSubsystems extends BaseHullMod {
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addPara("Increases the ship's max combat readiness by %s.", oPad, good, Math.round(MAX_CR_MOD * 100f) + "%");
-        tooltip.addPara("Increases the ship's deployment points by %s/%s/%s/%s based on its hull size.", pad, bad,
+        tooltip.addPara("Increases the ship's deployment points by %s/%s/%s/%s based on hull size.", pad, bad,
                 DEPLOYMENT_POINTS_MOD.get(HullSize.FRIGATE).intValue() + "",
                 DEPLOYMENT_POINTS_MOD.get(HullSize.DESTROYER).intValue() + "",
                 DEPLOYMENT_POINTS_MOD.get(HullSize.CRUISER).intValue() + "",

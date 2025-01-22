@@ -13,18 +13,18 @@ public class StreamlinedBubbleDrive extends BaseHullMod {
     public static Map<ShipAPI.HullSize, Float> TERRAIN_PENALTY_MOD = new HashMap<>();
 
     static {
-        TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.FRIGATE, 0.4f);
-        TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.DESTROYER, 0.8f);
+        TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.FRIGATE, 0.04f);
+        TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.DESTROYER, 0.08f);
         TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.CRUISER, 0.12f);
         TERRAIN_PENALTY_MOD.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.20f);
     }
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        float pad = 3f;
+        float oPad = 10f;
         Color good = Misc.getPositiveHighlightColor();
 
-        tooltip.addPara("Decreases the terrain movement penalty by %s/%s/%s/%s", pad, good,
+        tooltip.addPara("Decreases the terrain movement penalty by %s/%s/%s/%s based on hull size.", oPad, good,
                 Math.round(TERRAIN_PENALTY_MOD.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
                 Math.round(TERRAIN_PENALTY_MOD.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
                 Math.round(TERRAIN_PENALTY_MOD.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",

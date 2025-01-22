@@ -71,7 +71,7 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
                 MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "",
                 MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",
                 MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP) + "");
-        tooltip.addPara("Can convert a maximum of %s/%s/%s/%s marines per ship with this hullmod.", pad, b,
+        tooltip.addPara("Can convert a maximum of %s/%s/%s/%s marines per ship with this hullmod based on hull size.", pad, b,
                 MAX_MARINES_TO_GENERATE.get(HullSize.FRIGATE) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",

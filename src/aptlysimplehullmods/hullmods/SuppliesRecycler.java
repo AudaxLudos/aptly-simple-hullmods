@@ -1,5 +1,6 @@
 package aptlysimplehullmods.hullmods;
 
+import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.plugins.SuppliesRecyclerScript;
 import com.fs.starfarer.api.GameState;
@@ -41,7 +42,7 @@ public class SuppliesRecycler extends BaseHullMod {
         Color good = Misc.getPositiveHighlightColor();
         Color bad = Misc.getNegativeHighlightColor();
 
-        tooltip.addPara("Decreases the fleet's supply use per month by %s/%s/%s/%s.", oPad, good,
+        tooltip.addPara("Decreases the fleet's supply use per month by %s/%s/%s/%s based on hull size.", oPad, good,
                 Math.round(FLEET_SUPPLIES_PER_MONTH.get(ShipAPI.HullSize.FRIGATE) * 100f) + "%",
                 Math.round(FLEET_SUPPLIES_PER_MONTH.get(ShipAPI.HullSize.DESTROYER) * 100f) + "%",
                 Math.round(FLEET_SUPPLIES_PER_MONTH.get(ShipAPI.HullSize.CRUISER) * 100f) + "%",
@@ -71,7 +72,7 @@ public class SuppliesRecycler extends BaseHullMod {
             if (member.isMothballed()) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(SuppliesRecyclerScript.SUPPLIES_RECYCLER_ID)) {
+            if (member.getVariant().hasHullMod(Ids.SUPPLIES_RECYCLER)) {
                 totalStat += FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
             }
         }
