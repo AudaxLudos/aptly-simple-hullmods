@@ -1,3 +1,7 @@
+### 2.1.1b
+- Release 2.1.1a
+- Fix streamlined bubble drive not applying to fleet
+
 ### 2.1.1a
 - Release 2.1.1a
 - Fix production hullmods including mothballed ships when producing commodities
