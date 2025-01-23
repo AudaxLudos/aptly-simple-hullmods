@@ -2,6 +2,7 @@
 - Release 2.1.1a
 - Fix production hullmods including mothballed ships when producing commodities
 - Fix supplies recycler causing lag due to reapplication of stats every frame
+- Update add streamlined bubble drive to factions
 - Update hull mod descriptions
 - Add streamlined bubble drive hullmod
 
