@@ -43,7 +43,7 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
             int addMarines = 0;
             float trainMarines = 0;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
+                if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
                     continue;
                 }
                 ++shipsWithMod;

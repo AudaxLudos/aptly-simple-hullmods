@@ -42,7 +42,7 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
             float baseMetalsToUse = 0f;
             float extraMetalsToUse = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
+                if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
                     continue;
                 }
                 ++shipsWithMod;

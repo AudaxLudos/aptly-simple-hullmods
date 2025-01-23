@@ -31,13 +31,11 @@ public class InvasionPackageScript implements EveryFrameScript {
         int shipsWithMod = 0;
         bonusStat = 0f;
         for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
-            if (member.isMothballed()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.INVASION_PACKAGE)) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(Ids.INVASION_PACKAGE)) {
-                ++shipsWithMod;
-                bonusStat += InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
-            }
+            ++shipsWithMod;
+            bonusStat += InvasionPackage.PLANETARY_OPERATION_CASUALTIES_MULT.get(member.getVariant().getHullSize());
         }
 
         if (bonusStat > 0f) {

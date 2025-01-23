@@ -38,7 +38,7 @@ public class FuelRamscoopScript implements EveryFrameScript {
             int shipsWithMod = 0;
             float fuelGenerated = 0;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(Ids.FUEL_RAMSCOOP)) {
+                if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.FUEL_RAMSCOOP)) {
                     continue;
                 }
                 ++shipsWithMod;

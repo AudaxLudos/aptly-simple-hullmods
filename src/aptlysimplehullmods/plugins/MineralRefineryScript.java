@@ -47,7 +47,7 @@ public class MineralRefineryScript implements EveryFrameScript {
             float baseRareOreToUse = 0f;
             float extraRareOreToUse = 0f;
             for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-                if (!member.getVariant().hasHullMod(Ids.MINERAL_REFINERY)) {
+                if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.MINERAL_REFINERY)) {
                     continue;
                 }
                 ++shipsWithMod;

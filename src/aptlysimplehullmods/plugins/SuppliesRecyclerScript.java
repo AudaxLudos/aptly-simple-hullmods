@@ -26,39 +26,33 @@ public class SuppliesRecyclerScript implements EveryFrameScript {
     @Override
     public void advance(float amount) {
         CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
-        FleetDataAPI playerFleetData = playerFleet.getFleetData();
-        List<FleetMemberAPI> playerFleetMembers = playerFleetData.getMembersListCopy();
         Float bonusStat = (Float) playerFleet.getFleetData().getCacheClearedOnSync().get(Ids.SUPPLIES_RECYCLER);
         if (bonusStat != null) {
             return;
         }
 
         bonusStat = 0f;
-        for (FleetMemberAPI member : playerFleetMembers) {
-            if (member.isMothballed()) {
+        for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.SUPPLIES_RECYCLER)) {
                 continue;
             }
-            if (member.getVariant().hasHullMod(Ids.SUPPLIES_RECYCLER)) {
-                bonusStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
-            }
+            bonusStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
         }
 
         if (bonusStat > 0) {
-            for (FleetMemberAPI member : playerFleetMembers) {
-                if (member.getBuffManager().getBuff(Ids.SUPPLIES_RECYCLER) != null) {
-                    member.getBuffManager().removeBuff(Ids.SUPPLIES_RECYCLER);
-                }
-                member.getBuffManager().addBuff(new SuppliesRecyclerBuff(Ids.SUPPLIES_RECYCLER, 1f - Utils.computeStatMultiplier(bonusStat)));
+            for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
+                member.getStats().getSuppliesPerMonth().modifyMult(Ids.SUPPLIES_RECYCLER, 1f - Utils.computeStatMultiplier(bonusStat));
             }
         } else {
-            for (FleetMemberAPI member : playerFleetMembers) {
-                member.getBuffManager().removeBuff(Ids.SUPPLIES_RECYCLER);
+            for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
+                member.getStats().getSuppliesPerMonth().unmodify(Ids.SUPPLIES_RECYCLER);
             }
         }
 
         playerFleet.getFleetData().getCacheClearedOnSync().put(Ids.SUPPLIES_RECYCLER, bonusStat);
     }
 
+    // Remove when doing a big update
     public static class SuppliesRecyclerBuff implements BuffManagerAPI.Buff {
         String id;
         float statValue;
