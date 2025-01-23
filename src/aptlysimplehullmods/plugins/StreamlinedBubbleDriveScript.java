@@ -39,9 +39,9 @@ public class StreamlinedBubbleDriveScript implements EveryFrameScript {
         }
 
         if (bonusStat > 0f) {
-            playerFleet.getStats().getDynamic().getStat(Stats.NAVIGATION_PENALTY_MULT).modifyFlat(Ids.STREAMLINED_BUBBLE_DRIVE, -bonusStat);
+            playerFleet.getCommanderStats().getDynamic().getStat(Stats.NAVIGATION_PENALTY_MULT).modifyFlat(Ids.STREAMLINED_BUBBLE_DRIVE, -bonusStat);
         } else {
-            playerFleet.getStats().getDynamic().getStat(Stats.NAVIGATION_PENALTY_MULT).unmodify(Ids.STREAMLINED_BUBBLE_DRIVE);
+            playerFleet.getCommanderStats().getDynamic().getStat(Stats.NAVIGATION_PENALTY_MULT).unmodify(Ids.STREAMLINED_BUBBLE_DRIVE);
         }
 
         playerFleet.getFleetData().getCacheClearedOnSync().put(Ids.STREAMLINED_BUBBLE_DRIVE, bonusStat);
