@@ -202,7 +202,7 @@ ash_temporal_flux_reactor_stat2,Peak Performance Time Multiplier,Double,0.40,,De
 ash_venting_overdrive_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Special
 ash_venting_overdrive_stat1,Ship Movement Multiplier,Double,1,,Default value: 1,0,2147483647,Special
 ,,,,,,,,
-ash_volatile_warheads_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Offensive
+ash_volatile_warheads_header,Venting Overdrive Header,Header,Volatile Warheads,,,,,Offensive
 ash_volatile_warheads_stat1,Missile Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_volatile_warheads_stat2,Missile Health Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ash_volatile_warheads_stat3,Missile Speed Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
