@@ -1,3 +1,9 @@
+### 2.1.1d
+- Release 2.1.1d
+- Add streamlined bubble drive vanilla and lunalib settings
+- Update remove weapons tab from mod lunalib settings
+- Fix makeshift missile autoforge settings not properly applying
+
 ### 2.1.1b
 - Release 2.1.1a
 - Fix streamlined bubble drive not applying to fleet
