@@ -171,6 +171,13 @@ ash_reactor_bay_stat4_1,Destroyer Deployment Points Modifier,Double,1,,Default v
 ash_reactor_bay_stat4_2,Cruiser Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ash_reactor_bay_stat4_3,Capital Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ,,,,,,,,
+ash_streamlined_bubble_drive_header,Streamlined Bubble Drive Header,Header,Streamlined Bubble Drive,,,,,Logistics
+ash_streamlined_bubble_drive_stat1_0,Frigate Terrain Movement Penalty Multiplier,Double,0.04,,Default value: 0.04,0,2147483647,Logistics
+ash_streamlined_bubble_drive_stat1_1,Destroyer Terrain Movement Penalty Multiplier,Double,0.08,,Default value: 0.08,0,2147483647,Logistics
+ash_streamlined_bubble_drive_stat1_2,Cruiser Terrain Movement Penalty Multiplier,Double,0.12,,Default value: 0.12,0,2147483647,Logistics
+ash_streamlined_bubble_drive_stat1_3,Capital Terrain Movement Penalty Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Logistics
+,,,,,,,,
+,,,,,,,,
 ash_supplies_recycler_header,Supplies Recycler Header,Header,Supplies Recycler,,,,,Special
 ash_supplies_recycler_stat1_0,Frigate Fleet Supply Use Per Month Multiplier,Double,0.01,,Default value: 0.01,0,2147483647,Special
 ash_supplies_recycler_stat1_1,Destroyer Fleet Supply Use Per Month Multiplier,Double,0.02,,Default value: 0.02,0,2147483647,Special
