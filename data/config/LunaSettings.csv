@@ -58,15 +58,15 @@ ash_fighter_targeting_uplink_stat1,Fighter Damage Multiplier,Double,0.20,,Defaul
 ash_fighter_targeting_uplink_stat2,Minimum Effect Range,Double,760,,Default value: 760,0,2147483647,Fighters
 ash_fighter_targeting_uplink_stat3,Maximum Effect Range,Double,560,,Default value: 560,0,2147483647,Fighters
 ,,,,,,,,
-ash_flux_amplifiers_header,Flux Amplifiers Header,Header,Flux Amplifiers,,,,,Weapons
-ash_flux_amplifiers_stat1,Weapon Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Weapons
-ash_flux_amplifiers_stat2,Weapon Flux Cost Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
-ash_flux_amplifiers_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
+ash_flux_amplifiers_header,Flux Amplifiers Header,Header,Flux Amplifiers,,,,,Offensive
+ash_flux_amplifiers_stat1,Weapon Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
+ash_flux_amplifiers_stat2,Weapon Flux Cost Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
+ash_flux_amplifiers_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
-ash_flux_limiters_header,Flux Limiters Header,Header,Flux Limiters,,,,,Weapons
-ash_flux_limiters_stat1,Weapon Flux Cost Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Weapons
-ash_flux_limiters_stat2,Weapon Damage Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
-ash_flux_limiters_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
+ash_flux_limiters_header,Flux Limiters Header,Header,Flux Limiters,,,,,Offensive
+ash_flux_limiters_stat1,Weapon Flux Cost Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
+ash_flux_limiters_stat2,Weapon Damage Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
+ash_flux_limiters_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
 ash_front_loaded_armor_header,Front Loaded Armor Header,Header,Front Loaded Armor,,,,,Defenses
 ash_front_loaded_armor_stat1,Front Armor Value Multiplier,Double,1.5,,Default value: 1.5,0,2147483647,Defenses
@@ -113,9 +113,9 @@ ash_invasion_package_stat2_2,Cruiser Planetary Operations Multiplier,Double,0.06
 ash_invasion_package_stat2_3,Capital  Planetary Operations Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_invasion_package_stat3,Cargo Capacity Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Logistics
 ,,,,,,,,
-ash_makeshift_missile_autoforge_header,Makeshift Missile Autoforge Header,Header,Makeshift Missile Autoforge,,,,,Weapons
-ash_makeshift_missile_autoforge_stat1,Missile Ammo Reload Size Modifier,Double,10,,Default value: 10,0,2147483647,Weapons
-ash_makeshift_missile_autoforge_stat2,Missile Reload Per Second Modifier,Double,50,,Default value: 50,0,2147483647,Weapons
+ash_makeshift_missile_autoforge_header,Makeshift Missile Autoforge Header,Header,Makeshift Missile Autoforge,,,,,Offensive
+ash_makeshift_missile_autoforge_stat1,Missile Ammo Reload Size Modifier,Double,10,,Default value: 10,0,2147483647,Offensive
+ash_makeshift_missile_autoforge_stat2,Missile Reload Per Second Modifier,Double,50,,Default value: 50,0,2147483647,Offensive
 ,,,,,,,,
 ash_marine_training_facility_header,Marine Training Facility Header,Header,Marine Training Facility,,,,,Logistics
 ash_marine_training_facility_stat1,Days to Generate Marines,Double,7,,Default value: 7,0,2147483647,Logistics
@@ -195,8 +195,8 @@ ash_temporal_flux_reactor_stat2,Peak Performance Time Multiplier,Double,0.40,,De
 ash_venting_overdrive_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Special
 ash_venting_overdrive_stat1,Ship Movement Multiplier,Double,1,,Default value: 1,0,2147483647,Special
 ,,,,,,,,
-ash_volatile_warheads_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Weapons
-ash_volatile_warheads_stat1,Missile Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Weapons
-ash_volatile_warheads_stat2,Missile Health Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
-ash_volatile_warheads_stat3,Missile Speed Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Weapons
+ash_volatile_warheads_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Offensive
+ash_volatile_warheads_stat1,Missile Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
+ash_volatile_warheads_stat2,Missile Health Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
+ash_volatile_warheads_stat3,Missile Speed Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
