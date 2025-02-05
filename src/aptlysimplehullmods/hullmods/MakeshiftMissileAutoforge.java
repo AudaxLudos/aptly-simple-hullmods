@@ -33,7 +33,7 @@ public class MakeshiftMissileAutoforge extends BaseHullMod {
                 continue;
             }
             if (weapon.getAmmo() <= 0f || isSMod(ship)) {
-                float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() / MISSILE_AMMO_RELOAD_SIZE_MOD);
+                float ammoReloadSize = (float) Math.ceil(weapon.getMaxAmmo() * MISSILE_AMMO_RELOAD_SIZE_MOD * 0.01f);
                 float ammoPerSecond = ammoReloadSize / MISSILE_AMMO_PER_SECOND_MOD;
                 weapon.getAmmoTracker().setReloadSize(ammoReloadSize);
                 weapon.getAmmoTracker().setAmmoPerSecond(ammoPerSecond);
