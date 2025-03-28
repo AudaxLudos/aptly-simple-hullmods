@@ -4,7 +4,7 @@
     "author": "Audax",
     "version": "2.1.1d",
     "description": "Additional hullmods for starsector",
-    "gameVersion": "0.97a",
+    "gameVersion": "0.98a",
     "jars": [
         "AptlySimpleHullmods.jar"
     ],
