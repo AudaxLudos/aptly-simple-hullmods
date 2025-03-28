@@ -1,3 +1,10 @@
+### 2.1.2c
+- Release 2.1.2c
+- Remove unused abilities files
+- Update game version to 0.98a from 0.97a
+- Update java version to 17 from 7
+- Fix volatile warheads header in lunalib settings
+
 ### 2.1.1d
 - Release 2.1.1d
 - Add streamlined bubble drive vanilla and lunalib settings
