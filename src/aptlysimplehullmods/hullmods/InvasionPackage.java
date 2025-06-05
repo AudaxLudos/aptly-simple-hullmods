@@ -60,8 +60,8 @@ public class InvasionPackage extends BaseHullMod {
                 Math.round(PLANETARY_OPERATION_CASUALTIES_MULT.get(ShipAPI.HullSize.CAPITAL_SHIP) * 100f) + "%");
         tooltip.addPara("Decreases the ship's cargo capacity by %s.", pad, bad, Math.round(CARGO_CAPACITY_MULT * 100f) + "%");
 
-        tooltip.addPara("Both buffs has %s.", oPad, b, "diminishing returns");
-        if (!isForModSpec) {
+        tooltip.addPara("Both buffs have %s.", oPad, b, "diminishing returns");
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE) {
             tooltip.addPara("The current bonus for both buffs is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
             if (!ship.getVariant().hasHullMod(this.spec.getId())) {
                 tooltip.addPara("Adding this hullmod increases both buffs to %s.", pad, good, Math.round(getStatMultiplier(PLANETARY_OPERATIONS_MULT.get(hullSize)) * 100f) + "%");
