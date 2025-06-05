@@ -46,7 +46,13 @@ public class SuppliesRecyclerSkill {
                 bonusStat += SuppliesRecycler.FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
             }
 
-            return 1f - Utils.computeStatMultiplier(bonusStat);
+            float computedStat = 1f - Utils.computeStatMultiplier(bonusStat);
+            System.out.println(computedStat);
+            if (computedStat < 0.25f) {
+                computedStat = 0.25f;
+            }
+
+            return computedStat;
         }
 
         protected float getSupplyUseMult(FleetDataAPI data) {
