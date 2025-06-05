@@ -1,9 +1,6 @@
 package aptlysimplehullmods.plugins;
 
 import aptlysimplehullmods.Ids;
-import aptlysimplehullmods.Utils;
-import aptlysimplehullmods.hullmods.InvasionPackage;
-import aptlysimplehullmods.hullmods.MarineTrainingFacility;
 import aptlysimplehullmods.hullmods.StreamlinedBubbleDrive;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;

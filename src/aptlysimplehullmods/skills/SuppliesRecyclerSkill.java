@@ -3,18 +3,12 @@ package aptlysimplehullmods.skills;
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.hullmods.SuppliesRecycler;
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FleetDataAPI;
-import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.ShipSkillEffect;
-import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.MutableStat;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription;
-import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.Misc;
 
 public class SuppliesRecyclerSkill {
     public static String SUPPLIES_EFFECT_ID = Ids.SUPPLIES_RECYCLER + "_mod";
@@ -47,7 +41,6 @@ public class SuppliesRecyclerSkill {
             }
 
             float computedStat = 1f - Utils.computeStatMultiplier(bonusStat);
-            System.out.println(computedStat);
             if (computedStat < 0.25f) {
                 computedStat = 0.25f;
             }
