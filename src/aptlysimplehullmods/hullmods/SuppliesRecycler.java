@@ -50,7 +50,7 @@ public class SuppliesRecycler extends BaseHullMod {
                 Math.round(FLEET_SUPPLIES_PER_MONTH.get(ShipAPI.HullSize.CAPITAL_SHIP) * 100f) + "%");
         tooltip.addPara("Decreases the ship's cargo capacity by %s.", pad, bad, Math.round(CARGO_CAPACITY_MULT * 100f) + "%");
 
-        tooltip.addPara("The buff has %s.", oPad, b, "diminishing returns");
+        tooltip.addPara("The buff have %s.", oPad, b, "diminishing returns");
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE) {
             float currentStat = getStatFromSkill(ship.getMutableStats());
             float bonusForShip = FLEET_SUPPLIES_PER_MONTH.get(hullSize);

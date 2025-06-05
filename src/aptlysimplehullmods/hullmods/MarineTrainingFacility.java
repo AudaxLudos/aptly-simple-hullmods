@@ -78,7 +78,7 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
                 MAX_MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP) + "");
         tooltip.setBulletedListMode(null);
 
-        if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
