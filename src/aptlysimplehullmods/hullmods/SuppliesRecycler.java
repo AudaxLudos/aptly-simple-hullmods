@@ -52,12 +52,11 @@ public class SuppliesRecycler extends BaseHullMod {
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE) {
             float currentStat = getStatFromSkill(ship.getMutableStats());
             float bonusForShip = FLEET_SUPPLIES_PER_MONTH.get(hullSize);
+            tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(currentStat * 100f) + "%");
             if (!ship.getVariant().hasHullMod(this.spec.getId())) {
-                tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(currentStat * 100f) + "%");
                 tooltip.addPara("Adding this hullmod increases the buff to %s.", pad, good, Math.round(adjustStatForDesc(currentStat, bonusForShip) * 100f) + "%");
             } else {
-                tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(adjustStatForDesc(currentStat, bonusForShip) * 100f) + "%");
-                tooltip.addPara("Removing this hullmod decreases the buff to %s.", pad, bad, Math.round(currentStat * 100f) + "%");
+                tooltip.addPara("Removing this hullmod decreases the buff to %s.", pad, bad, Math.round(adjustStatForDesc(currentStat, -bonusForShip) * 100f) + "%");
             }
         }
     }
