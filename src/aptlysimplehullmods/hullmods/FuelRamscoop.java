@@ -54,7 +54,7 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
                 FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + "");
         tooltip.setBulletedListMode(null);
 
-        if (!isForModSpec && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
