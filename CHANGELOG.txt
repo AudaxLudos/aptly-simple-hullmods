@@ -1,3 +1,14 @@
+### 2.1.3k
+- Release 2.1.3k
+- Cap supply use multiplier of supplies recycler to 0.25x from none
+- Fix marine training facility codex error
+- Fix invasion package codex error
+- Fix industrial machine forge codex error
+- Fix fuel ramscoop codex error
+- Fix mineral refinery codex error
+- Fix supplies recycler codex error
+- Fix supplies recycler stats being recalculated more often in heavily modded saves
+
 ### 2.1.2c
 - Release 2.1.2c
 - Remove unused abilities files
