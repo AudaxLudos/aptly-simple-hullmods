@@ -2,13 +2,14 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
-import aptlysimplehullmods.plugins.SuppliesRecyclerScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -51,33 +52,34 @@ public class SuppliesRecycler extends BaseHullMod {
 
         tooltip.addPara("The buff has %s.", oPad, b, "diminishing returns");
         if (!isForModSpec) {
-            tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(getStatMultiplier(0) * 100f) + "%");
+            float currentStat = getStatFromSkill(ship.getMutableStats());
+            float bonusForShip = FLEET_SUPPLIES_PER_MONTH.get(hullSize);
             if (!ship.getVariant().hasHullMod(this.spec.getId())) {
-                tooltip.addPara("Adding this hullmod increases the buff to %s.", pad, good, Math.round(getStatMultiplier(FLEET_SUPPLIES_PER_MONTH.get(hullSize)) * 100f) + "%");
+                tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(currentStat * 100f) + "%");
+                tooltip.addPara("Adding this hullmod increases the buff to %s.", pad, good, Math.round(adjustStatForDesc(currentStat, bonusForShip) * 100f) + "%");
             } else {
-                tooltip.addPara("Removing this hullmod decreases the buff to %s.", pad, bad, Math.round(getStatMultiplier(-FLEET_SUPPLIES_PER_MONTH.get(hullSize)) * 100f) + "%");
+                tooltip.addPara("The Total bonus for the buff is %s.", pad, good, Math.round(adjustStatForDesc(currentStat, bonusForShip) * 100f) + "%");
+                tooltip.addPara("Removing this hullmod decreases the buff to %s.", pad, bad, Math.round(currentStat * 100f) + "%");
             }
         }
     }
 
-    public float getStatMultiplier(float statOffset) {
-        if (Global.getCurrentState() != GameState.CAMPAIGN || Global.getSector() == null || Global.getSector().getPlayerFleet() == null) {
-            return 0f;
+    public float getStatFromSkill(MutableShipStatsAPI stats) {
+        FleetDataAPI data = BaseSkillEffectDescription.getFleetData(stats);
+
+        String key = Ids.SUPPLIES_RECYCLER + "_key";
+        Float useMultDiminished = (Float) data.getCacheClearedOnSync().get(key);
+        if (useMultDiminished != null) {
+            return 1f - useMultDiminished;
         }
 
-        float calculatedStat;
-        float totalStat = 0f;
+        return 0f;
+    }
 
-        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.isMothballed()) {
-                continue;
-            }
-            if (member.getVariant().hasHullMod(Ids.SUPPLIES_RECYCLER)) {
-                totalStat += FLEET_SUPPLIES_PER_MONTH.get(member.getVariant().getHullSize());
-            }
-        }
+    public float adjustStatForDesc(float currentStat, float statOffset) {
+        float unmodifiedMult = currentStat / (1 - currentStat);
+        unmodifiedMult += statOffset;
 
-        calculatedStat = Utils.computeStatMultiplier(totalStat + statOffset);
-        return calculatedStat;
+        return Utils.computeStatMultiplier(unmodifiedMult);
     }
 }

@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="lazylib.api">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../LazyLib-3.0.0/jars/LazyLib-Kotlin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../LazyLib-3.0.0/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/LazyLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/LazyLib.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../LazyLib-3.0.0/jars/LazyLib-Kotlin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../LazyLib-3.0.0/jars/LazyLib.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../LazyLib-3.0.0/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/LazyLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/LazyLib.jar!/" />
     </SOURCES>
   </library>
 </component>

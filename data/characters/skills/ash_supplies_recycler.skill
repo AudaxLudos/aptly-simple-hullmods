@@ -1,0 +1,15 @@
+{
+	"id":"ash_supplies_recycler",
+	"governingAptitude":"industry",
+	"compressHullmods":false,
+	"scope":"FLEET",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":1,
+			"effectBasedOnLevel":false,
+			"effects":[
+				{"type":"ALL_SHIPS_IN_FLEET", "script":"aptlysimplehullmods.skills.SuppliesRecyclerSkill$Level1"},
+			]
+		},
+	],
+}

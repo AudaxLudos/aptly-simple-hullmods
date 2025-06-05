@@ -27,8 +27,12 @@ public class ModPlugin extends BaseModPlugin {
         Global.getSector().addTransientScript(new IndustrialMachineForgeScript());
         Global.getSector().addTransientScript(new MineralRefineryScript());
         Global.getSector().addTransientScript(new InvasionPackageScript());
-        Global.getSector().addTransientScript(new SuppliesRecyclerScript());
+        // Global.getSector().addTransientScript(new SuppliesRecyclerScript());
         Global.getSector().addTransientScript(new StreamlinedBubbleDriveScript());
+
+        if (!Global.getSector().getPlayerStats().hasSkill("ash_supplies_recycler")) {
+            Global.getSector().getPlayerStats().setSkillLevel("ash_supplies_recycler", 1f);
+        }
 
         try {
             JSONObject hullmodData = Global.getSettings().loadJSON(HULLMOD_SETTINGS_FILE);
