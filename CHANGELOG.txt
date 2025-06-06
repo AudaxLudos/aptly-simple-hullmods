@@ -1,3 +1,7 @@
+### 2.1.3l
+- Release 2.1.3l
+- Fix fleet data null error in supplies recycler
+
 ### 2.1.3k
 - Release 2.1.3k
 - Cap supply use multiplier of supplies recycler to 0.25x from none
