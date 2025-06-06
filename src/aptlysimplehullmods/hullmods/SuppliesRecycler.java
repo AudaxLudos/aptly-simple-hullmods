@@ -15,6 +15,8 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription.isInCampaign;
+
 public class SuppliesRecycler extends BaseHullMod {
     public static Map<Object, Float> FLEET_SUPPLIES_PER_MONTH = new HashMap<>();
     public static float CARGO_CAPACITY_MULT = 0.40f;
@@ -64,10 +66,12 @@ public class SuppliesRecycler extends BaseHullMod {
     public float getStatFromSkill(MutableShipStatsAPI stats) {
         FleetDataAPI data = BaseSkillEffectDescription.getFleetData(stats);
 
-        String key = Ids.SUPPLIES_RECYCLER + "_key";
-        Float useMultDiminished = (Float) data.getCacheClearedOnSync().get(key);
-        if (useMultDiminished != null) {
-            return 1f - useMultDiminished;
+        if (data != null) {
+            String key = Ids.SUPPLIES_RECYCLER + "_key";
+            Float useMultDiminished = (Float) data.getCacheClearedOnSync().get(key);
+            if (useMultDiminished != null) {
+                return 1f - useMultDiminished;
+            }
         }
 
         return 0f;
