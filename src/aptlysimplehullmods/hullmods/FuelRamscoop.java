@@ -2,6 +2,8 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.FuelRamscoopScript;
+import aptlysimplehullmods.plugins.IndustrialMachineForgeScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -52,9 +54,15 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
                 FUEL_TO_GENERATE.get(HullSize.DESTROYER).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.CRUISER).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + "");
-        tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, false);
+            if (isEnabled) {
+                tooltip.addPara("Fuel to Generate: %s", pad, b,
+                        Misc.getWithDGS(FuelRamscoopScript.getResourceMadeOrUsed(false)));
+            }
+            tooltip.setBulletedListMode(null);
+
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
@@ -67,13 +75,14 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
                 }
             }
 
-            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, false);
             String status = isEnabled ? "Enabled" : "Disabled";
             Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
+
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
+        tooltip.setBulletedListMode(null);
     }
 
     @Override

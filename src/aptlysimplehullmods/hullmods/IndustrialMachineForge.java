@@ -2,6 +2,7 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.IndustrialMachineForgeScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -57,9 +58,17 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
                 METALS_TO_CONSUME.get(HullSize.DESTROYER).toString(),
                 METALS_TO_CONSUME.get(HullSize.CRUISER).toString(),
                 METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP).toString());
-        tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false);
+            if (isEnabled) {
+                tooltip.addPara("Heavy Machinery to generate: %s", pad, b,
+                        Misc.getWithDGS(IndustrialMachineForgeScript.getResourceMadeOrUsed(false)));
+                tooltip.addPara("Metals to Consume: %s", pad, b,
+                        Misc.getWithDGS(IndustrialMachineForgeScript.getResourceMadeOrUsed(true)));
+            }
+            tooltip.setBulletedListMode(null);
+
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
@@ -72,13 +81,16 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
                 }
             }
 
-            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false);
             String status = isEnabled ? "Enabled" : "Disabled";
             Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
+
+
+
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
+        tooltip.setBulletedListMode(null);
     }
 
     @Override

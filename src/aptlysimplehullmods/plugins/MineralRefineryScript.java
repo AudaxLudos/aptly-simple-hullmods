@@ -130,4 +130,69 @@ public class MineralRefineryScript implements EveryFrameScript {
             }
         }
     }
+
+    public static float getResourceMadeOrUsed(boolean returnUsed, boolean returnSecond) {
+        float baseMetalsToMake = 0f;
+        float extraMetalsToMake = 0f;
+        float baseOreToUse = 0f;
+        float extraOreToUse = 0f;
+
+        float baseRareMetalsToMake = 0f;
+        float extraRareMetalsToMake = 0f;
+        float baseRareOreToUse = 0f;
+        float extraRareOreToUse = 0f;
+        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.MINERAL_REFINERY)) {
+                continue;
+            }
+            if (member.getVariant().getSMods().contains(Ids.MINERAL_REFINERY)) {
+                extraMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.25f;
+                extraOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                extraRareMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.25f;
+                extraRareOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+            } else {
+                baseMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
+                baseOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+                baseRareMetalsToMake += MineralRefinery.ALLOYS_TO_GENERATE.get(member.getVariant().getHullSize());
+                baseRareOreToUse += MineralRefinery.MINERALS_TO_CONSUME.get(member.getVariant().getHullSize());
+            }
+        }
+
+        if (!returnSecond) {
+            float currentOre = Global.getSector().getPlayerFleet().getCargo().getCommodityQuantity(Commodities.ORE);
+            float totalMetalsToMake = baseMetalsToMake + extraMetalsToMake;
+            float totalOreToUse = baseOreToUse + extraOreToUse;
+            if (currentOre < totalOreToUse) {
+                if (currentOre < extraOreToUse) {
+                    totalMetalsToMake = currentOre / 4f;
+                    totalOreToUse = totalMetalsToMake * 4f;
+                } else {
+                    extraMetalsToMake = extraOreToUse / 4f;
+                    baseOreToUse = currentOre - extraOreToUse;
+                    baseMetalsToMake = baseOreToUse / 5f;
+                    totalMetalsToMake = baseMetalsToMake + extraMetalsToMake;
+                    totalOreToUse = extraOreToUse + baseOreToUse;
+                }
+            }
+            return !returnUsed ? totalMetalsToMake : totalOreToUse;
+        } else {
+
+            float currentRareOre = Global.getSector().getPlayerFleet().getCargo().getCommodityQuantity(Commodities.RARE_ORE);
+            float totalRareMetalsToMake = baseRareMetalsToMake + extraRareMetalsToMake;
+            float totalRareOreToUse = baseRareOreToUse + extraRareOreToUse;
+            if (currentRareOre < totalRareOreToUse) {
+                if (currentRareOre < extraRareOreToUse) {
+                    totalRareMetalsToMake = currentRareOre / 4f;
+                    totalRareOreToUse = totalRareMetalsToMake * 4f;
+                } else {
+                    extraRareMetalsToMake = extraRareOreToUse / 4f;
+                    baseRareOreToUse = currentRareOre - extraRareOreToUse;
+                    baseRareMetalsToMake = baseRareOreToUse / 5f;
+                    totalRareMetalsToMake = baseRareMetalsToMake + extraRareMetalsToMake;
+                    totalRareOreToUse = extraRareOreToUse + baseRareOreToUse;
+                }
+            }
+            return !returnUsed ? totalRareMetalsToMake : totalRareOreToUse;
+        }
+    }
 }

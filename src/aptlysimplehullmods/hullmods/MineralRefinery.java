@@ -2,6 +2,7 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.MineralRefineryScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
@@ -56,9 +57,21 @@ public class MineralRefinery extends BaseHullMod {
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.DESTROYER).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CRUISER).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CAPITAL_SHIP).toString());
-        tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
+            if (isEnabled) {
+                tooltip.addPara("Metals to generate: %s", pad, b,
+                        Misc.getWithDGS(MineralRefineryScript.getResourceMadeOrUsed(false, false)));
+                tooltip.addPara("Ores to Consume: %s", pad, b,
+                        Misc.getWithDGS(MineralRefineryScript.getResourceMadeOrUsed(true, false)));
+                tooltip.addPara("Transplutonics to generate: %s", pad, b,
+                        Misc.getWithDGS(MineralRefineryScript.getResourceMadeOrUsed(false, true)));
+                tooltip.addPara("Rare Ores to Consume: %s", pad, b,
+                        Misc.getWithDGS(MineralRefineryScript.getResourceMadeOrUsed(true, true)));
+            }
+            tooltip.setBulletedListMode(null);
+
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
@@ -71,13 +84,13 @@ public class MineralRefinery extends BaseHullMod {
                 }
             }
 
-            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
             String status = isEnabled ? "Enabled" : "Disabled";
             Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
+        tooltip.setBulletedListMode(null);
     }
 
     @Override

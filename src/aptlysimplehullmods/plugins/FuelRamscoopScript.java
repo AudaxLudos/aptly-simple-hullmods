@@ -74,4 +74,20 @@ public class FuelRamscoopScript implements EveryFrameScript {
             }
         }
     }
+
+    public static float getResourceMadeOrUsed(boolean returnUsed) {
+        float fuelGenerated = 0;
+        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.FUEL_RAMSCOOP)) {
+                continue;
+            }
+            if (!member.getVariant().getSMods().contains(Ids.FUEL_RAMSCOOP)) {
+                fuelGenerated += FuelRamscoop.FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
+            } else {
+                fuelGenerated += FuelRamscoop.SMOD_FUEL_TO_GENERATE.get(member.getVariant().getHullSize());
+            }
+        }
+
+        return fuelGenerated;
+    }
 }

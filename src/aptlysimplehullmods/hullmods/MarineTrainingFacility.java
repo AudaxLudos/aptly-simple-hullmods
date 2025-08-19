@@ -2,6 +2,8 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
+import aptlysimplehullmods.plugins.FuelRamscoopScript;
+import aptlysimplehullmods.plugins.MarineTrainingFacilityScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -76,9 +78,19 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
                 MAX_MARINES_TO_GENERATE.get(HullSize.DESTROYER) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP) + "");
-        tooltip.setBulletedListMode(null);
 
         if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false);
+            if (isEnabled) {
+                tooltip.addPara("Max Marines Convertible: %s", pad, b,
+                        Misc.getWithDGS(MarineTrainingFacilityScript.getResourceMadeOrUsed("maxMarines")));
+                tooltip.addPara("Marines to Convert: %s", pad, b,
+                        Misc.getWithDGS(MarineTrainingFacilityScript.getResourceMadeOrUsed("addMarines")));
+                tooltip.addPara("Marines to Train: %s", pad, b,
+                        Misc.getWithDGS(MarineTrainingFacilityScript.getResourceMadeOrUsed("")));
+            }
+            tooltip.setBulletedListMode(null);
+
             if (Mouse.getEventButton() == MouseEvent.BUTTON1) {
                 Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, true);
                 Global.getSoundPlayer().playSound("ui_neutrino_detector_on", 0.5f, 1f, Global.getSoundPlayer().getListenerPos(), new Vector2f());
@@ -91,13 +103,14 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
                 }
             }
 
-            boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false);
             String status = isEnabled ? "Enabled" : "Disabled";
             Color statusColor = isEnabled ? good : bad;
 
             tooltip.addPara("Status: %s", oPad, statusColor, status);
+
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
+        tooltip.setBulletedListMode(null);
     }
 
     @Override
