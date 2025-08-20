@@ -36,4 +36,7 @@ public class Ids {
     public static final String INDUSTRIAL_MACHINE_FORGE_MEM = "$ash_industrial_machine_forge_active";
     public static final String MARINE_TRAINING_FACILITY_MEM = "$ash_marine_training_facility_active";
     public static final String MINERAL_REFINERY_MEM = "$ash_mineral_refinery_active";
+
+    public static final String APTLYSIMPLEHULLMODS = "aptlysimplehullmods";
+    public static final String LUNALIB = "aptlysimplehullmods";
 }
