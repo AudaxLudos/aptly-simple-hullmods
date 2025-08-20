@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FuelRamscoop extends BaseLogisticsHullMod {
+    public static boolean ENABLED = true;
     public static float DAYS_TO_GENERATE_FUEL = 3f;
     public static Map<HullSize, Float> FUEL_TO_GENERATE = new HashMap<>();
     public static Map<HullSize, Float> SMOD_FUEL_TO_GENERATE = new HashMap<>();

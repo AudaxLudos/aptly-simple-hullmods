@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IndustrialMachineForge extends BaseLogisticsHullMod {
+    public static boolean ENABLED = true;
     public static float DAYS_TO_GENERATE_HEAVY_MACHINERY = 3f;
     public static Map<HullSize, Integer> HEAVY_MACHINERY_TO_GENERATE = new HashMap<>();
     public static Map<HullSize, Integer> METALS_TO_CONSUME = new HashMap<>();

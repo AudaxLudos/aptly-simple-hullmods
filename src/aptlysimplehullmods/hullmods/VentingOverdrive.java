@@ -11,6 +11,7 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 
 public class VentingOverdrive extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float SHIP_MOVEMENT_MULT = 1f;
 
     @Override

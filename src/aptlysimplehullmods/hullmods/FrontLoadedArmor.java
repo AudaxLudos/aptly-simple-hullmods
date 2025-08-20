@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FrontLoadedArmor extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float POSITIVE_ARMOR_VALUE_MULT = 1.5f;
     public static float NEGATIVE_ARMOR_VALUE_MULT = 0.5f;
 

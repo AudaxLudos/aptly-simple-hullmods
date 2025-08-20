@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCryoPods extends BaseLogisticsHullMod {
+    public static boolean ENABLED = true;
     public static float FLUX_DISSIPATION_MULT = 0.10f;
     public static float SENSOR_PROFILE_MULT = 0.10f;
     public static float CREW_LOST_MULT = 0.10f;

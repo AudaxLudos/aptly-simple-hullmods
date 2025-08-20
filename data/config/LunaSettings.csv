@@ -1,22 +1,27 @@
 fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
 ash_advance_radar_systems_header,Advance Radar Systems Header,Header,Advance Radar Systems,,,,,Offensive
+ash_advance_radar_systems_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_advance_radar_systems_stat1,Sight Radius Multiplier,Double,0.25,,Default value: 0.25,0,2147483647,Offensive
 ash_advance_radar_systems_stat2,Weapon Range Multiplier,Double,0.05,,Default value: 0.05,0,2147483647,Offensive
 ,,,,,,,,
 ash_automated_racks_header,Automated Racks Header,Header,Automated Racks,,,,,Offensive
+ash_automated_racks_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_automated_racks_stat1,Missile Fire Rate Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_automated_racks_stat2,Missile Ammo Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ash_automated_racks_stat3,Missile Turn Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
 ash_beam_combiners_header,Beam Combiners Header,Header,Beam Combiners,,,,,Offensive
+ash_beam_combiners_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_beam_combiners_stat1,Beam Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_beam_combiners_stat2,Beam Flux Cost Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
 ash_circuit_breakers_header,Circuit Breakers Header,Header,Circuit Breakers,,,,,Defenses
+ash_circuit_breakers_stat0,Enable,Boolean,True,,Default value: True,,,Defenses
 ash_circuit_breakers_stat1,Overload Duration Multiplier,Double,0.33,,Default value: 0.33,0,2147483647,Defenses
 ash_circuit_breakers_stat2,EMP Damage Taken Multiplier,Double,0.50,,Default value: 0.50,0,2147483647,Defenses
 ,,,,,,,,
 ash_convicted_crewmates_header,Convicted Crewmates Header,Header,Convicted Crewmates,,,,,Special
+ash_convicted_crewmates_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_convicted_crewmates_stat1,Frigate PPT Multiplier,Double,2,,Default value: 2,0,2147483647,Special
 ash_convicted_crewmates_stat2,Destroyer PPT Multiplier,Double,1.5,,Default value: 1.5,0,2147483647,Special
 ash_convicted_crewmates_stat3,Max Combat Readiness Modifier,Double,0.15,,Default value: 0.15,0,2147483647,Special
@@ -27,6 +32,7 @@ ash_convicted_crewmates_stat5_2,Cruiser PPT Gain,Double,15,,Default value: 15,0,
 ash_convicted_crewmates_stat5_3,Capital PPT Gain,Double,25,,Default value: 25,0,2147483647,Special
 ,,,,,,,,
 ash_external_cargo_holds_header,External Cargo Holds,Header,External Cargo Holds,,,,,Logistics
+ash_external_cargo_holds_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_external_cargo_holds_stat1,Flux Dissipation Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_cargo_holds_stat2,Sensor Profile Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_cargo_holds_stat3,Armor Damage Taken Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
@@ -36,6 +42,7 @@ ash_external_cargo_holds_stat4_2,Cruiser Cargo Capacity Modifier,Double,180,,Def
 ash_external_cargo_holds_stat4_3,Capital Cargo Capacity Modifier,Double,300,,Default value: 300,0,2147483647,Logistics
 ,,,,,,,,
 ash_external_cryo_pods_header,External Cryo Pods,Header,External Cryo Pods,,,,,Logistics
+ash_external_cryo_pods_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_external_cryo_pods_stat1,Flux Dissipation Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_cryo_pods_stat2,Sensor Profile Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_cryo_pods_stat3,Crew Lost Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
@@ -45,6 +52,7 @@ ash_external_cryo_pods_stat4_2,Cruiser Crew Capacity Modifier,Double,180,,Defaul
 ash_external_cryo_pods_stat4_3,Capital Crew Capacity Modifier,Double,300,,Default value: 300,0,2147483647,Logistics
 ,,,,,,,,
 ash_external_fuel_tanks_header,External Fuel Tanks,Header,External Fuel Tanks,,,,,Logistics
+ash_external_fuel_tanks_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_external_fuel_tanks_stat1,Flux Dissipation Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_fuel_tanks_stat2,Sensor Profile Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
 ash_external_fuel_tanks_stat3,High Explosive Damage Taken Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Logistics
@@ -54,25 +62,30 @@ ash_external_fuel_tanks_stat4_2,Cruiser Fuel Capacity Modifier,Double,180,,Defau
 ash_external_fuel_tanks_stat4_3,Capital Fuel Capacity Modifier,Double,300,,Default value: 300,0,2147483647,Logistics
 ,,,,,,,,
 ash_fighter_targeting_uplink_header,Fighter Targeting Uplink Header,Header,Fighter Targeting Uplink,,,,,Fighters
+ash_fighter_targeting_uplink_stat0,Enable,Boolean,True,,Default value: True,,,Fighters
 ash_fighter_targeting_uplink_stat1,Fighter Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Fighters
 ash_fighter_targeting_uplink_stat2,Minimum Effect Range,Double,760,,Default value: 760,0,2147483647,Fighters
 ash_fighter_targeting_uplink_stat3,Maximum Effect Range,Double,560,,Default value: 560,0,2147483647,Fighters
 ,,,,,,,,
 ash_flux_amplifiers_header,Flux Amplifiers Header,Header,Flux Amplifiers,,,,,Offensive
+ash_flux_amplifiers_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_flux_amplifiers_stat1,Weapon Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_flux_amplifiers_stat2,Weapon Flux Cost Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ash_flux_amplifiers_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
 ash_flux_limiters_header,Flux Limiters Header,Header,Flux Limiters,,,,,Offensive
+ash_flux_limiters_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_flux_limiters_stat1,Weapon Flux Cost Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_flux_limiters_stat2,Weapon Damage Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ash_flux_limiters_stat3,Weapon Fire Rate Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ,,,,,,,,
 ash_front_loaded_armor_header,Front Loaded Armor Header,Header,Front Loaded Armor,,,,,Defenses
+ash_front_loaded_armor_stat0,Enable,Boolean,True,,Default value: True,,,Defenses
 ash_front_loaded_armor_stat1,Front Armor Value Multiplier,Double,1.5,,Default value: 1.5,0,2147483647,Defenses
 ash_front_loaded_armor_stat2,Back Armor Value Multiplier,Double,0.5,,Default value: 0.5,0,2147483647,Defenses
 ,,,,,,,,
 ash_fuel_ramscoop_header,Fuel Ramscoop Header,Header,Fuel Ramscoop,,,,,Logistics
+ash_fuel_ramscoop_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_fuel_ramscoop_stat1,Days to Generate Fuel,Double,3,,Default value: 3,0,2147483647,Logistics
 ash_fuel_ramscoop_stat2_0,Frigate Fuel to Generate,Double,1,,Default value: 1,0,2147483647,Logistics
 ash_fuel_ramscoop_stat2_1,Destroyer Fuel to Generate,Double,2,,Default value: 2,0,2147483647,Logistics
@@ -84,6 +97,7 @@ ash_fuel_ramscoop_stat3_2,Cruiser S-mod Fuel to Generate,Double,5,,Default value
 ash_fuel_ramscoop_stat3_3,Capital S-mod Fuel to Generate,Double,6,,Default value: 6,0,2147483647,Logistics
 ,,,,,,,,
 ash_graviton_attunement_drive_header,Graviton Attunement Drive Header,Header,Graviton Attunement Drive,,,,,Logistics
+ash_graviton_attunement_drive_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_graviton_attunement_drive_stat1,Supplies Per Month Multiplier,Double,2,,Default value: 2,0,2147483647,Logistics
 ash_graviton_attunement_drive_stat2,Sensor Profile Multiplier,Double,3,,Default value: 3,0,2147483647,Logistics
 ash_graviton_attunement_drive_stat3_0,Frigate Fleet Burn Modifier,Double,1,,Default value: 1,0,2147483647,Logistics
@@ -92,6 +106,7 @@ ash_graviton_attunement_drive_stat3_2,Cruiser Fleet Burn Modifier,Double,3,,Defa
 ash_graviton_attunement_drive_stat3_3,Capital Fleet Burn Modifier,Double,4,,Default value: 4,0,2147483647,Logistics
 ,,,,,,,,
 ash_industrial_machine_forge_header,Industrial Machine Forge Header,Header,Industrial Machine Forge,,,,,Logistics
+ash_industrial_machine_forge_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_industrial_machine_forge_stat1,Days to Generate Heavy Machinery,Double,3,,Default value: 3,0,2147483647,Logistics
 ash_industrial_machine_forge_stat2_0,Frigate Heavy Machinery to Generate,Double,5,,Default value: 5,0,2147483647,Logistics
 ash_industrial_machine_forge_stat2_1,Destroyer Heavy Machinery to Generate,Double,15,,Default value: 15,0,2147483647,Logistics
@@ -103,6 +118,7 @@ ash_industrial_machine_forge_stat3_2,Cruiser Metals to Consume,Double,210,,Defau
 ash_industrial_machine_forge_stat3_3,Capital Metals to Consume,Double,350,,Default value: 350,0,2147483647,Logistics
 ,,,,,,,,
 ash_invasion_package_header,Invasion Package Header,Header,Invasion Package,,,,,Logistics
+ash_invasion_package_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_invasion_package_stat1_0,Frigate Planetary Operations Marine Casualties Multiplier,Double,0.02,,Default value: 0.02,0,2147483647,Logistics
 ash_invasion_package_stat1_1,Destroyer Planetary Operations Marine Casualties Multiplier,Double,0.04,,Default value: 0.04,0,2147483647,Logistics
 ash_invasion_package_stat1_2,Cruiser Planetary Operations Marine Casualties Multiplier,Double,0.06,,Default value: 0.06,0,2147483647,Logistics
@@ -114,10 +130,12 @@ ash_invasion_package_stat2_3,Capital  Planetary Operations Multiplier,Double,0.1
 ash_invasion_package_stat3,Cargo Capacity Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Logistics
 ,,,,,,,,
 ash_makeshift_missile_autoforge_header,Makeshift Missile Autoforge Header,Header,Makeshift Missile Autoforge,,,,,Offensive
+ash_makeshift_missile_autoforge_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_makeshift_missile_autoforge_stat1,Missile Ammo Reload Size Modifier,Double,10,,Default value: 10,0,2147483647,Offensive
 ash_makeshift_missile_autoforge_stat2,Missile Reload Per Second Modifier,Double,50,,Default value: 50,0,2147483647,Offensive
 ,,,,,,,,
 ash_marine_training_facility_header,Marine Training Facility Header,Header,Marine Training Facility,,,,,Logistics
+ash_marine_training_facility_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_marine_training_facility_stat1,Days to Generate Marines,Double,7,,Default value: 7,0,2147483647,Logistics
 ash_marine_training_facility_stat2_0,Frigate Marines to Generate,Double,10,,Default value: 10,0,2147483647,Logistics
 ash_marine_training_facility_stat2_1,Destroyer Marines to Generate,Double,20,,Default value: 20,0,2147483647,Logistics
@@ -137,6 +155,7 @@ ash_marine_training_facility_stat5_2,Cruiser Max Marines to Generate,Double,150,
 ash_marine_training_facility_stat5_3,Capital Max Marines to Generate,Double,250,,Default value: 250,0,2147483647,Logistics
 ,,,,,,,,
 ash_mineral_refinery_header,Mineral Refinery Header,Header,Mineral Refinery,,,,,Logistics
+ash_mineral_refinery_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_mineral_refinery_stat1,Days to Generate Metals/Rare Metals,Double,3,,Default value: 3,0,2147483647,Logistics
 ash_mineral_refinery_stat2_0,Frigate Metals/Rare Metals to Generate,Double,80,,Default value: 80,0,2147483647,Logistics
 ash_mineral_refinery_stat2_1,Destroyer Metals/Rare Metals to Generate,Double,160,,Default value: 160,0,2147483647,Logistics
@@ -148,6 +167,7 @@ ash_mineral_refinery_stat3_2,Cruiser Ore/Rare Ore to Consume,Double,1200,,Defaul
 ash_mineral_refinery_stat3_3,Capital Ore/Rare Ore to Consume,Double,2000,,Default value: 2000,0,2147483647,Logistics
 ,,,,,,,,
 ash_missile_bay_header,Missile Bay Header,Header,Missile Bay,,,,,Special
+ash_missile_bay_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_missile_bay_stat1,Missile Ammo Multiplier,Double,0.60,,Default value: 0.60,0,2147483647,Special
 ash_missile_bay_stat2,Fighter Bay Modifier,Double,1,,Default value: 1,0,2147483647,Special
 ash_missile_bay_stat3_0,Frigate Deployment Points Modifier,Double,1,,Default value: 1,0,2147483647,Special
@@ -156,6 +176,7 @@ ash_missile_bay_stat3_2,Cruiser Deployment Points Modifier,Double,2,,Default val
 ash_missile_bay_stat3_3,Capital Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ,,,,,,,,
 ash_reactive_subsystems_header,Reactive Subsystems Header,Header,Reactive Subsystems,,,,,Special
+ash_reactive_subsystems_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_reactive_subsystems_stat1,Max Combat Readiness Modifier,Double,0.15,,Default value: 0.15,0,2147483647,Special
 ash_reactive_subsystems_stat2_0,Frigate Deployment Points Modifier,Double,1,,Default value: 1,0,2147483647,Special
 ash_reactive_subsystems_stat2_1,Destroyer Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
@@ -163,6 +184,7 @@ ash_reactive_subsystems_stat2_2,Cruiser Deployment Points Modifier,Double,3,,Def
 ash_reactive_subsystems_stat2_3,Capital Deployment Points Modifier,Double,5,,Default value: 5,0,2147483647,Special
 ,,,,,,,,
 ash_reactor_bay_header,Reactor Bay Header,Header,Reactor Bay,,,,,Special
+ash_reactor_bay_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_reactor_bay_stat1,Flux Dissipation Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Special
 ash_reactor_bay_stat2,Flux Capacity Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Special
 ash_reactor_bay_stat3,Fighter Bay Modifier,Double,1,,Default value: 1,0,2147483647,Special
@@ -172,6 +194,7 @@ ash_reactor_bay_stat4_2,Cruiser Deployment Points Modifier,Double,2,,Default val
 ash_reactor_bay_stat4_3,Capital Deployment Points Modifier,Double,2,,Default value: 2,0,2147483647,Special
 ,,,,,,,,
 ash_streamlined_bubble_drive_header,Streamlined Bubble Drive Header,Header,Streamlined Bubble Drive,,,,,Logistics
+ash_streamlined_bubble_drive_stat0,Enable,Boolean,True,,Default value: True,,,Logistics
 ash_streamlined_bubble_drive_stat1_0,Frigate Terrain Movement Penalty Multiplier,Double,0.04,,Default value: 0.04,0,2147483647,Logistics
 ash_streamlined_bubble_drive_stat1_1,Destroyer Terrain Movement Penalty Multiplier,Double,0.08,,Default value: 0.08,0,2147483647,Logistics
 ash_streamlined_bubble_drive_stat1_2,Cruiser Terrain Movement Penalty Multiplier,Double,0.12,,Default value: 0.12,0,2147483647,Logistics
@@ -179,6 +202,7 @@ ash_streamlined_bubble_drive_stat1_3,Capital Terrain Movement Penalty Multiplier
 ,,,,,,,,
 ,,,,,,,,
 ash_supplies_recycler_header,Supplies Recycler Header,Header,Supplies Recycler,,,,,Special
+ash_supplies_recycler_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_supplies_recycler_stat1_0,Frigate Fleet Supply Use Per Month Multiplier,Double,0.01,,Default value: 0.01,0,2147483647,Special
 ash_supplies_recycler_stat1_1,Destroyer Fleet Supply Use Per Month Multiplier,Double,0.02,,Default value: 0.02,0,2147483647,Special
 ash_supplies_recycler_stat1_2,Cruiser Fleet Supply Use Per Month Multiplier,Double,0.03,,Default value: 0.03,0,2147483647,Special
@@ -186,24 +210,28 @@ ash_supplies_recycler_stat1_3,Capital Fleet Supply Use Per Month Multiplier,Doub
 ash_supplies_recycler_stat2,Cargo Capacity Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Special
 ,,,,,,,,
 ash_swift_retreat_protocol_header,Swift Retreat Protocol Header,Header,Swift Retreat Protocol,,,,,Fighters
+ash_swift_retreat_protocol_stat0,Enable,Boolean,True,,Default value: True,,,Fighters
 ash_swift_retreat_protocol_stat1,Fighter Movement Multiplier,Double,0.25,,Default value: 0.25,0,2147483647,Fighters
 ash_swift_retreat_protocol_stat2,Fighter Engine Damage Taken Multiplier,Double,0.25,,Default value: 0.25,0,2147483647,Fighters
 ,,,,,,,,
 ash_targeting_transceiver_header,Targeting Transceiver Header,Header,Targeting Transceiver,,,,,Special
+ash_targeting_transceiver_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_targeting_transceiver_stat1,Frigate/Destroyer Weapon Range Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Special
 ash_targeting_transceiver_stat2,Cruiser/Capital Autofire Accuracy Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Special
 ash_targeting_transceiver_stat3,Minimum Effect Range,Double,760,,Default value: 760,0,2147483647,Special
 ash_targeting_transceiver_stat4,Maximum Effect Range,Double,560,,Default value: 560,0,2147483647,Special
 ,,,,,,,,
 ash_temporal_flux_reactor_header,Temporal Flux Reactor Header,Header,Temporal Flux Reactor,,,,,Special
+ash_temporal_flux_reactor_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_temporal_flux_reactor_stat1,Timeflow Multiplier,Double,0.33,,Default value: 0.33,0,2147483647,Special
 ash_temporal_flux_reactor_stat2,Peak Performance Time Multiplier,Double,0.40,,Default value: 0.40,0,2147483647,Special
 ,,,,,,,,
 ash_venting_overdrive_header,Venting Overdrive Header,Header,Venting Overdrive,,,,,Special
+ash_venting_overdrive_stat0,Enable,Boolean,True,,Default value: True,,,Special
 ash_venting_overdrive_stat1,Ship Movement Multiplier,Double,1,,Default value: 1,0,2147483647,Special
 ,,,,,,,,
 ash_volatile_warheads_header,Venting Overdrive Header,Header,Volatile Warheads,,,,,Offensive
+ash_volatile_warheads_stat0,Enable,Boolean,True,,Default value: True,,,Offensive
 ash_volatile_warheads_stat1,Missile Damage Multiplier,Double,0.20,,Default value: 0.20,0,2147483647,Offensive
 ash_volatile_warheads_stat2,Missile Health Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
 ash_volatile_warheads_stat3,Missile Speed Multiplier,Double,0.10,,Default value: 0.10,0,2147483647,Offensive
-,,,,,,,,

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.util.Iterator;
 
 public class FighterTargetingUplink extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float FIGHTER_DAMAGE_MULT = 0.20f;
     public static float MIN_EFFECTIVE_RANGE = 760f;
     public static float MAX_EFFECTIVE_RANGE = 560f;

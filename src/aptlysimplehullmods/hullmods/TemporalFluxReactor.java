@@ -12,6 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class TemporalFluxReactor extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float TIME_FLOW_MULT = 0.33f;
     public static float PEAK_PERFORMANCE_TIME_MULT = 0.40f;
 

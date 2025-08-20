@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExternalCargoHolds extends BaseLogisticsHullMod {
+    public static boolean ENABLED = true;
     public static float FLUX_DISSIPATION_MULT = 0.10f;
     public static float SENSOR_PROFILE_MULT = 0.10f;
     public static float ARMOR_DAMAGE_TAKEN_MULT = 0.10f;

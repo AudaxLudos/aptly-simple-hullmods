@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StreamlinedBubbleDrive extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static Map<ShipAPI.HullSize, Float> TERRAIN_PENALTY_MOD = new HashMap<>();
 
     static {

@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MarineTrainingFacility extends BaseLogisticsHullMod {
+    public static boolean ENABLED = true;
     public static int DAYS_TO_GENERATE_MARINES = 7;
     public static Map<HullSize, Integer> MARINES_TO_GENERATE = new HashMap<>();
     public static Map<HullSize, Integer> MARINES_TO_LEVEL = new HashMap<>();

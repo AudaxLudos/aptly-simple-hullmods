@@ -10,6 +10,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class FluxLimiters extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float WEAPON_FLUX_MULT = 0.20f;
     public static float WEAPON_DAMAGE_MULT = 0.10f;
     public static float WEAPON_FIRE_RATE_MULT = 0.10f;

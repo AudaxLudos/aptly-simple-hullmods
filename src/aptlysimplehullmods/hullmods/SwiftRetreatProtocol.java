@@ -12,6 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class SwiftRetreatProtocol extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float FIGHTER_MOVEMENT_MULT = 0.25f;
     public static float FIGHTER_ENGINE_DMG_TAKEN_MULT = 0.25f;
 

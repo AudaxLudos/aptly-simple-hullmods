@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class AutomatedRacks extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float MISSILE_FIRE_RATE_MULT = 0.20f;
     public static float MISSILE_AMMO_MULT = 0.10f;
     public static float MISSILE_TURN_RATE_MULT = 0.10f;

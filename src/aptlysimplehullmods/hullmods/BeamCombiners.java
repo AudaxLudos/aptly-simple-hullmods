@@ -10,6 +10,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.awt.*;
 
 public class BeamCombiners extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float BEAM_DAMAGE_MULT = 0.20f;
     public static float BEAM_FLUX_COST_MULT = 0.20f;
 

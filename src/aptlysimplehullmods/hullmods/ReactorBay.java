@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReactorBay extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float FLUX_DISSIPATION_MULT = 0.1f;
     public static float FLUX_CAPACITY_MULT = 0.1f;
     public static float FIGHTER_BAY_MOD = 1f;

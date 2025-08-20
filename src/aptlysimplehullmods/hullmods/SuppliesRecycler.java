@@ -18,6 +18,7 @@ import java.util.Map;
 import static com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription.isInCampaign;
 
 public class SuppliesRecycler extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static Map<Object, Float> FLEET_SUPPLIES_PER_MONTH = new HashMap<>();
     public static float CARGO_CAPACITY_MULT = 0.40f;
 

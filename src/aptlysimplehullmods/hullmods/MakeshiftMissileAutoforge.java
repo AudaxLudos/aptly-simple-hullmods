@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.List;
 
 public class MakeshiftMissileAutoforge extends BaseHullMod {
+    public static boolean ENABLED = true;
     public static float MISSILE_AMMO_RELOAD_SIZE_MOD = 10f;
     public static float MISSILE_AMMO_PER_SECOND_MOD = 50f;
 
