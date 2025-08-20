@@ -88,7 +88,6 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
             tooltip.addPara("Status: %s", oPad, statusColor, status);
 
 
-
             tooltip.addPara("%s the hullmod to disable/enable its effects. %s all ships with this hullmod", oPad, Misc.getGrayColor(), Misc.setAlpha(b, 200), "Right-click", "Affects");
         }
         tooltip.setBulletedListMode(null);

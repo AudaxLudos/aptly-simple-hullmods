@@ -2,7 +2,6 @@ package aptlysimplehullmods.hullmods;
 
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
-import aptlysimplehullmods.plugins.FuelRamscoopScript;
 import aptlysimplehullmods.plugins.MarineTrainingFacilityScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;

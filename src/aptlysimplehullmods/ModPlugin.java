@@ -10,8 +10,6 @@ import lunalib.lunaSettings.LunaSettings;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 public class ModPlugin extends BaseModPlugin {
 
     @Override
@@ -281,48 +279,54 @@ public class ModPlugin extends BaseModPlugin {
         }
     }
 
-    public int getInt(JSONObject data, String statId) throws JSONException {
+    public int getInt(JSONObject data, String statId, Integer index) throws JSONException {
+        Integer result;
+
         if (isModEnabled(Ids.LUNALIB)) {
-            Integer result = LunaSettings.getInt(Ids.APTLYSIMPLEHULLMODS, statId);
-            if (result == null) {
-                return 0;
+            String key = (index == null) ? statId : statId + "_" + index;
+            result = LunaSettings.getInt(Ids.APTLYSIMPLEHULLMODS, key);
+        } else {
+            if (index == null) {
+                result = data.getInt(statId);
+            } else {
+                result = data.getJSONArray(statId).getInt(index);
             }
-            return result;
         }
-        return data.getInt(statId);
+
+        if (result == null) {
+            return 0;
+        }
+
+        return Math.min(result, 255);
     }
 
-    public int getInt(JSONObject data, String statId, int index) throws JSONException {
+    public int getInt(JSONObject data, String statId) throws JSONException {
+        return getInt(data, statId, null);
+    }
+
+    public float getFloat(JSONObject data, String statId, Integer index) throws JSONException {
+        Float result;
+
         if (isModEnabled(Ids.LUNALIB)) {
-            Integer result = LunaSettings.getInt(Ids.APTLYSIMPLEHULLMODS, statId + "_" + index);
-            if (result == null) {
-                return 0;
+            String key = (index == null) ? statId : statId + "_" + index;
+            result = LunaSettings.getFloat(Ids.APTLYSIMPLEHULLMODS, key);
+        } else {
+            if (index == null) {
+                result = (float) data.getDouble(statId);
+            } else {
+                result = (float) data.getJSONArray(statId).getDouble(index);
             }
-            return result;
         }
-        return data.getJSONArray(statId).getInt(index);
+
+        if (result == null) {
+            return 0;
+        }
+
+        return Math.min(result, 255);
     }
 
     public float getFloat(JSONObject data, String statId) throws JSONException {
-        if (isModEnabled(Ids.LUNALIB)) {
-            Float result = LunaSettings.getFloat(Ids.APTLYSIMPLEHULLMODS, statId);
-            if (result == null) {
-                return 0;
-            }
-            return result;
-        }
-        return (float) data.getDouble(statId);
-    }
-
-    public float getFloat(JSONObject data, String statId, int index) throws JSONException {
-        if (isModEnabled(Ids.LUNALIB)) {
-            Float result = LunaSettings.getFloat(Ids.APTLYSIMPLEHULLMODS, statId + "_" + index);
-            if (result == null) {
-                return 0;
-            }
-            return result;
-        }
-        return (float) data.getJSONArray(statId).getDouble(index);
+        return getFloat(data, statId, null);
     }
 
     public boolean getBoolean(JSONObject data, String statId) throws JSONException {

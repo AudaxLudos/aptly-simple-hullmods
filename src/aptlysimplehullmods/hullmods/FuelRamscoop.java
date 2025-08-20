@@ -3,7 +3,6 @@ package aptlysimplehullmods.hullmods;
 import aptlysimplehullmods.Ids;
 import aptlysimplehullmods.Utils;
 import aptlysimplehullmods.plugins.FuelRamscoopScript;
-import aptlysimplehullmods.plugins.IndustrialMachineForgeScript;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;

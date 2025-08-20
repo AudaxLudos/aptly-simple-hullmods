@@ -19,6 +19,31 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
     public Long lastDay = null;
     public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
+    public static float getResourceMadeOrUsed(String type) {
+        int maxMarines = 0;
+        int addMarines = 0;
+        float trainMarines = 0;
+        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
+                continue;
+            }
+            addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
+            maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
+            if (!member.getVariant().getSMods().contains(Ids.MARINE_TRAINING_FACILITY)) {
+                trainMarines += MarineTrainingFacility.MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
+            } else {
+                trainMarines += MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
+            }
+        }
+
+        if (Objects.equals(type, "maxMarines")) {
+            return maxMarines;
+        } else if (Objects.equals(type, "addMarines")) {
+            return addMarines;
+        }
+        return trainMarines;
+    }
+
     @Override
     public boolean isDone() {
         return false;
@@ -107,30 +132,5 @@ public class MarineTrainingFacilityScript implements EveryFrameScript {
                 }
             }
         }
-    }
-
-    public static float getResourceMadeOrUsed(String type) {
-        int maxMarines = 0;
-        int addMarines = 0;
-        float trainMarines = 0;
-        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.MARINE_TRAINING_FACILITY)) {
-                continue;
-            }
-            addMarines += MarineTrainingFacility.MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
-            maxMarines += MarineTrainingFacility.MAX_MARINES_TO_GENERATE.get(member.getVariant().getHullSize());
-            if (!member.getVariant().getSMods().contains(Ids.MARINE_TRAINING_FACILITY)) {
-                trainMarines += MarineTrainingFacility.MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
-            } else {
-                trainMarines += MarineTrainingFacility.SMOD_MARINES_TO_LEVEL.get(member.getVariant().getHullSize());
-            }
-        }
-
-        if (Objects.equals(type, "maxMarines")) {
-            return maxMarines;
-        } else if (Objects.equals(type, "addMarines")) {
-            return addMarines;
-        }
-        return trainMarines;
     }
 }

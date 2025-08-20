@@ -16,6 +16,44 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
     public Long lastDay = null;
     public IntervalUtil timer = new IntervalUtil(0.9f, 1.1f);
 
+    public static float getResourceMadeOrUsed(boolean returnUsed) {
+        float baseMachineryToMake = 0f;
+        float extraMachineryToMake = 0f;
+        float baseMetalsToUse = 0f;
+        float extraMetalsToUse = 0f;
+        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
+            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
+                continue;
+            }
+            if (member.getVariant().getSMods().contains(Ids.INDUSTRIAL_MACHINE_FORGE)) {
+                extraMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.2f;
+                extraMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
+            } else {
+                baseMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
+                baseMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
+            }
+        }
+
+        float currentMetals = Global.getSector().getPlayerFleet().getCargo().getCommodityQuantity(Commodities.METALS);
+        float totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
+        float totalMetalsToUse = baseMetalsToUse + extraMetalsToUse;
+
+        if (currentMetals < totalMetalsToUse) {
+            if (currentMetals < extraMetalsToUse) {
+                totalMachineryToMake = currentMetals / 5.8333f;
+                totalMetalsToUse = totalMachineryToMake * 5.8333f;
+            } else {
+                extraMachineryToMake = extraMetalsToUse / 5.8333f;
+                baseMetalsToUse = currentMetals - extraMetalsToUse;
+                baseMachineryToMake = baseMetalsToUse / 7f;
+                totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
+                totalMetalsToUse = extraMetalsToUse + baseMetalsToUse;
+            }
+        }
+
+        return !returnUsed ? totalMachineryToMake : totalMetalsToUse;
+    }
+
     @Override
     public boolean isDone() {
         return false;
@@ -93,43 +131,5 @@ public class IndustrialMachineForgeScript implements EveryFrameScript {
                 }
             }
         }
-    }
-
-    public static float getResourceMadeOrUsed(boolean returnUsed) {
-        float baseMachineryToMake = 0f;
-        float extraMachineryToMake = 0f;
-        float baseMetalsToUse = 0f;
-        float extraMetalsToUse = 0f;
-        for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-            if (member.isMothballed() || !member.getVariant().hasHullMod(Ids.INDUSTRIAL_MACHINE_FORGE)) {
-                continue;
-            }
-            if (member.getVariant().getSMods().contains(Ids.INDUSTRIAL_MACHINE_FORGE)) {
-                extraMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize()) * 1.2f;
-                extraMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
-            } else {
-                baseMachineryToMake += IndustrialMachineForge.HEAVY_MACHINERY_TO_GENERATE.get(member.getVariant().getHullSize());
-                baseMetalsToUse += IndustrialMachineForge.METALS_TO_CONSUME.get(member.getVariant().getHullSize());
-            }
-        }
-
-        float currentMetals = Global.getSector().getPlayerFleet().getCargo().getCommodityQuantity(Commodities.METALS);
-        float totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
-        float totalMetalsToUse = baseMetalsToUse + extraMetalsToUse;
-
-        if (currentMetals < totalMetalsToUse) {
-            if (currentMetals < extraMetalsToUse) {
-                totalMachineryToMake = currentMetals / 5.8333f;
-                totalMetalsToUse = totalMachineryToMake * 5.8333f;
-            } else {
-                extraMachineryToMake = extraMetalsToUse / 5.8333f;
-                baseMetalsToUse = currentMetals - extraMetalsToUse;
-                baseMachineryToMake = baseMetalsToUse / 7f;
-                totalMachineryToMake = baseMachineryToMake + extraMachineryToMake;
-                totalMetalsToUse = extraMetalsToUse + baseMetalsToUse;
-            }
-        }
-
-        return !returnUsed ? totalMachineryToMake : totalMetalsToUse;
     }
 }
