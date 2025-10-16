@@ -297,7 +297,7 @@ public class ModPlugin extends BaseModPlugin {
             return 0;
         }
 
-        return Math.min(result, 255);
+        return result;
     }
 
     public int getInt(JSONObject data, String statId) throws JSONException {
@@ -322,7 +322,7 @@ public class ModPlugin extends BaseModPlugin {
             return 0;
         }
 
-        return Math.min(result, 255);
+        return result;
     }
 
     public float getFloat(JSONObject data, String statId) throws JSONException {
