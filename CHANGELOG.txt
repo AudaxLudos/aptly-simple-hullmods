@@ -1,3 +1,7 @@
+### 2.1.3m
+- Release 2.1.3m
+- Fix settings capping values to 255
+
 ### 2.1.3l
 - Release 2.1.3l
 - Fix fleet data null error in supplies recycler
