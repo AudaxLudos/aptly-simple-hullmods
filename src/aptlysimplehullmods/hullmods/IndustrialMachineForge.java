@@ -60,7 +60,7 @@ public class IndustrialMachineForge extends BaseLogisticsHullMod {
                 METALS_TO_CONSUME.get(HullSize.CRUISER).toString(),
                 METALS_TO_CONSUME.get(HullSize.CAPITAL_SHIP).toString());
 
-        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             boolean isEnabled = Utils.getProductionHullmodActivity(Ids.INDUSTRIAL_MACHINE_FORGE_MEM, false);
             if (isEnabled) {
                 tooltip.addPara("Heavy Machinery to generate: %s", pad, b,

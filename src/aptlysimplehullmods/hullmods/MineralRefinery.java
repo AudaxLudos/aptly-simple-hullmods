@@ -59,7 +59,7 @@ public class MineralRefinery extends BaseHullMod {
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CRUISER).toString(),
                 MINERALS_TO_CONSUME.get(ShipAPI.HullSize.CAPITAL_SHIP).toString());
 
-        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MINERAL_REFINERY_MEM, false);
             if (isEnabled) {
                 tooltip.addPara("Metals to generate: %s", pad, b,

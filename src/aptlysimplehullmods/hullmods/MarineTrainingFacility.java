@@ -79,7 +79,7 @@ public class MarineTrainingFacility extends BaseLogisticsHullMod {
                 MAX_MARINES_TO_GENERATE.get(HullSize.CRUISER) + "",
                 MAX_MARINES_TO_GENERATE.get(HullSize.CAPITAL_SHIP) + "");
 
-        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             boolean isEnabled = Utils.getProductionHullmodActivity(Ids.MARINE_TRAINING_FACILITY_MEM, false);
             if (isEnabled) {
                 tooltip.addPara("Max Marines Convertible: %s", pad, b,

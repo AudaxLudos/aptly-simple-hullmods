@@ -55,7 +55,7 @@ public class FuelRamscoop extends BaseLogisticsHullMod {
                 FUEL_TO_GENERATE.get(HullSize.CRUISER).intValue() + "",
                 FUEL_TO_GENERATE.get(HullSize.CAPITAL_SHIP).intValue() + "");
 
-        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship.getVariant().hasHullMod(this.spec.getId())) {
+        if (!isForModSpec && !Global.CODEX_TOOLTIP_MODE && Global.getCurrentState() == GameState.CAMPAIGN && ship != null && ship.getVariant().hasHullMod(this.spec.getId())) {
             boolean isEnabled = Utils.getProductionHullmodActivity(Ids.FUEL_RAMSCOOP_MEM, false);
             if (isEnabled) {
                 tooltip.addPara("Fuel to Generate: %s", pad, b,
