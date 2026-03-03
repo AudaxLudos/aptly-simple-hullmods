@@ -1,12 +1,12 @@
-### 2.1.3m
+### 2.1.39
 - Release 2.1.3m
 - Fix settings capping values to 255
 
-### 2.1.3l
+### 2.1.32
 - Release 2.1.3l
 - Fix fleet data null error in supplies recycler
 
-### 2.1.3k
+### 2.1.30
 - Release 2.1.3k
 - Cap supply use multiplier of supplies recycler to 0.25x from none
 - Fix marine training facility codex error
@@ -17,24 +17,24 @@
 - Fix supplies recycler codex error
 - Fix supplies recycler stats being recalculated more often in heavily modded saves
 
-### 2.1.2c
+### 2.1.18
 - Release 2.1.2c
 - Remove unused abilities files
 - Update game version to 0.98a from 0.97a
 - Update java version to 17 from 7
 - Fix volatile warheads header in lunalib settings
 
-### 2.1.1d
+### 2.1.13
 - Release 2.1.1d
 - Add streamlined bubble drive vanilla and lunalib settings
 - Update remove weapons tab from mod lunalib settings
 - Fix makeshift missile autoforge settings not properly applying
 
-### 2.1.1b
+### 2.1.9
 - Release 2.1.1a
 - Fix streamlined bubble drive not applying to fleet
 
-### 2.1.1a
+### 2.1.6
 - Release 2.1.1a
 - Fix production hullmods including mothballed ships when producing commodities
 - Fix supplies recycler causing lag due to reapplication of stats every frame
@@ -42,7 +42,7 @@
 - Update hull mod descriptions
 - Add streamlined bubble drive hullmod
 
-### 2.1.0a
+### 2.1.0 (413)
 - Release 2.1.0a
 - Fix marine training facility enable and disable function not working
 - Update optimized marine training facility script
@@ -54,7 +54,7 @@
 - Update convicted crewmates to be incompatible with automated ships
 - Update production hullmod to save its status when reloading/restarting/reopening the game
 
-### 2.0.2
+### 2.0.12
 - Release 2.0.2
 - Fix crash with convicted crewmates when checking for PPT gain values on target death
 - Hidden forging ability (Replaced with new implementation)
@@ -63,11 +63,11 @@
 - Add supplies recycler settings data
 - Add supplies recycler hullmod
 
-### 2.0.0a
+### 2.0.2
 - Release 2.0.0a
 - Fix crash with forging ability during the tutorial
 
-### 2.0.0
+### 2.0.0 (389)
 - Release 2.0.0
 - Update sprite names to match hullmod ids
 - Fix crash issue regarding bounty from arma armatura
@@ -83,29 +83,29 @@
 - Add new settings options for temporal flux reactor
 - Add peak performance time multiplier penalty of 40% to temporal flux reaction when s-modded
 
-### 1.9.5
+### 1.9.21
 - Release 1.9.5
 - Update circuit breakers tags and ui tags to defenses
 - Add lunalib integration
 - Add lunalib settings file
 
-### 1.9.4
+### 1.9.16
 - Release 1.9.4
 - Update hullmod stats to reflect settings file
 - Add hullmod settings file
 
-### 1.9.3a
+### 1.9.8
 - Release 1.9.3a
 - Update GitHub action script
 - Fix crash when hovering over invasion package part 2
 
-### 1.9.3
+### 1.9.5
 - Release 1.9.3
 - Fix crash when viewing invasion package outside of campaign
 - Buff missile bay missile ammo bonus to 60% from 25%
 - Fix issue where marine training facility ui message triggers when training 0 marines
 
-### 1.9.0
+### 1.9.0 (351)
 - Update invasion package added to factions known hullmods
 - Update re-enabled targeting transceiver
 - Fix issue where fighter targeting uplink also links with enemies
@@ -130,11 +130,11 @@
 - Update temporal flux reactor op cost to 6/12/18/30 from 5/10/15/25
 - Update package structure
 
-### 1.8.6
+### 1.8.19
 - Release 1.8.6
 - Update directDownloadURL link in version file
 
-### 1.8.5
+### 1.8.13
 - Release 1.8.5
 - Add MineralRefinery sprite
 - Remove IndustrialMachineForge survey cost smod effect
@@ -149,7 +149,7 @@
 - Update SwiftRetreatProtocol description
 - Add mineral refinery hullmod
 
-### 1.8.0
+### 1.8.0 (303)
 - Remove ConvictedCrewmates peak performance time penalty
 - Increase ConvictedCrewmates ordnance points to 5/10/15/20 from 4/8/12/20
 - Increase GravitonAttunementDrive ordnance cost to 6/12/18/30 from 5/10/15/25
@@ -180,29 +180,29 @@
 - Add automated racks hullmod
 - Update master version file link
 
-### 1.7.2
+### 1.7.5
 - Release version 1.7.2
 - Forgot to push updates before releasing 1.7.1
 
-### 1.7.1
+### 1.7.4
 - Release version 1.7.1
 - Fix version file name typo
 
-### 1.7.0
+### 1.7.0 (248)
 - Release version 1.7.0
 - Update game version to 0.97a
 - Reformat entire code base
 
-### 1.6.3
+### 1.6.10
 - Fix github action script issue
 
-### 1.6.2
+### 1.6.8
 - Fix bug periodic sudden consumption and generation of all materials for industrial machine forge
 
-### 1.6.1
+### 1.6.5
 - Fix crash when using reactive shields without a system
 
-### 1.6.0
+### 1.6.0 (233)
 - Update hullmod smod check to use built-in vanilla functions
 - Update ASH_AdvanceRadarSystems increase sight radius buff to 25% from 20%
 - Update ASH_AdvanceRadarSystems increase auto aim accuracy buff to 50% from 20%
@@ -211,7 +211,7 @@
 - Remove s-mod effect for convicted crewmates
 - Fix crash when s-modding reactor bay and missile bay
 
-### 1.5.5
+### 1.5.2
 - Update CHANGELOG from md to txt
 - Update LICENSE from md to txt
 - Remove settings.json
@@ -220,7 +220,7 @@
 - Update missile bay missile ammo increase to 25% from 50%
 - Update convicted crewmates ppt gain to 5/10/15/25 from 10/20/30/50
 
-### 1.5.0
+### 1.5.0 (224)
 - Update circuit breakers now unlocked at the start
 - Add hullmod sprites for new hullmods
 - Update subverted shields stats reduced shield up keep and shield strength to 15% and reduced shield pierce chance to 25%
@@ -235,7 +235,7 @@
 - Fix missile bay and reactor bay to only work for built-in fighter bays
 - Add hullmods missile bay & reactor bay
 
-### 1.3.5
+### 1.3.12
 - Add s-mod effect Industrial Machine Forge
     - Generates 15/30/40/75 machinery every 3 days when s-modded
 - Add s-mod effect for Marine Training Facility
@@ -250,32 +250,32 @@
     - Add increase sensor profile modifier by 10%
     - Update flat cargo modifiers to 60/120/180/300 from 200/400/600/1000
 
-### 1.3.2
+### 1.3.4
 - Fix marin training facility crash when getting accessed outside of combat
 - Fix fuel ramscoop crash when getting accessed outside of combat
 
-### 1.3.0
+### 1.3.0 (197)
 - Update mod_info.json lazylib dependency to any version
 - Update mod_info.json game version to latest
 
-### 1.2.9
+### 1.2.19
 - Fix Reactive Shields Hullmod crash when shield color changes
 - Fix ASH_ExternalCargoHolds to be installable on ships that support 2 or more logistics hullmod
 - Fix ASH_ExternalCryoPods to be installable on ships that support 2 or more logistics hullmod
 - Fix ASH_ExternalFuelTanks to be installable on ships that support 2 or more logistics hullmod
 - Update ASH_MarineTrainingFacility marines trained to 2/4/6/10 from 5/10/15/25
 
-### 1.2.4
+### 1.2.15
 - Fix venting overdrive unmodified all the modifiers from the stats it uses
 
-### 1.2.3
+### 1.2.13
 - Fix makeshift missile autoforge crash when viewing as blueprint/mod spec
 
-### 1.2.2
+### 1.2.7
 - Fix hullmod ui when hovering in the market
 - Fix crash when hovering mod spec in market
 
-### 1.2.0
+### 1.2.0 (175)
 - Add settings for disabling or enabling mod and compatibility with BDSM
 - Add flux conduction armor s-mod effects
     - Increase flux capacity to 20% when s-modded
@@ -308,7 +308,7 @@
     - Remove fire rate debuff when s-modded
 - Add LICENSE.md
 
-### 1.0.0
+### 1.0.0 (162)
 - Update reactive shields & subverted shields visuals
 - Remove unused hullmod sprites
 - Update hullmods base value
@@ -475,7 +475,7 @@ Add missile speed reduction to 10% from 0%
     - Update compatibility to incompatible with phase ships from none
     - Fix crash when ship has no shields
 
-### 0.8.3
+### 0.8.10a (122)
 - Updated message from hullmods that generate goods
 - Fixed Industrial Machine Forge not working
 - Updated hullmods descriptions
@@ -484,7 +484,7 @@ Add missile speed reduction to 10% from 0%
 - Fixed Front Loaded Armor tags
 - Fixed External Cryo Pods not affecting max crew value
 
-### 0.7.6
+### 0.7.17a (112)
 - Added Front Loaded Armor Hullmod
 - Fixed logistical hullmods not getting properly checked if installable
 - Added Industrial Machine Forge Hullmod
@@ -496,21 +496,21 @@ Add missile speed reduction to 10% from 0%
 - MarineTF - Decreased days needed to generate marines to 7 from 30
 - Increase fuel ramscoop fuel generation to 1/2/3/4 from 1/1/2/2
 
-### 0.6.7
+### 0.6.21a (95)
 - Updated temporal flux reactor to be color compatible with reactive shields
 - Fixed temporal flux reactor affecting other ships with the hullmod
 - Fixed reactive shields affecting other ships with the hullmod
 - Fixed marine training facility not giving marines every month
 - Fixed fuel ramscoop not giving fuel every 3 days
 
-### 0.6.2
+### 0.6.14a
 - Added visual indicator for Reactive Shields
 - Added Aligned Thrust Variants
 - Added Temporal Flux Reactor
 - Updated Excessive Venting Protocol to Venting Overdrive
 - Updated mods with default sprites to available game sprites
 
-### 0.5.6
+### 0.5.16a (74)
 - Added Targeting Transceiver Sprite by Vildrian
 - Added Marine Training Facility Sprite by Vildrian
 - Added Hull Conversion Sprite by Vildrian
@@ -522,14 +522,14 @@ Add missile speed reduction to 10% from 0%
 - Added Excessive Venting Protocol Hullmod
 - Added Redundant Machinery Hullmod
 
-### 0.4.5
+### 0.4.11a
 - Added Hull Conversion Hullmod
 - Added Beam Combiners Hullmod
 - Added Marine Training Facility Hullmod
 - Added Fuel Ramscoop Hullmod
 - Added Targeting Receiver Hullmod
 
-### 0.4.0
+### 0.4.0a (58)
 - Added External Cryo Pods Hullmod
 - Added External Fuel Tanks Hullmod
 - Added Makeshift Missile Autoforge Sprite
@@ -549,20 +549,20 @@ Add missile speed reduction to 10% from 0%
 - Added Overloaded Capacitors Hullmod
 - Added Volatile Ammunition Hullmod
 
-### 0.1.8
+### 0.1.19a
 - Added Enhanced Autoloader Hullmod
 - Added Energized Capacitors Hullmod
 - Added Extended Barrels Hullmod
 - Added Subatomic Accelerator Hullmod
 - Change Base values and Tiers of certain Hullmods
 
-### 0.1.1
+### 0.1.8a (22)
 - Added 3 new sprites for hullmods
 - Added Subverted Shields sprite
 - Added 3 sprites for existing hullmods
 - Added Makeshift Missile Autoforge
 
-### 0.0.7
+### 0.0.14a (14)
 - Added Flux Conduction Armor Hullmod
 - Added Graviton Attunement Drive Hullmod
 - Added Conductive Rails Hullmod
