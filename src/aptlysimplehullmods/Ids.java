@@ -38,5 +38,5 @@ public class Ids {
     public static final String MINERAL_REFINERY_MEM = "$ash_mineral_refinery_active";
 
     public static final String APTLYSIMPLEHULLMODS = "aptlysimplehullmods";
-    public static final String LUNALIB = "aptlysimplehullmods";
+    public static final String LUNALIB = "lunalib";
 }
