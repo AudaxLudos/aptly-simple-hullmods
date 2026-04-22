@@ -45,7 +45,7 @@ public class ModPlugin extends BaseModPlugin {
             AdvanceRadarSystems.WEAPON_RANGE_MULT = getFloat(statsData, "ash_advance_radar_systems_stat2");
 
             statsData = Global.getSettings().getJSONObject("ash_automated_racks");
-            AutomatedRacks.ENABLED = getBoolean(statsData, "ash_advance_radar_systems_stat0");
+            AutomatedRacks.ENABLED = getBoolean(statsData, "ash_automated_racks_stat0");
             AutomatedRacks.MISSILE_FIRE_RATE_MULT = getFloat(statsData, "ash_automated_racks_stat1");
             AutomatedRacks.MISSILE_AMMO_MULT = getFloat(statsData, "ash_automated_racks_stat2");
             AutomatedRacks.MISSILE_TURN_RATE_MULT = getFloat(statsData, "ash_automated_racks_stat3");
