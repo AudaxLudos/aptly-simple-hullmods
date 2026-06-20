@@ -87,7 +87,7 @@ public class TargetingTransceiver extends BaseHullMod {
                 data.mag = bestMag;
             }
 
-            if (ship.getHullSize().ordinal() <= 2) {
+            if (ship.getHullSize().ordinal() <= 3) {
                 stats.getEnergyWeaponRangeBonus().modifyMult(this.spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
                 stats.getBallisticWeaponRangeBonus().modifyMult(this.spec.getId(), 1f + WEAPON_RANGE_MOD * data.mag);
             } else {
