@@ -19,7 +19,7 @@ public class TemporalFluxReactor extends BaseHullMod {
     @Override
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         if (isSMod(stats)) {
-            stats.getPeakCRDuration().modifyMult(id, PEAK_PERFORMANCE_TIME_MULT);
+            stats.getPeakCRDuration().modifyMult(id, 1f - PEAK_PERFORMANCE_TIME_MULT);
         }
     }
 

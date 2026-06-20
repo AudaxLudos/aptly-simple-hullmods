@@ -35,7 +35,7 @@ public class InvasionPackage extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        stats.getCargoMod().modifyMult(id, CARGO_CAPACITY_MULT);
+        stats.getCargoMod().modifyMult(id, 1f - CARGO_CAPACITY_MULT);
     }
 
     // other effects are located in InvasionPackageScript file
