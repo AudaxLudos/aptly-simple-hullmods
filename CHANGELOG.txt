@@ -1,3 +1,7 @@
+### 2.1.50
+- Fix targeting transceiver only affecting frigates and lower
+- Fix multiplier stats to correspond to its stat descriptions
+
 ### 2.1.47
 - Fix crash when disabling/enabling automated racks hullmod
 - Fix advance radar system sight radius setting not being applied
